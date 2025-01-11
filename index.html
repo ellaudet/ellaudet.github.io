@@ -9,38 +9,47 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.6; /* Improved readability */
-            color: #333; /* Unified text color */
+            line-height: 1.6;
+            color: #333;
         }
 
         .header {
             display: flex;
             align-items: center;
             padding: 15px 20px;
-            background-color: #f9f9f9; /* Light gray background */
+            background-color: #f9f9f9;
             border-bottom: 1px solid #ddd;
         }
 
         .header img {
             border-radius: 5px;
-            width: 100px; /* Smaller photo size */
+            width: 100px; /* Keep photo size as is */
             height: auto;
-            margin-right: 15px; /* Spacing between photo and text */
+            margin-right: 15px;
         }
 
-        .header-content h1 {
-            font-size: 1.4em; /* Smaller title size */
+        .header-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header h1 {
+            font-size: 1.4em;
             font-weight: bold;
             text-transform: uppercase;
-            color: #555; /* Dark gray */
+            color: #555;
             margin: 0;
         }
 
-        .header-content h2 {
-            font-size: 1em; /* Subtitle size */
+        .header h2 {
+            font-size: 1em;
             font-weight: normal;
             color: #777;
-            margin: 3px 0 0 0; /* Minimal spacing */
+            margin: 5px 0; /* Reduced space between name, position, and role */
+        }
+
+        .header h2:last-of-type {
+            margin-bottom: 15px; /* Add blank space below the role */
         }
 
         .nav {
@@ -59,37 +68,38 @@
         }
 
         .nav a.active {
-            color: #ff0000; /* Red for active page */
+            color: #ff0000;
         }
 
         .nav a.inactive {
-            color: #aaa; /* Gray for inactive links */
+            color: #aaa;
         }
 
         .nav span {
-            color: #aaa; /* Gray separators */
+            color: #aaa;
         }
 
         .content {
             padding: 20px;
-            background-color: #f9f9f9; /* Light gray background for content */
+            background-color: #f9f9f9;
         }
 
         .content img {
-            float: left; /* Float image to the left */
-            margin: 0 20px 10px 0; /* Add spacing around the image */
+            float: left;
+            margin: 0 20px 10px 0;
             border-radius: 5px;
-            width: 100px; /* Smaller image size */
+            width: 100px;
             height: auto;
             border: 1px solid #ddd;
         }
 
         p {
-            text-align: justify; /* Justify text for better readability */
+            text-align: justify;
+            margin: 1em 0;
         }
 
         a {
-            color: #ff0000; /* Unified link color */
+            color: #ff0000;
         }
     </style>
 </head>
@@ -136,7 +146,7 @@
             <em>Political Research Quarterly</em>, and <em>PS: Political Science & Politics</em>.
             My latest publication, co-authored with Kosuke Imai, is <em><a href="https://bit.ly/dss_book" target="_blank">Data Analysis for Social Science: A Friendly and Practical Introduction</a></em> 
             (Princeton University Press, 2022). This textbook provides an accessible introduction to survey research, 
-            predictive models, and causal inference, using the free and widely-used statistical software R.
+            predictive modeling, and causal inference, using the free and widely-used statistical software R.
             It assumes no prior knowledge of statistics or coding, and requires only minimal knowledge of math, 
             making it ideal for beginners.
         </p>

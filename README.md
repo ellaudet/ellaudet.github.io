@@ -1,7 +1,7 @@
 <div style="display: flex; gap: 20px; margin-top: 10px;">
   <a href="https://ellaudet.github.io/research/" style="text-decoration: none; font-size: 1.2em; color: #d22b2b;">Research</a>
   <a href="https://ellaudet.github.io/teaching/" style="text-decoration: none; font-size: 1.2em; color: #d22b2b;">Teaching</a>
-  <a href="https://ellaudet.github.io/dssbook/" style="text-decoration: none; font-size: 1.2em; color: #d22b2b;">DSS Book</a>
+  <a href="https://ellaudet.github.io/dssbook/" style="text-decoration: none; font-size: 1.2em; color: #d22b2b;">Data Analysis for Social Science (DSS)</a>
 </div>
 
 <div class="page">

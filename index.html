@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.8;
+            line-height: 1.5; /* Smaller line spacing */
             color: #333; /* Slightly less black for easier reading */
         }
 
@@ -39,7 +39,7 @@
         .nav {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 10px; /* Adjust spacing around separators */
             padding: 10px;
             background-color: #fff;
             border-bottom: 1px solid #ddd;
@@ -59,9 +59,33 @@
             color: #aaa; /* Gray for inactive links */
         }
 
+        .nav span {
+            color: #aaa; /* Gray separators */
+        }
+
         .content {
             padding: 20px 40px;
             background-color: #f4f4f4; /* Light gray background for content */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dss-section {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .dss-section img {
+            width: 150px; /* Placeholder image size */
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .dss-section div {
+            flex: 1;
         }
     </style>
 </head>
@@ -70,7 +94,7 @@
     <!-- Header Section -->
     <div class="header">
         <h1>Elena Llaudet</h1>
-        <img src="llaudet_photo.jpg" alt="Elena Llaudet">
+        <img src="llaudet_photo.png" alt="Elena Llaudet">
     </div>
 
     <!-- Navigation Links -->
@@ -109,16 +133,20 @@
             <em>What is the effect of attending a private school on educational outcomes?</em>
         </p>
 
-        <p>
-            My research has been published in <em>Legislative Studies Quarterly</em>, <em>Electoral Studies</em>, 
-            <em>Political Research Quarterly</em>, and <em>PS: Political Science &amp; Politics</em>. My most recent 
-            publication is an introductory quantitative-methods textbook co-authored with Kosuke Imai, 
-            <a href="https://bit.ly/dss_book" target="_blank" style="color: #ff0000;">Data Analysis for Social Science: 
-            A Friendly and Practical Introduction</a> (DSS), Princeton University Press, 2022. Assuming no prior knowledge 
-            of statistics or coding and only minimal knowledge of math, the book teaches the fundamentals of survey research, 
-            predictive models, and causal inference while analyzing data from published research with the free and popular 
-            statistical program R.
-        </p>
+        <!-- DSS Section -->
+        <div class="dss-section">
+            <img src="dss.jpeg" alt="Data Analysis for Social Science">
+            <div>
+                <p>
+                    My most recent publication is an introductory quantitative-methods textbook co-authored with Kosuke Imai, 
+                    <a href="https://bit.ly/dss_book" target="_blank" style="color: #ff0000;">Data Analysis for Social Science: 
+                    A Friendly and Practical Introduction</a> (DSS), Princeton University Press, 2022. Assuming no prior knowledge 
+                    of statistics or coding and only minimal knowledge of math, the book teaches the fundamentals of survey research, 
+                    predictive models, and causal inference while analyzing data from published research with the free and popular 
+                    statistical program R.
+                </p>
+            </div>
+        </div>
 
         <p>
             Since Fall 2016, I have taught an introductory undergraduate quantitative-methods course at Suffolk University, 
@@ -141,12 +169,6 @@
             <em>Data Analysis and Politics</em>. 
             In 2020-21, I was one of three faculty members nominated by Suffolk's Student Government Association for the 
             Outstanding College of Arts and Sciences Faculty Member of the Year Award.
-        </p>
-
-        <p>
-            I am affiliated with the Institute for Quantitative Social Science and the Center for American Political Studies 
-            at Harvard University. Previously, I was a postdoctoral fellow in the Democracy Program at the Brennan Center for 
-            Justice at NYU School of Law and a visiting scholar at the Juan March Institute.
         </p>
     </div>
 

@@ -9,47 +9,42 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-            color: #333;
+            color: #333; /* Dark gray for text */
         }
 
         .header {
             display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: #f9f9f9;
-            border-bottom: 1px solid #ddd;
+            align-items: flex-start; /* Align items at the top */
+            padding: 20px;
+            background-color: #fff; /* White background */
+            border-bottom: 1px solid #ddd; /* Subtle separator */
         }
 
         .header img {
             border-radius: 5px;
-            width: 100px; /* Keep photo size as is */
+            width: 120px; /* Adjusted photo size */
             height: auto;
-            margin-right: 15px;
+            margin-right: 20px; /* Spacing between photo and text */
         }
 
         .header-content {
             display: flex;
             flex-direction: column;
+            justify-content: flex-start;
         }
 
-        .header h1 {
-            font-size: 1.4em;
+        .header-content h1 {
+            font-size: 1.8em; /* Slightly larger font for name */
             font-weight: bold;
-            text-transform: uppercase;
-            color: #555;
             margin: 0;
+            color: #333; /* Dark gray for name */
         }
 
-        .header h2 {
-            font-size: 1em;
+        .header-content h2 {
+            font-size: 1em; /* Consistent font size for position and role */
             font-weight: normal;
-            color: #777;
-            margin: 5px 0; /* Reduced space between name, position, and role */
-        }
-
-        .header h2:last-of-type {
-            margin-bottom: 15px; /* Add blank space below the role */
+            margin: 5px 0; /* Minimal spacing between lines */
+            color: #555; /* Medium gray for subtler look */
         }
 
         .nav {
@@ -57,42 +52,32 @@
             justify-content: flex-start;
             gap: 15px;
             padding: 10px 20px;
-            background-color: #fff;
-            border-bottom: 1px solid #ddd;
+            background-color: #f9f9f9; /* Light gray background for navigation */
+            border-bottom: 1px solid #ddd; /* Subtle separator */
         }
 
         .nav a {
-            text-decoration: none; /* Remove underline */
+            text-decoration: none; /* No underline by default */
             font-size: 1em;
             font-weight: normal;
-            color: #aaa;
-            transition: text-decoration 0.3s ease; /* Smooth hover effect */
+            color: #aaa; /* Inactive link color */
         }
 
         .nav a.active {
-            color: #ff0000;
+            color: #ff0000; /* Active link in red */
         }
 
         .nav a:hover {
-            text-decoration: underline; /* Show underline on hover */
+            text-decoration: underline; /* Underline on hover */
         }
 
         .nav span {
-            color: #aaa;
+            color: #aaa; /* Gray separator */
         }
 
         .content {
             padding: 20px;
-            background-color: #f9f9f9;
-        }
-
-        .content img {
-            float: left;
-            margin: 0 20px 10px 0;
-            border-radius: 5px;
-            width: 200px; /* Smaller DSS image */
-            height: auto;
-            border: 1px solid #ddd;
+            background-color: #f9f9f9; /* Light gray background for content */
         }
 
         p {
@@ -101,13 +86,12 @@
         }
 
         a {
-            text-decoration: none; /* Remove underline for content links */
             color: #ff0000;
-            transition: text-decoration 0.3s ease; /* Smooth hover effect */
+            text-decoration: none; /* No underline by default */
         }
 
         a:hover {
-            text-decoration: underline; /* Show underline on hover */
+            text-decoration: underline; /* Underline on hover */
         }
     </style>
 </head>
@@ -120,7 +104,6 @@
             <h1>Elena Llaudet</h1>
             <h2>Associate Professor of Political Science at Suffolk University in Boston</h2>
             <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
-            <h2> </h2>
         </div>
     </div>
 

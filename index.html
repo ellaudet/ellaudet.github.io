@@ -9,60 +9,53 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.5; /* Adjusted line spacing */
-            color: #333; /* Slightly lighter black for readability */
-            font-size: 0.95em; /* Slightly smaller font size for content */
+            line-height: 1.6; /* Increased line height for better readability */
+            color: #333; /* Unified text color */
         }
 
         .header {
             display: flex;
-            align-items: center; /* Vertically align content */
-            padding: 20px; /* Padding around the header */
-            background-color: #f4f4f4; /* Light gray background */
+            align-items: center;
+            padding: 15px 20px; /* Reduced padding */
+            background-color: #f9f9f9; /* Lighter background color */
             border-bottom: 1px solid #ddd;
         }
 
         .header img {
             border-radius: 5px;
-            width: 120px; /* Adjusted size of the photo */
+            width: 100px; /* Smaller photo size */
             height: auto;
-            margin-right: 20px; /* Space between the image and the text */
-            border: 1px solid #ddd;
+            margin-right: 15px; /* Less space between image and text */
         }
 
-        .header-content {
-            display: flex;
-            flex-direction: column; /* Stack name and titles vertically */
-        }
-
-        .header h1 {
-            font-size: 1.5em; /* Font size for the name */
+        .header-content h1 {
+            font-size: 1.4em; /* Smaller title size */
             font-weight: bold;
             text-transform: uppercase;
-            color: #555; /* Dark gray for the name */
-            margin: 0 0 5px 0; /* Tight space between name and position/role */
+            color: #555; /* Unified color */
+            margin: 0;
         }
 
-        .header h2 {
-            font-size: 1em; /* Font size for subtitles */
+        .header-content h2 {
+            font-size: 1em; /* Unified subtitle size */
             font-weight: normal;
-            color: #777; /* Lighter gray for the subtitle */
-            margin: 0 0 5px 0; /* Reduced space between position and role */
+            color: #777;
+            margin: 3px 0 0 0; /* Minimal spacing */
         }
 
         .nav {
             display: flex;
-            justify-content: flex-start; /* Left-align navigation links */
-            gap: 10px;
-            padding: 10px 20px; /* Align with header padding */
+            justify-content: flex-start;
+            gap: 15px; /* More space between links */
+            padding: 10px 20px;
             background-color: #fff;
             border-bottom: 1px solid #ddd;
         }
 
         .nav a {
             text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 1em; /* Smaller and unified link size */
+            font-weight: normal;
         }
 
         .nav a.active {
@@ -73,26 +66,19 @@
             color: #aaa; /* Gray for inactive links */
         }
 
-        .nav span {
-            color: #aaa; /* Gray separators */
-        }
-
         .content {
             padding: 20px;
-            background-color: #f4f4f4; /* Light gray background for content */
-        }
-
-        .content img {
-            float: left; /* Float image to the left */
-            margin: 0 20px 10px 0; /* Add spacing around the image */
-            border-radius: 5px;
-            width: 150px; /* Placeholder image size */
-            height: auto;
-            border: 1px solid #ddd;
+            max-width: 800px; /* Limit content width for better readability */
+            margin: 0 auto; /* Center-align content */
         }
 
         p {
-            text-align: justify; /* Justify text for better readability */
+            text-align: justify;
+            margin: 1em 0; /* Spaced-out paragraphs */
+        }
+
+        a {
+            color: #ff0000; /* Unified link color */
         }
     </style>
 </head>
@@ -103,24 +89,19 @@
         <img src="llaudet_photo.png" alt="Elena Llaudet">
         <div class="header-content">
             <h1>Elena Llaudet</h1>
-            <h2>Associate Professor of Political Science at Suffolk University in Boston</h2>
-            <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
+            <h2>Associate Professor at Suffolk University</h2>
+            <h2>Co-author of <em>Data Analysis for Social Science</em></h2>
         </div>
     </div>
 
     <!-- Navigation Links -->
     <div class="nav">
         <a href="https://ellaudet.github.io/" class="active">HOME</a>
-        <span>|</span>
         <a href="https://ellaudet.github.io/research/" class="inactive">RESEARCH</a>
-        <span>|</span>
         <a href="https://ellaudet.github.io/teaching/" class="inactive">TEACHING</a>
-        <span>|</span>
         <a href="https://ellaudet.github.io/dssbook/" class="inactive">DSS</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/dss_resources/" class="inactive">INSTRUCTOR MATERIALS for DSS</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/dss_interactive/" class="inactive">INTERACTIVE GRAPHS for DSS</a>
+        <a href="https://ellaudet.github.io/dss_resources/" class="inactive">INSTRUCTOR MATERIALS</a>
+        <a href="https://ellaudet.github.io/dss_interactive/" class="inactive">INTERACTIVE GRAPHS</a>
     </div>
 
     <!-- Content Section -->
@@ -128,51 +109,22 @@
         <p>
             I am an Associate Professor with tenure in the Department of Political Science and Legal Studies 
             at Suffolk University, Boston. I hold a Ph.D. in Government from Harvard University and a B.S. in 
-            Economic and Business Sciences from the University of Barcelona. My curriculum vitae is 
-            available <a href="https://www.dropbox.com/scl/fi/s0k903ernvchi35fu6re2/Llaudet_CV_website.pdf?rlkey=fb02jzo91dc490pvdmowrgpcm&amp;dl=0" 
-               style="color: #ff0000;">here</a>.
+            Economic and Business Sciences from the University of Barcelona. My detailed curriculum vitae is 
+            available <a href="https://www.dropbox.com/scl/fi/s0k903ernvchi35fu6re2/Llaudet_CV_website.pdf?rlkey=fb02jzo91dc490pvdmowrgpcm&amp;dl=0">here</a>.
         </p>
 
         <p>
-            My interests are political methodology, elections, and education. 
-            I am particularly interested in questions that involve estimating causal effects, 
-            such as <em> What are the effects of political TV ads on voter 
+            My research focuses on political methodology, elections, and education, with a particular interest 
+            in estimating causal effects. Examples include: What are the effects of political TV ads on voter 
             turnout? Do negative political TV ads influence voters differently than positive ones? What mechanisms 
             underpin incumbents’ advantages in elections? How do specific forms of student collaboration impact 
-            academic performance? What are the outcomes of attending private versus public schools?</em>
+            academic performance? What are the outcomes of attending private versus public schools?
         </p>
 
         <p>
-            <img src="DSS.jpeg" alt="Data Analysis for Social Science">
-            My latest publication, co-authored with Kosuke Imai, is <em><a href="https://bit.ly/dss_book" target="_blank" 
-               style="color: #ff0000;">Data Analysis for Social Science: A Friendly and Practical Introduction</a></em> 
+            My latest publication, co-authored with Kosuke Imai, is <em><a href="https://bit.ly/dss_book" target="_blank">Data Analysis for Social Science: A Friendly and Practical Introduction</a></em> 
             (Princeton University Press, 2022). This textbook provides an accessible introduction to survey research, 
-            predictive modeling, and causal inference, using the free and widely-used statistical software R. It assumes 
-            no prior knowledge of statistics or coding, and requires only minimal knowledge of math, 
-            making it ideal for beginners.
-        </p>
-
-        <p>
-            Since 2016, I have taught <em><a href="https://bit.ly/teaching_dss" target="_blank" 
-               style="color: #ff0000;">Data Analysis and Politics</a></em> (POLS 201), an undergraduate quantitative-methods 
-            course at Suffolk University. In this hands-on course, students learn R programming and statistical techniques 
-            to analyze real-world data and answer substantive political questions, such as the effect of Pfizer's vaccine 
-            on COVID-19 infection rates. The course emphasizes critical evaluation of social science studies.
-        </p>
-
-        <p>
-            In 2022–23, I had the honor of delivering the <a href="https://suffolku.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a223919e-8065-4998-94a0-af0801268d11" 
-               target="_blank" style="color: #ff0000;">Convocation Speech</a> at Suffolk University. In 2021–22, I received 
-            the <a href="https://sites.suffolk.edu/ctse/events/symposium/innovative-teaching-award/" target="_blank" 
-               style="color: #ff0000;">Innovative Teaching Award</a> for implementing creative teaching strategies in my 
-            quantitative-methods course. In 2020–21, I was nominated by Suffolk's Student Government Association for the 
-            Outstanding College of Arts and Sciences Faculty Member of the Year Award.
-        </p>
-
-        <p>
-            I am affiliated with Harvard University's Institute for Quantitative Social Science and the Center for American 
-            Political Studies. Previously, I served as a postdoctoral fellow in the Democracy Program at NYU School of Law's 
-            Brennan Center for Justice and as a visiting scholar at the Juan March Institute.
+            predictive modeling, and causal inference, using the free and widely-used statistical software R.
         </p>
     </div>
 

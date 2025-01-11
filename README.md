@@ -19,7 +19,7 @@
   </div>
 
   <!-- Introduction Section -->
-  <div style="margin: 0 10%; text-align: justify;">
+  <div style="padding: 0 20px; text-align: justify;">
     <p>
       I am an Associate Professor (with tenure) in the Department of Political Science and Legal Studies 
       at Suffolk University in Boston. I received my Ph.D. from the Department of Government at Harvard 
@@ -80,4 +80,3 @@
     </p>
   </div>
 </div>
-

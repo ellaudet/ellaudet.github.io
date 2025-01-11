@@ -2,6 +2,11 @@
 
   <!-- Links Section -->
   <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; padding: 10px; background-color: #f9f9f9; border: 1px solid #ddd;">
+    <a href="https://ellaudet.github.io/" 
+       style="text-decoration: none; font-size: 1.3em; color: #ff0000; font-weight: bold;">
+      HOME
+    </a>
+    <span style="color: #aaa; font-size: 1.3em;">|</span>
     <a href="https://ellaudet.github.io/research/" 
        style="text-decoration: none; font-size: 1.3em; color: #ff0000; font-weight: bold;">
       RESEARCH
@@ -16,6 +21,16 @@
        style="text-decoration: none; font-size: 1.3em; color: #ff0000; font-weight: bold;">
       DATA ANALYSIS FOR SOCIAL SCIENCE (DSS)
     </a>
+    <a href="https://ellaudet.github.io/dss_resources/" 
+       style="text-decoration: none; font-size: 1.3em; color: #ff0000; font-weight: bold;">
+      INSTRUCTOR MATERIALS FOR DSS
+    </a>
+    <span style="color: #aaa; font-size: 1.3em;">|</span>
+    <a href="https://ellaudet.github.io/dss_interactive/" 
+       style="text-decoration: none; font-size: 1.3em; color: #ff0000; font-weight: bold;">
+      INTERACTIVE GRAPHS FOR DSS
+    </a>
+    <span style="color: #aaa; font-size: 1.3em;">|</span>
   </div>
 
   <!-- Introduction Section -->

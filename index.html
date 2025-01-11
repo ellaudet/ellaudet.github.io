@@ -17,8 +17,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 40px;
-            background-color: #f4f4f4; /* Light gray background for the header */
+            padding: 10px 20px; /* Reduced padding for less space around the title */
+            background-color: #f4f4f4; /* Light gray background */
             border-bottom: 1px solid #ddd;
         }
 
@@ -27,20 +27,14 @@
             font-weight: bold;
             text-transform: uppercase;
             color: #555; /* Dark gray for the title */
-            margin: 0;
-        }
-
-        .header img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
+            margin: 0; /* Remove extra margin */
         }
 
         .nav {
             display: flex;
-            justify-content: center;
-            gap: 10px; /* Adjust spacing around separators */
-            padding: 10px;
+            justify-content: flex-start; /* Left-align navigation links */
+            gap: 10px;
+            padding: 10px 20px; /* Align with header padding */
             background-color: #fff;
             border-bottom: 1px solid #ddd;
         }
@@ -64,11 +58,17 @@
         }
 
         .content {
-            padding: 20px 40px;
+            padding: 20px;
             background-color: #f4f4f4; /* Light gray background for content */
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        }
+
+        .content img {
+            float: right; /* Float photo to the right of the first paragraph */
+            margin: 0 0 10px 20px; /* Add spacing around the image */
+            border-radius: 5px;
+            width: 150px;
+            height: auto;
+            border: 1px solid #ddd;
         }
 
         .dss-section {
@@ -87,6 +87,10 @@
         .dss-section div {
             flex: 1;
         }
+
+        p {
+            text-align: justify; /* Justify text for better readability */
+        }
     </style>
 </head>
 <body>
@@ -94,7 +98,6 @@
     <!-- Header Section -->
     <div class="header">
         <h1>Elena Llaudet</h1>
-        <img src="llaudet_photo.png" alt="Elena Llaudet">
     </div>
 
     <!-- Navigation Links -->
@@ -115,6 +118,7 @@
     <!-- Content Section -->
     <div class="content">
         <p>
+            <img src="llaudet_photo.png" alt="Elena Llaudet">
             I am an Associate Professor (with tenure) in the Department of Political Science and Legal Studies 
             at Suffolk University in Boston. I received my Ph.D. from the Department of Government at Harvard 
             University and my B.S. from the Department of Economic and Business Sciences at the University of Barcelona. 
@@ -156,19 +160,6 @@
             substantive political questions such as 
             <em>What is the effect of Pfizer's vaccine on the probability of contracting COVID?</em>, and identify the 
             strengths and weaknesses of social scientific studies.
-        </p>
-
-        <p>
-            In 2022-23, I was honored to give the 
-            <a href="https://suffolku.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a223919e-8065-4998-94a0-af0801268d11&amp;fbclid=IwAR2q7bwnyCLB08dCuGT10V0iSrbpEPMR6p0-ejoYLYbElepiYo5kqDrc-GM" 
-               target="_blank" style="color: #ff0000;">Convocation Speech</a> at Suffolk. 
-            In 2021-22, I won Suffolk's 
-            <a href="https://sites.suffolk.edu/ctse/events/symposium/innovative-teaching-award/" 
-               target="_blank" style="color: #ff0000;">Innovative Teaching Award</a> 
-            for the innovations I have implemented in 
-            <em>Data Analysis and Politics</em>. 
-            In 2020-21, I was one of three faculty members nominated by Suffolk's Student Government Association for the 
-            Outstanding College of Arts and Sciences Faculty Member of the Year Award.
         </p>
     </div>
 

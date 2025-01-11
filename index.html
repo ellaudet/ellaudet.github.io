@@ -62,17 +62,19 @@
         }
 
         .nav a {
-            text-decoration: none;
+            text-decoration: none; /* Remove underline */
             font-size: 1em;
             font-weight: normal;
+            color: #aaa;
+            transition: text-decoration 0.3s ease; /* Smooth hover effect */
         }
 
         .nav a.active {
             color: #ff0000;
         }
 
-        .nav a.inactive {
-            color: #aaa;
+        .nav a:hover {
+            text-decoration: underline; /* Show underline on hover */
         }
 
         .nav span {
@@ -88,7 +90,7 @@
             float: left;
             margin: 0 20px 10px 0;
             border-radius: 5px;
-            width: 100px;
+            width: 100px; /* Smaller DSS image */
             height: auto;
             border: 1px solid #ddd;
         }
@@ -99,7 +101,13 @@
         }
 
         a {
+            text-decoration: none; /* Remove underline for content links */
             color: #ff0000;
+            transition: text-decoration 0.3s ease; /* Smooth hover effect */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Show underline on hover */
         }
     </style>
 </head>

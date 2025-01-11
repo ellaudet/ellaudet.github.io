@@ -4,7 +4,7 @@
   <a href="https://ellaudet.github.io/dssbook/" style="text-decoration: none; font-size: 1.2em; color: #d22b2b;">Data Analysis for Social Science (DSS)</a>
 </div>
 
-
+<div>
 <p>
 				I am an Associate Professor (with tenure) in the Department of Political Science and Legal Studies&nbsp;at Suffolk University in Boston. I received my Ph.D. from&nbsp;the Department of Government at Harvard University and my B.S. from the Department of Economic and Business Sciences at the University of Barcelona.&nbsp;My curriculum vitae is&nbsp;<a href="https://www.dropbox.com/scl/fi/s0k903ernvchi35fu6re2/Llaudet_CV_website.pdf?rlkey=fb02jzo91dc490pvdmowrgpcm&amp;dl=0" target="_blank" title=""><span style="color:#ff0000">here</span></a>.
 			</p>
@@ -28,3 +28,4 @@
 			<p>
 				I am affiliated with the Institute for Quantitative Social Science and the Center for American Political Studies at Harvard University. Previously, I was a postdoctoral fellow in the Democracy Program at the Brennan Center for Justice at NYU School of Law and a visiting scholar at the Juan March Institute.
 			</p>
+   </div>

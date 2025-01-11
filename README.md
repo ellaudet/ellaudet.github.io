@@ -1,4 +1,13 @@
 <div style="margin-top: 20px; font-family: Arial, sans-serif; line-height: 1.8;">
+  <!-- Page Title -->
+  <div style="text-align: center; margin-bottom: 30px;">
+    <h1 style="font-size: 3em; font-weight: bold; color: #ff0000; margin: 0;">
+      Elena Llaudet
+    </h1>
+    <p style="font-size: 1.2em; color: #555; margin-top: 5px;">
+      Associate Professor, Suffolk University
+    </p>
+  </div>
 
   <!-- Links Section -->
   <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; padding: 10px; background-color: #f9f9f9; border: 1px solid #ddd;">

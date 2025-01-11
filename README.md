@@ -5,11 +5,11 @@
     <a href="https://ellaudet.github.io/research/" 
        style="text-decoration: none; font-size: 1.2em; color: #ff0000; font-weight: bold;">
       RESEARCH
-    </a>
+    </a> |
     <a href="https://ellaudet.github.io/teaching/" 
        style="text-decoration: none; font-size: 1.2em; color: #ff0000; font-weight: bold;">
       TEACHING
-    </a>
+    </a> |
     <a href="https://ellaudet.github.io/dssbook/" 
        style="text-decoration: none; font-size: 1.2em; color: #ff0000; font-weight: bold;">
       DATA ANALYSIS FOR SOCIAL SCIENCE (DSS)

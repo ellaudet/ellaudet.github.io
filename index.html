@@ -9,22 +9,22 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333; /* Dark gray for text */
+            color: #333;
         }
 
         .header {
             display: flex;
-            align-items: flex-start; /* Align items at the top */
+            align-items: flex-start; /* Align image and text at the top */
             padding: 20px;
-            background-color: #fff; /* White background */
-            border-bottom: 1px solid #ddd; /* Subtle separator */
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
         }
 
         .header img {
             border-radius: 5px;
-            width: 120px; /* Adjusted photo size */
+            width: 120px;
             height: auto;
-            margin-right: 20px; /* Spacing between photo and text */
+            margin-right: 20px;
         }
 
         .header-content {
@@ -34,17 +34,18 @@
         }
 
         .header-content h1 {
-            font-size: 1.8em; /* Slightly larger font for name */
+            font-size: 1.6em; /* Adjusted title size */
             font-weight: bold;
+            text-transform: uppercase; /* Keep name in all caps */
             margin: 0;
-            color: #333; /* Dark gray for name */
+            color: #555; /* Dark gray */
         }
 
         .header-content h2 {
-            font-size: 1em; /* Consistent font size for position and role */
+            font-size: 1em;
             font-weight: normal;
-            margin: 5px 0; /* Minimal spacing between lines */
-            color: #555; /* Medium gray for subtler look */
+            margin: 5px 0;
+            color: #555;
         }
 
         .nav {
@@ -52,15 +53,15 @@
             justify-content: flex-start;
             gap: 15px;
             padding: 10px 20px;
-            background-color: #f9f9f9; /* Light gray background for navigation */
-            border-bottom: 1px solid #ddd; /* Subtle separator */
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #ddd;
         }
 
         .nav a {
-            text-decoration: none; /* No underline by default */
+            text-decoration: none;
             font-size: 1em;
             font-weight: normal;
-            color: #aaa; /* Inactive link color */
+            color: #aaa;
         }
 
         .nav a.active {
@@ -68,16 +69,25 @@
         }
 
         .nav a:hover {
-            text-decoration: underline; /* Underline on hover */
+            text-decoration: underline;
         }
 
         .nav span {
-            color: #aaa; /* Gray separator */
+            color: #aaa;
         }
 
         .content {
             padding: 20px;
-            background-color: #f9f9f9; /* Light gray background for content */
+            background-color: #f9f9f9;
+        }
+
+        .content img.dss-photo {
+            float: right; /* Move DSS photo to the right */
+            margin: 0 0 10px 20px; /* Space between text and photo */
+            width: 100px; /* Smaller DSS photo */
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #ddd;
         }
 
         p {
@@ -87,11 +97,11 @@
 
         a {
             color: #ff0000;
-            text-decoration: none; /* No underline by default */
+            text-decoration: none;
         }
 
         a:hover {
-            text-decoration: underline; /* Underline on hover */
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -132,10 +142,10 @@
         </p>
 
         <p>
-            <img src="DSS.jpeg" alt="Data Analysis for Social Science">
             My interests are political methodology, elections, and education.
             My research has been published in <em>Legislative Studies Quarterly</em>, <em>Electoral Studies</em>, 
             <em>Political Research Quarterly</em>, and <em>PS: Political Science & Politics</em>.
+            <img src="DSS.jpeg" alt="Data Analysis for Social Science" class="dss-photo">
             My latest publication, co-authored with Kosuke Imai, is <em><a href="https://bit.ly/dss_book" target="_blank">Data Analysis for Social Science: A Friendly and Practical Introduction</a></em> 
             (Princeton University Press, 2022). This textbook provides an accessible introduction to survey research, 
             predictive modeling, and causal inference, using the free and widely-used statistical software R.

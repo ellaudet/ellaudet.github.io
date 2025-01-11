@@ -9,25 +9,33 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.5; /* Smaller line spacing */
-            color: #333; /* Slightly less black for easier reading */
+            line-height: 1.5; /* Adjusted line spacing */
+            color: #333; /* Slightly lighter black for readability */
         }
 
         .header {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px; /* Reduced padding for less space around the title */
+            flex-direction: column; /* Allow multiple lines in the title */
+            align-items: center; /* Center-align the header content */
+            padding: 20px 20px 10px; /* Reduced padding at the bottom for compactness */
             background-color: #f4f4f4; /* Light gray background */
             border-bottom: 1px solid #ddd;
         }
 
         .header h1 {
-            font-size: 1.5em;
+            font-size: 2em;
             font-weight: bold;
             text-transform: uppercase;
             color: #555; /* Dark gray for the title */
             margin: 0; /* Remove extra margin */
+        }
+
+        .header h2 {
+            font-size: 1.1em;
+            font-weight: normal;
+            color: #777; /* Lighter gray for the subtitle */
+            margin: 5px 0 0; /* Space between title and subtitle */
+            text-align: center; /* Center-align the subtitle */
         }
 
         .nav {
@@ -101,8 +109,6 @@
         <h2>Associate Professor of Political Science at Suffolk University in Boston</h2>
         <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
     </div>
-
-    <!-- Navig
 
     <!-- Navigation Links -->
     <div class="nav">

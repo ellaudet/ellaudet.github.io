@@ -1,4 +1,18 @@
+<head>
+  <title>Elena Llaudet - Associate Professor</title>
+</head>
+
+
 <div style="margin-top: 20px; font-family: Arial, sans-serif; line-height: 1.8;">
+  
+  <h1 style="font-size: 3em; font-weight: bold; color: #ff0000; text-align: center; margin-top: 20px;">
+  Elena Llaudet
+</h1>
+<p style="font-size: 1.2em; color: #555; text-align: center; margin-top: 5px;">
+  Associate Professor, Suffolk University
+</p>
+
+
   <!-- Page Title -->
   <div style="text-align: center; margin-bottom: 30px;">
     <h1 style="font-size: 3em; font-weight: bold; color: #ff0000; margin: 0;">

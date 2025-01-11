@@ -58,7 +58,7 @@
 
         .nav {
             display: flex;
-            flex-wrap: wrap; /* Allow links to wrap */
+            flex-wrap: wrap;
             justify-content: flex-start;
             gap: 10px;
             padding: 10px 20px;
@@ -71,7 +71,7 @@
             font-size: 1em;
             font-weight: normal;
             color: #888;
-            white-space: nowrap; /* Prevent word breaking */
+            white-space: nowrap;
         }
 
         .nav a.active {
@@ -88,17 +88,17 @@
 
         @media (max-width: 600px) {
             .nav {
-                flex-direction: column; /* Stack links vertically */
-                align-items: flex-start; /* Align links to the left */
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .nav span {
-                display: none; /* Hide separators */
+                display: none;
             }
         }
 
         .content {
-            padding: 20px;
+            padding: 10px 20px; /* Reduced padding above the content */
             background-color: #f4f4f4;
         }
 
@@ -132,8 +132,8 @@
         <img src="llaudet_photo.png" alt="Elena Llaudet">
         <div class="header-content">
             <h1>ELENA LLAUDET</h1>
-            <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
             <h2>Associate Professor of Political Science at Suffolk University in Boston</h2>
+            <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
         </div>
     </div>
 

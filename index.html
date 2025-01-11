@@ -9,51 +9,44 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.6; /* Improved readability */
-            color: #333; /* Slightly lighter black for readability */
-            font-size: 0.95em; /* Slightly smaller font size */
+            line-height: 1.6; /* Increased line height for better readability */
+            color: #333; /* Unified text color */
         }
 
         .header {
             display: flex;
-            align-items: center; /* Vertically align content */
-            padding: 15px 20px; /* Adjusted padding */
-            background-color: #f4f4f4; /* Light gray background */
+            align-items: center;
+            padding: 15px 20px; /* Reduced padding */
+            background-color: #f9f9f9; /* Lighter background color */
             border-bottom: 1px solid #ddd;
         }
 
         .header img {
             border-radius: 5px;
-            width: 120px; /* Photo size */
+            width: 100px; /* Smaller photo size */
             height: auto;
-            margin-right: 15px; /* Space between image and text */
-            border: 1px solid #ddd;
+            margin-right: 15px; /* Less space between image and text */
         }
 
-        .header-content {
-            display: flex;
-            flex-direction: column; /* Stack name and titles vertically */
-        }
-
-        .header h1 {
-            font-size: 1.5em; /* Title font size */
+        .header-content h1 {
+            font-size: 1.4em; /* Smaller title size */
             font-weight: bold;
             text-transform: uppercase;
-            color: #555; /* Dark gray for the name */
-            margin: 0 0 5px 0; /* Tight spacing */
+            color: #555; /* Unified color */
+            margin: 0;
         }
 
-        .header h2 {
-            font-size: 1em; /* Subtitle font size */
+        .header-content h2 {
+            font-size: 1em; /* Unified subtitle size */
             font-weight: normal;
-            color: #777; /* Lighter gray */
-            margin: 0 0 5px 0; /* Tight spacing */
+            color: #777;
+            margin: 3px 0 0 0; /* Minimal spacing */
         }
 
         .nav {
             display: flex;
-            justify-content: flex-start; /* Left-align navigation links */
-            gap: 10px;
+            justify-content: flex-start;
+            gap: 15px; /* More space between links */
             padding: 10px 20px;
             background-color: #fff;
             border-bottom: 1px solid #ddd;
@@ -61,8 +54,8 @@
 
         .nav a {
             text-decoration: none;
-            font-size: 1.2em; /* Navigation link font size */
-            font-weight: bold;
+            font-size: 1em; /* Smaller and unified link size */
+            font-weight: normal;
         }
 
         .nav a.active {
@@ -73,27 +66,15 @@
             color: #aaa; /* Gray for inactive links */
         }
 
-        .nav span {
-            color: #aaa; /* Gray separators */
-        }
-
         .content {
             padding: 20px;
-            max-width: 800px; /* Limit content width for readability */
+            max-width: 800px; /* Limit content width for better readability */
             margin: 0 auto; /* Center-align content */
         }
 
-        .content img {
-            float: left; /* Float image to the left */
-            margin: 0 20px 10px 0; /* Add spacing around the image */
-            border-radius: 5px;
-            width: 150px; /* Placeholder image size */
-            height: auto;
-            border: 1px solid #ddd;
-        }
-
         p {
-            text-align: justify; /* Justify text for better readability */
+            text-align: justify;
+            margin: 1em 0; /* Spaced-out paragraphs */
         }
 
         a {
@@ -102,6 +83,7 @@
     </style>
 </head>
 <body>
+
 
     <!-- Header Section -->
     <div class="header">

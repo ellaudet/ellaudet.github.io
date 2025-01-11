@@ -4,15 +4,15 @@
   <div style="display: flex; justify-content: space-evenly; margin-bottom: 20px;">
     <a href="https://ellaudet.github.io/research/" 
        style="text-decoration: none; font-size: 1.2em; color: #ff0000; font-weight: bold;">
-      Research
+      RESEARCH
     </a>
     <a href="https://ellaudet.github.io/teaching/" 
        style="text-decoration: none; font-size: 1.2em; color: #ff0000; font-weight: bold;">
-      Teaching
+      TEACHING
     </a>
     <a href="https://ellaudet.github.io/dssbook/" 
        style="text-decoration: none; font-size: 1.2em; color: #ff0000; font-weight: bold;">
-      Data Analysis for Social Science (DSS)
+      DATA ANALYSIS FOR SOCIAL SCIENCE (DSS)
     </a>
   </div>
 

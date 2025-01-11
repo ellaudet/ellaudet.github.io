@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.8;
+            color: #333; /* Slightly less black for easier reading */
         }
 
         .header {
@@ -17,15 +18,15 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px 40px;
-            background-color: #f4f4f4;
+            background-color: #f4f4f4; /* Light gray background for the header */
             border-bottom: 1px solid #ddd;
         }
 
         .header h1 {
-            font-size: 1.5em; /* Smaller size for the title */
+            font-size: 1.5em;
             font-weight: bold;
             text-transform: uppercase;
-            color: #555; /* Dark gray color */
+            color: #555; /* Dark gray for the title */
             margin: 0;
         }
 
@@ -48,16 +49,19 @@
             text-decoration: none;
             font-size: 1.2em;
             font-weight: bold;
-            color: #ff0000;
         }
 
-        .nav span {
-            color: #aaa;
+        .nav a.active {
+            color: #ff0000; /* Red for active page */
+        }
+
+        .nav a.inactive {
+            color: #aaa; /* Gray for inactive links */
         }
 
         .content {
             padding: 20px 40px;
-            text-align: justify;
+            background-color: #f4f4f4; /* Light gray background for content */
         }
     </style>
 </head>
@@ -66,22 +70,17 @@
     <!-- Header Section -->
     <div class="header">
         <h1>Elena Llaudet</h1>
-        <img src="llaudet_photo.png" alt="Elena Llaudet">
+        <img src="path-to-photo.jpg" alt="Elena Llaudet">
     </div>
 
     <!-- Navigation Links -->
     <div class="nav">
-        <a href="https://ellaudet.github.io/">Home</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/research/">Research</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/teaching/">Teaching</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/dssbook/">DSS Book</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/dss_resources/">Instructor Materials for DSS</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/dss_interactive/">Interactive Graphs for DSS</a>
+        <a href="https://ellaudet.github.io/" class="active">Home</a>
+        <a href="https://ellaudet.github.io/research/" class="inactive">Research</a>
+        <a href="https://ellaudet.github.io/teaching/" class="inactive">Teaching</a>
+        <a href="https://ellaudet.github.io/dssbook/" class="inactive">DSS Book</a>
+        <a href="https://ellaudet.github.io/dss_resources/" class="inactive">Instructor Materials for DSS</a>
+        <a href="https://ellaudet.github.io/dss_interactive/" class="inactive">Interactive Graphs for DSS</a>
     </div>
 
     <!-- Content Section -->

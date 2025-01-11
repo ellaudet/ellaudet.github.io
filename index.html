@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elena Llaudet</title>
+    <title>Elena Llaudet - Associate Professor</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #444; /* Slightly lighter text gray for better contrast */
+            color: #444;
         }
 
         .header {
             display: flex;
             align-items: flex-start;
             padding: 20px;
-            background-color: #f4f4f4; /* Gray background for the title */
+            background-color: #f4f4f4;
             border-bottom: 1px solid #ddd;
         }
 
         .header img {
             border-radius: 5px;
-            width: 120px; /* Photo size */
+            width: 120px;
             height: auto;
             margin-right: 20px;
         }
@@ -38,61 +38,74 @@
             font-weight: bold;
             text-transform: uppercase;
             margin: 0;
-            color: #444; /* Darker gray for name */
+            color: #444;
+        }
+
+        .header-content h2:first-of-type {
+            margin-top: 3px;
+        }
+
+        .header-content h2:nth-of-type(2) {
+            margin-top: -5px;
         }
 
         .header-content h2 {
             font-size: 1em;
             font-weight: normal;
-            margin: 3px 0 2px 0; /* Reduced space between lines */
-            color: #666; /* Softer medium gray for subtitles */
+            margin: 5px 0;
+            color: #666;
         }
 
-        .header-content h2:first-of-type {
-        margin-top: 3px; /* Minimal margin after name */
-        }
-
-        .header-content h2:nth-of-type(2) {
-        margin-top: -5px; /* Move closer to the first subtitle */
-        }
-        
         .nav {
             display: flex;
+            flex-wrap: wrap; /* Allow links to wrap */
             justify-content: flex-start;
-            gap: 15px;
+            gap: 10px;
             padding: 10px 20px;
-            background-color: #fff; /* White background for navigation */
-            border-bottom: 1px solid #ddd; /* Line below navigation */
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
         }
 
         .nav a {
-            text-decoration: none; /* No underline by default */
+            text-decoration: none;
             font-size: 1em;
             font-weight: normal;
-            color: #888; /* Slightly darker gray for inactive links */
+            color: #888;
+            white-space: nowrap; /* Prevent word breaking */
         }
 
         .nav a.active {
-            color: #d32f2f; /* Subdued professional red for active links */
+            color: #d32f2f;
         }
 
         .nav a:hover {
-            text-decoration: underline; /* Underline on hover */
+            text-decoration: underline;
         }
 
         .nav span {
-            color: #888; /* Matching separator color */
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .nav {
+                flex-direction: column; /* Stack links vertically */
+                align-items: flex-start; /* Align links to the left */
+            }
+
+            .nav span {
+                display: none; /* Hide separators */
+            }
         }
 
         .content {
             padding: 20px;
-            background-color: #f4f4f4; /* Slightly brighter gray for content background */
+            background-color: #f4f4f4;
         }
 
         .content img.dss-photo {
             float: right;
-            margin: 10px 0 10px 20px; /* Space between text and photo */
-            width: 250px; /* Larger DSS photo */
+            margin: 10px 0 10px 20px;
+            width: 250px;
             height: auto;
             border-radius: 5px;
             border: 1px solid #ddd;
@@ -104,28 +117,26 @@
         }
 
         a {
-            color: #d32f2f; /* Consistent link color */
-            text-decoration: none; /* No underline by default */
+            color: #d32f2f;
+            text-decoration: none;
         }
 
         a:hover {
-            text-decoration: underline; /* Underline on hover */
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
     <div class="header">
         <img src="llaudet_photo.png" alt="Elena Llaudet">
         <div class="header-content">
             <h1>ELENA LLAUDET</h1>
-            <h2>Associate Professor of Political Science at Suffolk University in Boston</h2>
             <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
+            <h2>Associate Professor of Political Science at Suffolk University in Boston</h2>
         </div>
     </div>
 
-    <!-- Navigation Links -->
     <div class="nav">
         <a href="https://ellaudet.github.io/" class="active">HOME</a>
         <span>|</span>
@@ -135,9 +146,9 @@
         <span>|</span>
         <a href="https://ellaudet.github.io/dssbook/" class="inactive">DSS</a>
         <span>|</span>
-        <a href="https://ellaudet.github.io/dss_resources/" class="inactive">INSTRUCTOR MATERIALS</a>
+        <a href="https://ellaudet.github.io/dss_resources/" class="inactive">INSTRUCTOR MATERIALS for DSS</a>
         <span>|</span>
-        <a href="https://ellaudet.github.io/dss_interactive/" class="inactive">INTERACTIVE GRAPHS</a>
+        <a href="https://ellaudet.github.io/dss_interactive/" class="inactive">INTERACTIVE GRAPHS for DSS</a>
     </div>
 
     <!-- Content Section -->

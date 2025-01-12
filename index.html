@@ -138,17 +138,17 @@
     </div>
 
     <div class="nav">
-        <a href="https://ellaudet.github.io/" class="active">HOME</a>
+        <a href="https://ellaudet.github.io/" class="nav-link active">HOME</a>
         <span>|</span>
-        <a href="https://ellaudet.github.io/research/" class="inactive">RESEARCH</a>
+        <a href="https://ellaudet.github.io/research/" class="nav-link inactive">RESEARCH</a>
         <span>|</span>
-        <a href="https://ellaudet.github.io/teaching/" class="inactive">TEACHING</a>
+        <a href="https://ellaudet.github.io/teaching/" class="nav-link inactive">TEACHING</a>
         <span>|</span>
-        <a href="https://ellaudet.github.io/dss/" class="inactive">DSS</a>
+        <a href="https://ellaudet.github.io/dss/" class="nav-link inactive">DSS</a>
         <span>|</span>
-        <a href="https://ellaudet.github.io/instructor_resources/" class="inactive">DSS INSTRUCTOR RESOURCES</a>
+        <a href="https://ellaudet.github.io/instructor_resources/" class="nav-link inactive">DSS INSTRUCTOR RESOURCES</a>
         <span>|</span>
-        <a href="https://ellaudet.github.io/interactive_graphs/" class="inactive">DSS INTERACTIVE GRAPHS</a>
+        <a href="https://ellaudet.github.io/interactive_graphs/" class="nav-link inactive">DSS INTERACTIVE GRAPHS</a>
     </div>
 
     <!-- Content Section -->
@@ -189,8 +189,8 @@
     </div>
 
     <script>
-        // Ensure all links open in a new tab
-        document.querySelectorAll('a').forEach(link => {
+        // Ensure only non-navigation links open in a new tab
+        document.querySelectorAll('a:not(.nav-link)').forEach(link => {
             link.setAttribute('target', '_blank');
         });
     </script>

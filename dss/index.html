@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analysis for Social Science (DSS)</title>
+    <title>Elena Llaudet</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             color: #444;
-            line-height: 1.6;
         }
 
         .header {
@@ -42,13 +41,6 @@
             color: #444;
         }
 
-        .header-content h2 {
-            font-size: 1em;
-            font-weight: normal;
-            margin: 5px 0;
-            color: #666;
-        }
-
         .header-content h2:first-of-type {
             margin-top: 3px;
         }
@@ -76,7 +68,8 @@
 
         .nav a {
             text-decoration: none;
-            font-size: 0.9em;
+            font-size: 1em;
+            font-weight: normal;
             color: #888;
             white-space: nowrap;
         }
@@ -93,59 +86,34 @@
             color: #888;
         }
 
+        @media (max-width: 600px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav span {
+                display: none;
+            }
+        }
+
         .content {
             padding: 10px 20px;
             background-color: #f4f4f4;
         }
 
-        .top-content {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .book-image {
-            flex: 0 0 300px;
-        }
-
-        .book-image img {
-            width: 100%;
+        .content img.dss-photo {
+            float: right;
+            margin: 10px 0 10px 20px;
+            width: 200px;
             height: auto;
             border-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .intro-content {
-            flex: 1;
-        }
-
-        .highlight {
-            color: #d32f2f;
-            font-size: 1.1em;
-            margin-top: 1.5em;
-            margin-bottom: 0.2em;
-            font-weight: 500;
-        }
-
-        h3 {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 0;
-            margin-bottom: 0.2em;
-        }
-
-        .author {
-            margin-bottom: 1.5em;
+            border: 1px solid #ddd;
         }
 
         p {
-            margin: 0.8em 0;
-            line-height: 1.6;
-        }
-
-        .quote {
-            margin-left: 20px;
-            margin-bottom: 1em;
+            text-align: justify;
+            margin: 1em 0;
         }
 
         a {
@@ -156,33 +124,35 @@
         a:hover {
             text-decoration: underline;
         }
-
-        ul {
-            padding-left: 20px;
+        
+        .highlight {
+            color: #d32f2f;
+            font-size: 1.1em;
+            margin-top: 1.5em;
+            margin-bottom: 0.2em;
+            font-weight: 500;
+        }
+        
+	    h3 {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 0;
+            margin-bottom: 0.2em;
         }
 
-        li {
-            margin-bottom: 0.8em;
+	    .author {
+            margin-bottom: 1.5em;
         }
 
-        @media (max-width: 768px) {
-            .top-content {
-                flex-direction: column;
-            }
-
-            .book-image {
-                flex: 0 0 auto;
-                max-width: 280px;
-                margin: 0 auto;
-            }
-
-            .nav span {
-                display: none;
-            }
+        .quote {
+            margin-left: 20px;
+            margin-bottom: 1em;
         }
+
     </style>
 </head>
 <body>
+    
     <div class="header">
         <img src="../images/llaudet.png" alt="Elena Llaudet">
         <div class="header-content">

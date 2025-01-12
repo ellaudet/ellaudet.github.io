@@ -82,16 +82,17 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 30px 20px;
+            background-color: #fff;
+        }
+
+        .top-content {
             display: flex;
             gap: 40px;
-            background-color: #fff;
+            margin-bottom: 40px;
         }
 
         .book-image {
             flex: 0 0 300px;
-            position: sticky;
-            top: 20px;
-            align-self: flex-start;
         }
 
         .book-image img {
@@ -101,7 +102,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .main-content {
+        .intro-content {
             flex: 1;
         }
 
@@ -127,8 +128,6 @@
 
         .quote {
             margin-left: 20px;
-            border-left: 3px solid #d32f2f;
-            padding-left: 15px;
             margin-bottom: 1em;
         }
 
@@ -150,13 +149,12 @@
         }
 
         @media (max-width: 768px) {
-            .content {
+            .top-content {
                 flex-direction: column;
             }
 
             .book-image {
                 flex: 0 0 auto;
-                position: static;
                 max-width: 280px;
                 margin: 0 auto;
             }
@@ -192,27 +190,30 @@
     </div>
 
     <div class="content">
-        <div class="book-image">
-            <img src="../images/DSS.png" alt="Data Analysis for Social Science">
-        </div>
-        
-        <div class="main-content">
-            <h2 class="highlight">DATA ANALYSIS FOR SOCIAL SCIENCE</h2>
-            <h3>A FRIENDLY AND PRACTICAL INTRODUCTION</h3>
-            <h3>Elena Llaudet and Kosuke Imai</h3>
+        <div class="top-content">
+            <div class="book-image">
+                <img src="../images/DSS.png" alt="Data Analysis for Social Science">
+            </div>
             
-            <p>An ideal textbook for complete beginners — teaches from scratch R, statistics, and the fundamentals of quantitative social science.</p>
-            
-            <p>
-                <a href="https://bit.ly/dss_contents" target="_blank">Look Inside</a> |
-                <a href="https://bit.ly/dss_amazon" target="_blank">Purchase from Amazon</a> |
-                <a href="https://suffolk.co1.qualtrics.com/jfe/form/SV_b4m4HmOumNWHY6W" target="_blank">Provide Feedback</a> |
-                <a href="https://bit.ly/dss_exam" target="_blank">Request Exam Copy</a> |
-                <a href="https://bit.ly/teaching_dss" target="_blank">Preview Instructor Resources</a> |
-                <a href="https://bit.ly/dss_instructor" target="_blank">Request Instructor Resources</a>
-            </p>
+            <div class="intro-content">
+                <h2 class="highlight">DATA ANALYSIS FOR SOCIAL SCIENCE</h2>
+                <h3>A FRIENDLY AND PRACTICAL INTRODUCTION</h3>
+                <h3>Elena Llaudet and Kosuke Imai</h3>
+                
+                <p>An ideal textbook for complete beginners — teaches from scratch R, statistics, and the fundamentals of quantitative social science.</p>
+                
+                <p>
+                    <a href="https://bit.ly/dss_contents" target="_blank">Look Inside</a> |
+                    <a href="https://bit.ly/dss_amazon" target="_blank">Purchase from Amazon</a> |
+                    <a href="https://suffolk.co1.qualtrics.com/jfe/form/SV_b4m4HmOumNWHY6W" target="_blank">Provide Feedback</a> |
+                    <a href="https://bit.ly/dss_exam" target="_blank">Request Exam Copy</a> |
+                    <a href="https://bit.ly/teaching_dss" target="_blank">Preview Instructor Resources</a> |
+                    <a href="https://bit.ly/dss_instructor" target="_blank">Request Instructor Resources</a>
+                </p>
 
-            <p><strong>Instructors:</strong> If you are using our book as the main textbook in your course, you can request instructor resources, including a sample syllabus, lecture slides, additional replication-style exercises, and interactive graphs.</p>
+                <p><strong>Instructors:</strong> If you are using our book as the main textbook in your course, you can request instructor resources, including a sample syllabus, lecture slides, additional replication-style exercises, and interactive graphs.</p>
+            </div>
+        </div>
 
        <h2 class="highlight">SELECTED PRAISE FOR DSS</h2>
         <p class="quote">"I love this book. More importantly, my students love this book." <strong>— Anna Harvey, NYU</strong></p>

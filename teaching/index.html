@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elena Llaudet - Teaching</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #444;
+        }
+
+        .header {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header img {
+            border-radius: 5px;
+            width: 120px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .header-content h1 {
+            font-size: 1.6em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 0;
+            color: #444;
+        }
+
+        .header-content h2:first-of-type {
+            margin-top: 3px;
+        }
+
+        .header-content h2:nth-of-type(2) {
+            margin-top: -4px;
+        }
+
+        .header-content h2 {
+            font-size: 1em;
+            font-weight: normal;
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 10px;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .nav a {
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: normal;
+            color: #888;
+            white-space: nowrap;
+        }
+
+        .nav a.active {
+            color: #d32f2f;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .nav span {
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav span {
+                display: none;
+            }
+        }
+
+        .content {
+            padding: 10px 20px;
+            background-color: #f4f4f4;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: justify;
+            margin: 1em 0;
+        }
+
+        a {
+            color: #d32f2f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .teaching-award img {
+            float: right;
+            margin-left: 20px;
+            width: 235px;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="llaudet_photo.png" alt="Elena Llaudet">
+        <div class="header-content">
+            <h1>ELENA LLAUDET</h1>
+            <h2>Associate Professor of Political Science at Suffolk University in Boston</h2>
+            <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
+        </div>
+    </div>
+
+    <div class="nav">
+        <a href="https://ellaudet.github.io/" class="inactive">HOME</a>
+        <span>|</span>
+        <a href="https://ellaudet.github.io/research/" class="inactive">RESEARCH</a>
+        <span>|</span>
+        <a href="https://ellaudet.github.io/teaching/" class="active">TEACHING</a>
+        <span>|</span>
+        <a href="https://ellaudet.github.io/dssbook/" class="inactive">DSS</a>
+        <span>|</span>
+        <a href="https://ellaudet.github.io/dss_resources/" class="inactive">DSS INSTRUCTOR RESOURCES</a>
+        <span>|</span>
+        <a href="https://ellaudet.github.io/dss_interactive/" class="inactive">DSS INTERACTIVE GRAPHS</a>
+    </div>
+
+    <div class="content">
+        <address><strong>Courses Taught at Suffolk:</strong></address>
+
+        <ul>
+            <li><em>Data Analysis and Politics</em> (POLS 201)
+                <ul>
+                    <li>Relies on <a href="https://bit.ly/dss_book" target="_blank">Data Analysis for Social Science: A Friendly and Practical Introduction</a> (DSS)</li>
+                    <li>Course materials can be found <a href="https://bit.ly/teaching_dss" target="_blank">here</a></li>
+                </ul>
+            </li>
+            <li><em>Introduction to American Democracy</em> (POLS 110)</li>
+            <li><em>Causal Inference and Politics</em> (Under Development)</li>
+        </ul>
+
+        <address><strong>While at Harvard, I served as a Teaching Fellow for:</strong></address>
+
+        <ul>
+            <li><em>Introduction to Econometrics</em> (ECON 1123)
+                <ul>
+                    <li><a href="https://www.dropbox.com/s/5rqwzxz27o4glev/econ1123_handouts.pdf?dl=0" target="_blank">My section and review session handouts from Fall 2010</a></li>
+                    <li><a href="https://www.dropbox.com/s/z5x6r3cbiu72j09/ECON1123_SUMMARY.pdf?dl=0" target="_blank">Full cheatsheet I wrote for final exam review</a></li>
+                    <li><a href="https://www.dropbox.com/s/vu2jbnmdhz787hr/ECON1123_BRIEF_SUMMARY.pdf?dl=0" target="_blank">Brief cheatsheet I wrote for final exam review</a></li>
+                </ul>
+            </li>
+            <li><em>American Government</em> (GOV 30)</li>
+            <li><em>Introduction to Congress</em> (GOV 131)</li>
+        </ul>
+
+        <address><strong>Teaching Awards and Recognition:</strong></address>
+
+        <div class="teaching-award">
+            <img src="teaching_award.png" alt="Innovative Teaching Award">
+        </div>
+
+        <ul>
+            <li>Winner of <a href="https://sites.suffolk.edu/ctse/events/symposium/innovative-teaching-award/" target="_blank">Innovative Teaching Award</a> for <em>Data Analysis and Politics</em> (POLS 201), Center for Teaching and Scholarly Excellence at Suffolk University (2021-22)</li>
+            <li>One of three faculty members nominated for Outstanding College of Arts and Sciences Faculty Member of the Year Award, Student Government Association at Suffolk University (2020-21)</li>
+            <li>Notes of appreciation from students through the Thank-a-Prof program, Center for Teaching and Scholarly Excellence (multiple semesters)</li>
+            <li>Winner of Certificate of Excellence and Distinction in Teaching for <em>Introduction to Econometrics</em> (ECON 1123), The Derek Bok Center for Teaching and Learning at Harvard University (2009-10)</li>
+        </ul>
+    </div>
+
+</body>
+</html>

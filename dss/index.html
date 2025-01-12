@@ -35,23 +35,12 @@
 
         .header-content h1 {
             font-size: 1.4em;
-            font-weight: bold;
-            text-transform: uppercase;
             margin: 0;
             color: #444;
         }
 
-        .header-content h2:first-of-type {
-            margin-top: 3px;
-        }
-
-        .header-content h2:nth-of-type(2) {
-            margin-top: -4px;
-        }
-
         .header-content h2 {
-            font-size: 1em;
-            font-weight: normal;
+            font-size: 0.9em;
             margin: 5px 0;
             color: #666;
         }
@@ -69,7 +58,6 @@
         .nav a {
             text-decoration: none;
             font-size: 1em;
-            font-weight: normal;
             color: #888;
             white-space: nowrap;
         }
@@ -82,37 +70,34 @@
             text-decoration: underline;
         }
 
-        .nav span {
-            color: #888;
-        }
-
         @media (max-width: 600px) {
             .nav {
                 flex-direction: column;
                 align-items: flex-start;
             }
-
-            .nav span {
-                display: none;
-            }
         }
 
         .content {
-            padding: 10px 20px;
+            display: flex;
+            padding: 20px;
             background-color: #f4f4f4;
         }
 
         .content img.dss-photo {
-            float: right;
-            margin: 10px 0 10px 20px;
+            flex: 0 0 200px;
+            margin-right: 20px;
             width: 200px;
             height: auto;
             border-radius: 5px;
             border: 1px solid #ddd;
         }
 
-        p {
+        .text-content {
+            flex: 1;
             text-align: justify;
+        }
+
+        p, h2.highlight, h3 {
             margin: 1em 0;
         }
 
@@ -124,40 +109,47 @@
         a:hover {
             text-decoration: underline;
         }
+
+        h2.highlight {
+            color: #d32f2f;
+            font-size: 1.2em;
+        }
+
+        h3 {
+            font-size: 1em;
+            color: #666;
+        }
     </style>
 </head>
+<body>
 
-    <body>
-
-    <div class="header">
-        <img src="../images/llaudet.png" alt="Elena Llaudet">
-        <div class="header-content">
-            <h1>ELENA LLAUDET</h1>
-            <h2>Associate Professor of Political Science at Suffolk University in Boston</h2>
-            <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
-        </div>
+<div class="header">
+    <img src="../images/llaudet.png" alt="Elena Llaudet">
+    <div class="header-content">
+        <h1>ELENA LLAUDET</h1>
+        <h2>Associate Professor of Political Science at Suffolk University in Boston</h2>
+        <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
     </div>
+</div>
 
-    <div class="nav">
-        <a href="https://ellaudet.github.io/" class="nav-link inactive">HOME</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/research/" class="nav-link inactive">RESEARCH</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/teaching/" class="nav-link inactive">TEACHING</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/dss/" class="nav-link active">DSS</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/instructor_resources/" class="nav-link inactive">DSS INSTRUCTOR RESOURCES</a>
-        <span>|</span>
-        <a href="https://ellaudet.github.io/interactive_graphs/" class="nav-link inactive">DSS INTERACTIVE GRAPHS</a>
-    </div>
+<div class="nav">
+    <a href="https://ellaudet.github.io/" class="nav-link inactive">HOME</a>
+    <a href="https://ellaudet.github.io/research/" class="nav-link inactive">RESEARCH</a>
+    <a href="https://ellaudet.github.io/teaching/" class="nav-link inactive">TEACHING</a>
+    <a href="https://ellaudet.github.io/dss/" class="nav-link active">DSS</a>
+    <a href="https://ellaudet.github.io/instructor_resources/" class="nav-link inactive">DSS INSTRUCTOR RESOURCES</a>
+    <a href="https://ellaudet.github.io/interactive_graphs/" class="nav-link inactive">DSS INTERACTIVE GRAPHS</a>
+</div>
 
-    <div class="content">
-        <img src="../images/DSS.png" alt="Data Analysis for Social Science" class="image" width="280" height="343">
-        <h2 class="highlight"><strong>DATA ANALYSIS FOR SOCIAL SCIENCE</strong></h2>
-        <h3><strong>A FRIENDLY AND PRACTICAL INTRODUCTION</strong></h3>
+<div class="content">
+    <img src="../images/DSS.png" alt="Data Analysis for Social Science" class="dss-photo">
+    <div class="text-content">
+        <h2 class="highlight">DATA ANALYSIS FOR SOCIAL SCIENCE</h2>
+        <h3>A Friendly and Practical Introduction</h3>
         <h3>Elena Llaudet and Kosuke Imai</h3>
         <p>An ideal textbook for complete beginners — teaches from scratch R, statistics, and the fundamentals of quantitative social science.</p>
+    </div>
+</div>
         <p>
             <a href="https://bit.ly/dss_contents" target="_blank">Look Inside</a> |
             <a href="https://bit.ly/dss_amazon" target="_blank">Purchase from Amazon</a> |

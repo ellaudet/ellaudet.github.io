@@ -193,5 +193,11 @@
 
     </div>
 
+    <script>
+        // Ensure only non-navigation links open in a new tab
+        document.querySelectorAll('a:not(.nav-link)').forEach(link => {
+            link.setAttribute('target', '_blank');
+        });
+    </script>
 </body>
 </html>

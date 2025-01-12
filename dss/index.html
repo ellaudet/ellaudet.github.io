@@ -10,7 +10,6 @@
             margin: 0;
             padding: 0;
             color: #444;
-            background-color: #f4f4f4;
         }
 
         .header {
@@ -75,21 +74,38 @@
             text-decoration: underline;
         }
 
+        .nav span {
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav span {
+                display: none;
+            }
+        }
+
         .content {
             padding: 20px;
-            background-color: #fff;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .content h2 {
-            color: #d32f2f;
-            margin-bottom: 1em;
-        }
-
-        .content p {
-            margin: 1em 0;
+            background-color: #f4f4f4;
             line-height: 1.6;
+        }
+
+        p, h2, h3 {
+            margin: 1em 0;
+        }
+
+        ul {
+            margin: 1em 0;
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 0.5em;
         }
 
         a {
@@ -101,13 +117,23 @@
             text-decoration: underline;
         }
 
-        ul {
-            margin: 1em 0;
-            padding-left: 20px;
+        .highlight {
+            color: #d32f2f;
+            font-weight: bold;
         }
 
-        ul li {
-            margin-bottom: 0.5em;
+        .quote {
+            font-style: italic;
+            margin-bottom: 1em;
+        }
+
+        .image {
+            float: left;
+            margin-right: 15px;
+        }
+
+        .clear {
+            clear: both;
         }
     </style>
 </head>
@@ -137,21 +163,42 @@
     </div>
 
     <div class="content">
-        <h2>Data Analysis for Social Science (DSS)</h2>
-        <p><em>A friendly and practical introduction</em></p>
-        <p>Co-authored by Elena Llaudet and Kosuke Imai, DSS is an ideal textbook for complete beginners. It teaches R, statistics, and the fundamentals of quantitative social science from scratch.</p>
-        <p>
-            <a href="https://bit.ly/dss_contents" target="_blank">Look Inside</a> | 
-            <a href="https://bit.ly/dss_amazon" target="_blank">Purchase from Amazon</a> | 
-            <a href="https://bit.ly/dss_exam" target="_blank">Request Exam Copy</a> | 
-            <a href="https://bit.ly/teaching_dss" target="_blank">Preview Instructor Resources</a>
-        </p>
-        <ul>
-            <li>Includes cheatsheets, tips, and interactive materials</li>
-            <li>Step-by-step guidance for real-world data analysis using R</li>
-            <li>Designed for students with diverse math backgrounds</li>
-        </ul>
-    </div>
+        <img src="../images/dss_cover.png" alt="Data Analysis for Social Science" class="image" width="280" height="343">
+        <h2 class="highlight">DATA ANALYSIS FOR SOCIAL SCIENCE</h2>
+        <h3>A FRIENDLY AND PRACTICAL INTRODUCTION</h3>
+        <h3>Elena Llaudet and Kosuke Imai</h3>
+        <p>An ideal textbook for complete beginners — teaches from scratch R, statistics, and the fundamentals of quantitative social science.</p>
+        <div class="clear"></div>
 
+        <p>
+            <a href="https://bit.ly/dss_contents" target="_blank">Look Inside</a> |
+            <a href="https://bit.ly/dss_amazon" target="_blank">Purchase from Amazon</a> |
+            <a href="https://suffolk.co1.qualtrics.com/jfe/form/SV_b4m4HmOumNWHY6W" target="_blank">Provide Feedback</a> |
+            <a href="https://bit.ly/dss_exam" target="_blank">Request Exam Copy</a> |
+            <a href="https://bit.ly/teaching_dss" target="_blank">Preview Instructor Resources</a> |
+            <a href="https://bit.ly/dss_instructor" target="_blank">Request Instructor Resources</a>
+        </p>
+
+        <p><strong>Instructors:</strong> If you are using our book as the main textbook in your course, you can request instructor resources, including a sample syllabus, lecture slides, additional replication-style exercises, and interactive graphs.</p>
+
+        <h2 class="highlight">SELECTED PRAISE FOR DSS</h2>
+        <p class="quote">"I love this book. More importantly, my students love this book." — Anna Harvey, NYU</p>
+        <p class="quote">"This is without doubt the best book to get started with data analysis in the social sciences." — Simon Weschle, Syracuse University</p>
+        <p class="quote">"A game changer! I never had such good results and engagement from my students until I adopted this book." — Javier Sajuria, Queen Mary University of London</p>
+        <p class="quote">"[This book] is outstanding—by far the most effective introductory textbook on the topic I have come across in more than a decade of teaching this material." — PJ Lamberson, UCLA</p>
+
+        <h2 class="highlight">OVERVIEW</h2>
+        <p>Assuming no prior knowledge of statistics or coding and only minimal knowledge of math, <em>Data Analysis for Social Science</em> teaches the fundamentals of survey research, predictive models, and causal inference, plus how to analyze real-world data with the free and popular statistical program R.</p>
+        <p>It progresses by teaching how to solve one kind of problem after another, bringing in methods as needed. It flips the script of traditional statistics textbooks, engaging students by demonstrating from the very beginning how data analysis can answer interesting questions.</p>
+
+        <h2 class="highlight">FEATURES / HIGHLIGHTS</h2>
+        <ul>
+            <li>Step-by-step guide to analyzing real-world data using R.</li>
+            <li>Designed to accommodate students with varying math backgrounds.</li>
+            <li>Includes cheatsheets, tips, recalls, and interactive graphs.</li>
+        </ul>
+
+        <p><strong>We sincerely hope our book is helpful to you and/or your students!</strong> — Elena and Kosuke</p>
+    </div>
 </body>
 </html>

@@ -103,24 +103,31 @@
 	.top-content {
  	   display: flex;
     	   gap: 40px;
-    	   margin-bottom: 40px;
-    	   align-items: flex-start;  /* Align  at the top */
-		}    
-
-        .book-image {
-            flex: 0 0 200px;
-        }
-
-        .book-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+	   margin-bottom: 40px;
+	   align-items: flex-start; /* This ensures all items start from the top */
+	   padding: 0; /* Remove any padding that might affect alignment */
+	}    
+	    
+	.book-image {
+		    flex: 0 0 200px; /* Adjust width as necessary */
+		    margin-top: 0; /* Ensure no top margin */
+	    }
+	    
+	.book-image img {
+    		width: 100%;
+    		height: auto;
+    		border-radius: 5px;
+    		box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    		display: block; /* Ensures no extra space at bottom of image */
+	}
 
         .intro-content {
             flex: 1;
         }
+
+	.intro-content h2, .intro-content h3 {
+		margin-top: 0; /* Removes the top margin pushing the text down */
+	}    
 
         p {
             text-align: justify;

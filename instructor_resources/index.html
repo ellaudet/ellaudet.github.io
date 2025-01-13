@@ -182,6 +182,18 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Soft shadow for depth */
         	}
 
+	/* Hide the break on small screens */
+    	.conditional-break {
+        	display: none;
+    	}
+
+    	/* Show the break on screens wider than 768px */
+    	@media (min-width: 768px) {
+        .conditional-break {
+            display: inline;
+        	}
+    	}
+
     </style>
 </head>
 <body>
@@ -226,7 +238,7 @@
                     <a href="https://bit.ly/dss_contents" target="_blank">Look Inside</a> |
                     <a href="https://bit.ly/dss_amazon" target="_blank">Purchase from Amazon</a> |
                     <a href="https://suffolk.co1.qualtrics.com/jfe/form/SV_b4m4HmOumNWHY6W" target="_blank">Provide Feedback</a>
-                <br>
+                <br class="conditional-break">
                     <a href="https://bit.ly/dss_exam" target="_blank">Request Exam Copy</a> |
                     <a href="https://bit.ly/teaching_dss" target="_blank">Preview Instructor Resources</a> |
                     <a href="https://bit.ly/dss_instructor" target="_blank">Request Instructor Resources</a>

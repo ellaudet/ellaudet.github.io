@@ -100,26 +100,34 @@
             border: 1px solid #ddd;
         }
 
-        .top-content {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .book-image {
-            flex: 0 0 300px;
-        }
-
-        .book-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+	.top-content {
+ 	   display: flex;
+    	   gap: 40px;
+	   margin-bottom: 40px;
+	   align-items: flex-start; /* This ensures all items start from the top */
+	   padding: 0; /* Remove any padding that might affect alignment */
+	}    
+	    
+	.book-image {
+		    flex: 0 0 200px; /* Adjust width as necessary */
+		    margin-top: 0; /* Ensure no top margin */
+	    }
+	    
+	.book-image img {
+    		width: 100%;
+    		height: auto;
+    		border-radius: 5px;
+    		box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    		display: block; /* Ensures no extra space at bottom of image */
+	}
 
         .intro-content {
             flex: 1;
         }
+
+	.intro-content h2, .intro-content h3 {
+		margin-top: 0; /* Removes the top margin pushing the text down */
+	}    
 
         p {
             text-align: justify;
@@ -159,7 +167,7 @@
             margin-bottom: 1em;
         }
 	
-	    @media (max-width: 768px) {
+	@media (max-width: 768px) {
             .top-content {
                 flex-direction: column;
             }
@@ -175,21 +183,26 @@
             }
         }
 
-	    .important-notes {
-            background-color: #fff;
-            margin: 20px;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Soft shadow for depth */
-        	}
-
-	/* Hide the break on small screens */
+	/* Hide the break on large screens */
     	.conditional-break {
         	display: none;
     	}
 
-    	/* Show the break on screens wider than 768px */
-    	@media (min-width: 768px) {
+    	/* Show the break on screens smaller than 1000px */
+    	@media (max-width: 850px) {
         .conditional-break {
+            display: block;
+        	}
+    	}
+
+	/* Hide the break on small screens */
+    	.break-large-screen {
+        display: none;
+    	}
+
+    	/* Show the break on screens wider than 400px */
+    	@media (min-width: 850px) {
+        .break-large-screen {
             display: inline;
         	}
     	}
@@ -206,7 +219,7 @@
             <h2>Co-author of <em>Data Analysis for Social Science</em> (with Kosuke Imai)</h2>
         </div>
     </div>
-
+	
     <div class="nav">
         <a href="https://ellaudet.github.io/" class="nav-link inactive">HOME</a>
         <span>|</span>
@@ -214,7 +227,7 @@
         <span>|</span>
         <a href="https://ellaudet.github.io/teaching/" class="nav-link inactive">TEACHING</a>
         <span>|</span>
-        <a href="https://ellaudet.github.io/dss/" class="nav-link inactive">DATA ANALYSIS FOR SOCIAL SCIENCE (DSS)</a>
+        <a href="https://ellaudet.github.io/dss/" class="nav-link iactive">DATA ANALYSIS FOR SOCIAL SCIENCE (DSS)</a>
         <span>|</span>
         <a href="https://ellaudet.github.io/dss_resources/" class="nav-link active">DSS RESOURCES</a>
     </div>
@@ -226,6 +239,7 @@
             </div>
             
             <div class="intro-content">
+		<br class="break-large-screen">    
                 <h2 class="highlight">DATA ANALYSIS FOR SOCIAL SCIENCE</h2>
                 <h3>A FRIENDLY AND PRACTICAL INTRODUCTION</h3>
                 <h3 class="author">Elena Llaudet and Kosuke Imai</h3>
@@ -233,16 +247,14 @@
                 <p>An ideal textbook for complete beginners — teaches from scratch R, statistics, and the fundamentals of quantitative social science.</p>
                 
                 <p>
-                    <a href="https://bit.ly/dss_contents" target="_blank">Look Inside</a> |
-                    <a href="https://bit.ly/dss_amazon" target="_blank">Purchase from Amazon</a> |
+                    <a href="https://press.princeton.edu/books/paperback/9780691199436/data-analysis-for-social-science#preview" target="_blank">Read First Chapter</a> |
+                    <a href="https://bit.ly/dss_amazon" target="_blank">See in Amazon</a> |
+		<br class="conditional-break">
+		    <a href="https://bit.ly/dss_exam" target="_blank">Request Exam Copy</a> |
                     <a href="https://suffolk.co1.qualtrics.com/jfe/form/SV_b4m4HmOumNWHY6W" target="_blank">Provide Feedback</a>
-                <br class="conditional-break">
-                    <a href="https://bit.ly/dss_exam" target="_blank">Request Exam Copy</a> |
-                    <a href="https://bit.ly/teaching_dss" target="_blank">Preview Instructor Resources</a> |
-                    <a href="https://bit.ly/dss_instructor" target="_blank">Request Instructor Resources</a>
                 </p>
 
-	    </div>
+            </div>
         </div>
 
 

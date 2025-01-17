@@ -249,10 +249,11 @@
 	.container p {
             margin-bottom: 0; /* Ensures no extra space after the paragraph */
         }
-        .container ul {
-            margin-top: 0; /* Ensures no extra space before the list */
-        }
+        
         .container ul li {
+	   margin-top: 0; /* Remove top margin */
+    	   margin-bottom: 0; /* Remove bottom margin */
+    	    padding: 0; /* No padding inside elements */
 	    padding-left: 20px; /* Keep list indentation */
             margin-bottom: 0.5em; /* Adds space after each list item */
         }

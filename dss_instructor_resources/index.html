@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elena Llaudet</title>
+    <title>DSS Instructor Resources</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,41 +14,46 @@
 
         .header {
             display: flex;
-            align-items: flex-start;
-            padding: 20px 20px 15px 20px;
+            align-items: center;
+            padding: 20px;
             background-color: #f4f4f4;
             border-bottom: 1px solid #ddd;
         }
 
         .header img {
             border-radius: 5px;
-            width: 100px;
+            width: 110px;
             height: auto;
-            margin-right: 20px;
+            margin-right: 10px;
         }
 
         .header-content {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
         }
 
+        .header-content h1, .header-content h2, .header-content h3, .header-content p {
+            margin: 0;
+            padding: 0;
+        }
+            
         .header-content h1 {
             font-size: 1.1em;
             font-weight: normal;
             text-transform: uppercase;
-            margin: 0;
             color: #d32f2f;
         }
 
         .header-content h2:first-of-type {
             margin-top: 3px;
-            font-size: 0.8em;
+            font-weight: normal;
+            font-size: 1em;
         }
 
         .header-content h2:nth-of-type(2) {
             margin-top: -4px;
-            font-size: 0.8em;
+            font-size: 0.9em;
         }
 
         .header-content h2 {
@@ -58,12 +63,20 @@
             color: #666;
         }
 
+        .header-content h3 {
+            font-size: 0.8em;
+            font-weight: normal;
+            margin: 0;
+            color: #444;
+            margin-top: 3px;
+        }
+
         .nav {
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
             gap: 10px;
-            padding: 8px 20px;
+            padding: 10px 20px;
             background-color: #fff;
             border-bottom: 1px solid #ddd;
         }
@@ -88,32 +101,12 @@
             color: #888;
         }
 
-        @media (max-width: 600px) {
-            .nav {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .nav span {
-                display: none;
-            }
-        }
-
         .content {
             padding: 10px 20px;
             background-color: #f4f4f4;
         }
 
-        .content img.dss-photo {
-            float: right;
-            margin-left: 10px;
-            width: 170px;
-            height: auto;
-            border-radius: 5px;
-        }
-
         p {
-            text-align: left;
             margin: 1em 0;
         }
 
@@ -125,11 +118,164 @@
         a:hover {
             text-decoration: underline;
         }
+        
+        .highlight {
+            color: #d32f2f;
+            font-size: 1.1em;
+            margin-top: 1.5em;
+            margin-bottom: 0.2em;
+            font-weight: 500;
+        }
+
+        /* Remove top margin from paragraphs that immediately follow chapter headings */
+        .highlight + p {
+            margin-top: 0;
+        }
+
+        /* Remove top margin from lists that immediately follow paragraphs */
+        p + ul {
+            margin-top: 0;
+        }
+
+        /* Remove top margin from lists that immediately follow headings */
+        .highlight + ul {
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #666;
+            font-size: 1em;
+            margin-top: 0;
+            margin-bottom: 0.2em;
+            font-weight: 500;        
+        }
+
+        .chapter-tag {
+            color: #888;
+            font-size: 1em;
+            font-weight: normal;
+        }
+    
+        @media (max-width: 768px) {
+            .nav span {
+                display: none;
+            }
+
+            .container-row {
+                flex-direction: column;
+            }
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 20px 20px 20px 0;
+            padding: 10px 25px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .container-half {
+            flex: 1;
+            padding: 10px 25px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+            
+        .container h2, .container p, .container ul, .container li, 
+        .container-half h2, .container-half p, .container-half ul, .container-half li {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 0;
+        }
+
+        .container h2, .container-half h2 {
+            color: #d32f2f;
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 10px;
+        }
+
+        .container p, .container ul, .container-half p, .container-half ul {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .container ul, .container-half ul {
+            padding-left: 20px;
+        }
+
+        .container a, .container-half a {
+            color: #d32f2f;
+            text-decoration: none;
+        }
+
+        .container a:hover, .container-half a:hover {
+            text-decoration: underline;
+        }
+
+        .container p, .container-half p {
+            margin-bottom: 0;
+        }
+        .container ul, .container-half ul {
+            margin-top: 0;
+        }
+        .container ul li, .container-half ul li {
+            margin-bottom: 0.5em;
+        }
+            
+        ul {
+            margin-bottom: 0.5em;
+        }
+
+        ul li {
+            margin-bottom: 0.5em;
+        }
+
+        ul > li > ul {
+            margin-left: 20px;
+            padding-left: 0;
+        }   
+
+        .container ul li, .container-half ul li {
+            margin-bottom: 0.4em;
+        }
+
+        .container ul li ul, .container-half ul li ul {
+            padding-top: 0;
+        }
 
         .main-container {
-            max-width: 900px; /* Sets the maximum width for the content */
-            }
-        
+            max-width: 900px;
+        }
+
+        .important-notes {
+            background-color: #fff;
+            padding: 15px 25px;
+            margin: 20px 20px 20px 0;
+            max-width: 700px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .important-notes h3 {
+            color: #d32f2f;
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 10px;
+            margin-bottom: 0;
+        }
+
+        .important-notes ul {
+            padding-top: 10px;
+            padding-left: 20px;
+        }
+
+        .important-notes ul li {
+            margin-bottom: 0.5em;
+        }
     </style>
 </head>
 <body>
@@ -147,18 +293,17 @@
             </p>
         </div>
     </div>
-
+    
     <div class="nav">
-        <a href="https://ellaudet.github.io/" class="nav-link active">HOME</a>
+        <a href="https://ellaudet.github.io/" class="nav-link inactive">HOME</a>
         <span>|</span>
         <a href="https://ellaudet.github.io/publications/" class="nav-link inactive">PUBLICATIONS</a>
         <span>|</span>
         <a href="https://ellaudet.github.io/teaching/" class="nav-link inactive">TEACHING</a>
         <span>|</span>
-        <a href="https://ellaudet.github.io/dss_instructor_resources/" class="nav-link inactive">DSS INSTRUCTOR RESOURCES</a>
+        <a href="https://ellaudet.github.io/dss_instructor_resources/" class="nav-link active">DSS INSTRUCTOR RESOURCES</a>
     </div>
 
-    <!-- Content Section -->
     <div class="content">
     <div class="main-container">
             
@@ -167,7 +312,7 @@
                 <p style="color: #666; margin-bottom: -7px;"><em>What's On This Page?</em></p>
                 <p style="margin-bottom: -7px;">Instructor resources organized by type:</p>
                 <ul>
-                    <li><a href="#my-course">My Course</a></li>
+                    <li><a href="#my-course">My Course Overview and Syllabus</a></li>
                     <li><a href="#lecture-slides">Lecture Slides</a></li>
                     <li><a href="#code-data">Code and Datasets</a></li>
                     <li><a href="#exercises">Additional Replication Exercises</a></li>
@@ -176,14 +321,6 @@
                     <li><a href="#videos">Videos</a></li>
                     <li><a href="#readings">Additional Readings</a></li>
                 </ul>
-
-                <p style="color: #666; margin-bottom: -7px;"><em>What's NOT On This Page?</em></p>
-                <ul>
-                    <li>The files necessary to produce and change my syllabus, my lecture slides, and the additional replication-style exercises</li>
-                    <li>The datasets analyzed in the additional replication-style exercises</li>
-                    <li>The solutions to given exercises.</li>
-                </ul>
-                <p style="margin-top: -15px;">If you are an instructor using DSS as the main textbook in your course, you can request these materials from Princeton University Press <a href="https://bit.ly/dss_instructor" target="_blank">here</a>.</p>        
             </div>
 
             <div class="container-half">
@@ -195,11 +332,25 @@
                     <li><a href="https://ellaudet.github.io/dss_book/dss_student_resources" target="_blank">Student Resources Website</a></li>
                     <li><a href="https://press.princeton.edu/books/paperbook/9780691199436/data-analysis-for-social-science" target="_blank">Official Book Website</a></li>
                     <li><a href="https://www.iwanami.co.jp/book/b656062.html" target="_blank">Japanese Translation</a></li>
+                    <li><a href="https://github.com/ellaudet/dsslearnr" target="_blank">GitHub: Practice Exercises</a></li>
+                    <li><a href="https://github.com/ellaudet/interactivegraphs" target="_blank">GitHub: Interactive Graphs</a></li>
                 </ul>
             </div>
         </div>
 
-        <h2 class="highlight"><a id="my-course">MY COURSE</a></h2>
+        <div class="container">
+            <p style="color: #666; margin-bottom: -7px;"><em>What's NOT On This Page?</em></p>
+            <ul>
+                <li>The files necessary to produce and change my syllabus, my lecture slides, and the additional replication-style exercises</li>
+                <li>The datasets analyzed in the additional replication-style exercises</li>
+                <li>The solutions to given exercises</li>
+                <li>Answer keys and grading rubrics for assignments</li>
+                <li>Editable source files for all course materials</li>
+            </ul>
+            <p style="margin-top: -15px;">If you are an instructor using DSS as the main textbook in your course, you can request these materials from Princeton University Press <a href="https://bit.ly/dss_instructor" target="_blank">here</a>.</p>
+        </div>
+
+        <h2 class="highlight"><a id="my-course">MY COURSE OVERVIEW AND SYLLABUS</a></h2>
         <p>My course progresses through bite-sized exercises, which students have a chance to practice at least three times: once with the textbook, once with the in-class exercises, and once with the take-home weekly problem sets. All three–textbook, class, and problem sets–move in parallel, asking similar questions, but using different real-world datasets so that students get to see the same material in different contexts.</p>
 
         <ul>
@@ -300,54 +451,50 @@
         <p>Additional exercises that can be used as in-class exercises or as take-home problem sets:</p>
 
         <ul>
-        <li><p style="margin-bottom: 0.5em;">Chapter 1. Introduction:</p>
-            <ul>
-            <li><a href="https://www.dropbox.com/scl/fi/xzu1ebm6qhteax0yna0kc/bias-in-self-reported-turnout-part1-without-solutions.pdf?rlkey=lky2xu57i3l4ltoppeepb3lyl&amp;dl=0" target="_blank">Estimating the Bias in Self-Reported Turnout - Part I: Loading and Making Sense of Data</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/fdr7rojpf70h9hubscubk/bias-in-self-reported-turnout-part2-without-solutions.pdf?rlkey=hyqx59rgi7kvmtp2mn6reb1ib&amp;dl=0" target="_blank">Estimating the Bias in Self-Reported Turnout - Part II: Computing and Interpreting Means</a></li>
-            <li><a href="https://www.dropbox.com/s/r2gvcw7g1xmg2as/criminal-record-labor-market-part1-without-solutions.pdf?dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part I: Loading and Making Sense of Data</a></li>
-            <li><a href="https://www.dropbox.com/s/xfiav1lcd41aoeu/criminal-record-labor-market-part2-without-solutions.pdf?dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part II: Computing and Interpreting Means</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/elf5gslqqyovejavbwj41/female-leaders-india-part1-without-solutions.pdf?rlkey=a2v1uedhn31ec2j1kt7rxyw1v&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part I: Loading and Making Sense of Data</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/a35v8nmwe9szmretzpagl/female-leaders-india-part2-without-solutions.pdf?rlkey=cvbzx9z6a346j658pm48au97t&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part II: Computing and Interpreting Means</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/fvglhvd13894am58fwwyc/social-pressure-to-vote-part1-without-solutions.pdf?rlkey=zpg9ht93ha0znifdw5o0s8j42&amp;dl=0" target="_blank">Effects of Social Pressure Message on Probability of Voting - Part I: Loading and Making Sense of Data, and Computing and Interpreting Means</a></li>
-            </ul></li>
+        <li><a href="https://www.dropbox.com/scl/fi/xzu1ebm6qhteax0yna0kc/bias-in-self-reported-turnout-part1-without-solutions.pdf?rlkey=lky2xu57i3l4ltoppeepb3lyl&amp;dl=0" target="_blank">Estimating the Bias in Self-Reported Turnout - Part I: Loading and Making Sense of Data</a> <span class="chapter-tag">(Chapter 1)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/fdr7rojpf70h9hubscubk/bias-in-self-reported-turnout-part2-without-solutions.pdf?rlkey=hyqx59rgi7kvmtp2mn6reb1ib&amp;dl=0" target="_blank">Estimating the Bias in Self-Reported Turnout - Part II: Computing and Interpreting Means</a> <span class="chapter-tag">(Chapter 1)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/7e7bmwse5cxzwef5jgp6r/bias-in-self-reported-turnout-part3-without-solutions.pdf?rlkey=r7q1fhf1e4wfg5ixba9prs09n&amp;dl=0" target="_blank">Estimating the Bias in Self-Reported Turnout - Part III: Subsetting Variables and Creating Histograms</a> <span class="chapter-tag">(Chapter 3)</span></li>
 
-        <li><p style="margin-bottom: 0.5em;">Chapter 2. Estimating Causal Effects with Randomized Experiments:</p>
-            <ul>
-            <li><a href="https://www.dropbox.com/s/n2zge3j82q86mj9/criminal-record-labor-market-part3-without-solutions.pdf?dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part III: Estimating an Average Causal Effect</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/bwlrz9youtgbakvzdafin/female-leaders-india-part3-without-solutions.pdf?rlkey=fnqy6ox1v5kj3550nfucbdkvj&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part III: Estimating an Average Causal Effect</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/hf16emijbh5x8xh0d33iz/social-pressure-to-vote-part2-without-solutions.pdf?rlkey=7iwok0qw2posjnrdhy05bc3rc&amp;dl=0" target="_blank">Effects of Social Pressure Message on Probability of Voting - Part II: Estimating an Average Causal Effect</a></li>
-            </ul></li>
+        <li><a href="https://www.dropbox.com/s/r2gvcw7g1xmg2as/criminal-record-labor-market-part1-without-solutions.pdf?dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part I: Loading and Making Sense of Data</a> <span class="chapter-tag">(Chapter 1)</span></li>
+        <li><a href="https://www.dropbox.com/s/xfiav1lcd41aoeu/criminal-record-labor-market-part2-without-solutions.pdf?dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part II: Computing and Interpreting Means</a> <span class="chapter-tag">(Chapter 1)</span></li>
+        <li><a href="https://www.dropbox.com/s/n2zge3j82q86mj9/criminal-record-labor-market-part3-without-solutions.pdf?dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part III: Estimating an Average Causal Effect</a> <span class="chapter-tag">(Chapter 2)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/xq3hjspk9humxghlu3yv4/criminal-record-labor-market-part4-without-solutions.pdf?rlkey=wpy7tw9unaacez9fvb3cjnzs2&amp;dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part IV: Focus on White Applicants</a> <span class="chapter-tag">(Chapter 7)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/bnygbjp5v0htryck7zy2w/criminal-record-labor-market-part5-without-solutions.pdf?rlkey=z3cg7bmy6jvd0ixr70yf9tt5j&amp;dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part V: Focus on Black Applicants</a> <span class="chapter-tag">(Chapter 7)</span></li>
 
-        <li><p style="margin-bottom: 0.5em;">Chapter 3. Inferring Population Characteristics via Survey Research:</p>
-            <ul>
-            <li><a href="https://www.dropbox.com/scl/fi/7e7bmwse5cxzwef5jgp6r/bias-in-self-reported-turnout-part3-without-solutions.pdf?rlkey=r7q1fhf1e4wfg5ixba9prs09n&amp;dl=0" target="_blank">Estimating the Bias in Self-Reported Turnout - Part III: Subsetting Variables and Creating Histograms</a></li>
-            <li><a href="https://www.dropbox.com/s/mird1dvhdxp3knp/evidence-data-fabrication-without-solutions.pdf?dl=0" target="_blank">Evidence of Data Fabrication</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/nwwr4eojl9nq9xumkwaux/female-leaders-india-part4-without-solutions.pdf?rlkey=tskkzntmtefwo7g7dx8kpsf3t&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part IV: Visualizations and Correlations</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/l29rcg3l67z1ifynxz7yx/leaders-assassination-part1-without-solutions.pdf?rlkey=lno9y4r92bdfn29jok4k1pa56&amp;dl=0" target="_blank">Effect of Assassination of Leaders on Level of Democracy - Part I: Visualizations and Correlations</a></li>
-            </ul></li>
+        <li><a href="https://www.dropbox.com/scl/fi/elf5gslqqyovejavbwj41/female-leaders-india-part1-without-solutions.pdf?rlkey=a2v1uedhn31ec2j1kt7rxyw1v&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part I: Loading and Making Sense of Data</a> <span class="chapter-tag">(Chapter 1)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/a35v8nmwe9szmretzpagl/female-leaders-india-part2-without-solutions.pdf?rlkey=cvbzx9z6a346j658pm48au97t&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part II: Computing and Interpreting Means</a> <span class="chapter-tag">(Chapter 1)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/bwlrz9youtgbakvzdafin/female-leaders-india-part3-without-solutions.pdf?rlkey=fnqy6ox1v5kj3550nfucbdkvj&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part III: Estimating an Average Causal Effect</a> <span class="chapter-tag">(Chapter 2)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/nwwr4eojl9nq9xumkwaux/female-leaders-india-part4-without-solutions.pdf?rlkey=tskkzntmtefwo7g7dx8kpsf3t&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part IV: Visualizations and Correlations</a> <span class="chapter-tag">(Chapter 3)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/nmeiefrdx0bmnk1do6pt5/female-leaders-india-part5-without-solutions.pdf?rlkey=n51ep5su5qdwgh3lhii987hye&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part V: Effect on Drinking Water Facilities</a> <span class="chapter-tag">(Chapter 7)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/552xgkzl25l8iw95d6v7s/female-leaders-india-part6-without-solutions.pdf?rlkey=gwzihttmfm3lotyk55z8hkxkt&amp;dl=0" target="_blank">Effects of Female Leaders in India - Part VI: Effect on Irrigation Facilities</a> <span class="chapter-tag">(Chapter 7)</span></li>
 
-        <li><p style="margin-bottom: 0.5em;">Chapter 4. Predicting Outcomes Using Linear Regression:</p>
-            <ul>
-            <li><a href="https://www.dropbox.com/scl/fi/686hfl945uq3opp048hfp/predicting-course-grades-part1-without-solutions.pdf?rlkey=wg1m1e9y0p11ws47tkrfrescl&amp;dl=0" target="_blank">Predicting Course Grades - Part I: Predicting Final Exam Scores</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/acb1mxxnkw2xl8p4xeqpy/predicting-course-grades-part2-without-solutions.pdf?rlkey=lot65blqcgtqb2pskgk8yty45&amp;dl=0" target="_blank">Predicting Course Grades - Part II: Predicting Overall Scores</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/f3ntijpnngxy5bfeqc78o/predicting-course-grades-part3-without-solutions.pdf?rlkey=4a21anvfc72dp8mdl03z7u0hm&amp;dl=0" target="_blank">Predicting Course Grades - Part III: Predicting Probability of Earning an A or A-</a></li>
-            <li><a href="https://www.dropbox.com/s/76rbp69z6vg55zj/predicting-elections-using-betting-markets-without-solutions.pdf?dl=0" target="_blank">Predicting Elections Using Betting Markets</a></li>
-            </ul></li>
+        <li><a href="https://www.dropbox.com/scl/fi/fvglhvd13894am58fwwyc/social-pressure-to-vote-part1-without-solutions.pdf?rlkey=zpg9ht93ha0znifdw5o0s8j42&amp;dl=0" target="_blank">Effects of Social Pressure Message on Probability of Voting - Part I: Loading and Making Sense of Data, and Computing and Interpreting Means</a> <span class="chapter-tag">(Chapter 1)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/hf16emijbh5x8xh0d33iz/social-pressure-to-vote-part2-without-solutions.pdf?rlkey=7iwok0qw2posjnrdhy05bc3rc&amp;dl=0" target="_blank">Effects of Social Pressure Message on Probability of Voting - Part II: Estimating an Average Causal Effect</a> <span class="chapter-tag">(Chapter 2)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/36v4f6z5ltx5gxmy9mvkm/social-pressure-to-vote-part3-without-solutions.pdf?rlkey=z49r8kbm9v8xcnjiwo0y7l5zj&amp;dl=0" target="_blank">Effects of Social Pressure Message on Probability of Voting - Part III: Estimate an Average Causal Effect, Determine Statistical Significance, and Discuss Internal and External Validity</a> <span class="chapter-tag">(Chapter 7)</span></li>
 
-        <li><p style="margin-bottom: 0.5em;">Chapter 5. Estimating Causal Effects with Observational Data:</p>
-            <ul>
-            <li><a href="https://www.dropbox.com/s/28jn6997c4kf4hc/black-candidates-black-turnout-without-solutions.pdf?dl=0" target="_blank">Effect of Black Candidates on Black Turnout</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/33iotppa1xyu0f2010z8j/leaders-assassination-part2-without-solutions.pdf?rlkey=89hb2d5o519qglls7j0by7hvc&amp;dl=0" target="_blank">Effect of Assassination of Leaders on Level of Democracy - Part II: Fitting a Line to Compute the Difference-in-Means Estimator</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/dpw3zcuc7x1h0vrj8bgha/leaders-assassination-part3-without-solutions.pdf?rlkey=b0yz13se6d07cicdg1n1txmyi&amp;dl=0" target="_blank">Effect of Assassination of Leaders on Level of Democracy - Part III: Controlling for Confounders</a></li>
-            <li><a href="https://www.dropbox.com/scl/fi/qij8t6jbighx7fbqmwwff/political-TV-ads-without-solutions.pdf?rlkey=eom9njt4is0fla95mmxtavct8&amp;dl=0" target="_blank">Effect of Political TV Ads on Turnout</a></li>
-            </ul></li>
+        <li><a href="https://www.dropbox.com/s/mird1dvhdxp3knp/evidence-data-fabrication-without-solutions.pdf?dl=0" target="_blank">Evidence of Data Fabrication</a> <span class="chapter-tag">(Chapter 3)</span></li>
 
-        <li><p style="margin-bottom: 0.5em;">Chapter 6. Probability:</p>
-            <ul>
-            <li><a href="https://www.dropbox.com/scl/fi/jdf6g0etl8ppnug2ou1yt/multiple-choice-probability-questions-without-solutions.pdf?rlkey=gv3pgcuusx6wu6qwj4qp14nf2&amp;dl=0" target="_blank">Multiple-Choice Questions on Probability</a></li>
-            </ul></li>
+        <li><a href="https://www.dropbox.com/scl/fi/l29rcg3l67z1ifynxz7yx/leaders-assassination-part1-without-solutions.pdf?rlkey=lno9y4r92bdfn29jok4k1pa56&amp;dl=0" target="_blank">Effect of Assassination of Leaders on Level of Democracy - Part I: Visualizations and Correlations</a> <span class="chapter-tag">(Chapter 3)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/33iotppa1xyu0f2010z8j/leaders-assassination-part2-without-solutions.pdf?rlkey=89hb2d5o519qglls7j0by7hvc&amp;dl=0" target="_blank">Effect of Assassination of Leaders on Level of Democracy - Part II: Fitting a Line to Compute the Difference-in-Means Estimator</a> <span class="chapter-tag">(Chapter 5)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/dpw3zcuc7x1h0vrj8bgha/leaders-assassination-part3-without-solutions.pdf?rlkey=b0yz13se6d07cicdg1n1txmyi&amp;dl=0" target="_blank">Effect of Assassination of Leaders on Level of Democracy - Part III: Controlling for Confounders</a> <span class="chapter-tag">(Chapter 5)</span></li>
 
-        <li><p style="margin-bottom: 0.5em;">Chapter 7. Quantifying Uncertainty:</p>
+        <li><a href="https://www.dropbox.com/scl/fi/686hfl945uq3opp048hfp/predicting-course-grades-part1-without-solutions.pdf?rlkey=wg1m1e9y0p11ws47tkrfrescl&amp;dl=0" target="_blank">Predicting Course Grades - Part I: Predicting Final Exam Scores</a> <span class="chapter-tag">(Chapter 4)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/acb1mxxnkw2xl8p4xeqpy/predicting-course-grades-part2-without-solutions.pdf?rlkey=lot65blqcgtqb2pskgk8yty45&amp;dl=0" target="_blank">Predicting Course Grades - Part II: Predicting Overall Scores</a> <span class="chapter-tag">(Chapter 4)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/f3ntijpnngxy5bfeqc78o/predicting-course-grades-part3-without-solutions.pdf?rlkey=4a21anvfc72dp8mdl03z7u0hm&amp;dl=0" target="_blank">Predicting Course Grades - Part III: Predicting Probability of Earning an A or A-</a> <span class="chapter-tag">(Chapter 4)</span></li>
+        <li><a href="https://www.dropbox.com/scl/fi/hqo3pcmrz33h40rtznf86/predicting-course-grades-part4-without-solutions.pdf?rlkey=lajoemofbwcqotczlecl85ncg&amp;dl=0" target="_blank">Predicting Course Grades - Part IV: Quantifying Uncertainty</a> <span class="chapter-tag">(Chapter 7)</span></li>
+
+        <li><a href="https://www.dropbox.com/s/76rbp69z6vg55zj/predicting-elections-using-betting-markets-without-solutions.pdf?dl=0" target="_blank">Predicting Elections Using Betting Markets</a> <span class="chapter-tag">(Chapter 4)</span></li>
+
+        <li><a href="https://www.dropbox.com/s/28jn6997c4kf4hc/black-candidates-black-turnout-without-solutions.pdf?dl=0" target="_blank">Effect of Black Candidates on Black Turnout</a> <span class="chapter-tag">(Chapter 5)</span></li>
+
+        <li><a href="https://www.dropbox.com/scl/fi/qij8t6jbighx7fbqmwwff/political-TV-ads-without-solutions.pdf?rlkey=eom9njt4is0fla95mmxtavct8&amp;dl=0" target="_blank">Effect of Political TV Ads on Turnout</a> <span class="chapter-tag">(Chapter 5)</span></li>
+
+        <li><a href="https://www.dropbox.com/scl/fi/jdf6g0etl8ppnug2ou1yt/multiple-choice-probability-questions-without-solutions.pdf?rlkey=gv3pgcuusx6wu6qwj4qp14nf2&amp;dl=0" target="_blank">Multiple-Choice Questions on Probability</a> <span class="chapter-tag">(Chapter 6)</span></li>
+
+        <li><a href="https://www.dropbox.com/scl/fi/muxntl1qlymkelg7a4309/racial-discrimination-labor-market-without-solutions.pdf?rlkey=ru4lfu43p0xqjfk8r78fj0mp3&amp;dl=0" target="_blank">Effects of Black-Sounding Names on Call Backs for Job Interviews</a> <span class="chapter-tag">(Chapter 7)</span></li>
+
+        <li><a href="https://www.dropbox.com/scl/fi/yt1k4u4vbykv57zlcdpy5/small-class-student-outcomes-without-solutions.pdf?rlkey=fy233kczmflmcnljnigbfky08&amp;dl=0" target="_blank">Effect of Small Classes on Student Outcomes</a> <span class="chapter-tag">(Chapter 7)</span></li>
+        </ul>
             <ul>
             <li><a href="https://www.dropbox.com/scl/fi/xq3hjspk9humxghlu3yv4/criminal-record-labor-market-part4-without-solutions.pdf?rlkey=wpy7tw9unaacez9fvb3cjnzs2&amp;dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part IV: Focus on White Applicants</a></li>
             <li><a href="https://www.dropbox.com/scl/fi/bnygbjp5v0htryck7zy2w/criminal-record-labor-market-part5-without-solutions.pdf?rlkey=z3cg7bmy6jvd0ixr70yf9tt5j&amp;dl=0" target="_blank">Effects of A Criminal Record in Labor Market - Part V: Focus on Black Applicants</a></li>

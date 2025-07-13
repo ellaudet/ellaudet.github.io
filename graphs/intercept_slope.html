@@ -322,10 +322,12 @@
 
                     <!-- Chart Panel -->
                     <div class="col-lg-8">
-                        <div class="chart-container">
+                        <div class="chart-container" style="position: relative;">
                             <div class="equation-display" id="equation-display">
                                 Y = 1 + 2X
                             </div>
+                            <!-- Manual Y label -->
+                            <div style="position: absolute; top: 60px; left: 10px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
                             <canvas id="lineChart"></canvas>
                         </div>
                     </div>
@@ -499,22 +501,6 @@
                         legend: {
                             display: false
                         }
-                    },
-                    onAnimationComplete: function() {
-                        const ctx = this.chart.ctx;
-                        const chartArea = this.chart.chartArea;
-                        
-                        // Draw horizontal Y label
-                        ctx.save();
-                        ctx.fillStyle = '#333';
-                        ctx.font = '16px "Helvetica Neue", Helvetica, Arial, sans-serif';
-                        ctx.textAlign = 'left';
-                        ctx.textBaseline = 'bottom';
-                        
-                        // Position Y label at top-left of chart area, reading left-to-right
-                        ctx.fillText('Y', chartArea.left - 15, chartArea.top - 5);
-                        
-                        ctx.restore();
                     },
                     scales: {
                         x: {

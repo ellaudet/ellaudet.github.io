@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+layout: {
+                        padding: {
+                            top: 10,
+                            right: 30,
+                            bottom: 30,
+                            left: 20
+                        }
+                    },<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,9 +63,9 @@
             background: white;
             border: 1px solid #dee2e6;
             border-radius: 8px;
-            padding: 20px;
+            padding: 30px;
             position: relative;
-            height: 500px;
+            height: 550px;
         }
         .equation-display {
             text-align: center;
@@ -478,7 +485,8 @@
                         borderWidth: 3,
                         pointRadius: 0,
                         fill: false,
-                        tension: 0
+                        tension: 0,
+                        order: 10  // Draw line behind other elements
                     }]
                 },
                 options: {
@@ -530,7 +538,8 @@
                                 font: {
                                     size: 16
                                 },
-                                align: 'end'
+                                align: 'end',
+                                rotation: 0
                             }
                         }
                     },

@@ -56,16 +56,16 @@
             background: white;
             border: 1px solid #dee2e6;
             border-radius: 8px;
-            padding: 30px;
+            padding: 40px;
             position: relative;
-            height: 550px;
+            height: 580px;
         }
         .equation-display {
             text-align: center;
             margin-bottom: 15px;
             font-size: 20px;
             font-weight: bold;
-            color: #fb4128;
+            color: #333;
         }
         .form-label {
             color: #333333;
@@ -80,7 +80,7 @@
             line-height: 1.4;
         }
         .form-check {
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             font-size: 14px;
         }
         .form-check-label {
@@ -105,17 +105,19 @@
             border-left: 3px solid #6c757d;
         }
         .slider-container {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .slider-input {
             width: 100%;
-            margin: 10px 0;
+            margin: 10px 0 5px 0;
+            position: relative;
         }
         .slider-value {
             text-align: center;
             font-weight: bold;
             color: #fb4128;
-            margin-top: 5px;
+            margin-top: 2px;
+            font-size: 14px;
         }
         
         /* Custom red slider styling */
@@ -282,14 +284,14 @@
                     <!-- Controls Panel -->
                     <div class="col-lg-4">
                         <div class="controls-panel">
-                            <div class="form-check" style="margin-bottom: 15px;">
+                            <div class="form-check" style="margin-bottom: 8px;">
                                 <input class="form-check-input" type="checkbox" id="show-x0-point">
                                 <label class="form-check-label" for="show-x0-point">
                                     Show Point at X=0 (Red Circle)
                                 </label>
                             </div>
 
-                            <div class="form-check" style="margin-bottom: 20px;">
+                            <div class="form-check" style="margin-bottom: 12px;">
                                 <input class="form-check-input" type="checkbox" id="show-x2-point">
                                 <label class="form-check-label" for="show-x2-point">
                                     Show Point at X=2 (Red Triangle)
@@ -485,6 +487,14 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            top: 20,
+                            right: 50,
+                            bottom: 50,
+                            left: 30
+                        }
+                    },
                     plugins: {
                         legend: {
                             display: false

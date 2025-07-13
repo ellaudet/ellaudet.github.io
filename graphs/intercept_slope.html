@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+onHover: function(event, elements, chart) {
+                        // Force redraw to maintain proper layering
+                        if (elements.length === 0) {
+                            chart.update('none');
+                        }
+                    }, <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -455,10 +460,7 @@
             // Add all grid lines and points to chart
             chart.data.datasets.push(...gridLines, ...points);
             
-            chart.update('active');
-            
-            // Force a complete redraw to ensure proper layering
-            chart.render();
+            chart.update('none');
             
             // Track interaction
             trackEvent('line_updated', {
@@ -501,17 +503,6 @@
                     plugins: {
                         legend: {
                             display: false
-                        },
-                        afterDraw: function(chart) {
-                            // Draw horizontal Y label manually
-                            const ctx = chart.ctx;
-                            ctx.save();
-                            ctx.textAlign = 'left';
-                            ctx.textBaseline = 'bottom';
-                            ctx.fillStyle = '#333';
-                            ctx.font = '16px "Helvetica Neue", Helvetica, Arial, sans-serif';
-                            ctx.fillText('Y', chart.chartArea.left - 15, chart.chartArea.top - 5);
-                            ctx.restore();
                         }
                     },
                     onHover: function(event, elements, chart) {
@@ -555,7 +546,13 @@
                                 color: '#ddd'
                             },
                             title: {
-                                display: false
+                                display: true,
+                                text: 'Y',
+                                color: '#333',
+                                font: {
+                                    size: 16
+                                },
+                                align: 'end'
                             }
                         }
                     },

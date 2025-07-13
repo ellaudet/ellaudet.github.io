@@ -390,6 +390,15 @@
             
             if (showX0) {
                 const y0 = intercept;
+                // Red circle point
+                points.push({
+                    data: [{ x: 0, y: y0 }],
+                    backgroundColor: '#ea3a44',
+                    borderColor: '#ea3a44',
+                    pointRadius: 7,
+                    pointStyle: 'circle',
+                    showLine: false
+                });
                 // Vertical dashed line from (0, y0) to bottom
                 gridLines.push({
                     data: [{ x: 0, y: y0 }, { x: 0, y: -6 }],

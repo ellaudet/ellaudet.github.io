@@ -120,6 +120,21 @@
             font-size: 16px;
         }
         
+        /* Chart canvas positioning */
+        #backgroundChart {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+        #overlayChart {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
         /* Custom red slider styling */
         .form-range {
             -webkit-appearance: none;
@@ -328,7 +343,8 @@
                             </div>
                             <!-- Manual Y label -->
                             <div style="position: absolute; top: 70px; left: 28px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
-                            <canvas id="lineChart"></canvas>
+                            <canvas id="backgroundChart"></canvas>
+                            <canvas id="overlayChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -352,7 +368,128 @@
         }
 
         // Initialize app
-        let chart;
+        let backgroundChart, overlayChart;
+        
+        function initCharts() {
+            const bgCtx = document.getElementById('backgroundChart').getContext('2d');
+            const olCtx = document.getElementById('overlayChart').getContext('2d');
+
+            backgroundChart = new Chart(bgCtx, {
+                type: 'line',
+                data: {
+                    datasets: []
+                },
+                options: getBackgroundOptions()
+            });
+
+            overlayChart = new Chart(olCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: []
+                },
+                options: getOverlayOptions()
+            });
+        }
+
+        function getBackgroundOptions() {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                layout: {
+                    padding: {
+                        top: 10,
+                        right: 35,
+                        bottom: 35,
+                        left: 20
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        min: -2,
+                        max: 4,
+                        ticks: {
+                            stepSize: 1,
+                            color: '#333'
+                        },
+                        grid: {
+                            color: '#ddd'
+                        },
+                        title: {
+                            display: true,
+                            text: 'X',
+                            color: '#333',
+                            font: {
+                                size: 16
+                            },
+                            align: 'end'
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        min: -6,
+                        max: 6,
+                        ticks: {
+                            stepSize: 1,
+                            color: '#333'
+                        },
+                        grid: {
+                            color: '#ddd'
+                        },
+                        title: {
+                            display: false
+                        }
+                    }
+                }
+            };
+        }
+
+        function getOverlayOptions() {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                layout: {
+                    padding: {
+                        top: 10,
+                        right: 35,
+                        bottom: 35,
+                        left: 20
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'linear',
+                        min: -2,
+                        max: 4,
+                        display: false
+                    },
+                    y: {
+                        type: 'linear',
+                        min: -6,
+                        max: 6,
+                        display: false
+                    }
+                },
+                elements: {
+                    point: {
+                        hoverRadius: 0
+                    }
+                }
+            };
+        }
         
         // Update chart
         function updateChart() {
@@ -378,94 +515,89 @@
                 yValues.push(intercept + slope * x);
             }
             
-            // Update main line
-            chart.data.datasets[0].data = xValues.map((x, i) => ({ x: x, y: yValues[i] }));
+            const lineDataset = {
+                label: 'Line',
+                data: xValues.map((x, i) => ({ x: x, y: yValues[i] })),
+                borderColor: 'gray',
+                borderWidth: 3,
+                pointRadius: 0,
+                fill: false,
+                tension: 0
+            };
             
-            // Clear additional datasets
-            chart.data.datasets = chart.data.datasets.slice(0, 1);
-            
-            // Add grid lines and points if requested
+            // Generate grid lines for background chart
             const gridLines = [];
-            const points = [];
-            
             if (showX0) {
                 const y0 = intercept;
-                // Vertical dashed line from (0, y0) to bottom
                 gridLines.push({
                     data: [{ x: 0, y: y0 }, { x: 0, y: -6 }],
                     borderColor: '#bababa',
-                    borderWidth: 2,
                     borderDash: [5, 5],
+                    borderWidth: 2,
                     pointRadius: 0,
                     fill: false,
                     tension: 0,
-                    order:0
                 });
-                // Horizontal dashed line from (0, y0) to left
                 gridLines.push({
                     data: [{ x: 0, y: y0 }, { x: -2, y: y0 }],
                     borderColor: '#bababa',
-                    borderWidth: 2,
                     borderDash: [5, 5],
+                    borderWidth: 2,
                     pointRadius: 0,
                     fill: false,
                     tension: 0,
-                    order:0
                 });
-                // Red circle point
-                points.push({
-                    type: 'scatter',
-                    data: [{ x: 0, y: y0 }],
+            }
+            if (showX2) {
+                const y2 = intercept + slope * 2;
+                gridLines.push({
+                    data: [{ x: 2, y: y2 }, { x: 2, y: -6 }],
+                    borderColor: '#bababa',
+                    borderDash: [5, 5],
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0,
+                });
+                gridLines.push({
+                    data: [{ x: 2, y: y2 }, { x: -2, y: y2 }],
+                    borderColor: '#bababa',
+                    borderDash: [5, 5],
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0,
+                });
+            }
+            
+            // Update background chart with line and grid lines
+            backgroundChart.data.datasets = [lineDataset, ...gridLines];
+            backgroundChart.update('none');
+            
+            // Update overlay chart with points only
+            const overlayPoints = [];
+            if (showX0) {
+                overlayPoints.push({
+                    data: [{ x: 0, y: intercept }],
                     backgroundColor: '#ea3a44',
                     borderColor: '#ea3a44',
                     pointRadius: 7,
                     pointStyle: 'circle',
-                    showLine: false,
-                    order: 99
+                    showLine: false
                 });
             }
-            
             if (showX2) {
-                const y2 = intercept + slope * 2;
-                // Vertical dashed line from (2, y2) to bottom
-                gridLines.push({
-                    data: [{ x: 2, y: y2 }, { x: 2, y: -6 }],
-                    borderColor: '#bababa',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0,
-                    order:0
-                });
-                // Horizontal dashed line from (2, y2) to left
-                gridLines.push({
-                    data: [{ x: 2, y: y2 }, { x: -2, y: y2 }],
-                    borderColor: '#bababa',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0,
-                    order:0
-                });
-                // Red triangle point
-                points.push({
-                    type: 'scatter',
-                    data: [{ x: 2, y: y2 }],
+                overlayPoints.push({
+                    data: [{ x: 2, y: intercept + slope * 2 }],
                     backgroundColor: '#ea3a44',
                     borderColor: '#ea3a44',
                     pointRadius: 8,
                     pointStyle: 'triangle',
-                    showLine: false,
-                    order: 99
+                    showLine: false
                 });
             }
-            
-            // Add all grid lines and points to chart
-            chart.data.datasets.push(...gridLines, ...points);
-            
-            chart.update('none');
+            overlayChart.data.datasets = overlayPoints;
+            overlayChart.update('none');
             
             // Track interaction
             trackEvent('line_updated', {
@@ -476,91 +608,10 @@
             });
         }
         
-        // Initialize chart
-        function initChart() {
-            const ctx = document.getElementById('lineChart').getContext('2d');
-            
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    datasets: [{
-                        label: 'Line',
-                        data: [],
-                        borderColor: 'gray',
-                        borderWidth: 3,
-                        pointRadius: 0,
-                        fill: false,
-                        tension: 0,
-                        order: 10
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: {
-                            top: 10,
-                            right: 35,
-                            bottom: 35,
-                            left: 20
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        x: {
-                            type: 'linear',
-                            position: 'bottom',
-                            min: -2,
-                            max: 4,
-                            ticks: {
-                                stepSize: 1,
-                                color: '#333'
-                            },
-                            grid: {
-                                color: '#ddd'
-                            },
-                            title: {
-                                display: true,
-                                text: 'X',
-                                color: '#333',
-                                font: {
-                                    size: 16
-                                },
-                                align: 'end'
-                            }
-                        },
-                        y: {
-                            type: 'linear',
-                            min: -6,
-                            max: 6,
-                            ticks: {
-                                stepSize: 1,
-                                color: '#333'
-                            },
-                            grid: {
-                                color: '#ddd'
-                            },
-                            title: {
-                                display: false  // Disable automatic Y label
-                            }
-                        }
-                    },
-                    animation: {
-                        duration: 300
-                    }
-                }
-            });
-            
-            updateChart();
-        }
-        
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            initChart();
+            initCharts();
+            updateChart();
             
             document.getElementById('intercept-slider').addEventListener('input', updateChart);
             document.getElementById('slope-slider').addEventListener('input', updateChart);

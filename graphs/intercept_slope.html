@@ -117,6 +117,75 @@
             color: #ea3a44;
             margin-top: 5px;
         }
+        
+        /* Custom red slider styling */
+        .form-range {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        
+        /* Slider track */
+        .form-range::-webkit-slider-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
+        }
+        
+        .form-range::-moz-range-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
+            border: none;
+        }
+        
+        /* Slider thumb */
+        .form-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #ea3a44;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .form-range::-moz-range-thumb {
+            background: #ea3a44;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Slider thumb hover effect */
+        .form-range::-webkit-slider-thumb:hover {
+            background: #d63384;
+            transform: scale(1.1);
+        }
+        
+        .form-range::-moz-range-thumb:hover {
+            background: #d63384;
+            transform: scale(1.1);
+        }
+        
+        /* Slider focus styles */
+        .form-range:focus {
+            outline: none;
+        }
+        
+        .form-range:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 3px rgba(234, 58, 68, 0.3);
+        }
+        
+        .form-range:focus::-moz-range-thumb {
+            box-shadow: 0 0 0 3px rgba(234, 58, 68, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -164,10 +233,10 @@
                             <span class="step-number">STEP 1:</span> The graph below shows a line with an intercept of 1 and a slope of 2. The line is therefore: Y = 1 + 2X.
                             <ul style="margin-left: 0; padding-left: 20px; list-style-position: outside; line-height: 1.4;">
                                 <li style="margin-bottom: 5px; margin-top: 5px;">
-                                    To verify the intercept, find 0 on the x-axis, move up to the line, and find the corresponding Y-value. The point is (0,1), confirming that the intercept is 1. (Check the first box to show this point as a blue circle.) IMPORTANT: The intercept is NOT always where the line crosses the y-axis shown on a scatterplot, because that y-axis might not be drawn exactly at X=0 (as is the case here).
+                                    To verify the intercept, find 0 on the x-axis, move up to the line, and find the corresponding Y-value. The point is (0,1), confirming that the intercept is 1. (Check the first box to show this point as a red circle.) IMPORTANT: The intercept is NOT always where the line crosses the y-axis shown on a scatterplot, because that y-axis might not be drawn exactly at X=0 (as is the case here).
                                 </li>
                                 <li style="margin-bottom: 10px;">
-                                    To verify the slope, choose any two points on the line and compute rise over run. For example, use (0,1) and the point where X = 2, which is (2,5). (Check the second box to show this point as a blue triangle.) The rise (change in Y) is 5-1 = 4 and the run (change in X) is 2-0 = 2, so rise over run = 4/2 = 2. Every one-unit increase in X is associated with an increase in Y of 2 units.
+                                    To verify the slope, choose any two points on the line and compute rise over run. For example, use (0,1) and the point where X = 2, which is (2,5). (Check the second box to show this point as a red triangle.) The rise (change in Y) is 5-1 = 4 and the run (change in X) is 2-0 = 2, so rise over run = 4/2 = 2. Every one-unit increase in X is associated with an increase in Y of 2 units.
                                 </li>
                             </ul>
                         </li>
@@ -192,21 +261,21 @@
                     <!-- Controls Panel -->
                     <div class="col-lg-4">
                         <div class="controls-panel">
-                            <div class="form-check" style="margin-bottom: 5px;">
+                            <div class="form-check" style="margin-bottom: 15px;">
                                 <input class="form-check-input" type="checkbox" id="show-x0-point">
                                 <label class="form-check-label" for="show-x0-point">
-                                    Show Point at X=0 (Blue Circle)
+                                    Show Point at X=0 (Red Circle)
                                 </label>
                             </div>
 
-                            <div class="form-check" style="margin-bottom: 5px;">
+                            <div class="form-check" style="margin-bottom: 20px;">
                                 <input class="form-check-input" type="checkbox" id="show-x2-point">
                                 <label class="form-check-label" for="show-x2-point">
-                                    Show Point at X=2 (Blue Triangle)
+                                    Show Point at X=2 (Red Triangle)
                                 </label>
                             </div>
 
-                            <div class="slider-container" style="margin-bottom: 5px;">
+                            <div class="slider-container">
                                 <label class="form-label">Intercept:</label>
                                 <p class="form-text">
                                     Move this slider to see how the intercept changes the vertical location of the line.
@@ -216,7 +285,7 @@
                                 <div class="slider-value" id="intercept-value">1</div>
                             </div>
 
-                            <div class="slider-container style="margin-bottom: 5px;">
+                            <div class="slider-container">
                                 <label class="form-label">Slope:</label>
                                 <p class="form-text">
                                     Move this slider to see how the slope changes the steepness of the line.
@@ -319,8 +388,8 @@
                 // Blue circle point
                 points.push({
                     data: [{ x: 0, y: y0 }],
-                    backgroundColor: '#0066CC',
-                    borderColor: '#0066CC',
+                    backgroundColor: '#ea3a44',
+                    borderColor: '#ea3a44',
                     pointRadius: 7,
                     pointStyle: 'circle',
                     showLine: false
@@ -349,11 +418,11 @@
                     fill: false,
                     tension: 0
                 });
-                // Blue triangle point
+                // Red triangle point
                 points.push({
                     data: [{ x: 2, y: y2 }],
-                    backgroundColor: '#0066CC',
-                    borderColor: '#0066CC',
+                    backgroundColor: '#ea3a44',
+                    borderColor: '#ea3a44',
                     pointRadius: 7,
                     pointStyle: 'triangle',
                     showLine: false

@@ -209,7 +209,20 @@
             white-space: nowrap;
         }
         
-        /* Custom red checkbox styling */
+        /* Chart canvas positioning */
+        #backgroundChart {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+        }
+        #overlayChart {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
         .form-check-input {
             background-color: white;
             border-color: #ced4da;

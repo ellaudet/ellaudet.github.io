@@ -120,12 +120,19 @@
             font-size: 16px;
         }
         
+        /* Custom slider container with dynamic value positioning */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
         /* Custom red slider styling */
         .form-range {
             -webkit-appearance: none;
             appearance: none;
             background: transparent;
             cursor: pointer;
+            width: 100%;
         }
         
         /* Slider track */
@@ -187,6 +194,18 @@
         
         .form-range:focus::-moz-range-thumb {
             box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
+        }
+        
+        /* Dynamic value positioning */
+        .slider-dynamic-value {
+            position: absolute;
+            top: 25px;
+            font-weight: bold;
+            color: #fb4128;
+            font-size: 14px;
+            transform: translateX(-50%);
+            pointer-events: none;
+            transition: left 0.1s ease;
         }
         
         /* Custom red checkbox styling */
@@ -303,9 +322,11 @@
                                 <p class="form-text">
                                     Move this slider to see how the intercept changes the vertical location of the line.
                                 </p>
-                                <input type="range" class="form-range slider-input" id="intercept-slider" 
-                                       min="-2" max="2" step="0.1" value="1">
-                                <div class="slider-value" id="intercept-value">1</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" class="form-range slider-input" id="intercept-slider" 
+                                           min="-2" max="2" step="0.1" value="1">
+                                    <div class="slider-dynamic-value" id="intercept-value">1</div>
+                                </div>
                             </div>
 
                             <div class="slider-container">
@@ -313,9 +334,11 @@
                                 <p class="form-text">
                                     Move this slider to see how the slope changes the steepness of the line.
                                 </p>
-                                <input type="range" class="form-range slider-input" id="slope-slider" 
-                                       min="-2" max="2" step="0.1" value="2">
-                                <div class="slider-value" id="slope-value">2</div>
+                                <div class="slider-wrapper">
+                                    <input type="range" class="form-range slider-input" id="slope-slider" 
+                                           min="-2" max="2" step="0.1" value="2">
+                                    <div class="slider-dynamic-value" id="slope-value">2</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -354,6 +377,22 @@
         // Initialize app
         let chart;
         
+        // Function to update slider value position
+        function updateSliderValue(sliderId, valueId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+            const value = parseFloat(slider.value);
+            const min = parseFloat(slider.min);
+            const max = parseFloat(slider.max);
+            
+            // Calculate percentage position
+            const percentage = ((value - min) / (max - min)) * 100;
+            
+            // Update value text and position
+            valueDisplay.textContent = value;
+            valueDisplay.style.left = `${percentage}%`;
+        }
+        
         // Update chart
         function updateChart() {
             const intercept = parseFloat(document.getElementById('intercept-slider').value);
@@ -366,9 +405,9 @@
             const slopeText = slope >= 0 ? slope : `(${slope})`;
             document.getElementById('equation-display').textContent = `Y = ${interceptText} + ${slopeText}X`;
             
-            // Update slider value displays
-            document.getElementById('intercept-value').textContent = intercept;
-            document.getElementById('slope-value').textContent = slope;
+            // Update slider value displays and positions
+            updateSliderValue('intercept-slider', 'intercept-value');
+            updateSliderValue('slope-slider', 'slope-value');
             
             // Generate line data
             const xValues = [];
@@ -561,6 +600,10 @@
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
             initChart();
+            
+            // Initialize slider value positions
+            updateSliderValue('intercept-slider', 'intercept-value');
+            updateSliderValue('slope-slider', 'slope-value');
             
             document.getElementById('intercept-slider').addEventListener('input', updateChart);
             document.getElementById('slope-slider').addEventListener('input', updateChart);

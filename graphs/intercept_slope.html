@@ -199,13 +199,14 @@
         /* Dynamic value positioning */
         .slider-dynamic-value {
             position: absolute;
-            top: 25px;
+            top: 35px;
             font-weight: bold;
             color: #fb4128;
             font-size: 14px;
             transform: translateX(-50%);
             pointer-events: none;
             transition: left 0.1s ease;
+            white-space: nowrap;
         }
         
         /* Custom red checkbox styling */
@@ -385,12 +386,17 @@
             const min = parseFloat(slider.min);
             const max = parseFloat(slider.max);
             
-            // Calculate percentage position
+            // Calculate percentage position with better alignment
             const percentage = ((value - min) / (max - min)) * 100;
+            
+            // Account for thumb width to center properly
+            // The thumb is 20px wide, so we need to adjust for the track padding
+            const thumbOffset = (percentage - 50) * 0.15; // Fine-tune this multiplier as needed
+            const adjustedPercentage = percentage - thumbOffset;
             
             // Update value text and position
             valueDisplay.textContent = value;
-            valueDisplay.style.left = `${percentage}%`;
+            valueDisplay.style.left = `${adjustedPercentage}%`;
         }
         
         // Update chart

@@ -56,9 +56,9 @@
             background: white;
             border: 1px solid #dee2e6;
             border-radius: 8px;
-            padding: 40px;
+            padding: 25px;
             position: relative;
-            height: 580px;
+            height: 520px;
         }
         .equation-display {
             text-align: center;
@@ -457,6 +457,11 @@
             
             chart.update('none');
             
+            // Force update to ensure proper layering
+            setTimeout(() => {
+                chart.update('none');
+            }, 10);
+            
             // Track interaction
             trackEvent('line_updated', {
                 intercept: intercept,
@@ -489,10 +494,10 @@
                     maintainAspectRatio: false,
                     layout: {
                         padding: {
-                            top: 20,
-                            right: 50,
-                            bottom: 50,
-                            left: 30
+                            top: 10,
+                            right: 35,
+                            bottom: 35,
+                            left: 20
                         }
                     },
                     plugins: {

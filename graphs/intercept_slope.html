@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Graph: Intercept and Slope of a Line</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    
+    <!-- Google Analytics Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEPLTYLL6H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YEPLTYLL6H');
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        .app-container {
+            margin: 20px auto;
+            max-width: 1200px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header-section {
+            padding: 8px 30px 12px 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        .content-section {
+            padding: 20px 30px 30px 30px;
+        }
+        .info-box {
+            background-color: #f1f3f5;
+            border-left: 4px solid #ea3a44;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        .controls-panel {
+            background-color: #f1f3f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: none;
+        }
+        .chart-container {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            height: 450px;
+        }
+        .equation-display {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-label {
+            color: #333333;
+            font-size: 15px;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+        .form-text {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .form-check {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .form-check-label {
+            font-size: 14px;
+        }
+        .step-list {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .step-list li {
+            margin-bottom: 12px;
+        }
+        .step-number {
+            color: #ea3a44;
+            font-weight: bold;
+        }
+        .notes-section {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 3px solid #6c757d;
+        }
+        .slider-container {
+            margin-bottom: 20px;
+        }
+        .slider-input {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .slider-value {
+            text-align: center;
+            font-weight: bold;
+            color: #ea3a44;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="app-container">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h3 style="color: #ea3a44; text-align: center; margin-bottom: 2px; font-size: 20px;">
+                    Interactive Graph: Intercept and Slope of a Line
+                </h3>
+                <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
+                    By Elena Llaudet, co-author of 
+                    <a href="https://bit.ly/dss_textbook" target="_blank" style="color: #797979; text-decoration: none; font-style: italic;">
+                        Data Analysis for Social Science
+                    </a> (DSS)
+                </p>
+            </div>
+
+            <!-- Content Section -->
+            <div class="content-section">
+                <!-- Key Points Box -->
+                <div class="info-box">
+                    <p style="margin: 0 0 10px 0; font-size: 16px; color: #333333;">
+                        We can define a line as Y = α + βX, where:
+                    </p>
+                    <ul style="margin: 0; padding-left: 20px; line-height: 1.4;">
+                        <li style="margin-bottom: 8px; font-size: 16px; color: #333333;">
+                            α (alpha) is the intercept: the value of Y when X=0, which determines the vertical location of the line.
+                        </li>
+                        <li style="margin-bottom: 0; font-size: 16px; color: #333333;">
+                            β (beta) is the slope: the change in Y divided by the change in X (rise over run) between two points on the line, which determines the steepness of the line. It can be interpreted as the change in Y associated with a one-unit increase in X.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Explanation -->
+                <p style="font-size: 16px; color: #333333; margin-bottom: 15px;">
+                    Let's see how changing the intercept and slope affects the line:
+                </p>
+
+                <!-- Steps -->
+                <div class="step-list">
+                    <ul style="font-size: 16px; color: #333333;">
+                        <li style="margin-bottom: 10px;">
+                            <span class="step-number">STEP 1:</span> The graph below shows a line with an intercept of 1 and a slope of 2. The line is therefore: Y = 1 + 2X.
+                            <ul style="margin-left: 0; padding-left: 20px; list-style-position: outside; line-height: 1.4;">
+                                <li style="margin-bottom: 5px; margin-top: 5px;">
+                                    To verify the intercept, find 0 on the x-axis, move up to the line, and find the corresponding Y-value. The point is (0,1), confirming that the intercept is 1. (Check the first box to show this point as a blue circle.) IMPORTANT: The intercept is NOT always where the line crosses the y-axis shown on a scatterplot, because that y-axis might not be drawn exactly at X=0 (as is the case here).
+                                </li>
+                                <li style="margin-bottom: 10px;">
+                                    To verify the slope, choose any two points on the line and compute rise over run. For example, use (0,1) and the point where X = 2, which is (2,5). (Check the second box to show this point as a blue triangle.) The rise (change in Y) is 5-1 = 4 and the run (change in X) is 2-0 = 2, so rise over run = 4/2 = 2. Every one-unit increase in X is associated with an increase in Y of 2 units.
+                                </li>
+                            </ul>
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span class="step-number">STEP 2:</span> Move the first slider below to change the intercept. Notice that changing the intercept shifts the entire line vertically up or down but does not change its steepness. For example, changing the intercept from 1 to -1 shifts the entire line down by 2 units: the point at X=0 moves from (0,1) to (0,-1), and the point at X=2 moves from (2,5) to (2,3). Neither rise nor run have changed. The rise is 3-(-1) = 4 and the run is 2-0 = 2, so rise over run remains the same.
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <span class="step-number">STEP 3:</span> Move the second slider to change the slope. Notice that the slope affects the steepness of the line but does not affect its vertical position.
+                            <ul style="margin-left: 0; padding-left: 20px; list-style-position: outside; line-height: 1.4;">
+                                <li style="margin-bottom: 5px; margin-top: 5px;">
+                                    For example, if we keep the intercept at 1 but decrease the slope from 2 to 1, the line becomes less steep. The point at X=0 stays at (0,1)—the intercept is not affected—but the point at X=2 drops to (2,3). The new rise is 3-1 = 2 and the run is still 2, so the new slope is 2/2 = 1. Now, every one-unit increase in X is associated with an increase in Y of 1 unit.
+                                </li>
+                                <li style="margin-bottom: 10px;">
+                                    Now, let's try a negative slope. As the slope changes from positive to negative, the line will go from moving upwards to moving downwards (from left to right), thus the direction of the steepness reverses. For example, if we keep the intercept at 1 but change the slope to -2, the point at X=0 stays at (0,1), as expected, but the point at X=2 drops to (2,-3). The new rise is -3-1 = -4 and the run continues to be 2, so the new slope is -4/2 = -2. Now, every one-unit increase in X is associated with a <em>decrease</em> in Y of 2 units.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <!-- Controls Panel -->
+                    <div class="col-lg-4">
+                        <div class="controls-panel">
+                            <div class="form-check" style="margin-bottom: 15px;">
+                                <input class="form-check-input" type="checkbox" id="show-x0-point">
+                                <label class="form-check-label" for="show-x0-point">
+                                    Show Point at X=0 (Blue Circle)
+                                </label>
+                            </div>
+
+                            <div class="form-check" style="margin-bottom: 20px;">
+                                <input class="form-check-input" type="checkbox" id="show-x2-point">
+                                <label class="form-check-label" for="show-x2-point">
+                                    Show Point at X=2 (Blue Triangle)
+                                </label>
+                            </div>
+
+                            <div class="slider-container">
+                                <label class="form-label">Intercept:</label>
+                                <p class="form-text">
+                                    Move this slider to see how the intercept changes the vertical location of the line.
+                                </p>
+                                <input type="range" class="form-range slider-input" id="intercept-slider" 
+                                       min="-2" max="2" step="0.1" value="1">
+                                <div class="slider-value" id="intercept-value">1</div>
+                            </div>
+
+                            <div class="slider-container">
+                                <label class="form-label">Slope:</label>
+                                <p class="form-text">
+                                    Move this slider to see how the slope changes the steepness of the line.
+                                </p>
+                                <input type="range" class="form-range slider-input" id="slope-slider" 
+                                       min="-2" max="2" step="0.1" value="2">
+                                <div class="slider-value" id="slope-value">2</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Panel -->
+                    <div class="col-lg-8">
+                        <div class="chart-container">
+                            <div class="equation-display" id="equation-display">
+                                Y = 1 + 2X
+                            </div>
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notes Section -->
+                <div class="notes-section">
+                    <p style="margin: 0; font-size: 15px; color: #666;">
+                        <strong>Notes:</strong> In a scatterplot, each point consists of two coordinates in the two-dimensional space. The first coordinate indicates the position of the point on the x-axis, and the second indicates the position of the point on the y-axis. For example, the point (0,1) aligns with 0 on the x-axis and 1 on the y-axis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Analytics tracking
+        function trackEvent(eventName, parameters = {}) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, parameters);
+            }
+        }
+
+        // Initialize app
+        let chart;
+        
+        // Update chart
+        function updateChart() {
+            const intercept = parseFloat(document.getElementById('intercept-slider').value);
+            const slope = parseFloat(document.getElementById('slope-slider').value);
+            const showX0 = document.getElementById('show-x0-point').checked;
+            const showX2 = document.getElementById('show-x2-point').checked;
+            
+            // Update equation display
+            const interceptText = intercept >= 0 ? intercept : `(${intercept})`;
+            const slopeText = slope >= 0 ? slope : `(${slope})`;
+            document.getElementById('equation-display').textContent = `Y = ${interceptText} + ${slopeText}X`;
+            
+            // Update slider value displays
+            document.getElementById('intercept-value').textContent = intercept;
+            document.getElementById('slope-value').textContent = slope;
+            
+            // Generate line data
+            const xValues = [];
+            const yValues = [];
+            for (let x = -2; x <= 4; x += 0.1) {
+                xValues.push(x);
+                yValues.push(intercept + slope * x);
+            }
+            
+            // Update main line
+            chart.data.datasets[0].data = xValues.map((x, i) => ({ x: x, y: yValues[i] }));
+            
+            // Clear additional datasets
+            chart.data.datasets = chart.data.datasets.slice(0, 1);
+            
+            // Add grid lines and points if requested
+            const gridLines = [];
+            const points = [];
+            
+            if (showX0) {
+                const y0 = intercept;
+                // Vertical dashed line from (0, y0) to bottom
+                gridLines.push({
+                    data: [{ x: 0, y: y0 }, { x: 0, y: -6 }],
+                    borderColor: '#bababa',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0
+                });
+                // Horizontal dashed line from (0, y0) to left
+                gridLines.push({
+                    data: [{ x: 0, y: y0 }, { x: -2, y: y0 }],
+                    borderColor: '#bababa',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0
+                });
+                // Blue circle point
+                points.push({
+                    data: [{ x: 0, y: y0 }],
+                    backgroundColor: '#0066CC',
+                    borderColor: '#0066CC',
+                    pointRadius: 7,
+                    pointStyle: 'circle',
+                    showLine: false
+                });
+            }
+            
+            if (showX2) {
+                const y2 = intercept + slope * 2;
+                // Vertical dashed line from (2, y2) to bottom
+                gridLines.push({
+                    data: [{ x: 2, y: y2 }, { x: 2, y: -6 }],
+                    borderColor: '#bababa',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0
+                });
+                // Horizontal dashed line from (2, y2) to left
+                gridLines.push({
+                    data: [{ x: 2, y: y2 }, { x: -2, y: y2 }],
+                    borderColor: '#bababa',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0
+                });
+                // Blue triangle point
+                points.push({
+                    data: [{ x: 2, y: y2 }],
+                    backgroundColor: '#0066CC',
+                    borderColor: '#0066CC',
+                    pointRadius: 7,
+                    pointStyle: 'triangle',
+                    showLine: false
+                });
+            }
+            
+            // Add all grid lines and points to chart
+            chart.data.datasets.push(...gridLines, ...points);
+            
+            chart.update('none');
+            
+            // Track interaction
+            trackEvent('line_updated', {
+                intercept: intercept,
+                slope: slope,
+                show_x0_point: showX0,
+                show_x2_point: showX2
+            });
+        }
+        
+        // Initialize chart
+        function initChart() {
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Line',
+                        data: [],
+                        borderColor: 'gray',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            min: -2,
+                            max: 4,
+                            ticks: {
+                                stepSize: 1,
+                                color: '#333'
+                            },
+                            grid: {
+                                color: '#ddd'
+                            },
+                            title: {
+                                display: true,
+                                text: 'X',
+                                color: '#333',
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            min: -6,
+                            max: 6,
+                            ticks: {
+                                stepSize: 1,
+                                color: '#333'
+                            },
+                            grid: {
+                                color: '#ddd'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Y',
+                                color: '#333',
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 300
+                    }
+                }
+            });
+            
+            // Initial chart update
+            updateChart();
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            initChart();
+            
+            document.getElementById('intercept-slider').addEventListener('input', updateChart);
+            document.getElementById('slope-slider').addEventListener('input', updateChart);
+            document.getElementById('show-x0-point').addEventListener('change', updateChart);
+            document.getElementById('show-x2-point').addEventListener('change', updateChart);
+            
+            // Track app load
+            trackEvent('slope_app_loaded', {
+                load_type: 'javascript_version',
+                load_time: Date.now()
+            });
+        });
+        
+        // Track session duration
+        let sessionStart = Date.now();
+        window.addEventListener('beforeunload', function() {
+            const sessionDuration = Date.now() - sessionStart;
+            trackEvent('session_end', {
+                session_duration_ms: sessionDuration,
+                session_duration_minutes: Math.round(sessionDuration / 60000)
+            });
+        });
+    </script>
+</body>
+</html>

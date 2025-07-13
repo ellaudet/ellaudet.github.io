@@ -61,14 +61,14 @@
         }
         .correlation-display {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-size: 16px;
             font-weight: normal;
             color: #333;
         }
         .chart-title {
             text-align: center;
-            margin-bottom: 8px;
+            margin-bottom: 2px;
             font-size: 18px;
             font-weight: bold;
             color: #333;
@@ -233,7 +233,7 @@
                                 Scatterplot
                             </div>
                             <div class="correlation-display" id="correlation-display">
-                                Correlation = 1.00
+                                Correlation = 1
                             </div>
                             <canvas id="scatterChart"></canvas>
                             <div class="loading-overlay" id="loading-overlay">
@@ -291,8 +291,8 @@
             // Generate base x values within bounds
             const baseX = [];
             for (let i = 0; i < n; i++) {
-                let x = gaussianRandom() * 8 + 50; // Reduced spread
-                x = Math.max(25, Math.min(75, x)); // Clamp to bounds
+                let x = gaussianRandom() * 6 + 50; // Further reduced spread
+                x = Math.max(32, Math.min(68, x)); // Tighter clamp to bounds
                 baseX.push(x);
             }
             
@@ -304,19 +304,19 @@
                 switch (strength) {
                     case 'perfect':
                         y = x;
-                        correlation = direction === 'positive' ? 1.00 : -1.00;
+                        correlation = direction === 'positive' ? 1 : -1;
                         break;
                     case 'strong':
-                        y = x + gaussianRandom() * 5; // Reduced noise
+                        y = x + gaussianRandom() * 3; // Further reduced noise
                         correlation = direction === 'positive' ? 0.85 : -0.85;
                         break;
                     case 'moderate':
-                        y = x + gaussianRandom() * 12; // Reduced noise
+                        y = x + gaussianRandom() * 8; // Further reduced noise
                         correlation = direction === 'positive' ? 0.50 : -0.50;
                         break;
                     case 'none':
-                        y = gaussianRandom() * 16 + 50; // Reduced spread
-                        correlation = 0.05;
+                        y = gaussianRandom() * 12 + 50; // Further reduced spread
+                        correlation = 0;
                         break;
                 }
                 
@@ -325,8 +325,8 @@
                     y = 100 - y + 50;
                 }
                 
-                // Clamp y values to chart bounds
-                y = Math.max(25, Math.min(75, y));
+                // Tighter clamp y values to chart bounds
+                y = Math.max(32, Math.min(68, y));
                 
                 data.push({ x: x, y: y });
             }
@@ -385,9 +385,11 @@
                 currentData = result.data;
                 const actualCorrelation = calculateCorrelation(currentData);
                 
-                // Update correlation display
+                // Update correlation display (smart decimal formatting)
+                const correlationText = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
+                    Math.round(actualCorrelation) : actualCorrelation.toFixed(2);
                 document.getElementById('correlation-display').textContent = 
-                    `Correlation = ${actualCorrelation.toFixed(2)}`;
+                    `Correlation = ${correlationText}`;
                 
                 // Update chart data
                 chart.data.datasets[0].data = currentData;
@@ -399,8 +401,8 @@
                     chart.data.datasets[1] = {
                         label: 'Line of Best Fit',
                         data: [
-                            { x: 25, y: regression.slope * 25 + regression.intercept },
-                            { x: 75, y: regression.slope * 75 + regression.intercept }
+                            { x: 32, y: regression.slope * 32 + regression.intercept },
+                            { x: 68, y: regression.slope * 68 + regression.intercept }
                         ],
                         type: 'line',
                         borderColor: '#ea3a44',
@@ -420,11 +422,13 @@
                 document.getElementById('loading-overlay').style.display = 'none';
                 
                 // Track interaction
+                const correlationValue = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
+                    Math.round(actualCorrelation) : parseFloat(actualCorrelation.toFixed(2));
                 trackEvent('correlation_updated', {
                     direction: direction,
                     strength: strength,
                     show_line: showLine,
-                    correlation_value: parseFloat(actualCorrelation.toFixed(2))
+                    correlation_value: correlationValue
                 });
             }, 300);
         }
@@ -470,14 +474,14 @@
                             display: false,
                             type: 'linear',
                             position: 'bottom',
-                            min: 20,
-                            max: 80
+                            min: 30,
+                            max: 70
                         },
                         y: {
                             display: false,
                             type: 'linear',
-                            min: 20,
-                            max: 80
+                            min: 30,
+                            max: 70
                         }
                     },
                     animation: {

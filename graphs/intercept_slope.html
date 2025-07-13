@@ -1,9 +1,4 @@
-onHover: function(event, elements, chart) {
-                        // Force redraw to maintain proper layering
-                        if (elements.length === 0) {
-                            chart.update('none');
-                        }
-                    }, <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -503,6 +498,25 @@ onHover: function(event, elements, chart) {
                     plugins: {
                         legend: {
                             display: false
+                        },
+                        afterDraw: {
+                            id: 'customLabels',
+                            afterDraw: function(chart) {
+                                const ctx = chart.ctx;
+                                const chartArea = chart.chartArea;
+                                
+                                // Draw horizontal Y label
+                                ctx.save();
+                                ctx.fillStyle = '#333';
+                                ctx.font = '16px "Helvetica Neue", Helvetica, Arial, sans-serif';
+                                ctx.textAlign = 'left';
+                                ctx.textBaseline = 'bottom';
+                                
+                                // Position Y label at top-left of chart area, reading left-to-right
+                                ctx.fillText('Y', chartArea.left - 15, chartArea.top - 5);
+                                
+                                ctx.restore();
+                            }
                         }
                     },
                     onHover: function(event, elements, chart) {
@@ -546,13 +560,7 @@ onHover: function(event, elements, chart) {
                                 color: '#ddd'
                             },
                             title: {
-                                display: true,
-                                text: 'Y',
-                                color: '#333',
-                                font: {
-                                    size: 16
-                                },
-                                align: 'end'
+                                display: false  // Disable automatic Y label
                             }
                         }
                     },

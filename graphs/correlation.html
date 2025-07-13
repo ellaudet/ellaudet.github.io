@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Graph: Understanding the Correlation Coefficient</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<!-- Google Analytics Tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YEPLTYLL6H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-YEPLTYLL6H');
-</script>
+    
+    <!-- Google Analytics Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEPLTYLL6H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YEPLTYLL6H');
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        .shinylive-container {
+        .app-container {
             margin: 20px auto;
             max-width: 1200px;
             background: white;
@@ -26,432 +30,474 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        .loading-container {
-            text-align: center;
-            padding: 50px;
-            color: #666;
+        .header-section {
+            padding: 30px 30px 20px 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
-        .loading-spinner {
+        .content-section {
+            padding: 20px 30px 30px 30px;
+        }
+        .info-box {
+            background-color: #f1f3f5;
+            border-left: 4px solid #ea3a44;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        .controls-panel {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+        }
+        .chart-container {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            height: 450px;
+        }
+        .correlation-display {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-label {
+            color: #333333;
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .form-text {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .form-select, .form-check {
+            margin-bottom: 15px;
+        }
+        .step-list {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .step-list li {
+            margin-bottom: 12px;
+        }
+        .step-number {
+            color: #ea3a44;
+            font-weight: bold;
+        }
+        .notes-section {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 3px solid #6c757d;
+        }
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+        .spinner {
             width: 40px;
             height: 40px;
             border: 4px solid #f3f3f3;
             border-top: 4px solid #ea3a44;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 20px auto;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .progress-container {
-            max-width: 400px;
-            margin: 20px auto;
-        }
-        .progress-bar {
-            background-color: #ea3a44;
-            transition: width 0.3s ease;
-        }
-        .loading-steps {
-            text-align: left;
-            max-width: 500px;
-            margin: 20px auto;
-            font-size: 14px;
-        }
-        .step {
-            padding: 5px 0;
-            opacity: 0.5;
-        }
-        .step.active {
-            opacity: 1;
-            color: #ea3a44;
-            font-weight: bold;
-        }
-        .step.completed {
-            opacity: 0.7;
-            color: #28a745;
-        }
-        .step::before {
-            content: "⏳ ";
-        }
-        .step.active::before {
-            content: "🔄 ";
-        }
-        .step.completed::before {
-            content: "✅ ";
-        }
-        .error-container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-        .timeout-warning {
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 500px;
-        }
-        .fallback-app {
-            display: none;
-            padding: 20px;
-        }
     </style>
 </head>
 <body>
     <div class="container-fluid">
-        <div class="shinylive-container">
-            <!-- Loading Container -->
-            <div class="loading-container" id="loading-container">
-                <h4>Loading Interactive Correlation Coefficient App</h4>
-                <div class="loading-spinner"></div>
-                
-                <div class="progress-container">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" id="progress-bar" style="width: 0%"></div>
-                    </div>
-                    <div class="mt-2">
-                        <small class="text-muted" id="progress-text">Initializing...</small>
-                    </div>
-                </div>
-                
-                <div class="loading-steps">
-                    <div class="step active" id="step-1">Downloading R WebAssembly runtime (~50MB)</div>
-                    <div class="step" id="step-2">Loading R packages</div>
-                    <div class="step" id="step-3">Initializing Shiny environment</div>
-                    <div class="step" id="step-4">Preparing interactive interface</div>
-                    <div class="step" id="step-5">Ready to explore correlations!</div>
-                </div>
-
-                <!-- Timeout Warning -->
-                <div class="timeout-warning" id="timeout-warning" style="display: none;">
-                    <strong>⚠️ Taking longer than expected?</strong><br>
-                    The R environment is large (~50MB) and may take 1-3 minutes on slower connections.
-                    <br><br>
-                    <button class="btn btn-outline-primary btn-sm" onclick="showFallback()">
-                        View Static Demo Instead
-                    </button>
-                </div>
-            </div>
-
-            <!-- Shinylive Container -->
-            <div id="shinylive-container"></div>
-
-            <!-- Fallback Static Demo -->
-            <div class="fallback-app" id="fallback-app">
-                <div class="alert alert-info" role="alert">
-                    <h4 class="alert-heading">📊 Static Demo Version</h4>
-                    <p>The interactive R app is loading in the background. Here's a preview of what you'll see:</p>
-                </div>
-                
-                <h3 style="color: #ea3a44; text-align: center; margin-bottom: 0px;">
+        <div class="app-container">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h3 style="color: #ea3a44; text-align: center; margin-bottom: 5px;">
                     Interactive Graph: Understanding the Correlation Coefficient
                 </h3>
-                <p style="text-align: center; color: #797979; margin-bottom: 15px; font-size: 18px;">
+                <p style="text-align: center; color: #797979; margin-bottom: 0; font-size: 18px;">
                     By Elena Llaudet, co-author of 
-                    <a href="https://bit.ly/dss_textbook" target="_blank" style="color: #797979; text-decoration: none; font-style: italic;">Data Analysis for Social Science</a>
-                    (DSS)
+                    <a href="https://bit.ly/dss_textbook" target="_blank" style="color: #797979; text-decoration: none; font-style: italic;">
+                        Data Analysis for Social Science
+                    </a> (DSS)
                 </p>
+            </div>
 
-                <div style="background-color: #f1f3f5; border-left: 4px solid #ea3a44; padding: 15px; margin-bottom: 15px;">
+            <!-- Content Section -->
+            <div class="content-section">
+                <!-- Key Points Box -->
+                <div class="info-box">
                     <p style="margin: 0 0 10px 0; font-size: 16px; color: #333333;">
-                        The correlation coefficient captures the direction and strength of the linear association between two variables with a number that ranges from -1 to 1.
+                        The correlation coefficient (or correlation) captures the direction and strength of the linear association between two variables with a number that ranges from -1 to 1.
                     </p>
                     <ul style="margin: 0; padding-left: 20px; line-height: 1.4;">
                         <li style="margin-bottom: 8px; font-size: 16px; color: #333333;">
-                            The sign reflects the direction: positive when variables move together, negative when they move in opposite directions.
+                            The sign reflects the direction: positive when the variables tend to move together (when the slope of the line of best fit is positive) and negative when the variables tend to move in opposite directions (when the slope of the line of best fit is negative).
                         </li>
                         <li style="margin-bottom: 0; font-size: 16px; color: #333333;">
-                            The absolute value reflects strength: 0 (no association) to 1 (perfect association).
+                            The absolute value reflects the strength: it ranges from 0 (no linear association) to 1 (perfect linear association), increasing as dots get closer to the line of best fit.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Explanation -->
+                <p style="font-size: 16px; color: #333333; margin-bottom: 15px;">
+                    Let's explore how changing the direction and strength of the linear association affects the correlation coefficient:
+                </p>
+
+                <!-- Steps -->
+                <div class="step-list">
+                    <ul style="font-size: 16px; color: #333333;">
+                        <li>
+                            <span class="step-number">STEP 1:</span> The graph below shows a scatterplot with a correlation of 1. The sign is positive because the slope of the line of best fit is positive (moves upwards from left to right), and the absolute value is 1 because all dots are exactly on the line. (Check the box below to show the line of best fit as a dashed red line.)
+                        </li>
+                        <li>
+                            <span class="step-number">STEP 2:</span> Use the first drop-down menu to change the direction of the linear association. Notice that when the association goes from positive to negative, the line of best fit changes from sloping upwards to sloping downwards (from left to right) and the correlation coefficient goes from having a positive sign to having a negative sign.
+                        </li>
+                        <li>
+                            <span class="step-number">STEP 3:</span> Use the second drop-down menu to change the strength of the linear association. Weaker associations move dots farther from the line, decreasing the absolute value of the correlation. Stronger associations move dots closer to the line, increasing the absolute value of the correlation.
                         </li>
                     </ul>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4">
-                        <h5>Controls (Interactive Version):</h5>
-                        <div class="mb-3">
-                            <label class="form-label">Direction of Linear Association:</label>
-                            <select class="form-select" disabled>
-                                <option>positive linear association</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Strength of Linear Association:</label>
-                            <select class="form-select" disabled>
-                                <option>perfect linear association</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
+                    <!-- Controls Panel -->
+                    <div class="col-lg-4">
+                        <div class="controls-panel">
+                            <div class="mb-3">
+                                <label class="form-label">Direction of Linear Association:</label>
+                                <p class="form-text">
+                                    Select whether the variables tend to move in the same direction (positive) or in opposite directions (negative) and observe how that changes the slope of the line of best fit and the sign of the correlation coefficient.
+                                </p>
+                                <select class="form-select" id="direction-select">
+                                    <option value="positive">positive linear association</option>
+                                    <option value="negative">negative linear association</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Strength of Linear Association:</label>
+                                <p class="form-text">
+                                    Select the strength of the linear association and observe how that changes how tightly the dots cluster around the line of best fit and the absolute value of the correlation coefficient.
+                                </p>
+                                <select class="form-select" id="strength-select">
+                                    <option value="perfect">perfect linear association</option>
+                                    <option value="strong">strong linear association</option>
+                                    <option value="moderate">weak to moderate linear association</option>
+                                    <option value="none">no linear association (approximately)</option>
+                                </select>
+                            </div>
+
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" disabled>
-                                <label class="form-check-label">Show Line of Best Fit</label>
+                                <input class="form-check-input" type="checkbox" id="show-line">
+                                <label class="form-check-label" for="show-line">
+                                    Show Line of Best Fit
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <div style="background-color: #f8f9fa; border: 2px dashed #dee2e6; height: 400px; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
-                            <div style="text-align: center; color: #6c757d;">
-                                <h5>📈 Interactive Scatterplot</h5>
-                                <p>The full interactive graph will appear here<br>once the R environment loads.</p>
-                                <p><strong>Correlation = 1.00</strong></p>
-                                <small>Demo shows perfect positive correlation</small>
+
+                    <!-- Chart Panel -->
+                    <div class="col-lg-8">
+                        <div class="chart-container">
+                            <div class="correlation-display" id="correlation-display">
+                                Correlation = 1.00
+                            </div>
+                            <canvas id="scatterChart"></canvas>
+                            <div class="loading-overlay" id="loading-overlay">
+                                <div>
+                                    <div class="spinner"></div>
+                                    <p style="margin-top: 10px; color: #666;">Generating data...</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-3">
-                    <button class="btn btn-primary" onclick="retryLoading()" id="retry-btn">
-                        🔄 Try Loading Interactive Version Again
-                    </button>
+                <!-- Notes Section -->
+                <div class="notes-section">
+                    <p style="margin: 0; font-size: 15px; color: #666;">
+                        <strong>Notes:</strong> A scatterplot enables us to visualize the relationship between two variables by plotting one variable against the other in two-dimensional space. Each dot represents an observation. The line of best fit is the line that best summarizes the data cloud. For illustration purposes, here we use <em>weak</em>, <em>moderate</em>, and <em>strong</em>, but note that what is considered a <em>weak</em> correlation in one field may be considered <em>strong</em> in another.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Analytics tracking functions
+        // Analytics tracking
         function trackEvent(eventName, parameters = {}) {
             if (typeof gtag !== 'undefined') {
                 gtag('event', eventName, parameters);
             }
-            console.log('Analytics Event:', eventName, parameters);
         }
 
-        // Progress tracking
-        let currentStep = 1;
-        let loadingStartTime = Date.now();
-        let timeoutWarningShown = false;
-        let loadingTimeout;
-
-        function updateProgress(step, message) {
-            if (currentStep > 1) {
-                const prevStep = document.getElementById(`step-${currentStep - 1}`);
-                if (prevStep) {
-                    prevStep.classList.remove('active');
-                    prevStep.classList.add('completed');
+        // Initialize app
+        let chart;
+        let currentData = [];
+        
+        // Generate data based on correlation parameters
+        function generateData(direction, strength) {
+            const n = 200; // Number of points
+            const data = [];
+            let correlation = 0;
+            
+            // Set seed for consistent results
+            Math.seedrandom = function(seed) {
+                const m = 0x80000000;
+                const a = 1103515245;
+                const c = 12345;
+                let state = seed ? seed : Math.floor(Math.random() * (m - 1));
+                
+                Math.random = function() {
+                    state = (a * state + c) % m;
+                    return state / (m - 1);
+                };
+            };
+            Math.seedrandom(1234);
+            
+            // Generate base x values
+            const baseX = [];
+            for (let i = 0; i < n; i++) {
+                baseX.push(gaussianRandom() * 10 + 50);
+            }
+            
+            // Generate y values based on strength
+            for (let i = 0; i < n; i++) {
+                const x = baseX[i];
+                let y;
+                
+                switch (strength) {
+                    case 'perfect':
+                        y = x;
+                        correlation = direction === 'positive' ? 1.00 : -1.00;
+                        break;
+                    case 'strong':
+                        y = x + gaussianRandom() * 7;
+                        correlation = direction === 'positive' ? 0.85 : -0.85;
+                        break;
+                    case 'moderate':
+                        y = x + gaussianRandom() * 16;
+                        correlation = direction === 'positive' ? 0.50 : -0.50;
+                        break;
+                    case 'none':
+                        y = gaussianRandom() * 20 + 50;
+                        correlation = 0.05;
+                        break;
                 }
+                
+                // Apply direction
+                if (direction === 'negative' && strength !== 'none') {
+                    y = 100 - y + 50;
+                }
+                
+                data.push({ x: x, y: y });
             }
-
-            currentStep = step;
-            const currentStepEl = document.getElementById(`step-${currentStep}`);
-            if (currentStepEl) {
-                currentStepEl.classList.add('active');
-            }
-
-            const progress = (step / 5) * 100;
-            document.getElementById('progress-bar').style.width = progress + '%';
-            document.getElementById('progress-text').textContent = message;
-
-            trackEvent('app_loading_progress', {
-                step: step,
-                total_steps: 5,
-                progress_percent: Math.round(progress),
-                elapsed_time: Date.now() - loadingStartTime
-            });
-        }
-
-        function showTimeoutWarning() {
-            if (!timeoutWarningShown) {
-                document.getElementById('timeout-warning').style.display = 'block';
-                timeoutWarningShown = true;
-                trackEvent('loading_timeout_warning_shown', {
-                    elapsed_time: Date.now() - loadingStartTime
-                });
-            }
-        }
-
-        function showFallback() {
-            document.getElementById('loading-container').style.display = 'none';
-            document.getElementById('fallback-app').style.display = 'block';
-            trackEvent('fallback_demo_shown', {
-                reason: 'user_requested',
-                elapsed_time: Date.now() - loadingStartTime
-            });
-        }
-
-        function retryLoading() {
-            document.getElementById('fallback-app').style.display = 'none';
-            document.getElementById('loading-container').style.display = 'block';
-            document.getElementById('timeout-warning').style.display = 'none';
-            timeoutWarningShown = false;
-            currentStep = 1;
-            loadingStartTime = Date.now();
             
-            // Reset progress
-            updateProgress(1, 'Retrying initialization...');
-            
-            // Try loading again
-            loadShinyliveApp();
-            
-            trackEvent('loading_retry_attempted');
+            return { data, correlation };
         }
-
-        function loadShinyliveApp() {
-            // Clear any existing timeout
-            if (loadingTimeout) {
-                clearTimeout(loadingTimeout);
-            }
-
-            // Set up timeout warning
-            setTimeout(showTimeoutWarning, 30000); // Show warning after 30 seconds
+        
+        // Box-Muller transform for normal distribution
+        function gaussianRandom() {
+            let u = 0, v = 0;
+            while(u === 0) u = Math.random();
+            while(v === 0) v = Math.random();
+            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+        }
+        
+        // Calculate actual correlation coefficient
+        function calculateCorrelation(data) {
+            const n = data.length;
+            const sumX = data.reduce((sum, point) => sum + point.x, 0);
+            const sumY = data.reduce((sum, point) => sum + point.y, 0);
+            const sumXY = data.reduce((sum, point) => sum + point.x * point.y, 0);
+            const sumX2 = data.reduce((sum, point) => sum + point.x * point.x, 0);
+            const sumY2 = data.reduce((sum, point) => sum + point.y * point.y, 0);
             
-            // Set up automatic fallback after 2 minutes
-            loadingTimeout = setTimeout(() => {
-                trackEvent('loading_timeout_fallback', {
-                    elapsed_time: Date.now() - loadingStartTime
-                });
-                showFallback();
-            }, 120000);
-
-            // Simulate realistic loading steps
-            setTimeout(() => updateProgress(2, 'Loading R packages...'), 15000);
-            setTimeout(() => updateProgress(3, 'Initializing Shiny environment...'), 30000);
-            setTimeout(() => updateProgress(4, 'Preparing interface...'), 45000);
-
-            // Try to load shinylive
-            import('https://cdn.jsdelivr.net/npm/shinylive@0.2.3/dist/shinylive.js')
-                .then(({ runApp }) => {
-                    updateProgress(4, 'Starting interactive app...');
+            const numerator = n * sumXY - sumX * sumY;
+            const denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
+            
+            return denominator === 0 ? 0 : numerator / denominator;
+        }
+        
+        // Calculate regression line
+        function calculateRegressionLine(data) {
+            const n = data.length;
+            const sumX = data.reduce((sum, point) => sum + point.x, 0);
+            const sumY = data.reduce((sum, point) => sum + point.y, 0);
+            const sumXY = data.reduce((sum, point) => sum + point.x * point.y, 0);
+            const sumX2 = data.reduce((sum, point) => sum + point.x * point.x, 0);
+            
+            const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            const intercept = (sumY - slope * sumX) / n;
+            
+            return { slope, intercept };
+        }
+        
+        // Update chart
+        function updateChart() {
+            const direction = document.getElementById('direction-select').value;
+            const strength = document.getElementById('strength-select').value;
+            const showLine = document.getElementById('show-line').checked;
+            
+            // Show loading
+            document.getElementById('loading-overlay').style.display = 'flex';
+            
+            setTimeout(() => {
+                const result = generateData(direction, strength);
+                currentData = result.data;
+                const actualCorrelation = calculateCorrelation(currentData);
+                
+                // Update correlation display
+                document.getElementById('correlation-display').textContent = 
+                    `Correlation = ${actualCorrelation.toFixed(2)}`;
+                
+                // Update chart data
+                chart.data.datasets[0].data = currentData;
+                
+                // Handle regression line
+                if (showLine && strength !== 'none') {
+                    const regression = calculateRegressionLine(currentData);
+                    const minX = Math.min(...currentData.map(p => p.x));
+                    const maxX = Math.max(...currentData.map(p => p.x));
                     
-                    const appFiles = {
-                        "app.R": `library(shiny)
-
-## Define UI
-ui = fluidPage(
-  tags$head(
-    tags$style(HTML("
-      .well {
-        background-color: #f1f3f5 !important;
-        border: none;
-        box-shadow: none;
-      }
-    "))
-  ),
-
-  h3("Interactive Graph: Understanding the Correlation Coefficient",
-     style = "color: #ea3a44; text-align: center; margin-bottom: 0px;"),
-  p("By Elena Llaudet, co-author of ",
-    a("Data Analysis for Social Science", href = "https://bit.ly/dss_textbook", target = "_blank", style = "color: #797979; text-decoration: none; font-style: italic;"),
-    " (DSS)", style = "text-align: center; color: #797979; margin-bottom: 15px; font-size: 18px;"),
-
-  div(style = "background-color: #f1f3f5; border-left: 4px solid #ea3a44; padding: 15px; margin-bottom: 15px;",
-      p("The correlation coefficient captures the direction and strength of the linear association between two variables with a number that ranges from -1 to 1.",
-        style = "margin: 0 0 10px 0; font-size: 16px; color: #333333;"),
-      HTML("
-      <ul style='margin: 0; padding-left: 20px; line-height: 1.4;'>
-        <li style='margin-bottom: 8px; font-size: 16px; color: #333333;'>
-          The sign reflects the direction: positive when variables move together, negative when they move in opposite directions.
-        </li>
-        <li style='margin-bottom: 0; font-size: 16px; color: #333333;'>
-          The absolute value reflects strength: 0 (no association) to 1 (perfect association).
-        </li>
-      </ul>
-    ")),
-
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("sign", "Direction:", 
-                  choices = c("positive linear association", "negative linear association")),
-      selectInput("strength", "Strength:", 
-                  choices = c("perfect linear association", "strong linear association", 
-                             "weak to moderate linear association", "no linear association (approximately)")),
-      checkboxInput("line", "Show Line of Best Fit", FALSE)
-    ),
-
-    mainPanel(
-      plotOutput("distPlot", height = "400px"),
-      helpText("Interactive scatterplot showing correlation patterns.")
-    )
-  )
-)
-
-server = function(input, output) {
-  set.seed(1234)
-  base_x <- rnorm(1000, mean = 50, sd = 10)
-
-  computed_data <- reactive({
-    sign_mult <- ifelse(input$sign == "positive linear association", 1, -1)
-    
-    y_values <- switch(input$strength,
-                       "no linear association (approximately)" = rnorm(1000, mean = 50, sd = 20),
-                       "weak to moderate linear association" = base_x + rnorm(1000, mean = 50, sd = 16),
-                       "strong linear association" = base_x + rnorm(1000, mean = 50, sd = 7),
-                       "perfect linear association" = base_x)
-    
-    y_final <- sign_mult * y_values
-    correlation <- cor(base_x, y_final)
-    
-    list(x = base_x, y = y_final, correlation = correlation)
-  })
-
-  output$distPlot <- renderPlot({
-    data <- computed_data()
-    
-    plot(data$x, data$y, col = "#1f78b4", pch = 19, cex = 0.6,
-         xlab = "", ylab = "", xaxt = "n", yaxt = "n")
-    
-    if (input$line) {
-      abline(lm(data$y ~ data$x), col = "#ea3a44", lty = "dashed", lwd = 2)
-    }
-    
-    title(paste("Correlation =", round(data$correlation, 2)))
-  })
-}
-
-shinyApp(ui = ui, server = server)`
+                    chart.data.datasets[1] = {
+                        label: 'Line of Best Fit',
+                        data: [
+                            { x: minX, y: regression.slope * minX + regression.intercept },
+                            { x: maxX, y: regression.slope * maxX + regression.intercept }
+                        ],
+                        type: 'line',
+                        borderColor: '#ea3a44',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0
                     };
-
-                    return runApp(appFiles, "shinylive-container", {
-                        width: "100%",
-                        height: "800px"
-                    });
-                })
-                .then(() => {
-                    clearTimeout(loadingTimeout);
-                    updateProgress(5, 'Ready to explore correlations!');
-                    
-                    setTimeout(() => {
-                        document.getElementById('loading-container').style.display = 'none';
-                        trackEvent('app_load_completed', {
-                            load_time: Date.now() - loadingStartTime
-                        });
-                    }, 1000);
-                })
-                .catch((error) => {
-                    console.error('Shinylive loading error:', error);
-                    clearTimeout(loadingTimeout);
-                    
-                    trackEvent('app_load_error', {
-                        error_message: error.message,
-                        elapsed_time: Date.now() - loadingStartTime
-                    });
-                    
-                    document.getElementById('loading-container').innerHTML = `
-                        <div class="error-container">
-                            <div class="alert alert-danger" role="alert">
-                                <h4 class="alert-heading">⚠️ Loading Failed</h4>
-                                <p>The interactive R environment couldn't load. This might be due to:</p>
-                                <ul>
-                                    <li>Slow internet connection</li>
-                                    <li>Browser compatibility issues</li>
-                                    <li>Firewall blocking WebAssembly</li>
-                                </ul>
-                                <hr>
-                                <button class="btn btn-primary" onclick="showFallback()">View Static Demo</button>
-                                <button class="btn btn-outline-secondary ms-2" onclick="retryLoading()">Try Again</button>
-                            </div>
-                        </div>
-                    `;
+                } else {
+                    chart.data.datasets[1] = { data: [] };
+                }
+                
+                chart.update('none');
+                
+                // Hide loading
+                document.getElementById('loading-overlay').style.display = 'none';
+                
+                // Track interaction
+                trackEvent('correlation_updated', {
+                    direction: direction,
+                    strength: strength,
+                    show_line: showLine,
+                    correlation_value: parseFloat(actualCorrelation.toFixed(2))
                 });
+            }, 300);
         }
-
-        // Start loading
-        trackEvent('app_load_started');
-        updateProgress(1, 'Downloading R WebAssembly runtime (~50MB)...');
-        loadShinyliveApp();
+        
+        // Initialize chart
+        function initChart() {
+            const ctx = document.getElementById('scatterChart').getContext('2d');
+            
+            chart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Data Points',
+                        data: [],
+                        backgroundColor: '#1f78b4',
+                        borderColor: '#1f78b4',
+                        pointRadius: 3,
+                        pointHoverRadius: 5
+                    }, {
+                        label: 'Line of Best Fit',
+                        data: [],
+                        type: 'line',
+                        borderColor: '#ea3a44',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Scatterplot',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: '#333333'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: false,
+                            type: 'linear',
+                            position: 'bottom'
+                        },
+                        y: {
+                            display: false,
+                            type: 'linear'
+                        }
+                    },
+                    animation: {
+                        duration: 500
+                    }
+                }
+            });
+            
+            // Initial chart update
+            updateChart();
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            initChart();
+            
+            document.getElementById('direction-select').addEventListener('change', updateChart);
+            document.getElementById('strength-select').addEventListener('change', updateChart);
+            document.getElementById('show-line').addEventListener('change', updateChart);
+            
+            // Track app load
+            trackEvent('app_loaded', {
+                load_type: 'javascript_version',
+                load_time: Date.now()
+            });
+        });
+        
+        // Track session duration
+        let sessionStart = Date.now();
+        window.addEventListener('beforeunload', function() {
+            const sessionDuration = Date.now() - sessionStart;
+            trackEvent('session_end', {
+                session_duration_ms: sessionDuration,
+                session_duration_minutes: Math.round(sessionDuration / 60000)
+            });
+        });
     </script>
 </body>
 </html>

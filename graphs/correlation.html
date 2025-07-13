@@ -87,6 +87,10 @@
         }
         .form-select, .form-check {
             margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .form-check-label {
+            font-size: 14px;
         }
         .step-list {
             line-height: 1.6;
@@ -284,10 +288,12 @@
             };
             Math.seedrandom(1234);
             
-            // Generate base x values
+            // Generate base x values within bounds
             const baseX = [];
             for (let i = 0; i < n; i++) {
-                baseX.push(gaussianRandom() * 10 + 50);
+                let x = gaussianRandom() * 8 + 50; // Reduced spread
+                x = Math.max(25, Math.min(75, x)); // Clamp to bounds
+                baseX.push(x);
             }
             
             // Generate y values based on strength
@@ -301,15 +307,15 @@
                         correlation = direction === 'positive' ? 1.00 : -1.00;
                         break;
                     case 'strong':
-                        y = x + gaussianRandom() * 7;
+                        y = x + gaussianRandom() * 5; // Reduced noise
                         correlation = direction === 'positive' ? 0.85 : -0.85;
                         break;
                     case 'moderate':
-                        y = x + gaussianRandom() * 16;
+                        y = x + gaussianRandom() * 12; // Reduced noise
                         correlation = direction === 'positive' ? 0.50 : -0.50;
                         break;
                     case 'none':
-                        y = gaussianRandom() * 20 + 50;
+                        y = gaussianRandom() * 16 + 50; // Reduced spread
                         correlation = 0.05;
                         break;
                 }
@@ -318,6 +324,9 @@
                 if (direction === 'negative' && strength !== 'none') {
                     y = 100 - y + 50;
                 }
+                
+                // Clamp y values to chart bounds
+                y = Math.max(25, Math.min(75, y));
                 
                 data.push({ x: x, y: y });
             }
@@ -386,14 +395,12 @@
                 // Handle regression line
                 if (showLine && strength !== 'none') {
                     const regression = calculateRegressionLine(currentData);
-                    const minX = Math.min(...currentData.map(p => p.x));
-                    const maxX = Math.max(...currentData.map(p => p.x));
                     
                     chart.data.datasets[1] = {
                         label: 'Line of Best Fit',
                         data: [
-                            { x: minX, y: regression.slope * minX + regression.intercept },
-                            { x: maxX, y: regression.slope * maxX + regression.intercept }
+                            { x: 25, y: regression.slope * 25 + regression.intercept },
+                            { x: 75, y: regression.slope * 75 + regression.intercept }
                         ],
                         type: 'line',
                         borderColor: '#ea3a44',
@@ -462,11 +469,15 @@
                         x: {
                             display: false,
                             type: 'linear',
-                            position: 'bottom'
+                            position: 'bottom',
+                            min: 20,
+                            max: 80
                         },
                         y: {
                             display: false,
-                            type: 'linear'
+                            type: 'linear',
+                            min: 20,
+                            max: 80
                         }
                     },
                     animation: {

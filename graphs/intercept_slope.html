@@ -455,12 +455,10 @@
             // Add all grid lines and points to chart
             chart.data.datasets.push(...gridLines, ...points);
             
-            chart.update('none');
+            chart.update('active');
             
-            // Force update to ensure proper layering
-            setTimeout(() => {
-                chart.update('none');
-            }, 10);
+            // Force a complete redraw to ensure proper layering
+            chart.render();
             
             // Track interaction
             trackEvent('line_updated', {
@@ -503,6 +501,17 @@
                     plugins: {
                         legend: {
                             display: false
+                        },
+                        afterDraw: function(chart) {
+                            // Draw horizontal Y label manually
+                            const ctx = chart.ctx;
+                            ctx.save();
+                            ctx.textAlign = 'left';
+                            ctx.textBaseline = 'bottom';
+                            ctx.fillStyle = '#333';
+                            ctx.font = '16px "Helvetica Neue", Helvetica, Arial, sans-serif';
+                            ctx.fillText('Y', chart.chartArea.left - 15, chart.chartArea.top - 5);
+                            ctx.restore();
                         }
                     },
                     onHover: function(event, elements, chart) {
@@ -546,13 +555,7 @@
                                 color: '#ddd'
                             },
                             title: {
-                                display: true,
-                                text: 'Y',
-                                color: '#333',
-                                font: {
-                                    size: 16
-                                },
-                                align: 'end'
+                                display: false
                             }
                         }
                     },

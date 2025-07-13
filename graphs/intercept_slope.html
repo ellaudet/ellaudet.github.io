@@ -117,7 +117,7 @@
             font-weight: bold;
             color: #fb4128;
             margin-top: 2px;
-            font-size: 14px;
+            font-size: 16px;
         }
         
         /* Custom red slider styling */
@@ -505,6 +505,12 @@
                             display: false
                         }
                     },
+                    onHover: function(event, elements, chart) {
+                        // Force redraw to maintain proper layering
+                        if (elements.length === 0) {
+                            chart.update('none');
+                        }
+                    },
                     scales: {
                         x: {
                             type: 'linear',
@@ -546,9 +552,7 @@
                                 font: {
                                     size: 16
                                 },
-                                align: 'end',
-                                rotation: 0,
-                                position: 'top'
+                                align: 'end'
                             }
                         }
                     },

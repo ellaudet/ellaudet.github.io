@@ -461,8 +461,8 @@
                 points.push({
                     type: 'scatter',
                     data: [{ x: 0, y: y0 }],
-                    backgroundColor: '#ea3a44',
-                    borderColor: '#ea3a44',
+                    backgroundColor: '#fb4128',
+                    borderColor: '#fb4128',
                     pointRadius: 7,
                     pointStyle: 'circle',
                     showLine: false,
@@ -498,8 +498,8 @@
                 points.push({
                     type: 'scatter',
                     data: [{ x: 2, y: y2 }],
-                    backgroundColor: '#ea3a44',
-                    borderColor: '#ea3a44',
+                    backgroundColor: '#fb4128',
+                    borderColor: '#fb4128',
                     pointRadius: 8,
                     pointStyle: 'triangle',
                     showLine: false,
@@ -566,8 +566,10 @@
                                 color: '#333'
                             },
                             grid: {
-                                display: false,
-                                drawBorder: true
+                                display: true,
+                                drawOnChartArea: false,
+                                drawTicks: true,
+                                color: '#333'
                             },
                             title: {
                                 display: true,
@@ -588,8 +590,10 @@
                                 color: '#333'
                             },
                             grid: {
-                                display: false,
-                                drawBorder: true
+                                display: true,
+                                drawOnChartArea: false,
+                                drawTicks: true,
+                                color: '#333'
                             },
                             title: {
                                 display: false  // Disable automatic Y label

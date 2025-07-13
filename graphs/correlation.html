@@ -270,7 +270,7 @@
         
         // Generate data based on correlation parameters
         function generateData(direction, strength) {
-            const n = 200; // Number of points
+            const n = 1000; // Number of points (matching original)
             const data = [];
             let correlation = 0;
             
@@ -288,47 +288,39 @@
             };
             Math.seedrandom(1234);
             
-            // Generate base x values within bounds
+            // Generate base x values (matching original: mean=50, sd=10)
             const baseX = [];
             for (let i = 0; i < n; i++) {
-                let x = gaussianRandom() * 6 + 50; // Further reduced spread
-                x = Math.max(32, Math.min(68, x)); // Tighter clamp to bounds
-                baseX.push(x);
+                baseX.push(gaussianRandom() * 10 + 50);
             }
             
-            // Generate y values based on strength
+            // Get sign multiplier
+            const signMult = (direction === 'positive') ? 1 : -1;
+            
+            // Generate y values based on strength (matching original R code)
             for (let i = 0; i < n; i++) {
                 const x = baseX[i];
                 let y;
                 
                 switch (strength) {
                     case 'perfect':
-                        y = x;
-                        correlation = direction === 'positive' ? 1 : -1;
+                        y = x; // perfect linear association
                         break;
                     case 'strong':
-                        y = x + gaussianRandom() * 3; // Further reduced noise
-                        correlation = direction === 'positive' ? 0.85 : -0.85;
+                        y = x + gaussianRandom() * 7; // strong linear association
                         break;
                     case 'moderate':
-                        y = x + gaussianRandom() * 8; // Further reduced noise
-                        correlation = direction === 'positive' ? 0.50 : -0.50;
+                        y = x + gaussianRandom() * 16; // weak to moderate linear association
                         break;
                     case 'none':
-                        y = gaussianRandom() * 12 + 50; // Further reduced spread
-                        correlation = 0;
+                        y = gaussianRandom() * 20 + 50; // no linear association (approximately)
                         break;
                 }
                 
-                // Apply direction
-                if (direction === 'negative' && strength !== 'none') {
-                    y = 100 - y + 50;
-                }
+                // Apply sign (matching original R logic)
+                const yFinal = signMult * y;
                 
-                // Tighter clamp y values to chart bounds
-                y = Math.max(32, Math.min(68, y));
-                
-                data.push({ x: x, y: y });
+                data.push({ x: x, y: yFinal });
             }
             
             return { data, correlation };
@@ -397,12 +389,14 @@
                 // Handle regression line
                 if (showLine && strength !== 'none') {
                     const regression = calculateRegressionLine(currentData);
+                    const minX = Math.min(...currentData.map(p => p.x));
+                    const maxX = Math.max(...currentData.map(p => p.x));
                     
                     chart.data.datasets[1] = {
                         label: 'Line of Best Fit',
                         data: [
-                            { x: 32, y: regression.slope * 32 + regression.intercept },
-                            { x: 68, y: regression.slope * 68 + regression.intercept }
+                            { x: minX, y: regression.slope * minX + regression.intercept },
+                            { x: maxX, y: regression.slope * maxX + regression.intercept }
                         ],
                         type: 'line',
                         borderColor: '#ea3a44',
@@ -473,15 +467,11 @@
                         x: {
                             display: false,
                             type: 'linear',
-                            position: 'bottom',
-                            min: 30,
-                            max: 70
+                            position: 'bottom'
                         },
                         y: {
                             display: false,
-                            type: 'linear',
-                            min: 30,
-                            max: 70
+                            type: 'linear'
                         }
                     },
                     animation: {

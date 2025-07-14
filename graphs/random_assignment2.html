@@ -408,13 +408,27 @@
             
             // Special case for n=20 to match the text description
             if (individuals.length === 20) {
+                // Set seed for consistent results at n=20
+                Math.seedrandom = function(seed) {
+                    const m = 0x80000000;
+                    const a = 1103515245;
+                    const c = 12345;
+                    let state = seed ? seed : Math.floor(Math.random() * (m - 1));
+                    
+                    Math.random = function() {
+                        state = (a * state + c) % m;
+                        return state / (m - 1);
+                    };
+                };
+                Math.seedrandom(123); // Fixed seed for n=20
+                
                 individuals.forEach(individual => {
                     if (individual === 'Blue' || individual === 'Purple') {
                         control.push(individual); // All blue and purple go to control
                     } else if (individual === 'Pink') {
                         treatment.push(individual); // All pink go to treatment
                     } else {
-                        // For other colors (orange, green), assign randomly
+                        // For other colors (orange, green), assign randomly with fixed seed
                         if (Math.random() < 0.5) {
                             treatment.push(individual);
                         } else {
@@ -572,7 +586,7 @@
                         ctx.fillStyle = 'white';
                         ctx.strokeStyle = 'black';
                         ctx.lineWidth = 1;
-                        ctx.font = 'bold 12px Arial';
+                        ctx.font = 'bold 14px Arial';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'top';
                         
@@ -584,11 +598,11 @@
                             const count = chartData.rawCounts[index];
                             
                             if (bar && count > 0) {
-                                // Position text at the bottom of the bar (under the end)
+                                // Position text further below the bar
                                 const x = bar.x;
-                                const y = bar.y + 5; // 5px below the bar top (which is the end of the bar)
+                                const y = bar.y + 12; // 12px below the bar top for more separation
                                 
-                                // Draw white text with black outline for visibility
+                                // Draw white text with black outline (no shadow)
                                 ctx.strokeText(count.toString(), x, y);
                                 ctx.fillText(count.toString(), x, y);
                             }

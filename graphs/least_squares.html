@@ -170,7 +170,7 @@
             }
             
             .y-label {
-                top: 75px !important;
+                top: 40px !important;
                 left: 25px !important;
             }
         }
@@ -259,7 +259,7 @@
                                 Scatterplot of X and Y
                             </div>
                             <!-- Manual Y label -->
-                            <div class="y-label" style="position: absolute; top: 85px; left: 35px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
+                            <div class="y-label" style="position: absolute; top: 50px; left: 35px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
                             <canvas id="scatterChart"></canvas>
                         </div>
                     </div>
@@ -369,8 +369,8 @@
                 chart.data.datasets.push({
                     label: 'Regression Line',
                     data: [
-                        { x: -4, y: params.intercept + params.slope * (-4) },
-                        { x: 8, y: params.intercept + params.slope * 8 }
+                        { x: -6, y: params.intercept + params.slope * (-6) },
+                        { x: 10, y: params.intercept + params.slope * 10 }
                     ],
                     type: 'line',
                     borderColor: '#fb4128',
@@ -460,17 +460,13 @@
                         x: {
                             type: 'linear',
                             position: 'bottom',
-                            min: -4,
-                            max: 8,
+                            min: -6,
+                            max: 10,
                             ticks: {
-                                stepSize: 2,
-                                color: '#333',
-                                font: {
-                                    size: 12
-                                }
+                                display: false
                             },
                             grid: {
-                                color: '#ddd',
+                                display: false,
                                 drawBorder: true
                             },
                             title: {
@@ -485,17 +481,13 @@
                         },
                         y: {
                             type: 'linear',
-                            min: -15,
-                            max: 20,
+                            min: -25,
+                            max: 25,
                             ticks: {
-                                stepSize: 5,
-                                color: '#333',
-                                font: {
-                                    size: 12
-                                }
+                                display: false
                             },
                             grid: {
-                                color: '#ddd',
+                                display: false,
                                 drawBorder: true
                             },
                             title: {

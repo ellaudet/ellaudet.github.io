@@ -58,7 +58,7 @@
             border-radius: 8px;
             padding: 20px;
             position: relative;
-            height: 450px;
+            height: 480px;
         }
         .correlation-display {
             text-align: center;
@@ -78,20 +78,23 @@
             color: #333333;
             font-size: 15px;
             font-weight: normal;
-            margin-bottom: 5px;
+            margin-bottom: -2px;
         }
         .form-text {
             color: #666;
             font-size: 14px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            margin-top: 1px;
             line-height: 1.5;
         }
         .form-select, .form-check {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-size: 14px;
         }
         .form-check-label {
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: normal;
+            color: #333333;
         }
         .step-list {
             line-height: 1.5;
@@ -262,10 +265,9 @@
                                 </label>
                             </div>
 
-                            <div class="mb-3" style="margin-bottom: 15px !important;">
-                            <label class="form-label" style="margin-bottom: 3px;">Direction of Linear Association:</label>
-
-                                <p class="form-text" style="line-height: 1.5; margin-bottom: 3px;">
+                            <div class="mb-3" style="margin-bottom: 10px !important;">
+                                <label class="form-label" style="margin-bottom: 0px;">Direction of Linear Association:</label>
+                                <p class="form-text" style="line-height: 1.5; margin-bottom: 10px;">
                                     Select whether the variables tend to move in the same direction (positive) or in opposite directions (negative) and observe how that changes the slope of the line of best fit and the sign of the correlation coefficient.
                                 </p>
                                 <select class="form-select" id="direction-select">
@@ -274,9 +276,9 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label" style="margin-bottom: 3px;">Strength of Linear Association:</label>
-                                <p class="form-text" style="line-height: 1.5; margin-bottom: 3px;">
+                            <div class="mb-3" style="margin-bottom: 0px !important;">
+                                <label class="form-label" style="margin-bottom: 0px;">Strength of Linear Association:</label>
+                                <p class="form-text" style="line-height: 1.5; margin-bottom: 10px;">
                                     Select the strength of the linear association and observe how that changes how tightly the dots cluster around the line of best fit and the absolute value of the correlation coefficient.
                                 </p>
                                 <select class="form-select" id="strength-select">
@@ -444,7 +446,7 @@
                     `Correlation = ${correlationText}`;
                 
                 // Update chart data
-                chart.data.datasets[0].data = currentData;
+                chart.data.datasets[1].data = currentData;
                 
                 // Calculate bounds with padding
                 const xValues = currentData.map(p => p.x);
@@ -470,7 +472,7 @@
                     const minX = Math.min(...currentData.map(p => p.x));
                     const maxX = Math.max(...currentData.map(p => p.x));
                     
-                    chart.data.datasets[1] = {
+                    chart.data.datasets[0] = {
                         label: 'Line of Best Fit',
                         data: [
                             { x: minX, y: regression.slope * minX + regression.intercept },
@@ -485,7 +487,7 @@
                         tension: 0
                     };
                 } else {
-                    chart.data.datasets[1] = { data: [] };
+                    chart.data.datasets[0] = { data: [] };
                 }
                 
                 chart.update('none');
@@ -513,13 +515,6 @@
                 type: 'scatter',
                 data: {
                     datasets: [{
-                        label: 'Data Points',
-                        data: [],
-                        backgroundColor: '#0891b2',
-                        borderColor: '#0891b2',
-                        pointRadius: 3,
-                        pointHoverRadius: 5
-                    }, {
                         label: 'Line of Best Fit',
                         data: [],
                         type: 'line',
@@ -528,6 +523,13 @@
                         borderDash: [5, 5],
                         pointRadius: 0,
                         fill: false
+                    }, {
+                        label: 'Data Points',
+                        data: [],
+                        backgroundColor: '#0891b2',
+                        borderColor: '#0891b2',
+                        pointRadius: 3,
+                        pointHoverRadius: 5
                     }]
                 },
                 options: {

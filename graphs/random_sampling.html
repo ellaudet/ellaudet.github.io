@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Graph: Random Sampling</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    
+    <!-- Google Analytics Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEPLTYLL6H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YEPLTYLL6H');
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        .app-container {
+            margin: 20px auto;
+            max-width: 1200px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header-section {
+            padding: 4px 30px 12px 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        .content-section {
+            padding: 20px 30px 30px 30px;
+        }
+        .info-box {
+            background-color: #f1f3f5;
+            border-left: 4px solid #ea3a44;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        .controls-panel {
+            background-color: #f1f3f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: none;
+        }
+        .chart-container {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            position: relative;
+            height: 340px;
+        }
+        .charts-row {
+            display: flex;
+            gap: 15px;
+            height: 240px;
+        }
+        .chart-item {
+            flex: 1;
+            position: relative;
+        }
+        .chart-title {
+            text-align: center;
+            margin-bottom: 0px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .chart-subtitle {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-label {
+            color: #333333;
+            font-size: 15px;
+            font-weight: normal;
+            margin-bottom: 0px;
+        }
+        .form-text {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            margin-top: 1px;
+            line-height: 1.5;
+        }
+        .step-list {
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .step-list li {
+            margin-bottom: 12px;
+        }
+        .step-number {
+            color: #ea3a44;
+            font-weight: bold;
+        }
+        .notes-section {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 3px solid #6c757d;
+        }
+        .slider-container {
+            margin-bottom: 20px;
+        }
+        
+        /* Custom slider container with dynamic value positioning */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        /* Custom red slider styling */
+        .form-range {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        /* Slider track */
+        .form-range::-webkit-slider-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
+        }
+        
+        .form-range::-moz-range-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
+            border: none;
+        }
+        
+        /* Slider thumb */
+        .form-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #ea3a44;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .form-range::-moz-range-thumb {
+            background: #ea3a44;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Slider thumb hover effect */
+        .form-range::-webkit-slider-thumb:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        
+        .form-range::-moz-range-thumb:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        
+        /* Slider focus styles */
+        .form-range:focus {
+            outline: none;
+        }
+        
+        .form-range:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 3px rgba(234, 58, 68, 0.3);
+        }
+        
+        .form-range:focus::-moz-range-thumb {
+            box-shadow: 0 0 0 3px rgba(234, 58, 68, 0.3);
+        }
+        
+        /* Dynamic value positioning */
+        .slider-dynamic-value {
+            position: absolute;
+            top: 45px;
+            font-weight: bold;
+            color: #ea3a44;
+            font-size: 14px;
+            transform: translateX(-50%);
+            pointer-events: none;
+            transition: left 0.1s ease;
+            white-space: nowrap;
+        }
+        
+        canvas {
+            max-width: 100%;
+            height: auto !important;
+        }
+        
+        /* Mobile optimizations */
+        .mobile-break {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-break {
+                display: inline;
+            }
+            
+            .header-section {
+                padding: 4px 15px 12px 15px;
+            }
+            
+            .content-section {
+                padding: 15px 15px 25px 15px;
+            }
+            
+            .chart-container {
+                padding: 15px 10px 15px 15px;
+                height: auto;
+            }
+            
+            .charts-row {
+                flex-direction: column;
+                height: auto;
+                gap: 30px;
+            }
+            
+            .chart-item {
+                height: 300px;
+            }
+        }
+        
+        @media only screen and (max-width: 1200px) {
+            .mobile-break {
+                display: inline !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="app-container">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h3 style="color: #ea3a44; text-align: center; margin-bottom: 2px; font-size: 20px;">
+                    Interactive Graph:<span class="mobile-break"><br></span> Random Sampling
+                </h3>
+                <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
+                    By Elena Llaudet, co-author of 
+                    <a href="https://bit.ly/dss_textbook" target="_blank" style="color: #797979; text-decoration: none; font-style: italic;">
+                        Data Analysis for Social Science
+                    </a> (DSS)
+                </p>
+            </div>
+
+            <!-- Content Section -->
+            <div class="content-section">
+                <!-- Key Points Box -->
+                <div class="info-box">
+                    <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.5;">
+                        Random sampling creates a representative sample of the target population when the sample size is large enough.
+                    </p>
+                </div>
+
+                <!-- Explanation -->
+                <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
+                    Imagine five types of individuals: orange, blue, pink, green, and purple. If we randomly select individuals from the population into a sample, the sample will end up with similar proportions of each type of individual as long as the sample size is large enough. Let's take a closer look:
+                </p>
+
+                <!-- Steps -->
+                <div class="step-list">
+                    <div style="font-size: 16px; color: #333333; line-height: 1.5;">
+                        <div style="margin-bottom: 12px; line-height: 1.5;">
+                            <span class="step-number">STEP 1:</span> Look at the graphs below. With 20 individuals randomly sampled from a population of 1,000, the sample might end up without any blue individuals even though they represent 10% of the population, making the sample clearly not representative despite random sampling.
+                        </div>
+                        <div style="margin-bottom: 12px; line-height: 1.5;">
+                            <span class="step-number">STEP 2:</span> Now move the slider to increase sample size and observe how the sample composition starts to match the population. Try different values between 20 and 300. (Once you release the slider, the app automatically randomly selects individuals into the sample and updates the graphs.)
+                        </div>
+                        <div style="margin-bottom: 18px; line-height: 1.5;">
+                            <span class="step-number">STEP 3:</span> Increase the sample size to 300 and notice that the sample now has roughly the same proportions as the population: 20% orange, 10% blue, 20% pink, 30% green, 20% purple. Random sampling creates a representative sample when sample size is large enough.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Controls Panel -->
+                    <div class="col-lg-4">
+                        <div class="controls-panel">
+                            <div class="slider-container">
+                                <label class="form-label">Sample Size:</label>
+                                <p class="form-text">
+                                    Move the slider to see how random sampling creates representative samples as sample size increases.
+                                </p>
+                                <div class="slider-wrapper">
+                                    <input type="range" class="form-range" id="sample-size-slider" 
+                                           min="20" max="300" step="10" value="20">
+                                    <div class="slider-dynamic-value" id="sample-size-value">20</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Panel -->
+                    <div class="col-lg-8">
+                        <div class="chart-container">
+                            <div class="charts-row">
+                                <div class="chart-item">
+                                    <div class="chart-title">Population</div>
+                                    <div class="chart-subtitle">N = 1000</div>
+                                    <canvas id="populationChart" width="400" height="300"></canvas>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-title">Sample</div>
+                                    <div class="chart-subtitle" id="sample-n">n = 20</div>
+                                    <canvas id="sampleChart" width="400" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notes Section -->
+                <div class="notes-section">
+                    <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
+                        <strong>Note:</strong> N is the total population size and n is the sample size. The white numbers on top of each bar show the actual count of individuals of that type in each group.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Analytics tracking
+        function trackEvent(eventName, parameters = {}) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, parameters);
+            }
+        }
+
+        // Initialize app
+        let populationChart, sampleChart;
+        
+        // Color mapping for the five types
+        const typeColors = {
+            'Orange': '#e34a33',
+            'Blue': '#1f78b4', 
+            'Pink': '#f781bf',
+            'Green': '#33a02c',
+            'Purple': '#6a3d9a'
+        };
+        
+        // Pre-generated population data (1000 individuals)
+        const N = 1000;
+        const populationData = {
+            'Orange': Math.round(N * 0.2),  // 200
+            'Blue': Math.round(N * 0.1),   // 100
+            'Pink': Math.round(N * 0.2),   // 200
+            'Green': Math.round(N * 0.3),  // 300
+            'Purple': Math.round(N * 0.2)  // 200
+        };
+        
+        // Function to update slider value position
+        function updateSliderValue(sliderId, valueId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+            const value = parseFloat(slider.value);
+            const min = parseFloat(slider.min);
+            const max = parseFloat(slider.max);
+            
+            // Calculate percentage position with better alignment
+            const percentage = ((value - min) / (max - min)) * 100;
+            
+            // Account for thumb width to center properly
+            const thumbOffset = (percentage - 50) * 0.15;
+            const adjustedPercentage = percentage - thumbOffset;
+            
+            // Update value text and position
+            valueDisplay.textContent = value;
+            valueDisplay.style.left = `${adjustedPercentage}%`;
+        }
+        
+        // Generate sample data based on sample size using seeded random
+        function generateSampleData(sampleSize) {
+            // Create array of all individuals in population
+            const population = [];
+            for (let i = 0; i < populationData.Orange; i++) population.push('Orange');
+            for (let i = 0; i < populationData.Blue; i++) population.push('Blue');
+            for (let i = 0; i < populationData.Pink; i++) population.push('Pink');
+            for (let i = 0; i < populationData.Green; i++) population.push('Green');
+            for (let i = 0; i < populationData.Purple; i++) population.push('Purple');
+            
+            // Seeded random number generator for consistent results
+            function seededRandom(seed) {
+                let x = Math.sin(seed) * 10000;
+                return x - Math.floor(x);
+            }
+            
+            // Fisher-Yates shuffle with seeded random
+            const populationCopy = [...population];
+            let seed = 12678 + sampleSize; // Match R's set.seed behavior
+            
+            for (let i = populationCopy.length - 1; i > 0; i--) {
+                const j = Math.floor(seededRandom(seed++) * (i + 1));
+                [populationCopy[i], populationCopy[j]] = [populationCopy[j], populationCopy[i]];
+            }
+            
+            // Take first n individuals as sample
+            return populationCopy.slice(0, sampleSize);
+        }
+        
+        // Count occurrences of each type
+        function countTypes(individuals) {
+            const counts = {
+                'Orange': 0,
+                'Blue': 0,
+                'Pink': 0,
+                'Green': 0,
+                'Purple': 0
+            };
+            
+            individuals.forEach(individual => {
+                counts[individual]++;
+            });
+            
+            return counts;
+        }
+        
+        // Create chart data from counts
+        function createChartData(counts, isPopulation = false) {
+            const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
+            const maxCount = Math.max(...Object.values(counts));
+            
+            return {
+                labels: ['orange', 'blue', 'pink', 'green', 'purple'],
+                datasets: [{
+                    data: [counts.Orange, counts.Blue, counts.Pink, counts.Green, counts.Purple],
+                    backgroundColor: [
+                        typeColors.Orange,
+                        typeColors.Blue,
+                        typeColors.Pink,
+                        typeColors.Green,
+                        typeColors.Purple
+                    ],
+                    borderColor: 'white',
+                    borderWidth: 1
+                }],
+                rawCounts: [counts.Orange, counts.Blue, counts.Pink, counts.Green, counts.Purple],
+                isPopulation: isPopulation,
+                maxCount: maxCount
+            };
+        }
+        
+        // Check if device is mobile
+        function isMobile() {
+            return window.innerWidth <= 768 || 
+                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   'ontouchstart' in window ||
+                   navigator.maxTouchPoints > 0;
+        }
+        
+        // Chart configuration
+        function getChartConfig(data, isPopulation = false) {
+            const maxY = isPopulation ? 350 : Math.max(100, data.maxCount * 1.2);
+            
+            return {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    aspectRatio: 4 / 3,
+                    resizeDelay: 200,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const count = context.parsed.y;
+                                    const total = data.rawCounts.reduce((sum, c) => sum + c, 0);
+                                    const percentage = total > 0 ? (count / total * 100).toFixed(1) : 0;
+                                    return `${count} individuals (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#333',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            min: 0,
+                            max: maxY,
+                            ticks: {
+                                color: '#333',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                color: '#ddd'
+                            },
+                            title: {
+                                display: true,
+                                text: 'count',
+                                color: '#333',
+                                font: {
+                                    size: 13
+                                }
+                            }
+                        }
+                    },
+                    animation: false,
+                    transitions: {
+                        active: {
+                            animation: false
+                        },
+                        resize: {
+                            animation: false
+                        },
+                        show: {
+                            animation: false
+                        },
+                        hide: {
+                            animation: false
+                        }
+                    }
+                },
+                plugins: [{
+                    id: 'barLabels',
+                    afterDatasetsDraw: function(chart) {
+                        const ctx = chart.ctx;
+                        const chartData = chart.data;
+                        
+                        ctx.save();
+                        ctx.fillStyle = 'white';
+                        ctx.strokeStyle = 'black';
+                        ctx.lineWidth = 1;
+                        ctx.font = 'bold 14px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'top';
+                        
+                        const meta = chart.getDatasetMeta(0);
+                        
+                        chartData.datasets[0].data.forEach((count, index) => {
+                            const bar = meta.data[index];
+                            
+                            if (bar && count > 0) {
+                                const x = bar.x;
+                                const y = bar.y + 12;
+                                
+                                ctx.strokeText(count.toString(), x, y);
+                                ctx.fillText(count.toString(), x, y);
+                            }
+                        });
+                        
+                        ctx.restore();
+                    }
+                }]
+            };
+        }
+        
+        // Update all charts
+        function updateCharts() {
+            const sampleSize = parseInt(document.getElementById('sample-size-slider').value);
+            
+            updateSliderValue('sample-size-slider', 'sample-size-value');
+            
+            const sampleIndividuals = generateSampleData(sampleSize);
+            const sampleCounts = countTypes(sampleIndividuals);
+            
+            document.getElementById('sample-n').textContent = `n = ${sampleSize}`;
+            
+            const sampleData = createChartData(sampleCounts, false);
+            
+            sampleChart.data = sampleData;
+            sampleChart.options.scales.y.max = Math.max(100, sampleData.maxCount * 1.2);
+            sampleChart.update(isMobile() ? 'none' : 'active');
+            
+            trackEvent('sampling_updated', {
+                sample_size: sampleSize
+            });
+        }
+        
+        // Initialize charts
+        function initCharts() {
+            // Population chart (static)
+            const populationChartData = createChartData(populationData, true);
+            populationChart = new Chart(document.getElementById('populationChart'), 
+                getChartConfig(populationChartData, true));
+            
+            // Sample chart (dynamic)
+            const sampleSize = 20;
+            const sampleIndividuals = generateSampleData(sampleSize);
+            const sampleCounts = countTypes(sampleIndividuals);
+            const sampleData = createChartData(sampleCounts, false);
+            
+            sampleChart = new Chart(document.getElementById('sampleChart'), 
+                getChartConfig(sampleData, false));
+            
+            updateCharts();
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            initCharts();
+            
+            updateSliderValue('sample-size-slider', 'sample-size-value');
+            
+            document.getElementById('sample-size-slider').addEventListener('input', updateCharts);
+            
+            trackEvent('sampling_app_loaded', {
+                load_type: 'javascript_version',
+                load_time: Date.now()
+            });
+        });
+        
+        // Track session duration
+        let sessionStart = Date.now();
+        window.addEventListener('beforeunload', function() {
+            const sessionDuration = Date.now() - sessionStart;
+            trackEvent('session_end', {
+                session_duration_ms: sessionDuration,
+                session_duration_minutes: Math.round(sessionDuration / 60000)
+            });
+        });
+    </script>
+</body>
+</html>

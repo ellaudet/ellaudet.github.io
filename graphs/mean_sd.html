@@ -312,7 +312,7 @@
                     <div class="col-lg-8">
                         <div class="chart-container">
                             <div class="equation-display" id="equation-display">
-                                Mean = 0, Standard deviation = 1
+                                Mean = 0 and Standard deviation = 1
                             </div>
                             <canvas id="distributionChart"></canvas>
                         </div>
@@ -426,7 +426,7 @@
             
             // Update parameter display
             document.getElementById('equation-display').textContent = 
-                `Mean = ${mean}, Standard deviation = ${stdDev}`;
+                `Mean = ${mean} and Standard deviation = ${stdDev}`;
             
             // Update slider value displays and positions
             updateSliderValue('mean-slider', 'mean-value');
@@ -512,7 +512,7 @@
                         y: {
                             type: 'linear',
                             min: 0,
-                            max: 0.6,
+                            max: 0.5,
                             ticks: {
                                 stepSize: 0.1,
                                 color: '#333',

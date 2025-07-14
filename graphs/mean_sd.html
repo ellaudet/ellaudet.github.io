@@ -58,7 +58,7 @@
             border-radius: 8px;
             padding: 25px;
             position: relative;
-            height: 520px;
+            height: 550px;
         }
         .equation-display {
             text-align: center;
@@ -260,7 +260,7 @@
 
                 <!-- Explanation -->
                 <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
-                    Let's see how changing the mean and standard deviation of a variable affects its distribution:
+                    Let's see how changing these parameters affects the distribution of a variable:
                 </p>
 
                 <!-- Steps -->
@@ -295,7 +295,7 @@
                             </div>
 
                             <div class="slider-container">
-                                <label class="form-label">Standard Deviation:</label>
+                                <label class="form-label">Standard deviation:</label>
                                 <p class="form-text">
                                     Move this slider to see how the standard deviation changes the spread of the distribution.
                                 </p>
@@ -311,11 +311,8 @@
                     <!-- Chart Panel -->
                     <div class="col-lg-8">
                         <div class="chart-container">
-                            <div class="chart-title" id="chart-title">
-                                Distribution of Normal Random Variable
-                            </div>
                             <div class="equation-display" id="equation-display">
-                                Mean = 0, Standard Deviation = 1
+                                Mean = 0, Standard deviation = 1
                             </div>
                             <canvas id="distributionChart"></canvas>
                         </div>
@@ -429,7 +426,7 @@
             
             // Update parameter display
             document.getElementById('equation-display').textContent = 
-                `Mean = ${mean}, Standard Deviation = ${stdDev}`;
+                `Mean = ${mean}, Standard deviation = ${stdDev}`;
             
             // Update slider value displays and positions
             updateSliderValue('mean-slider', 'mean-value');
@@ -474,7 +471,7 @@
                             top: 10,
                             right: 35,
                             bottom: 35,
-                            left: 40
+                            left: 20
                         }
                     },
                     plugins: {
@@ -515,7 +512,7 @@
                         y: {
                             type: 'linear',
                             min: 0,
-                            max: 0.4,
+                            max: 0.6,
                             ticks: {
                                 stepSize: 0.1,
                                 color: '#333',

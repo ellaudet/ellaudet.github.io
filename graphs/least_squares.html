@@ -170,8 +170,8 @@
             }
             
             .y-label {
-                top: 60px !important;
-                left: 18px !important;
+                top: 75px !important;
+                left: 25px !important;
             }
         }
         
@@ -258,11 +258,8 @@
                             <div class="chart-title" id="chart-title">
                                 Scatterplot of X and Y
                             </div>
-                            <div class="ssr-display" id="ssr-display" style="display: none;">
-                                SSR = 704
-                            </div>
                             <!-- Manual Y label -->
-                            <div class="y-label" style="position: absolute; top: 70px; left: 28px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
+                            <div class="y-label" style="position: absolute; top: 85px; left: 35px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
                             <canvas id="scatterChart"></canvas>
                         </div>
                     </div>
@@ -348,22 +345,19 @@
             const showLineErrors = document.getElementById('show-line-errors').checked;
             const params = lineParams[selectedLine];
             
-            // Update title and SSR display
+            // Update title
             if (showLineErrors) {
-                document.getElementById('chart-title').textContent = `Scatterplot of X and Y with Line #${params.number}`;
-                document.getElementById('ssr-display').textContent = `SSR = ${params.ssr}`;
-                document.getElementById('ssr-display').style.display = 'block';
+                document.getElementById('chart-title').textContent = `Line #${params.number} (SSR = ${params.ssr})`;
             } else {
                 document.getElementById('chart-title').textContent = 'Scatterplot of X and Y';
-                document.getElementById('ssr-display').style.display = 'none';
             }
             
             // Clear existing datasets
             chart.data.datasets = [{
                 label: 'Data Points',
                 data: dataPoints,
-                backgroundColor: '#1f78b4',
-                borderColor: '#1f78b4',
+                backgroundColor: '#0891b2',
+                borderColor: '#0891b2',
                 pointRadius: 4,
                 pointHoverRadius: 6,
                 showLine: false,
@@ -371,18 +365,15 @@
             }];
             
             if (showLineErrors) {
-                // Add regression line
-                const minX = Math.min(...dataPoints.map(p => p.x));
-                const maxX = Math.max(...dataPoints.map(p => p.x));
-                
+                // Add regression line - extend to full axis range for consistency
                 chart.data.datasets.push({
                     label: 'Regression Line',
                     data: [
-                        { x: minX, y: params.intercept + params.slope * minX },
-                        { x: maxX, y: params.intercept + params.slope * maxX }
+                        { x: -4, y: params.intercept + params.slope * (-4) },
+                        { x: 8, y: params.intercept + params.slope * 8 }
                     ],
                     type: 'line',
-                    borderColor: '#1f78b4',
+                    borderColor: '#fb4128',
                     borderWidth: 3,
                     pointRadius: 0,
                     fill: false,

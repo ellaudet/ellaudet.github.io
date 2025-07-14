@@ -228,6 +228,21 @@
         .form-check-input:checked:focus {
             box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
         }
+        
+        /* Mobile title styling */
+        @media (max-width: 768px) {
+            .mobile-break {
+                display: block;
+            }
+            
+            .chart-container {
+                padding: 15px;
+            }
+        }
+        
+        .mobile-break {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -236,7 +251,7 @@
             <!-- Header Section -->
             <div class="header-section">
                 <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; font-size: 20px;">
-                    Interactive Graph: Intercept and Slope
+                    Interactive Graph:<span class="mobile-break"><br></span> Intercept and Slope
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
                     By Elena Llaudet, co-author of 

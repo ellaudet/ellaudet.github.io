@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Graph: Random Treatment Assignment</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    
+    <!-- Google Analytics Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEPLTYLL6H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YEPLTYLL6H');
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        .app-container {
+            margin: 20px auto;
+            max-width: 1200px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header-section {
+            padding: 4px 30px 12px 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        .content-section {
+            padding: 20px 30px 30px 30px;
+        }
+        .info-box {
+            background-color: #f1f3f5;
+            border-left: 4px solid #fb4128;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        .controls-panel {
+            background-color: #f1f3f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: none;
+        }
+        .chart-container {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            position: relative;
+            height: 340px;
+        }
+        .charts-row {
+            display: flex;
+            gap: 15px;
+            height: 240px;
+        }
+        .chart-item {
+            flex: 1;
+            position: relative;
+        }
+        .chart-title {
+            text-align: center;
+            margin-bottom: 0px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .chart-subtitle {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-label {
+            color: #333333;
+            font-size: 15px;
+            font-weight: normal;
+            margin-bottom: 0px;
+        }
+        .form-text {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            margin-top: 1px;
+            line-height: 1.5;
+        }
+        .step-list {
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .step-list li {
+            margin-bottom: 12px;
+        }
+        .step-number {
+            color: #fb4128;
+            font-weight: bold;
+        }
+        .notes-section {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 3px solid #6c757d;
+        }
+        .slider-container {
+            margin-bottom: 20px;
+        }
+        
+        /* Custom slider container with dynamic value positioning */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        /* Custom red slider styling */
+        .form-range {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        /* Slider track */
+        .form-range::-webkit-slider-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
+        }
+        
+        .form-range::-moz-range-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
+            border: none;
+        }
+        
+        /* Slider thumb */
+        .form-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #fb4128;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .form-range::-moz-range-thumb {
+            background: #fb4128;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Slider thumb hover effect */
+        .form-range::-webkit-slider-thumb:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        
+        .form-range::-moz-range-thumb:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        
+        /* Slider focus styles */
+        .form-range:focus {
+            outline: none;
+        }
+        
+        .form-range:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
+        }
+        
+        .form-range:focus::-moz-range-thumb {
+            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
+        }
+        
+        /* Dynamic value positioning */
+        .slider-dynamic-value {
+            position: absolute;
+            top: 45px;
+            font-weight: bold;
+            color: #fb4128;
+            font-size: 14px;
+            transform: translateX(-50%);
+            pointer-events: none;
+            transition: left 0.1s ease;
+            white-space: nowrap;
+        }
+        
+        /* Mobile optimizations */
+        .mobile-break {
+            display: none;
+        }
+        
+        @media (max-width: 1200px), (max-device-width: 1200px) {
+            .mobile-break {
+                display: inline;
+            }
+            
+            .header-section {
+                padding: 4px 15px 12px 15px;
+            }
+            
+            .content-section {
+                padding: 15px 15px 25px 15px;
+            }
+            
+            .chart-container {
+                padding: 15px 10px 15px 15px;
+            }
+            
+            .charts-row {
+                flex-direction: column;
+                height: auto;
+                gap: 20px;
+            }
+            
+            .chart-item {
+                height: 300px;
+            }
+        }
+        
+        @media only screen and (max-width: 1200px) {
+            .mobile-break {
+                display: inline !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="app-container">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; font-size: 20px;">
+                    Interactive Graph:<span class="mobile-break"><br></span> Random Treatment Assignment
+                </h3>
+                <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
+                    By Elena Llaudet, co-author of 
+                    <a href="https://bit.ly/dss_textbook" target="_blank" style="color: #797979; text-decoration: none; font-style: italic;">
+                        Data Analysis for Social Science
+                    </a> (DSS)
+                </p>
+            </div>
+
+            <!-- Content Section -->
+            <div class="content-section">
+                <!-- Key Points Box -->
+                <div class="info-box">
+                    <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.5;">
+                        Random treatment assignment makes treatment and control groups comparable when sample size <em>n</em> is large enough.
+                    </p>
+                </div>
+
+                <!-- Explanation -->
+                <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
+                    Suppose the population is composed of 20% orange individuals, 10% blue individuals, 20% pink individuals, 30% green individuals, and 20% purple individuals. If we select a sample of <em>n</em> individuals from this population and randomly assign them to treatment and control groups, the two groups will have similar proportions of each type of individual as long as <em>n</em> is large enough. Let's take a closer look:
+                </p>
+
+                <!-- Steps -->
+                <div class="step-list">
+                    <div style="font-size: 16px; color: #333333; line-height: 1.5;">
+                        <div style="margin-bottom: 12px; line-height: 1.5;">
+                            <span class="step-number">STEP 1:</span> Look at the graphs below. If the sample size is set to only 20 individuals, the treatment group might end up with all the pink individuals while the control group gets all the blue ones, making the groups clearly not comparable even with random assignment.
+                        </div>
+                        <div style="margin-bottom: 18px; line-height: 1.5;">
+                            <span class="step-number">STEP 2:</span> Move the slider to increase the sample size and observe how the treatment and control groups start to look more similar. When <em>n</em> reaches 1000, the groups have nearly identical proportions, making them comparable.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Controls Panel -->
+                    <div class="col-lg-4">
+                        <div class="controls-panel">
+                            <div class="slider-container">
+                                <label class="form-label">Sample size <em>n</em>:</label>
+                                <p class="form-text">
+                                    Move the slider to see how random assignment creates comparable groups as sample size increases.
+                                </p>
+                                <div class="slider-wrapper">
+                                    <input type="range" class="form-range" id="sample-size-slider" 
+                                           min="20" max="300" step="10" value="20">
+                                    <div class="slider-dynamic-value" id="sample-size-value">20</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Panel -->
+                    <div class="col-lg-8">
+                        <div class="chart-container">
+                            <div class="charts-row">
+                                <div class="chart-item">
+                                    <div class="chart-title">Treatment Group</div>
+                                    <div class="chart-subtitle" id="treatment-n">n_t = 10</div>
+                                    <!-- Manual count label -->
+                                    <div style="position: absolute; top: 30px; left: -5px; font-size: 12px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">proportion</div>
+                                    <canvas id="treatmentChart"></canvas>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-title">Control Group</div>
+                                    <div class="chart-subtitle" id="control-n">n_c = 10</div>
+                                    <!-- Manual count label -->
+                                    <div style="position: absolute; top: 30px; left: -5px; font-size: 12px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">proportion</div>
+                                    <canvas id="controlChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notes Section -->
+                <div class="notes-section">
+                    <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
+                        <strong>Note:</strong> n is the total sample size, n_t is the size of the treatment group, and n_c is the size of the control group.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Analytics tracking
+        function trackEvent(eventName, parameters = {}) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, parameters);
+            }
+        }
+
+        // Initialize app
+        let fullSampleChart, treatmentChart, controlChart;
+        
+        // Color mapping for the five types
+        const typeColors = {
+            'Orange': '#e34a33',
+            'Blue': '#1f78b4', 
+            'Pink': '#f781bf',
+            'Green': '#33a02c',
+            'Purple': '#6a3d9a'
+        };
+        
+        // Function to update slider value position
+        function updateSliderValue(sliderId, valueId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+            const value = parseFloat(slider.value);
+            const min = parseFloat(slider.min);
+            const max = parseFloat(slider.max);
+            
+            // Calculate percentage position with better alignment
+            const percentage = ((value - min) / (max - min)) * 100;
+            
+            // Account for thumb width to center properly
+            const thumbOffset = (percentage - 50) * 0.15;
+            const adjustedPercentage = percentage - thumbOffset;
+            
+            // Update value text and position
+            valueDisplay.textContent = value;
+            valueDisplay.style.left = `${adjustedPercentage}%`;
+        }
+        
+        // Generate sample data based on sample size
+        function generateSampleData(sampleSize) {
+            // Create individuals with specified proportions
+            const individuals = [];
+            
+            // Add individuals according to proportions
+            const orangeCount = Math.round(sampleSize * 0.2);
+            const blueCount = Math.round(sampleSize * 0.1);
+            const pinkCount = Math.round(sampleSize * 0.2);
+            const greenCount = Math.round(sampleSize * 0.3);
+            const purpleCount = sampleSize - orangeCount - blueCount - pinkCount - greenCount;
+            
+            for (let i = 0; i < orangeCount; i++) individuals.push('Orange');
+            for (let i = 0; i < blueCount; i++) individuals.push('Blue');
+            for (let i = 0; i < pinkCount; i++) individuals.push('Pink');
+            for (let i = 0; i < greenCount; i++) individuals.push('Green');
+            for (let i = 0; i < purpleCount; i++) individuals.push('Purple');
+            
+            return individuals;
+        }
+        
+        // Randomly assign individuals to treatment/control
+        function randomAssignment(individuals) {
+            // Set seed for consistent results (simplified)
+            Math.seedrandom = function(seed) {
+                const m = 0x80000000;
+                const a = 1103515245;
+                const c = 12345;
+                let state = seed ? seed : Math.floor(Math.random() * (m - 1));
+                
+                Math.random = function() {
+                    state = (a * state + c) % m;
+                    return state / (m - 1);
+                };
+            };
+            Math.seedrandom(678);
+            
+            const treatment = [];
+            const control = [];
+            
+            individuals.forEach(individual => {
+                if (Math.random() < 0.5) {
+                    treatment.push(individual);
+                } else {
+                    control.push(individual);
+                }
+            });
+            
+            return { treatment, control };
+        }
+        
+        // Count occurrences of each type and convert to proportions
+        function countTypes(individuals) {
+            const counts = {
+                'Orange': 0,
+                'Blue': 0,
+                'Pink': 0,
+                'Green': 0,
+                'Purple': 0
+            };
+            
+            individuals.forEach(individual => {
+                counts[individual]++;
+            });
+            
+            // Convert to proportions
+            const total = individuals.length;
+            if (total === 0) {
+                return counts; // Return zeros if no individuals
+            }
+            
+            Object.keys(counts).forEach(key => {
+                counts[key] = counts[key] / total;
+            });
+            
+            return counts;
+        }
+        
+        // Create chart data from counts
+        function createChartData(counts) {
+            return {
+                labels: ['orange', 'blue', 'pink', 'green', 'purple'],
+                datasets: [{
+                    data: [counts.Orange, counts.Blue, counts.Pink, counts.Green, counts.Purple],
+                    backgroundColor: [
+                        typeColors.Orange,
+                        typeColors.Blue,
+                        typeColors.Pink,
+                        typeColors.Green,
+                        typeColors.Purple
+                    ],
+                    borderColor: 'white',
+                    borderWidth: 1
+                }]
+            };
+        }
+        
+        // Chart configuration
+        function getChartConfig(data, maxY) {
+            return {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const proportion = context.parsed.y;
+                                    const percentage = (proportion * 100).toFixed(1);
+                                    return `${percentage}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#333',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            min: 0,
+                            max: maxY,
+                            ticks: {
+                                color: '#333',
+                                font: {
+                                    size: 11
+                                },
+                                callback: function(value) {
+                                    return (value * 100).toFixed(0) + '%';
+                                }
+                            },
+                            grid: {
+                                color: '#ddd'
+                            },
+                            title: {
+                                display: false  // Disable automatic Y label
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 300
+                    }
+                }
+            };
+        }
+        
+        // Update all charts
+        function updateCharts() {
+            const sampleSize = parseInt(document.getElementById('sample-size-slider').value);
+            
+            // Update slider value display
+            updateSliderValue('sample-size-slider', 'sample-size-value');
+            
+            // Generate data
+            const individuals = generateSampleData(sampleSize);
+            const assignment = randomAssignment(individuals);
+            
+            // Count types in each group
+            const treatmentCounts = countTypes(assignment.treatment);
+            const controlCounts = countTypes(assignment.control);
+            
+            // Update sample size displays
+            document.getElementById('treatment-n').textContent = `n_t = ${assignment.treatment.length}`;
+            document.getElementById('control-n').textContent = `n_c = ${assignment.control.length}`;
+            
+            // Calculate max Y for consistent scaling - use 0.5 (50%) as max for proportions
+            const allProportions = [...Object.values(treatmentCounts), ...Object.values(controlCounts)];
+            const maxProportion = Math.max(...allProportions);
+            
+            // For proportions, use a fixed scale that accommodates the expected range
+            // Population proportions are: 30% (green), 20% (orange/pink/purple), 10% (blue)
+            // Add some buffer above 30% for random variation
+            const maxY = 0.5; // 50% max scale
+            
+            // Update charts
+            treatmentChart.data = createChartData(treatmentCounts);
+            treatmentChart.options.scales.y.max = maxY;
+            treatmentChart.update('none');
+            
+            controlChart.data = createChartData(controlCounts);
+            controlChart.options.scales.y.max = maxY;
+            controlChart.update('none');
+            
+            // Track interaction
+            trackEvent('assignment_updated', {
+                sample_size: sampleSize,
+                treatment_size: assignment.treatment.length,
+                control_size: assignment.control.length
+            });
+        }
+        
+        // Initialize charts
+        function initCharts() {
+            const sampleSize = 20;
+            const individuals = generateSampleData(sampleSize);
+            const assignment = randomAssignment(individuals);
+            
+            const treatmentCounts = countTypes(assignment.treatment);
+            const controlCounts = countTypes(assignment.control);
+            
+            const maxY = Math.max(sampleSize/3 + 0.15 * sampleSize, 10);
+            
+            // Initialize charts
+            treatmentChart = new Chart(document.getElementById('treatmentChart'), 
+                getChartConfig(createChartData(treatmentCounts), maxY));
+            
+            controlChart = new Chart(document.getElementById('controlChart'), 
+                getChartConfig(createChartData(controlCounts), maxY));
+            
+            updateCharts();
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure slider range is correct
+            const slider = document.getElementById('sample-size-slider');
+            slider.setAttribute('max', '1000');
+            slider.max = 1000;
+            
+            initCharts();
+            
+            // Initialize slider value position
+            updateSliderValue('sample-size-slider', 'sample-size-value');
+            
+            document.getElementById('sample-size-slider').addEventListener('input', updateCharts);
+            
+            // Track app load
+            trackEvent('assignment_app_loaded', {
+                load_type: 'javascript_version',
+                load_time: Date.now()
+            });
+        });
+        
+        // Track session duration
+        let sessionStart = Date.now();
+        window.addEventListener('beforeunload', function() {
+            const sessionDuration = Date.now() - sessionStart;
+            trackEvent('session_end', {
+                session_duration_ms: sessionDuration,
+                session_duration_minutes: Math.round(sessionDuration / 60000)
+            });
+        });
+    </script>
+</body>
+</html>

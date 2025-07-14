@@ -168,6 +168,11 @@
             .chart-container {
                 padding: 15px 10px 15px 15px;
             }
+            
+            .y-label {
+                top: 60px !important;
+                left: 18px !important;
+            }
         }
         
         @media only screen and (max-width: 1200px) {
@@ -256,6 +261,8 @@
                             <div class="ssr-display" id="ssr-display" style="display: none;">
                                 SSR = 704
                             </div>
+                            <!-- Manual Y label -->
+                            <div class="y-label" style="position: absolute; top: 70px; left: 28px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
                             <canvas id="scatterChart"></canvas>
                         </div>
                     </div>
@@ -487,8 +494,8 @@
                         },
                         y: {
                             type: 'linear',
-                            min: -11,
-                            max: 15,
+                            min: -15,
+                            max: 20,
                             ticks: {
                                 stepSize: 5,
                                 color: '#333',
@@ -501,13 +508,7 @@
                                 drawBorder: true
                             },
                             title: {
-                                display: true,
-                                text: 'Y',
-                                color: '#333',
-                                font: {
-                                    size: 14
-                                },
-                                align: 'end'
+                                display: false  // Disable automatic Y label
                             }
                         }
                     },

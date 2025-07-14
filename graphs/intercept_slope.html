@@ -229,8 +229,8 @@
             box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
         }
         
-        /* Mobile title styling */
-        @media (max-width: 992px) {
+        /* Mobile title styling - multiple approaches */
+        @media (max-width: 1200px), (max-device-width: 1200px) {
             .mobile-break {
                 display: block;
             }
@@ -242,6 +242,13 @@
             .y-label {
                 top: 60px !important;
                 left: 18px !important;
+            }
+        }
+        
+        /* Additional mobile detection */
+        @media only screen and (max-width: 1200px) {
+            .mobile-break {
+                display: block !important;
             }
         }
         
@@ -293,7 +300,7 @@
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 1:</span> The graph shows a line with an intercept of 1 and a slope of 2, so the line is: Y = 1 + 2X (as shown in the title).
-                            <ul style="margin: 10px 0 0 0; padding-left: 15px; list-style-position: outside; line-height: 1.5;">
+                            <ul style="margin: 10px 0 0 0; padding-left: 20px; list-style-position: outside; line-height: 1.5;">
                                 <li style="margin-bottom: 8px; line-height: 1.5;">
                                     To verify the intercept, find 0 on the x-axis, move up to the line, and find the Y-value that corresponds to that point on the line. The point is (0,1), confirming the intercept is 1. (Check the first box to show in the graph the point at X=0 as an orange circle.) Note: The intercept is not always where the line crosses the visible y-axis, since that axis might not be drawn exactly at X=0.
                                 </li>
@@ -307,7 +314,7 @@
                         </div>
                         <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 3:</span> Move the slope slider to see how it changes the line's steepness without affecting the intercept.
-                            <ul style="margin: 10px 0 0 0; padding-left: 15px; list-style-position: outside; line-height: 1.5;">
+                            <ul style="margin: 10px 0 0 0; padding-left: 20px; list-style-position: outside; line-height: 1.5;">
                                 <li style="margin-bottom: 8px; line-height: 1.5;">
                                     Decreasing the slope from 2 to 1 makes the line less steep. The X=0 point stays at (0,1), but the X=2 point moves to (2,3): rise = 3-1 = 2, run = 2-0 = 2, so slope = 2/2 = 1. Interpretation: every one-unit increase in X is associated with an increase in Y of 1 unit.
                                 </li>

@@ -170,7 +170,7 @@
             }
             
             .y-label {
-                top: 40px !important;
+                top: 55px !important;
                 left: 25px !important;
             }
         }
@@ -234,7 +234,7 @@
                             <div class="form-check" style="margin-bottom: 15px;">
                                 <input class="form-check-input" type="checkbox" id="show-line-errors">
                                 <label class="form-check-label" for="show-line-errors">
-                                    Show line and errors
+                                    Show line (as a solid orange line) and errors (as dashed gray lines)
                                 </label>
                             </div>
 
@@ -259,7 +259,7 @@
                                 Scatterplot of X and Y
                             </div>
                             <!-- Manual Y label -->
-                            <div class="y-label" style="position: absolute; top: 50px; left: 35px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
+                            <div class="y-label" style="position: absolute; top: 65px; left: 35px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
                             <canvas id="scatterChart"></canvas>
                         </div>
                     </div>
@@ -467,7 +467,9 @@
                             },
                             grid: {
                                 display: false,
-                                drawBorder: true
+                                drawBorder: true,
+                                borderColor: '#333',
+                                borderWidth: 1
                             },
                             title: {
                                 display: true,
@@ -488,7 +490,9 @@
                             },
                             grid: {
                                 display: false,
-                                drawBorder: true
+                                drawBorder: true,
+                                borderColor: '#333',
+                                borderWidth: 1
                             },
                             title: {
                                 display: false  // Disable automatic Y label

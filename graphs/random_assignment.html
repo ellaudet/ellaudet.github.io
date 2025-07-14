@@ -492,6 +492,11 @@
             };
         }
         
+        // Check if device is mobile
+        function isMobile() {
+            return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        
         // Chart configuration
         function getChartConfig(data, maxY) {
             return {
@@ -546,7 +551,7 @@
                         }
                     },
                     animation: {
-                        duration: 300
+                        duration: isMobile() ? 0 : 300
                     }
                 },
                 plugins: [{
@@ -603,11 +608,11 @@
             
             treatmentChart.data = createChartData(treatmentData);
             treatmentChart.options.scales.y.max = maxY;
-            treatmentChart.update('none');
+            treatmentChart.update(isMobile() ? 'none' : 'active');
             
             controlChart.data = createChartData(controlData);
             controlChart.options.scales.y.max = maxY;
-            controlChart.update('none');
+            controlChart.update(isMobile() ? 'none' : 'active');
             
             trackEvent('assignment_updated', {
                 sample_size: sampleSize,

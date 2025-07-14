@@ -559,34 +559,44 @@
                         }
                     },
                     animation: {
-                        onComplete: function() {
-                            // Add count labels on top of bars
-                            const ctx = this.chart.ctx;
-                            const chartArea = this.chart.chartArea;
-                            
-                            ctx.save();
-                            ctx.fillStyle = 'white';
-                            ctx.font = 'bold 11px Helvetica';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'bottom';
-                            ctx.shadowColor = 'rgba(0,0,0,0.5)';
-                            ctx.shadowBlur = 2;
-                            
-                            this.chart.data.datasets[0].data.forEach((value, index) => {
-                                const meta = this.chart.getDatasetMeta(0);
-                                const bar = meta.data[index];
-                                const count = data.rawCounts[index];
-                                
-                                if (bar && count > 0) {
-                                    ctx.fillText(count, bar.x, bar.y - 2);
-                                }
-                            });
-                            
-                            ctx.restore();
-                        },
                         duration: 300
                     }
-                }
+                },
+                plugins: [{
+                    id: 'barLabels',
+                    afterDatasetsDraw: function(chart) {
+                        const ctx = chart.ctx;
+                        const chartData = chart.data;
+                        
+                        ctx.save();
+                        ctx.fillStyle = 'white';
+                        ctx.strokeStyle = 'black';
+                        ctx.lineWidth = 1;
+                        ctx.font = 'bold 12px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        
+                        // Get the dataset meta to access bar positions
+                        const meta = chart.getDatasetMeta(0);
+                        
+                        chartData.datasets[0].data.forEach((value, index) => {
+                            const bar = meta.data[index];
+                            const count = chartData.rawCounts[index];
+                            
+                            if (bar && count > 0) {
+                                // Position text above the bar
+                                const x = bar.x;
+                                const y = bar.y - 5; // 5px above the bar top
+                                
+                                // Draw white text with black outline for visibility
+                                ctx.strokeText(count.toString(), x, y);
+                                ctx.fillText(count.toString(), x, y);
+                            }
+                        });
+                        
+                        ctx.restore();
+                    }
+                }]
             };
         }
         

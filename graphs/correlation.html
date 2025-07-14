@@ -31,7 +31,7 @@
             overflow: hidden;
         }
         .header-section {
-            padding: 8px 30px 12px 30px;
+            padding: 4px 30px 12px 30px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
         .content-section {
@@ -83,8 +83,8 @@
         .form-text {
             color: #666;
             font-size: 14px;
-            margin-bottom: 15px;
-            line-height: 1.4;
+            margin-bottom: 5px;
+            line-height: 1.5;
         }
         .form-select, .form-check {
             margin-bottom: 15px;
@@ -95,7 +95,7 @@
         }
         .step-list {
             line-height: 1.5;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .step-list li {
             margin-bottom: 12px;
@@ -163,14 +163,38 @@
         }
         
         .form-select:focus {
-            border-color: #fb4128;
+            border-color: #0891b2;
             outline: 0;
-            box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba(8, 145, 178, 0.25);
         }
         
-        .form-select:focus option:checked {
-            background-color: #fb4128;
-            color: white;
+        /* Mobile optimizations */
+        .mobile-break {
+            display: none;
+        }
+        
+        @media (max-width: 1200px), (max-device-width: 1200px) {
+            .mobile-break {
+                display: inline;
+            }
+            
+            .header-section {
+                padding: 4px 15px 12px 15px;
+            }
+            
+            .content-section {
+                padding: 15px 15px 25px 15px;
+            }
+            
+            .chart-container {
+                padding: 15px 10px 15px 15px;
+            }
+        }
+        
+        @media only screen and (max-width: 1200px) {
+            .mobile-break {
+                display: inline !important;
+            }
         }
     </style>
 </head>
@@ -180,7 +204,7 @@
             <!-- Header Section -->
             <div class="header-section">
                 <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; font-size: 20px;">
-                    Interactive Graph: Correlation Coefficient
+                    Interactive Graph:<span class="mobile-break"><br></span> Correlation Coefficient
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
                     By Elena Llaudet, co-author of 
@@ -194,10 +218,10 @@
             <div class="content-section">
                 <!-- Key Points Box -->
                 <div class="info-box">
-                    <p style="margin: 0 0 10px 0; font-size: 16px; color: #333333;">
+                    <p style="margin: 0 0 10px 0; font-size: 16px; color: #333333; line-height: 1.5;">
                         The correlation coefficient (or correlation) captures the direction and strength of the linear association between two variables with a number that ranges from -1 to 1.
                     </p>
-                    <ul style="margin: 0; padding-left: 20px; line-height: 1.4;">
+                    <ul style="margin: 0; padding-left: 20px; line-height: 1.5;">
                         <li style="margin-bottom: 8px; font-size: 16px; color: #333333;">
                             The sign reflects the direction: positive when the variables tend to move together (when the slope of the line of best fit is positive) and negative when the variables tend to move in opposite directions (when the slope of the line of best fit is negative).
                         </li>
@@ -208,7 +232,7 @@
                 </div>
 
                 <!-- Explanation -->
-                <p style="font-size: 16px; color: #333333; margin-bottom: 15px; line-height: 1.5;">
+                <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
                     Let's explore how changing the direction and strength of the linear association affects the correlation coefficient:
                 </p>
 
@@ -216,12 +240,12 @@
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 1:</span> The graph below shows a scatterplot with a correlation of 1. The sign is positive because the slope of the line of best fit is positive (moves upwards from left to right), and the absolute value is 1 because all dots are exactly on the line. (Check the box below to show the line of best fit as a dashed red line.)
+                            <span class="step-number">STEP 1:</span> The graph shows a scatterplot with a correlation of 1. The sign is positive because the slope of the line of best fit is positive (moves upwards from left to right), and the absolute value is 1 because all dots are exactly on the line. (Check the box to show the line of best fit as a dashed red line.)
                         </div>
                         <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 2:</span> Use the first drop-down menu to change the direction of the linear association. Notice that when the association goes from positive to negative, the line of best fit changes from sloping upwards to sloping downwards (from left to right) and the correlation coefficient goes from having a positive sign to having a negative sign.
                         </div>
-                        <div style="margin-bottom: 12px; line-height: 1.5;">
+                        <div style="margin-bottom: 18px; line-height: 1.5;">
                             <span class="step-number">STEP 3:</span> Use the second drop-down menu to change the strength of the linear association. Weaker associations move dots farther from the line, decreasing the absolute value of the correlation. Stronger associations move dots closer to the line, increasing the absolute value of the correlation.
                         </div>
                     </div>
@@ -234,12 +258,13 @@
                             <div class="form-check" style="margin-bottom: 20px;">
                                 <input class="form-check-input" type="checkbox" id="show-line">
                                 <label class="form-check-label" for="show-line">
-                                    Show Line of Best Fit
+                                    Show line of best fit
                                 </label>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Direction of Linear Association:</label>
+                            <div class="mb-3" style="margin-bottom: 15px !important;">
+                            <label class="form-label" style="margin-bottom: 3px;">Direction of Linear Association:</label>
+
                                 <p class="form-text" style="line-height: 1.5;">
                                     Select whether the variables tend to move in the same direction (positive) or in opposite directions (negative) and observe how that changes the slope of the line of best fit and the sign of the correlation coefficient.
                                 </p>
@@ -250,7 +275,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Strength of Linear Association:</label>
+                                <label class="form-label" style="margin-bottom: 3px;">Strength of Linear Association:</label>
                                 <p class="form-text" style="line-height: 1.5;">
                                     Select the strength of the linear association and observe how that changes how tightly the dots cluster around the line of best fit and the absolute value of the correlation coefficient.
                                 </p>
@@ -284,7 +309,7 @@
                 <!-- Notes Section -->
                 <div class="notes-section">
                     <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
-                        <strong>Notes:</strong> A scatterplot enables us to visualize the relationship between two variables by plotting one variable against the other in two-dimensional space. Each dot represents an observation. The line of best fit is the line that best summarizes the data cloud. For illustration purposes, here we use <em>weak</em>, <em>moderate</em>, and <em>strong</em>, but note that what is considered a <em>weak</em> correlation in one field may be considered <em>strong</em> in another.
+                        <strong>Notes:</strong> In this scatterplot, each dot represents an observation. The line of best fit is the line that best summarizes the data cloud. For illustration purposes, here we use <em>weak</em>, <em>moderate</em>, and <em>strong</em>, but note that what is considered a <em>weak</em> correlation in one field may be considered <em>strong</em> in another.
                     </p>
                 </div>
             </div>

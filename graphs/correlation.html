@@ -39,17 +39,18 @@
         }
         .info-box {
             background-color: #f1f3f5;
-            border-left: 4px solid #ea3a44;
+            border-left: 4px solid #fb4128;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 0 5px 5px 0;
         }
         .controls-panel {
-            background-color: #f8f9fa;
+            background-color: #f1f3f5;
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
-            border: 1px solid #dee2e6;
+            border: none;
+            box-shadow: none;
         }
         .chart-container {
             background: white;
@@ -62,7 +63,7 @@
         .correlation-display {
             text-align: center;
             margin-bottom: 10px;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: bold;
             color: #333;
         }
@@ -93,14 +94,14 @@
             font-size: 14px;
         }
         .step-list {
-            line-height: 1.6;
+            line-height: 1.5;
             margin-bottom: 20px;
         }
         .step-list li {
             margin-bottom: 12px;
         }
         .step-number {
-            color: #ea3a44;
+            color: #fb4128;
             font-weight: bold;
         }
         .notes-section {
@@ -126,13 +127,34 @@
             width: 40px;
             height: 40px;
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #ea3a44;
+            border-top: 4px solid #fb4128;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        /* Custom red checkbox styling */
+        .form-check-input {
+            background-color: white;
+            border-color: #ced4da;
+        }
+        
+        .form-check-input:checked {
+            background-color: #fb4128;
+            border-color: #fb4128;
+        }
+        
+        .form-check-input:focus {
+            border-color: #fb4128;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
+        }
+        
+        .form-check-input:checked:focus {
+            box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
         }
     </style>
 </head>
@@ -141,7 +163,7 @@
         <div class="app-container">
             <!-- Header Section -->
             <div class="header-section">
-                <h3 style="color: #ea3a44; text-align: center; margin-bottom: 2px; font-size: 20px;">
+                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; font-size: 20px;">
                     Interactive Graph: Understanding the Correlation Coefficient
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
@@ -176,17 +198,17 @@
 
                 <!-- Steps -->
                 <div class="step-list">
-                    <ul style="font-size: 16px; color: #333333;">
-                        <li>
+                    <div style="font-size: 16px; color: #333333; line-height: 1.5;">
+                        <div style="margin-bottom: 20px; line-height: 1.5;">
                             <span class="step-number">STEP 1:</span> The graph below shows a scatterplot with a correlation of 1. The sign is positive because the slope of the line of best fit is positive (moves upwards from left to right), and the absolute value is 1 because all dots are exactly on the line. (Check the box below to show the line of best fit as a dashed red line.)
-                        </li>
-                        <li>
+                        </div>
+                        <div style="margin-bottom: 20px; line-height: 1.5;">
                             <span class="step-number">STEP 2:</span> Use the first drop-down menu to change the direction of the linear association. Notice that when the association goes from positive to negative, the line of best fit changes from sloping upwards to sloping downwards (from left to right) and the correlation coefficient goes from having a positive sign to having a negative sign.
-                        </li>
-                        <li>
+                        </div>
+                        <div style="margin-bottom: 20px; line-height: 1.5;">
                             <span class="step-number">STEP 3:</span> Use the second drop-down menu to change the strength of the linear association. Weaker associations move dots farther from the line, decreasing the absolute value of the correlation. Stronger associations move dots closer to the line, increasing the absolute value of the correlation.
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -414,7 +436,7 @@
                             { x: maxX, y: regression.slope * maxX + regression.intercept }
                         ],
                         type: 'line',
-                        borderColor: '#ea3a44',
+                        borderColor: '#fb4128',
                         borderWidth: 2,
                         borderDash: [5, 5],
                         pointRadius: 0,
@@ -460,7 +482,7 @@
                         label: 'Line of Best Fit',
                         data: [],
                         type: 'line',
-                        borderColor: '#ea3a44',
+                        borderColor: '#fb4128',
                         borderWidth: 2,
                         borderDash: [5, 5],
                         pointRadius: 0,

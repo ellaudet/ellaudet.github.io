@@ -283,11 +283,8 @@
                         <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 1:</span> Look at the graphs below. If we only select 20 individuals from the population, the treatment group might end up with all the pink individuals while the control group gets all the blue ones, making the groups clearly not comparable even with random assignment.
                         </div>
-                        <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 2:</span> Move the slider to increase the sample size and observe how the treatment and control groups start to look more similar.
-                        </div>
                         <div style="margin-bottom: 18px; line-height: 1.5;">
-                            <span class="step-number">STEP 3:</span> Increase the sample size to 1000 and notice that both groups now have nearly identical proportions: roughly 20% orange, 10% blue, 20% pink, 30% green, 20% purple. Random assignment splits each type roughly in half between the two groups, making them comparable.
+                            <span class="step-number">STEP 2:</span> Move the slider to increase the sample size and observe how the treatment and control groups start to look more similar. If we set <em>n</em> to 1000 the groups have nearly identical proportions of the different type of individuals, making them comparable.
                         </div>
                     </div>
                 </div>
@@ -586,6 +583,11 @@
         
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
+            // Ensure slider range is correct
+            const slider = document.getElementById('sample-size-slider');
+            slider.setAttribute('max', '1000');
+            slider.max = 1000;
+            
             initCharts();
             
             // Initialize slider value position

@@ -409,12 +409,12 @@
             // Special case for n=20 to match the text description
             if (individuals.length === 20) {
                 individuals.forEach(individual => {
-                    if (individual === 'Blue') {
-                        control.push(individual); // All blue go to control
+                    if (individual === 'Blue' || individual === 'Purple') {
+                        control.push(individual); // All blue and purple go to control
                     } else if (individual === 'Pink') {
                         treatment.push(individual); // All pink go to treatment
                     } else {
-                        // For other colors, assign randomly
+                        // For other colors (orange, green), assign randomly
                         if (Math.random() < 0.5) {
                             treatment.push(individual);
                         } else {
@@ -574,7 +574,7 @@
                         ctx.lineWidth = 1;
                         ctx.font = 'bold 12px Arial';
                         ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
+                        ctx.textBaseline = 'top';
                         
                         // Get the dataset meta to access bar positions
                         const meta = chart.getDatasetMeta(0);
@@ -584,9 +584,9 @@
                             const count = chartData.rawCounts[index];
                             
                             if (bar && count > 0) {
-                                // Position text above the bar
+                                // Position text at the bottom of the bar (under the end)
                                 const x = bar.x;
-                                const y = bar.y - 5; // 5px above the bar top
+                                const y = bar.y + 5; // 5px below the bar top (which is the end of the bar)
                                 
                                 // Draw white text with black outline for visibility
                                 ctx.strokeText(count.toString(), x, y);

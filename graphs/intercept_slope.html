@@ -285,34 +285,34 @@
 
                 <!-- Explanation -->
                 <p style="font-size: 16px; color: #333333; margin-bottom: 15px; line-height: 1.5;">
-                    Let's see how changing the intercept and slope affects the line:
+                    Let's see how changing these parameters affects the line:
                 </p>
 
                 <!-- Steps -->
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 1:</span> The graph below shows a line with an intercept of 1 and a slope of 2. The line is therefore: Y = 1 + 2X.
+                            <span class="step-number">STEP 1:</span> The graph shows a line with an intercept of 1 and a slope of 2, so the line is: Y = 1 + 2X (as shown in the title).
                             <ul style="margin: 10px 0 0 0; padding-left: 15px; list-style-position: outside; line-height: 1.5;">
                                 <li style="margin-bottom: 8px; line-height: 1.5;">
-                                    To verify the intercept, find 0 on the x-axis, move up to the line, and find the corresponding Y-value. The point is (0,1), confirming that the intercept is 1. (Check the first box to show this point as an orange circle.) IMPORTANT: The intercept is NOT always where the line crosses the y-axis shown on a scatterplot, because that y-axis might not be drawn exactly at X=0 (as is the case here).
+                                    To verify the intercept, find 0 on the x-axis, move up to the line, and find the Y-value that corresponds to that point on the line. The point is (0,1), confirming the intercept is 1. (Check the first box to show in the graph the point at X=0 as an orange circle.) Note: The intercept is not always where the line crosses the visible y-axis, since that axis might not be drawn exactly at X=0.
                                 </li>
                                 <li style="margin-bottom: 0; line-height: 1.5;">
-                                    To verify the slope, choose any two points on the line and compute rise over run. For example, use (0,1) and the point where X = 2, which is (2,5). (Check the second box to show this point as an orange triangle.) The rise (change in Y) is 5-1 = 4 and the run (change in X) is 2-0 = 2, so rise over run = 4/2 = 2. Every one-unit increase in X is associated with an increase in Y of 2 units.
+                                    To verify the slope, choose two points on the line, and calculate rise over run. Using (0,1) and (2,5): rise = 5-1 = 4, run = 2-0 = 2, so slope = 4/2 = 2. (Check the second box to show in the graph the point at X=2 as an orange triangle.) Interpretation: every one-unit increase in X is associated with an increase in Y of 2 units.
                                 </li>
                             </ul>
                         </div>
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 2:</span> Move the first slider below to change the intercept. Notice that changing the intercept shifts the entire line vertically up or down but does not change its steepness. For example, changing the intercept from 1 to -1 shifts the entire line down by 2 units: the point at X=0 moves from (0,1) to (0,-1), and the point at X=2 moves from (2,5) to (2,3). Neither rise nor run have changed. The rise is 3-(-1) = 4 and the run is 2-0 = 2, so rise over run remains the same.
+                            <span class="step-number">STEP 2:</span> Move the intercept slider to see how it shifts the line vertically without changing its steepness. For example, changing from 1 to -1 moves both points down by 2 units, but the slope stays the same because neither rise nor run have changed.
                         </div>
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 3:</span> Move the second slider to change the slope. Notice that the slope affects the steepness of the line but does not affect its vertical position.
+                            <span class="step-number">STEP 3:</span> Move the slope slider to see how it changes the line's steepness without affecting the intercept.
                             <ul style="margin: 10px 0 0 0; padding-left: 15px; list-style-position: outside; line-height: 1.5;">
                                 <li style="margin-bottom: 8px; line-height: 1.5;">
-                                    For example, if we keep the intercept at 1 but decrease the slope from 2 to 1, the line becomes less steep. The point at X=0 stays at (0,1)—the intercept is not affected—but the point at X=2 drops to (2,3). The new rise is 3-1 = 2 and the run is still 2, so the new slope is 2/2 = 1. Now, every one-unit increase in X is associated with an increase in Y of 1 unit.
+                                    Decreasing the slope from 2 to 1 makes the line less steep. The X=0 point stays at (0,1), but the X=2 point moves to (2,3): rise = 3-1 = 2, run = 2-0 = 2, so slope = 2/2 = 1. Interpretation: every one-unit increase in X is associated with an increase in Y of 1 unit.
                                 </li>
                                 <li style="margin-bottom: 0; line-height: 1.5;">
-                                    Now, let's try a negative slope. As the slope changes from positive to negative, the line will go from moving upwards to moving downwards (from left to right), thus the direction of the steepness reverses. For example, if we keep the intercept at 1 but change the slope to -2, the point at X=0 stays at (0,1), as expected, but the point at X=2 drops to (2,-3). The new rise is -3-1 = -4 and the run continues to be 2, so the new slope is -4/2 = -2. Now, every one-unit increase in X is associated with a <em>decrease</em> in Y of 2 units.
+                                    A negative slope reverses the direction. With slope = -2, the X=0 point stays at (0,1), but the X=2 point drops to (2,-3): rise = -3-1 = -4, run = 2-0 = 2, slope = -4/2 = -2. Interpretation: every one-unit increase in X is associated with a <em>decrease</em> in Y of 2 units.
                                 </li>
                             </ul>
                         </div>
@@ -340,7 +340,7 @@
                             <div class="slider-container">
                                 <label class="form-label">Intercept:</label>
                                 <p class="form-text">
-                                    Move this slider to see how the intercept changes the vertical location of the line.
+                                    Move this slider to see how the intercept changes the line's vertical position.
                                 </p>
                                 <div class="slider-wrapper">
                                     <input type="range" class="form-range slider-input" id="intercept-slider" 
@@ -352,7 +352,7 @@
                             <div class="slider-container">
                                 <label class="form-label">Slope:</label>
                                 <p class="form-text">
-                                    Move this slider to see how the slope changes the steepness of the line.
+                                    Move this slider to see how the slope changes the line's steepness.
                                 </p>
                                 <div class="slider-wrapper">
                                     <input type="range" class="form-range slider-input" id="slope-slider" 

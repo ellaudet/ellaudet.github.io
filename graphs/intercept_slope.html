@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Graph: Intercept and Slope of a Line</title>
+    <title>Interactive Graph: Intercept and Slope</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     
     <!-- Google Analytics Tag -->
@@ -77,7 +77,7 @@
             color: #666;
             font-size: 14px;
             margin-bottom: 15px;
-            line-height: 1.4;
+            line-height: 1.5;
         }
         .form-check {
             margin-bottom: 8px;
@@ -87,7 +87,7 @@
             font-size: 14px;
         }
         .step-list {
-            line-height: 1.6;
+            line-height: 1.5;
             margin-bottom: 20px;
         }
         .step-list li {
@@ -209,20 +209,6 @@
             white-space: nowrap;
         }
         
-        /* Chart canvas positioning */
-        #backgroundChart {
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 1;
-        }
-        #overlayChart {
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 10;
-            pointer-events: none;
-        }
         .form-check-input {
             background-color: white;
             border-color: #ced4da;
@@ -250,7 +236,7 @@
             <!-- Header Section -->
             <div class="header-section">
                 <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; font-size: 20px;">
-                    Interactive Graph: Intercept and Slope of a Line
+                    Interactive Graph: Intercept and Slope
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
                     By Elena Llaudet, co-author of 
@@ -278,28 +264,28 @@
                 </div>
 
                 <!-- Explanation -->
-                <p style="font-size: 16px; color: #333333; margin-bottom: 15px;">
+                <p style="font-size: 16px; color: #333333; margin-bottom: 15px; line-height: 1.5;">
                     Let's see how changing the intercept and slope affects the line:
                 </p>
 
                 <!-- Steps -->
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
-                        <div style="margin-bottom: 20px; line-height: 1.5;">
+                        <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 1:</span> The graph below shows a line with an intercept of 1 and a slope of 2. The line is therefore: Y = 1 + 2X.
                             <ul style="margin: 10px 0 0 0; padding-left: 15px; list-style-position: outside; line-height: 1.5;">
                                 <li style="margin-bottom: 8px; line-height: 1.5;">
-                                    To verify the intercept, find 0 on the x-axis, move up to the line, and find the corresponding Y-value. The point is (0,1), confirming that the intercept is 1. (Check the first box to show this point as a red circle.) IMPORTANT: The intercept is NOT always where the line crosses the y-axis shown on a scatterplot, because that y-axis might not be drawn exactly at X=0 (as is the case here).
+                                    To verify the intercept, find 0 on the x-axis, move up to the line, and find the corresponding Y-value. The point is (0,1), confirming that the intercept is 1. (Check the first box to show this point as an orange circle.) IMPORTANT: The intercept is NOT always where the line crosses the y-axis shown on a scatterplot, because that y-axis might not be drawn exactly at X=0 (as is the case here).
                                 </li>
                                 <li style="margin-bottom: 0; line-height: 1.5;">
-                                    To verify the slope, choose any two points on the line and compute rise over run. For example, use (0,1) and the point where X = 2, which is (2,5). (Check the second box to show this point as a red triangle.) The rise (change in Y) is 5-1 = 4 and the run (change in X) is 2-0 = 2, so rise over run = 4/2 = 2. Every one-unit increase in X is associated with an increase in Y of 2 units.
+                                    To verify the slope, choose any two points on the line and compute rise over run. For example, use (0,1) and the point where X = 2, which is (2,5). (Check the second box to show this point as an orange triangle.) The rise (change in Y) is 5-1 = 4 and the run (change in X) is 2-0 = 2, so rise over run = 4/2 = 2. Every one-unit increase in X is associated with an increase in Y of 2 units.
                                 </li>
                             </ul>
                         </div>
-                        <div style="margin-bottom: 20px; line-height: 1.5;">
+                        <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 2:</span> Move the first slider below to change the intercept. Notice that changing the intercept shifts the entire line vertically up or down but does not change its steepness. For example, changing the intercept from 1 to -1 shifts the entire line down by 2 units: the point at X=0 moves from (0,1) to (0,-1), and the point at X=2 moves from (2,5) to (2,3). Neither rise nor run have changed. The rise is 3-(-1) = 4 and the run is 2-0 = 2, so rise over run remains the same.
                         </div>
-                        <div style="margin-bottom: 20px; line-height: 1.5;">
+                        <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 3:</span> Move the second slider to change the slope. Notice that the slope affects the steepness of the line but does not affect its vertical position.
                             <ul style="margin: 10px 0 0 0; padding-left: 15px; list-style-position: outside; line-height: 1.5;">
                                 <li style="margin-bottom: 8px; line-height: 1.5;">
@@ -320,14 +306,14 @@
                             <div class="form-check" style="margin-bottom: 8px;">
                                 <input class="form-check-input" type="checkbox" id="show-x0-point">
                                 <label class="form-check-label" for="show-x0-point">
-                                    Show Point at X=0 (Red Circle)
+                                    Show point at X=0 (orange circle)
                                 </label>
                             </div>
 
                             <div class="form-check" style="margin-bottom: 12px;">
                                 <input class="form-check-input" type="checkbox" id="show-x2-point">
                                 <label class="form-check-label" for="show-x2-point">
-                                    Show Point at X=2 (Red Triangle)
+                                    Show point at X=2 (orange triangle)
                                 </label>
                             </div>
 
@@ -372,7 +358,7 @@
 
                 <!-- Notes Section -->
                 <div class="notes-section">
-                    <p style="margin: 0; font-size: 15px; color: #666;">
+                    <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
                         <strong>Notes:</strong> In a scatterplot, each point consists of two coordinates in the two-dimensional space. The first coordinate indicates the position of the point on the x-axis, and the second indicates the position of the point on the y-axis. For example, the point (0,1) aligns with 0 on the x-axis and 1 on the y-axis.
                     </p>
                 </div>
@@ -544,7 +530,7 @@
                     datasets: [{
                         label: 'Line',
                         data: [],
-                        borderColor: 'gray',
+                        borderColor: '#4b5563',
                         borderWidth: 3,
                         pointRadius: 0,
                         fill: false,

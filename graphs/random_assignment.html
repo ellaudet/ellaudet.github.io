@@ -553,14 +553,19 @@
                             }
                         }
                     },
-                    animation: {
-                        duration: isMobile() ? 0 : 300
-                    },
+                    animation: false,
                     transitions: {
                         active: {
-                            animation: {
-                                duration: isMobile() ? 0 : 300
-                            }
+                            animation: false
+                        },
+                        resize: {
+                            animation: false
+                        },
+                        show: {
+                            animation: false
+                        },
+                        hide: {
+                            animation: false
                         }
                     }
                 },

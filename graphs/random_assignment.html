@@ -274,17 +274,17 @@
 
                 <!-- Explanation -->
                 <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
-                    Suppose the population is composed of 20% orange individuals, 10% blue individuals, 20% pink individuals, 30% green individuals, and 20% purple individuals. If we select a sample of <em>n</em> individuals from this population and randomly assign them to treatment and control groups, both groups will end up with similar proportions of each type of individuals as long as <em>n</em> is large enough. Let's take a closer look:
+                    Suppose the population is composed of 20% orange individuals, 10% blue individuals, 20% pink individuals, 30% green individuals, and 20% purple individuals. If we select a sample of <em>n</em> individuals from this population and randomly assign them to treatment and control groups, the two groups will have similar proportions of each type of individual as long as <em>n</em> is large enough. Let's take a closer look:
                 </p>
 
                 <!-- Steps -->
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 1:</span> Look at the graphs below. If we only select 20 individuals from the population, the treatment group might end up with all the pink individuals while the control group gets all the blue ones, making the groups clearly not comparable even with random assignment.
+                            <span class="step-number">STEP 1:</span> Look at the graphs below. If the sample size is set to only 20 individuals, the treatment group might end up with all the pink individuals while the control group gets all the blue ones, making the groups clearly not comparable even with random assignment.
                         </div>
                         <div style="margin-bottom: 18px; line-height: 1.5;">
-                            <span class="step-number">STEP 2:</span> Move the slider to increase the sample size and observe how the treatment and control groups start to look more similar. If we set <em>n</em> to 1000 the groups have nearly identical proportions of the different type of individuals, making them comparable.
+                            <span class="step-number">STEP 2:</span> Move the slider to increase the sample size and observe how the treatment and control groups start to look more similar. When <em>n</em> reaches 1000, the groups have nearly identical proportions, making them comparable.
                         </div>
                     </div>
                 </div>
@@ -333,7 +333,7 @@
                 <!-- Notes Section -->
                 <div class="notes-section">
                     <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
-                        <strong>Note:</strong> n is the total sample size, n_t is the number of individuals in the treatment group, and n_c is the number in the control group.
+                        <strong>Note:</strong> n is the total sample size, n_t is the size of the treatment group, and n_c is the size of the control group.
                     </p>
                 </div>
             </div>
@@ -538,13 +538,22 @@
             document.getElementById('treatment-n').textContent = `n_t = ${assignment.treatment.length}`;
             document.getElementById('control-n').textContent = `n_c = ${assignment.control.length}`;
             
-            // Calculate max Y for consistent scaling - tighter range for better visibility
+            // Calculate max Y for consistent scaling - better scaling for all sample sizes
             const allCounts = [...Object.values(treatmentCounts), ...Object.values(controlCounts)];
             const maxCount = Math.max(...allCounts);
             const minCount = Math.min(...allCounts);
             const range = maxCount - minCount;
-            // Use a smaller buffer for large samples to show similarity better
-            const buffer = Math.max(15, range * 0.2);
+            
+            // Use a smaller, more appropriate buffer based on sample size
+            let buffer;
+            if (sampleSize <= 50) {
+                buffer = Math.max(3, maxCount * 0.3); // Smaller buffer for small samples
+            } else if (sampleSize <= 200) {
+                buffer = Math.max(8, range * 0.4);
+            } else {
+                buffer = Math.max(15, range * 0.2); // Original logic for large samples
+            }
+            
             const maxY = maxCount + buffer;
             
             // Update charts

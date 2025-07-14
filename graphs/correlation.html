@@ -249,7 +249,7 @@
                             <span class="step-number">STEP 2:</span> Use the first drop-down menu to change the direction of the linear association from positive to negative. Notice that the line of best fit changes from sloping upward to sloping downward (from left to right), and the correlation coefficient changes from positive to negative. It is not -1, which means the relationship between X and Y is not perfectly negatively linear.
                         </div>
                         <div style="margin-bottom: 18px; line-height: 1.5;">
-                            <span class="step-number">STEP 3:</span> Now, use the second drop-down menu to change the strength of the linear association. Notice that as the association becomes weaker, the dots spread farther from the line, and the absolute value of the correlation decreases. When there is no linear association, the correlation coefficient is approximately 0.
+                            <span class="step-number">STEP 3:</span> Now, use the second drop-down menu to change the strength of the linear association. Notice that as the association becomes weaker, the dots spread farther from the line, and the absolute value of the correlation decreases. When there is no linear association, the correlation coefficient will be close to 0, and the dots will appear scattered with no discernible pattern or trend.
                         </div>
                     </div>
                 </div>
@@ -350,7 +350,7 @@
             };
             Math.seedrandom(1234);
             
-            // Generate base x values (matching original: mean=50, sd=10)
+            // Generate base x values
             const baseX = [];
             for (let i = 0; i < n; i++) {
                 baseX.push(gaussianRandom() * 10 + 50);
@@ -359,7 +359,7 @@
             // Get sign multiplier
             const signMult = (direction === 'positive') ? 1 : -1;
             
-            // Generate y values based on strength (matching original R code)
+            // Generate y values based on strength
             for (let i = 0; i < n; i++) {
                 const x = baseX[i];
                 let y;
@@ -379,7 +379,7 @@
                         break;
                 }
                 
-                // Apply sign (matching original R logic)
+                // Apply sign
                 const yFinal = signMult * y;
                 
                 data.push({ x: x, y: yFinal });

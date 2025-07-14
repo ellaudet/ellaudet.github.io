@@ -207,6 +207,11 @@
             white-space: nowrap;
         }
         
+        canvas {
+            max-width: 100%;
+            height: auto !important;
+        }
+        
         /* Mobile optimizations */
         .mobile-break {
             display: none;
@@ -315,12 +320,12 @@
                                 <div class="chart-item">
                                     <div class="chart-title">Treatment Group</div>
                                     <div class="chart-subtitle" id="treatment-n">n_t = 10</div>
-                                    <canvas id="treatmentChart"></canvas>
+                                    <canvas id="treatmentChart" width="400" height="300"></canvas>
                                 </div>
                                 <div class="chart-item">
                                     <div class="chart-title">Control Group</div>
                                     <div class="chart-subtitle" id="control-n">n_c = 10</div>
-                                    <canvas id="controlChart"></canvas>
+                                    <canvas id="controlChart" width="400" height="300"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -507,7 +512,9 @@
                 data: data,
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
+                    aspectRatio: 4 / 3,
+                    resizeDelay: 200,
                     plugins: {
                         legend: {
                             display: false

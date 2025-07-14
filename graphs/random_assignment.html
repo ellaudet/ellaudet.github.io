@@ -538,10 +538,14 @@
             document.getElementById('treatment-n').textContent = `n_t = ${assignment.treatment.length}`;
             document.getElementById('control-n').textContent = `n_c = ${assignment.control.length}`;
             
-            // Calculate max Y for consistent scaling - no more than 30 units above tallest bar
+            // Calculate max Y for consistent scaling - tighter range for better visibility
             const allCounts = [...Object.values(treatmentCounts), ...Object.values(controlCounts)];
             const maxCount = Math.max(...allCounts);
-            const maxY = maxCount + 30;
+            const minCount = Math.min(...allCounts);
+            const range = maxCount - minCount;
+            // Use a smaller buffer for large samples to show similarity better
+            const buffer = Math.max(15, range * 0.2);
+            const maxY = maxCount + buffer;
             
             // Update charts
             treatmentChart.data = createChartData(treatmentCounts);

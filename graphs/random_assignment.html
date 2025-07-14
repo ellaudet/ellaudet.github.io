@@ -315,11 +315,6 @@
                         <div class="chart-container">
                             <div class="charts-row">
                                 <div class="chart-item">
-                                    <div class="chart-title">Full Sample</div>
-                                    <div class="chart-subtitle" id="full-sample-n">n = 20</div>
-                                    <canvas id="fullSampleChart"></canvas>
-                                </div>
-                                <div class="chart-item">
                                     <div class="chart-title">Treatment Group</div>
                                     <div class="chart-subtitle" id="treatment-n">n_t = 10</div>
                                     <canvas id="treatmentChart"></canvas>
@@ -540,12 +535,10 @@
             const assignment = randomAssignment(individuals);
             
             // Count types in each group
-            const fullCounts = countTypes(individuals);
             const treatmentCounts = countTypes(assignment.treatment);
             const controlCounts = countTypes(assignment.control);
             
             // Update sample size displays
-            document.getElementById('full-sample-n').textContent = `n = ${individuals.length}`;
             document.getElementById('treatment-n').textContent = `n_t = ${assignment.treatment.length}`;
             document.getElementById('control-n').textContent = `n_c = ${assignment.control.length}`;
             
@@ -553,10 +546,6 @@
             const maxY = Math.max(sampleSize/3 + 0.15 * sampleSize, 10);
             
             // Update charts
-            fullSampleChart.data = createChartData(fullCounts);
-            fullSampleChart.options.scales.y.max = maxY;
-            fullSampleChart.update('none');
-            
             treatmentChart.data = createChartData(treatmentCounts);
             treatmentChart.options.scales.y.max = maxY;
             treatmentChart.update('none');
@@ -579,16 +568,12 @@
             const individuals = generateSampleData(sampleSize);
             const assignment = randomAssignment(individuals);
             
-            const fullCounts = countTypes(individuals);
             const treatmentCounts = countTypes(assignment.treatment);
             const controlCounts = countTypes(assignment.control);
             
             const maxY = Math.max(sampleSize/3 + 0.15 * sampleSize, 10);
             
             // Initialize charts
-            fullSampleChart = new Chart(document.getElementById('fullSampleChart'), 
-                getChartConfig(createChartData(fullCounts), maxY));
-            
             treatmentChart = new Chart(document.getElementById('treatmentChart'), 
                 getChartConfig(createChartData(treatmentCounts), maxY));
             

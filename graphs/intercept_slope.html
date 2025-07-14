@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Graph: Intercept and Slope</title>
+    <title>Interactive Graph: Least Squares Method</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     
     <!-- Google Analytics Tag -->
@@ -58,33 +58,43 @@
             border-radius: 8px;
             padding: 25px;
             position: relative;
-            height: 520px;
+            height: 550px;
         }
-        .equation-display {
+        .chart-title {
             text-align: center;
-            margin-bottom: 15px;
-            font-size: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
             font-weight: bold;
             color: #333;
+        }
+        .ssr-display {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1f78b4;
         }
         .form-label {
             color: #333333;
             font-size: 15px;
             font-weight: normal;
-            margin-bottom: 5px;
+            margin-bottom: 0px;
         }
         .form-text {
             color: #666;
             font-size: 14px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            margin-top: 1px;
             line-height: 1.5;
         }
-        .form-check {
-            margin-bottom: 8px;
+        .form-select, .form-check {
+            margin-bottom: 15px;
             font-size: 14px;
         }
         .form-check-label {
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: normal;
+            color: #333333;
         }
         .step-list {
             line-height: 1.5;
@@ -104,111 +114,8 @@
             margin-top: 20px;
             border-left: 3px solid #6c757d;
         }
-        .slider-container {
-            margin-bottom: 20px;
-        }
-        .slider-input {
-            width: 100%;
-            margin: 10px 0 5px 0;
-            position: relative;
-        }
-        .slider-value {
-            text-align: center;
-            font-weight: bold;
-            color: #fb4128;
-            margin-top: 2px;
-            font-size: 16px;
-        }
         
-        /* Custom slider container with dynamic value positioning */
-        .slider-wrapper {
-            position: relative;
-            width: 100%;
-        }
-        
-        /* Custom red slider styling */
-        .form-range {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        /* Slider track */
-        .form-range::-webkit-slider-track {
-            background: #ddd;
-            height: 6px;
-            border-radius: 3px;
-        }
-        
-        .form-range::-moz-range-track {
-            background: #ddd;
-            height: 6px;
-            border-radius: 3px;
-            border: none;
-        }
-        
-        /* Slider thumb */
-        .form-range::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            background: #fb4128;
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .form-range::-moz-range-thumb {
-            background: #fb4128;
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        /* Slider thumb hover effect */
-        .form-range::-webkit-slider-thumb:hover {
-            background: #dc3545;
-            transform: scale(1.1);
-        }
-        
-        .form-range::-moz-range-thumb:hover {
-            background: #dc3545;
-            transform: scale(1.1);
-        }
-        
-        /* Slider focus styles */
-        .form-range:focus {
-            outline: none;
-        }
-        
-        .form-range:focus::-webkit-slider-thumb {
-            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
-        }
-        
-        .form-range:focus::-moz-range-thumb {
-            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
-        }
-        
-        /* Dynamic value positioning */
-        .slider-dynamic-value {
-            position: absolute;
-            top: 45px;
-            font-weight: bold;
-            color: #fb4128;
-            font-size: 14px;
-            transform: translateX(-50%);
-            pointer-events: none;
-            transition: left 0.1s ease;
-            white-space: nowrap;
-        }
-        
+        /* Custom red checkbox styling */
         .form-check-input {
             background-color: white;
             border-color: #ced4da;
@@ -229,10 +136,33 @@
             box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
         }
         
-        /* Mobile title styling - multiple approaches */
+        /* Custom dropdown styling */
+        .form-select {
+            border-color: #ced4da;
+        }
+        
+        .form-select:focus {
+            border-color: #0891b2;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(8, 145, 178, 0.25);
+        }
+        
+        /* Mobile optimizations */
+        .mobile-break {
+            display: none;
+        }
+        
         @media (max-width: 1200px), (max-device-width: 1200px) {
             .mobile-break {
                 display: inline;
+            }
+            
+            .header-section {
+                padding: 4px 15px 12px 15px;
+            }
+            
+            .content-section {
+                padding: 15px 15px 25px 15px;
             }
             
             .chart-container {
@@ -243,25 +173,12 @@
                 top: 60px !important;
                 left: 18px !important;
             }
-            
-            .header-section {
-                padding: 4px 15px 12px 15px;
-            }
-            
-            .content-section {
-                padding: 15px 15px 25px 15px;
-            }
         }
         
-        /* Additional mobile detection */
         @media only screen and (max-width: 1200px) {
             .mobile-break {
                 display: inline !important;
             }
-        }
-        
-        .mobile-break {
-            display: none;
         }
     </style>
 </head>
@@ -271,7 +188,7 @@
             <!-- Header Section -->
             <div class="header-section">
                 <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; font-size: 20px;">
-                    Interactive Graph:<span class="mobile-break"><br></span> Intercept and Slope
+                    Interactive Graph:<span class="mobile-break"><br></span> Least Squares Method
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
                     By Elena Llaudet, co-author of 
@@ -285,60 +202,27 @@
             <div class="content-section">
                 <!-- Key Points Box -->
                 <div class="info-box">
-                    <p style="margin: 0 0 10px 0; font-size: 16px; color: #333333;">
-                        We can define a line as Y = α + βX, where:
+                    <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.5;">
+                        To summarize the relationship between two variables, X and Y, we often use the least squares method. This method selects the line that minimizes the sum of squared residuals (SSR). Residuals—also known as errors—are the vertical distances between each data point and the line. The SSR captures the total magnitude of these errors by squaring them (which prevents negative and positive errors from canceling each other out) and summing them. The closer the line is to the data points, the smaller the errors and the SSR, and thus the better the line summarizes the relationship between X and Y.
                     </p>
-                    <ul style="margin: 0; padding-left: 20px; line-height: 1.4;">
-                        <li style="margin-bottom: 8px; font-size: 16px; color: #333333;">
-                            α (alpha) is the intercept: the value of Y when X=0, which determines the vertical location of the line.
-                        </li>
-                        <li style="margin-bottom: 0; font-size: 16px; color: #333333;">
-                            β (beta) is the slope: rise over run (the change in Y divided by the change in X between two points on the line), which determines the steepness of the line. Interpretation: change in Y associated with a one-unit increase in X.
-                        </li>
-                    </ul>
                 </div>
 
                 <!-- Explanation -->
                 <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
-                    Let's see how changing these parameters affects the line:
+                    Let's see how different lines fit the data to build an intuition about the least squares method:
                 </p>
 
                 <!-- Steps -->
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 1:</span> The graph below shows a line with an intercept of 1 and a slope of 2, so the line is: Y = 1 + 2X (as shown in the title).
-                            <ul style="margin: 8px 0 0 0; padding-left: 20px; list-style-position: outside; line-height: 1.5;">
-                                <li style="margin-bottom: 6px; line-height: 1.5;">
-                                    To verify the intercept, find 0 on the x-axis, move up to the line, and find the Y-value that corresponds to that point on the line. The point is (0,1), confirming the intercept is 1. (Check the first box to show in the graph the point at X=0 as an orange circle.) Note: The intercept is not always where the line crosses the visible y-axis, since that axis might not be drawn exactly at X=0.
-                                </li>
-                                <li style="margin-bottom: 0; line-height: 1.5;">
-                                    To verify the slope, choose two points on the line, and calculate rise over run. For example, we can use the intercept and the point at X=2, which is (2,5). (Check the second box to show in the graph this point as an orange triangle.) Using (0,1) and (2,5):
-                                    <ul style="margin: 3px 0; padding-left: 20px; list-style-position: outside; line-height: 1.5;">
-                                        <li style="margin-bottom: 0;">rise = ΔY = Y<sub>final</sub> - Y<sub>initial</sub> = 5-1 = 4</li>
-                                        <li style="margin-bottom: 0;">run = ΔX = X<sub>final</sub> - X<sub>initial</sub> = 2-0 = 2</li>
-                                        <li style="margin-bottom: 0;">slope = rise/run = 4/2 = 2</li>
-                                    </ul>
-                                    Interpretation: every one-unit increase in X is associated with an increase in Y of 2 units.
-                                </li>
-                            </ul>
+                            <span class="step-number">STEP 1:</span> The scatterplot shows the relationship between X and Y. In theory, we could draw an infinite number of lines on this scatterplot, but some lines will summarize the relationship between X and Y better than others. Intuitively, we know that the line of best fit should be as close as possible to the data points, and thus have the smallest possible errors. Let's start by examining Line #1 (which is selected by default). Check the box to display both the line and its errors. This line does not fit the data well. It has a negative slope while X and Y clearly have a positive relationship, and as a result the errors are very large. In this case, SSR = 704.
                         </div>
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 2:</span> Move the intercept slider to see how it shifts the line vertically without changing its steepness. For example, changing from 1 to -1 moves both points down by 2 units, but the slope stays the same because neither rise nor run have changed.
+                            <span class="step-number">STEP 2:</span> Now, select Line #2 from the dropdown menu. This line fits the data better because it produces smaller errors (shorter vertical distances). Here, the SSR = 452. However, this is still not the best-fitting line, as the SSR can be reduced further.
                         </div>
                         <div style="margin-bottom: 18px; line-height: 1.5;">
-                            <span class="step-number">STEP 3:</span> Now, keep the intercept at -1 and move the slope slider to see how it changes the line's steepness without affecting the intercept.
-                            <ul style="margin: 8px 0 0 0; padding-left: 20px; list-style-position: outside; line-height: 1.5;">
-                                <li style="margin-bottom: 6px; line-height: 1.5;">
-                                    Decreasing the slope from 2 to 1 makes the line less steep, but keeps it moving upwards (from left to right). The X=0 point stays at (0,-1), but the X=2 point moves to (2,1): rise = 1-(-1) = 2, run = 2-0 = 2, so slope = 2/2 = 1. Interpretation: every one-unit increase in X is associated with an increase in Y of 1 unit.
-                                </li>
-                                <li style="margin-bottom: 6px; line-height: 1.5;">
-                                    A negative slope reverses the direction of the line: it will go from moving upwards to downwards (from left to right). With slope = -2, the X=0 point stays at (0,-1), but the X=2 point drops to (2,-5): rise = -5-(-1) = -4, run = 2-0 = 2, slope = -4/2 = -2. Interpretation: every one-unit increase in X is associated with a <em>decrease</em> in Y of 2 units.
-                                </li>
-                                <li style="margin-bottom: 0; line-height: 1.5;">
-                                    Setting the slope to 0 creates a horizontal line. The X=0 point stays at (0,-1), and the X=2 point moves to (2,-1): rise = -1-(-1) = 0, run = 2-0 = 2, so slope = 0/2 = 0. Interpretation: changes in X are not associated with any change in Y.
-                                </li>
-                            </ul>
+                            <span class="step-number">STEP 3:</span> Finally, select Line #3. The errors associated with Line #3 are the smallest among the three. Here, the SSR = 297, which is the lowest of all options. Line #3 is the one the least squares method would choose as the line of best fit, because it has the smallest SSR of all possible lines.
                         </div>
                     </div>
                 </div>
@@ -347,55 +231,35 @@
                     <!-- Controls Panel -->
                     <div class="col-lg-4">
                         <div class="controls-panel">
-                            <div class="form-check" style="margin-bottom: 8px;">
-                                <input class="form-check-input" type="checkbox" id="show-x0-point">
-                                <label class="form-check-label" for="show-x0-point">
-                                    Show point at X=0 (orange circle)
+                            <div class="form-check" style="margin-bottom: 15px;">
+                                <input class="form-check-input" type="checkbox" id="show-line-errors">
+                                <label class="form-check-label" for="show-line-errors">
+                                    Show line and errors
                                 </label>
                             </div>
 
-                            <div class="form-check" style="margin-bottom: 12px;">
-                                <input class="form-check-input" type="checkbox" id="show-x2-point">
-                                <label class="form-check-label" for="show-x2-point">
-                                    Show point at X=2 (orange triangle)
-                                </label>
-                            </div>
-
-                            <div class="slider-container">
-                                <label class="form-label">Intercept:</label>
+                            <div class="mb-3">
+                                <label class="form-label">Choose line:</label>
                                 <p class="form-text">
-                                    Move this slider to see how the intercept changes the line's vertical position.
+                                    Select different lines to see how they fit the data.
                                 </p>
-                                <div class="slider-wrapper">
-                                    <input type="range" class="form-range slider-input" id="intercept-slider" 
-                                           min="-2" max="2" step="0.1" value="1">
-                                    <div class="slider-dynamic-value" id="intercept-value">1</div>
-                                </div>
-                            </div>
-
-                            <div class="slider-container">
-                                <label class="form-label">Slope:</label>
-                                <p class="form-text">
-                                    Move this slider to see how the slope changes the line's steepness.
-                                </p>
-                                <div class="slider-wrapper">
-                                    <input type="range" class="form-range slider-input" id="slope-slider" 
-                                           min="-2" max="2" step="0.1" value="2">
-                                    <div class="slider-dynamic-value" id="slope-value">2</div>
-                                </div>
+                                <select class="form-select" id="line-select">
+                                    <option value="line1">Line #1</option>
+                                    <option value="line2">Line #2</option>
+                                    <option value="line3">Line #3</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
                     <!-- Chart Panel -->
                     <div class="col-lg-8">
-                        <div class="chart-container" style="position: relative;">
-                            <div class="equation-display" id="equation-display">
-                                Y = 1 + 2X
+                        <div class="chart-container">
+                            <div class="chart-title" id="chart-title" style="display: none;">
                             </div>
                             <!-- Manual Y label -->
                             <div class="y-label" style="position: absolute; top: 70px; left: 28px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
-                            <canvas id="lineChart"></canvas>
+                            <canvas id="scatterChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -403,7 +267,7 @@
                 <!-- Notes Section -->
                 <div class="notes-section">
                     <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
-                        <strong>Notes:</strong> In this graph, each point consists of two coordinates in the two-dimensional space. The first coordinate indicates the position of the point on the x-axis, and the second indicates the position of the point on the y-axis. For example, the point (0,1) aligns with 0 on the x-axis and 1 on the y-axis.
+                        <strong>Note:</strong> A scatterplot enables us to visualize the relationship between two variables by plotting one variable against the other in two-dimensional space. Each dot represents an observation. The errors are the vertical distances between the dots and the line.
                     </p>
                 </div>
             </div>
@@ -420,166 +284,155 @@
 
         // Initialize app
         let chart;
+        let dataPoints = [];
         
-        // Function to update slider value position
-        function updateSliderValue(sliderId, valueId) {
-            const slider = document.getElementById(sliderId);
-            const valueDisplay = document.getElementById(valueId);
-            const value = parseFloat(slider.value);
-            const min = parseFloat(slider.min);
-            const max = parseFloat(slider.max);
+        // Pre-generated data (matching the Shiny app)
+        function generateData() {
+            // Using the same seed and parameters as the Shiny app
+            Math.seedrandom = function(seed) {
+                const m = 0x80000000;
+                const a = 1103515245;
+                const c = 12345;
+                let state = seed ? seed : Math.floor(Math.random() * (m - 1));
+                
+                Math.random = function() {
+                    state = (a * state + c) % m;
+                    return state / (m - 1);
+                };
+            };
+            Math.seedrandom(1234);
             
-            // Calculate percentage position with better alignment
-            const percentage = ((value - min) / (max - min)) * 100;
-            
-            // Account for thumb width to center properly
-            // The thumb is 20px wide, so we need to adjust for the track padding
-            const thumbOffset = (percentage - 50) * 0.15; // Fine-tune this multiplier as needed
-            const adjustedPercentage = percentage - thumbOffset;
-            
-            // Update value text and position
-            valueDisplay.textContent = value;
-            valueDisplay.style.left = `${adjustedPercentage}%`;
+            const data = [];
+            for (let i = 0; i < 20; i++) {
+                const x = gaussianRandom() * 2 + 2; // mean=2, sd=2
+                const error = gaussianRandom() * 4; // mean=0, sd=4
+                const y = -1 + 2 * x + error; // y = -1 + 2*x + error
+                data.push({ x: x, y: y });
+            }
+            return data;
+        }
+        
+        // Box-Muller transform for normal distribution
+        function gaussianRandom() {
+            let u = 0, v = 0;
+            while(u === 0) u = Math.random();
+            while(v === 0) v = Math.random();
+            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+        }
+        
+        // Line parameters (matching Shiny app)
+        const lineParams = {
+            'line1': { intercept: 2, slope: -1, number: 1, ssr: 704 },
+            'line2': { intercept: 2, slope: 0.5, number: 2, ssr: 452 },
+            'line3': { intercept: -1, slope: 2, number: 3, ssr: 297 }
+        };
+        
+        // Calculate SSR for a given line
+        function calculateSSR(data, intercept, slope) {
+            let ssr = 0;
+            data.forEach(point => {
+                const predictedY = intercept + slope * point.x;
+                const residual = point.y - predictedY;
+                ssr += residual * residual;
+            });
+            return Math.round(ssr);
         }
         
         // Update chart
         function updateChart() {
-            const intercept = parseFloat(document.getElementById('intercept-slider').value);
-            const slope = parseFloat(document.getElementById('slope-slider').value);
-            const showX0 = document.getElementById('show-x0-point').checked;
-            const showX2 = document.getElementById('show-x2-point').checked;
+            const selectedLine = document.getElementById('line-select').value;
+            const showLineErrors = document.getElementById('show-line-errors').checked;
+            const params = lineParams[selectedLine];
             
-            // Update equation display
-            const interceptText = intercept >= 0 ? intercept : `(${intercept})`;
-            const slopeText = slope >= 0 ? slope : `(${slope})`;
-            document.getElementById('equation-display').textContent = `Y = ${interceptText} + ${slopeText}X`;
-            
-            // Update slider value displays and positions
-            updateSliderValue('intercept-slider', 'intercept-value');
-            updateSliderValue('slope-slider', 'slope-value');
-            
-            // Generate line data
-            const xValues = [];
-            const yValues = [];
-            for (let x = -2; x <= 4; x += 0.1) {
-                xValues.push(x);
-                yValues.push(intercept + slope * x);
+            // Update title and SSR display
+            if (showLineErrors) {
+                document.getElementById('chart-title').textContent = `Line #${params.number} (SSR = ${params.ssr})`;
+                document.getElementById('chart-title').style.display = 'block';
+            } else {
+                document.getElementById('chart-title').style.display = 'none';
             }
             
-            // Update main line
-            chart.data.datasets[0].data = xValues.map((x, i) => ({ x: x, y: yValues[i] }));
+            // Clear existing datasets
+            chart.data.datasets = [{
+                label: 'Data Points',
+                data: dataPoints,
+                backgroundColor: '#1f78b4',
+                borderColor: '#1f78b4',
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                showLine: false,
+                order: 3
+            }];
             
-            // Clear additional datasets
-            chart.data.datasets = chart.data.datasets.slice(0, 1);
-            
-            // Add grid lines and points if requested
-            const gridLines = [];
-            const points = [];
-            
-            if (showX0) {
-                const y0 = intercept;
-                // Vertical dashed line from (0, y0) to bottom
-                gridLines.push({
-                    data: [{ x: 0, y: y0 }, { x: 0, y: -6 }],
-                    borderColor: '#bababa',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
+            if (showLineErrors) {
+                // Add regression line - extend to full axis range for consistency
+                chart.data.datasets.push({
+                    label: 'Regression Line',
+                    data: [
+                        { x: -4, y: params.intercept + params.slope * (-4) },
+                        { x: 8, y: params.intercept + params.slope * 8 }
+                    ],
+                    type: 'line',
+                    borderColor: '#1f78b4',
+                    borderWidth: 3,
                     pointRadius: 0,
                     fill: false,
                     tension: 0,
-                    order: 5
+                    order: 2
                 });
-                // Horizontal dashed line from (0, y0) to left
-                gridLines.push({
-                    data: [{ x: 0, y: y0 }, { x: -2, y: y0 }],
-                    borderColor: '#bababa',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0,
-                    order: 5
+                
+                // Add error lines
+                const errorLines = [];
+                dataPoints.forEach(point => {
+                    const predictedY = params.intercept + params.slope * point.x;
+                    errorLines.push({
+                        label: 'Error Lines',
+                        data: [
+                            { x: point.x, y: point.y },
+                            { x: point.x, y: predictedY }
+                        ],
+                        type: 'line',
+                        borderColor: 'gray',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0,
+                        order: 1
+                    });
                 });
-                // Red circle point
-                points.push({
-                    type: 'scatter',
-                    data: [{ x: 0, y: y0 }],
-                    backgroundColor: '#fb4128',
-                    borderColor: '#fb4128',
-                    pointRadius: 7,
-                    pointStyle: 'circle',
-                    showLine: false,
-                    order: 1
-                });
+                
+                chart.data.datasets.push(...errorLines);
             }
-            
-            if (showX2) {
-                const y2 = intercept + slope * 2;
-                // Vertical dashed line from (2, y2) to bottom
-                gridLines.push({
-                    data: [{ x: 2, y: y2 }, { x: 2, y: -6 }],
-                    borderColor: '#bababa',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0,
-                    order: 5
-                });
-                // Horizontal dashed line from (2, y2) to left
-                gridLines.push({
-                    data: [{ x: 2, y: y2 }, { x: -2, y: y2 }],
-                    borderColor: '#bababa',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0,
-                    order: 5
-                });
-                // Red triangle point
-                points.push({
-                    type: 'scatter',
-                    data: [{ x: 2, y: y2 }],
-                    backgroundColor: '#fb4128',
-                    borderColor: '#fb4128',
-                    pointRadius: 8,
-                    pointStyle: 'triangle',
-                    showLine: false,
-                    order: 1
-                });
-            }
-            
-            // Add all grid lines and points to chart
-            chart.data.datasets.push(...gridLines, ...points);
             
             chart.update('none');
             
             // Track interaction
-            trackEvent('line_updated', {
-                intercept: intercept,
-                slope: slope,
-                show_x0_point: showX0,
-                show_x2_point: showX2
+            trackEvent('least_squares_updated', {
+                line_selected: selectedLine,
+                show_errors: showLineErrors,
+                ssr: params.ssr
             });
         }
         
         // Initialize chart
         function initChart() {
-            const ctx = document.getElementById('lineChart').getContext('2d');
+            const ctx = document.getElementById('scatterChart').getContext('2d');
+            
+            // Generate data once
+            dataPoints = generateData();
             
             chart = new Chart(ctx, {
-                type: 'line',
+                type: 'scatter',
                 data: {
                     datasets: [{
-                        label: 'Line',
-                        data: [],
-                        borderColor: '#0891b2',
-                        borderWidth: 3,
-                        pointRadius: 0,
-                        fill: false,
-                        tension: 0,
-                        order: 10
+                        label: 'Data Points',
+                        data: dataPoints,
+                        backgroundColor: '#1f78b4',
+                        borderColor: '#1f78b4',
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        showLine: false
                     }]
                 },
                 options: {
@@ -596,41 +449,54 @@
                     plugins: {
                         legend: {
                             display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            mode: 'point',
+                            intersect: false
                         }
                     },
                     scales: {
                         x: {
                             type: 'linear',
                             position: 'bottom',
-                            min: -2,
-                            max: 4,
+                            min: -4,
+                            max: 8,
                             ticks: {
-                                stepSize: 1,
-                                color: '#333'
+                                stepSize: 2,
+                                color: '#333',
+                                font: {
+                                    size: 12
+                                }
                             },
                             grid: {
-                                color: '#ddd'
+                                color: '#ddd',
+                                drawBorder: true
                             },
                             title: {
                                 display: true,
                                 text: 'X',
                                 color: '#333',
                                 font: {
-                                    size: 16
+                                    size: 14
                                 },
                                 align: 'end'
                             }
                         },
                         y: {
                             type: 'linear',
-                            min: -6,
-                            max: 6,
+                            min: -15,
+                            max: 20,
                             ticks: {
-                                stepSize: 1,
-                                color: '#333'
+                                stepSize: 5,
+                                color: '#333',
+                                font: {
+                                    size: 12
+                                }
                             },
                             grid: {
-                                color: '#ddd'
+                                color: '#ddd',
+                                drawBorder: true
                             },
                             title: {
                                 display: false  // Disable automatic Y label
@@ -650,17 +516,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             initChart();
             
-            // Initialize slider value positions
-            updateSliderValue('intercept-slider', 'intercept-value');
-            updateSliderValue('slope-slider', 'slope-value');
-            
-            document.getElementById('intercept-slider').addEventListener('input', updateChart);
-            document.getElementById('slope-slider').addEventListener('input', updateChart);
-            document.getElementById('show-x0-point').addEventListener('change', updateChart);
-            document.getElementById('show-x2-point').addEventListener('change', updateChart);
+            document.getElementById('line-select').addEventListener('change', updateChart);
+            document.getElementById('show-line-errors').addEventListener('change', updateChart);
             
             // Track app load
-            trackEvent('slope_app_loaded', {
+            trackEvent('least_squares_app_loaded', {
                 load_type: 'javascript_version',
                 load_time: Date.now()
             });

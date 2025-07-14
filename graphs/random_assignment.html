@@ -662,7 +662,7 @@
             
             updateSliderValue('sample-size-slider', 'sample-size-value');
             
-            document.getElementById('sample-size-slider').addEventListener('input', updateCharts);
+            document.getElementById('sample-size-slider').addEventListener('input', throttledUpdateCharts);
             
             trackEvent('assignment_app_loaded', {
                 load_type: 'javascript_version',

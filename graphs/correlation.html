@@ -62,7 +62,7 @@
         }
         .correlation-display {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             font-size: 20px;
             font-weight: bold;
             color: #333;
@@ -311,7 +311,7 @@
                 <!-- Notes Section -->
                 <div class="notes-section">
                     <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
-                        <strong>Notes:</strong> In this scatterplot, each dot represents an observation. The line of best fit is the line that best summarizes the data cloud. For illustration purposes, here we use <em>weak</em>, <em>moderate</em>, and <em>strong</em>, but note that what is considered a <em>weak</em> correlation in one field may be considered <em>strong</em> in another.
+                        <strong>Notes:</strong> In a scatterplot, each dot represents an observation, positioned according to the values of ($X_i$, $Y_i$). The line of best fit is the line that best summarizes the data cloud. For illustration purposes, here we use <em>weak</em>, <em>moderate</em>, and <em>strong</em>, but note that what is considered a <em>weak</em> correlation in one field may be considered <em>strong</em> in another.
                     </p>
                 </div>
             </div>
@@ -554,7 +554,42 @@
                             type: 'linear'
                         }
                     },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    },
+                    onHover: function(event, activeElements) {
+                        // Custom hover behavior if needed
+                    },
                     animation: {
+                        onComplete: function() {
+                            // Add X and Y labels after chart is rendered
+                            const ctx = this.chart.ctx;
+                            const chartArea = this.chart.chartArea;
+                            
+                            ctx.save();
+                            ctx.fillStyle = '#666';
+                            ctx.font = 'bold 16px Helvetica';
+                            ctx.textAlign = 'right';
+                            ctx.textBaseline = 'bottom';
+                            
+                            // Add X label (bottom right)
+                            ctx.fillText('X', chartArea.right - 10, chartArea.bottom - 5);
+                            
+                            // Add Y label (top left)
+                            ctx.textAlign = 'left';
+                            ctx.textBaseline = 'top';
+                            ctx.fillText('Y', chartArea.left + 5, chartArea.top + 5);
+                            
+                            ctx.restore();
+                        },
                         duration: 500
                     }
                 }

@@ -268,26 +268,26 @@
                 <!-- Key Points Box -->
                 <div class="info-box">
                     <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.5;">
-                        Random treatment assignment makes treatment and control groups comparable when sample size is large enough.
+                        Random treatment assignment makes treatment and control groups comparable when sample size <em>n</em> is large enough.
                     </p>
                 </div>
 
                 <!-- Explanation -->
                 <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
-                    Imagine five types of individuals: orange, blue, pink, green, and purple. If we randomly assign them to treatment and control groups, both groups will end up with similar proportions of each type of individual as long as the sample size is large enough. Let's take a closer look:
+                    Suppose the population is composed of 20% orange individuals, 10% blue individuals, 20% pink individuals, 30% green individuals, and 20% purple individuals. If we select a sample of <em>n</em> individuals from this population and randomly assign them to treatment and control groups, both groups will end up with similar proportions of each type of individuals as long as <em>n</em> is large enough. Let's take a closer look:
                 </p>
 
                 <!-- Steps -->
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 1:</span> Look at the graphs below. With 20 individuals (20% orange, 10% blue, 20% pink, 30% green, 20% purple), the treatment group might end up with all the pink individuals while the control group gets all the blue ones, making the groups clearly not comparable even with random assignment.
+                            <span class="step-number">STEP 1:</span> Look at the graphs below. When we only select 20 individuals from the population, the treatment group might end up with all the pink individuals while the control group gets all the blue ones, making the groups clearly not comparable even with random assignment.
                         </div>
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 2:</span> Now move the slider to increase sample size and observe how the treatment and control groups start to look more similar. Try different values between 20 and 300. (Once you release the slider, the app automatically randomly assigns individuals to the two groups and updates the graphs.)
+                            <span class="step-number">STEP 2:</span> Move the slider to increase the sample size and observe how the treatment and control groups start to look more similar.
                         </div>
                         <div style="margin-bottom: 18px; line-height: 1.5;">
-                            <span class="step-number">STEP 3:</span> Increase the sample size to 300 and notice that both groups now have roughly the same proportions: 20% orange, 10% blue, 20% pink, 30% green, 20% purple. Random assignment splits each type roughly in half between the two groups, making them comparable.
+                            <span class="step-number">STEP 3:</span> Increase the sample size to 1000 and notice that both groups now have nearly identical proportions: roughly 20% orange, 10% blue, 20% pink, 30% green, 20% purple. Random assignment splits each type roughly in half between the two groups, making them comparable.
                         </div>
                     </div>
                 </div>
@@ -297,7 +297,7 @@
                     <div class="col-lg-4">
                         <div class="controls-panel">
                             <div class="slider-container">
-                                <label class="form-label">Sample size:</label>
+                                <label class="form-label">Sample size <em>n</em>:</label>
                                 <p class="form-text">
                                     Move the slider to see how random assignment creates comparable groups as sample size increases.
                                 </p>

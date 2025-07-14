@@ -156,6 +156,22 @@
         .form-check-input:checked:focus {
             box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
         }
+        
+        /* Custom dropdown styling */
+        .form-select {
+            border-color: #ced4da;
+        }
+        
+        .form-select:focus {
+            border-color: #fb4128;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
+        }
+        
+        .form-select:focus option:checked {
+            background-color: #fb4128;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -199,13 +215,13 @@
                 <!-- Steps -->
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
-                        <div style="margin-bottom: 20px; line-height: 1.5;">
+                        <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 1:</span> The graph below shows a scatterplot with a correlation of 1. The sign is positive because the slope of the line of best fit is positive (moves upwards from left to right), and the absolute value is 1 because all dots are exactly on the line. (Check the box below to show the line of best fit as a dashed red line.)
                         </div>
-                        <div style="margin-bottom: 20px; line-height: 1.5;">
+                        <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 2:</span> Use the first drop-down menu to change the direction of the linear association. Notice that when the association goes from positive to negative, the line of best fit changes from sloping upwards to sloping downwards (from left to right) and the correlation coefficient goes from having a positive sign to having a negative sign.
                         </div>
-                        <div style="margin-bottom: 20px; line-height: 1.5;">
+                        <div style="margin-bottom: 12px; line-height: 1.5;">
                             <span class="step-number">STEP 3:</span> Use the second drop-down menu to change the strength of the linear association. Weaker associations move dots farther from the line, decreasing the absolute value of the correlation. Stronger associations move dots closer to the line, increasing the absolute value of the correlation.
                         </div>
                     </div>
@@ -215,6 +231,13 @@
                     <!-- Controls Panel -->
                     <div class="col-lg-4">
                         <div class="controls-panel">
+                            <div class="form-check" style="margin-bottom: 20px;">
+                                <input class="form-check-input" type="checkbox" id="show-line">
+                                <label class="form-check-label" for="show-line">
+                                    Show Line of Best Fit
+                                </label>
+                            </div>
+
                             <div class="mb-3">
                                 <label class="form-label">Direction of Linear Association:</label>
                                 <p class="form-text" style="line-height: 1.5;">
@@ -237,13 +260,6 @@
                                     <option value="moderate">weak to moderate linear association</option>
                                     <option value="none">no linear association (approximately)</option>
                                 </select>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="show-line">
-                                <label class="form-check-label" for="show-line">
-                                    Show Line of Best Fit
-                                </label>
                             </div>
                         </div>
                     </div>
@@ -474,8 +490,8 @@
                     datasets: [{
                         label: 'Data Points',
                         data: [],
-                        backgroundColor: '#1f78b4',
-                        borderColor: '#1f78b4',
+                        backgroundColor: '#0891b2',
+                        borderColor: '#0891b2',
                         pointRadius: 3,
                         pointHoverRadius: 5
                     }, {

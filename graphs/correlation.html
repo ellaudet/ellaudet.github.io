@@ -431,80 +431,72 @@
             const strength = document.getElementById('strength-select').value;
             const showLine = document.getElementById('show-line').checked;
             
-            // Show loading
-            document.getElementById('loading-overlay').style.display = 'flex';
+            const result = generateData(direction, strength);
+            currentData = result.data;
+            const actualCorrelation = calculateCorrelation(currentData);
             
-            setTimeout(() => {
-                const result = generateData(direction, strength);
-                currentData = result.data;
-                const actualCorrelation = calculateCorrelation(currentData);
+            // Update correlation display (smart decimal formatting)
+            const correlationText = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
+                Math.round(actualCorrelation) : actualCorrelation.toFixed(2);
+            document.getElementById('correlation-display').textContent = 
+                `Correlation = ${correlationText}`;
+            
+            // Update chart data
+            chart.data.datasets[1].data = currentData;
+            
+            // Calculate bounds with padding
+            const xValues = currentData.map(p => p.x);
+            const yValues = currentData.map(p => p.y);
+            const minX = Math.min(...xValues);
+            const maxX = Math.max(...xValues);
+            const minY = Math.min(...yValues);
+            const maxY = Math.max(...yValues);
+            
+            // Add 10% padding around the data
+            const xPadding = (maxX - minX) * 0.1;
+            const yPadding = (maxY - minY) * 0.1;
+            
+            // Update chart scales with padding
+            chart.options.scales.x.min = minX - xPadding;
+            chart.options.scales.x.max = maxX + xPadding;
+            chart.options.scales.y.min = minY - yPadding;
+            chart.options.scales.y.max = maxY + yPadding;
+            
+            // Handle regression line
+            if (showLine && strength !== 'none') {
+                const regression = calculateRegressionLine(currentData);
+                const minX = Math.min(...currentData.map(p => p.x));
+                const maxX = Math.max(...currentData.map(p => p.x));
                 
-                // Update correlation display (smart decimal formatting)
-                const correlationText = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
-                    Math.round(actualCorrelation) : actualCorrelation.toFixed(2);
-                document.getElementById('correlation-display').textContent = 
-                    `Correlation = ${correlationText}`;
-                
-                // Update chart data
-                chart.data.datasets[1].data = currentData;
-                
-                // Calculate bounds with padding
-                const xValues = currentData.map(p => p.x);
-                const yValues = currentData.map(p => p.y);
-                const minX = Math.min(...xValues);
-                const maxX = Math.max(...xValues);
-                const minY = Math.min(...yValues);
-                const maxY = Math.max(...yValues);
-                
-                // Add 10% padding around the data
-                const xPadding = (maxX - minX) * 0.1;
-                const yPadding = (maxY - minY) * 0.1;
-                
-                // Update chart scales with padding
-                chart.options.scales.x.min = minX - xPadding;
-                chart.options.scales.x.max = maxX + xPadding;
-                chart.options.scales.y.min = minY - yPadding;
-                chart.options.scales.y.max = maxY + yPadding;
-                
-                // Handle regression line
-                if (showLine && strength !== 'none') {
-                    const regression = calculateRegressionLine(currentData);
-                    const minX = Math.min(...currentData.map(p => p.x));
-                    const maxX = Math.max(...currentData.map(p => p.x));
-                    
-                    chart.data.datasets[0] = {
-                        label: 'Line of Best Fit',
-                        data: [
-                            { x: minX, y: regression.slope * minX + regression.intercept },
-                            { x: maxX, y: regression.slope * maxX + regression.intercept }
-                        ],
-                        type: 'line',
-                        borderColor: '#fb4128',
-                        borderWidth: 2,
-                        borderDash: [5, 5],
-                        pointRadius: 0,
-                        fill: false,
-                        tension: 0
-                    };
-                } else {
-                    chart.data.datasets[0] = { data: [] };
-                }
-                
-                chart.update('none');
-                
-                // Hide loading
-                document.getElementById('loading-overlay').style.display = 'none';
-                
-                // Track interaction
-                const correlationValue = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
-                    Math.round(actualCorrelation) : parseFloat(actualCorrelation.toFixed(2));
-                trackEvent('correlation_updated', {
-                    direction: direction,
-                    strength: strength,
-                    show_line: showLine,
-                    correlation_value: correlationValue
-                });
-            }, 300);
+                chart.data.datasets[0] = {
+                    label: 'Line of Best Fit',
+                    data: [
+                        { x: minX, y: regression.slope * minX + regression.intercept },
+                        { x: maxX, y: regression.slope * maxX + regression.intercept }
+                    ],
+                    type: 'line',
+                    borderColor: '#fb4128',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0
+                };
+            } else {
+                chart.data.datasets[0] = { data: [] };
+            }
+            
+            chart.update('none');
+            
+            // Track interaction
+            const correlationValue = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
+                Math.round(actualCorrelation) : parseFloat(actualCorrelation.toFixed(2));
+            trackEvent('correlation_updated', {
+                direction: direction,
+                strength: strength,
+                show_line: showLine,
+                correlation_value: correlationValue
+            });
         }
         
         // Initialize chart

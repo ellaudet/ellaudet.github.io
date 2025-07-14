@@ -208,7 +208,8 @@
         }
         
         canvas {
-            max-width: 100%;
+            display: block;
+            width: 100% !important;
             height: auto !important;
         }
         
@@ -287,10 +288,10 @@
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 1:</span> Look at the graphs below. If the sample size is set to only 20 individuals, the sample might end up without any blue or purple individuals even though they represent 10% and 20% of the population respectively, making the sample clearly not representative despite random sampling.
+                            <span class="step-number">STEP 1:</span> Look at the graphs below. If the sample size is set to only 20 individuals, the sample might end up with no blue or purple individuals, even though these groups represent 10% and 20% of the population, respectively, making the sample clearly not representative despite random sampling.
                         </div>
                         <div style="margin-bottom: 18px; line-height: 1.5;">
-                            <span class="step-number">STEP 2:</span> Move the slider to increase the sample size and observe how the composition of the sample starts to match that of the population. When <em>n</em> reaches 300, the sample has roughly the same proportions as the population, making it representative of the population.
+                            <span class="step-number">STEP 2:</span> Move the slider to increase the sample size and observe how the composition of the sample starts to match that of the population. When <em>n</em> reaches 300, the sample closely mirrors the population's proportions, making it representative.
                         </div>
                     </div>
                 </div>
@@ -490,7 +491,6 @@
                     responsive: true,
                     maintainAspectRatio: true,
                     aspectRatio: 4 / 3,
-                    resizeDelay: 200,
                     plugins: {
                         legend: {
                             display: false
@@ -552,6 +552,7 @@
                         }
                     }
                 },
+                resizeDelay: 200,
                 plugins: [{
                     id: 'barLabels',
                     afterDatasetsDraw: function(chart) {

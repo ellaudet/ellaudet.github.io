@@ -62,12 +62,14 @@
             border-radius: 8px;
             padding: 25px;
             position: relative;
-            height: 520px;
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
         }
         .equation-display {
             text-align: center;
             margin-bottom: 15px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #333;
         }
@@ -233,39 +235,65 @@
             box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
         }
         
-        /* Mobile title styling - multiple approaches */
-        @media (max-width: 1200px), (max-device-width: 1200px) {
+        /* Mobile optimizations */
+        .mobile-break {
+            display: none;
+        }
+        
+        @media (max-width: 768px), (max-device-width: 768px) {
             .mobile-break {
                 display: inline;
             }
             
+            .equation-display {
+                margin-bottom: 6px;
+            }
+            
+            .header-section {
+                padding: 45px 15px 30px 15px;
+            }
+            
+            .content-section {
+                padding: 30px 15px 25px 15px;
+            }
+            
             .chart-container {
-                padding: 15px 10px 15px 15px;
+                padding: 10px 0px 10px 0px;
             }
             
             .y-label {
                 top: 60px !important;
                 left: 18px !important;
             }
+        }
+        
+        @media (max-width: 1200px), (max-device-width: 1200px) {
+            .mobile-break {
+                display: inline;
+            }
             
             .header-section {
-                padding: 4px 15px 12px 15px;
+                padding: 10px 15px 12px 15px;
             }
             
             .content-section {
                 padding: 15px 15px 25px 15px;
             }
+            
+            .chart-container {
+                padding: 15px 5px 15px 5px;
+            }
+            
+            .y-label {
+                top: 60px !important;
+                left: 18px !important;
+            }
         }
         
-        /* Additional mobile detection */
         @media only screen and (max-width: 1200px) {
             .mobile-break {
                 display: inline !important;
             }
-        }
-        
-        .mobile-break {
-            display: none;
         }
     </style>
 </head>
@@ -274,7 +302,7 @@
         <div class="app-container">
             <!-- Header Section -->
             <div class="header-section">
-                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; font-size: 20px;">
+                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; margin-top: 2px; font-size: 20px;">
                     Interactive Graph:<span class="mobile-break"><br></span> Intercept and Slope
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
@@ -584,6 +612,9 @@
         function initChart() {
             const ctx = document.getElementById('lineChart').getContext('2d');
             
+            // Check if mobile
+            const isMobileDevice = window.innerWidth <= 768;
+            
             chart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -600,13 +631,14 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
+                    aspectRatio: isMobileDevice ? 1 : 1.5,
                     layout: {
                         padding: {
                             top: 10,
-                            right: 35,
-                            bottom: 35,
-                            left: 20
+                            right: 15,
+                            bottom: 10,
+                            left: 2
                         }
                     },
                     plugins: {
@@ -622,19 +654,27 @@
                             max: 4,
                             ticks: {
                                 stepSize: 1,
-                                color: '#333'
+                                color: '#333',
+                                font: {
+                                    size: 12
+                                },
+                                padding: 8
                             },
                             grid: {
-                                color: '#ddd'
+                                color: '#ddd',
+                                drawBorder: true,
+                                tickLength: 0,
+                                offset: false
                             },
                             title: {
                                 display: true,
                                 text: 'X',
                                 color: '#333',
                                 font: {
-                                    size: 16
+                                    size: 14
                                 },
-                                align: 'end'
+                                align: 'end',
+                                padding: { top: 0 }
                             }
                         },
                         y: {
@@ -643,10 +683,16 @@
                             max: 6,
                             ticks: {
                                 stepSize: 1,
-                                color: '#333'
+                                color: '#333',
+                                font: {
+                                    size: 12
+                                },
+                                padding: 8
                             },
                             grid: {
-                                color: '#ddd'
+                                color: '#ddd',
+                                drawBorder: true,
+                                tickLength: 0
                             },
                             title: {
                                 display: false  // Disable automatic Y label
@@ -656,6 +702,17 @@
                     animation: {
                         duration: 300
                     }
+                }
+            });
+            
+            // Add resize listener for dynamic aspect ratio
+            window.addEventListener('resize', () => {
+                const isMobileDevice = window.innerWidth <= 768;
+                const newAspectRatio = isMobileDevice ? 1 : 1.5;
+
+                if (chart.options.aspectRatio !== newAspectRatio) {
+                    chart.options.aspectRatio = newAspectRatio;
+                    chart.update();
                 }
             });
             

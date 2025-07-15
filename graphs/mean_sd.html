@@ -71,6 +71,10 @@
             font-weight: bold;
             color: #333;
         }
+        
+        .equation-mobile-break {
+            display: none;
+        }
         .chart-title {
             text-align: center;
             margin-bottom: 10px;
@@ -212,6 +216,32 @@
             display: none;
         }
         
+        .mobile-title-break {
+            display: none;
+        }
+        
+        @media (max-width: 768px), (max-device-width: 768px) {
+            .mobile-break {
+                display: inline;
+            }
+            
+            .equation-mobile-break {
+                display: block;
+            }
+            
+            .header-section {
+                padding: 20px 15px 12px 15px;
+            }
+            
+            .content-section {
+                padding: 15px 15px 25px 15px;
+            }
+            
+            .chart-container {
+                padding: 15px 5px 15px 5px;
+            }
+        }
+        
         @media (max-width: 1200px), (max-device-width: 1200px) {
             .mobile-break {
                 display: inline;
@@ -226,7 +256,7 @@
             }
             
             .chart-container {
-                padding: 15px 10px 15px 15px;
+                padding: 15px 5px 15px 5px;
             }
         }
         
@@ -449,8 +479,8 @@
             const stdDev = parseFloat(document.getElementById('sd-slider').value);
             
             // Update parameter display
-            document.getElementById('equation-display').textContent = 
-                `Mean = ${mean} and Standard deviation = ${stdDev}`;
+            document.getElementById('equation-display').innerHTML = 
+                `Mean = ${mean} and<span class="equation-mobile-break"><br></span> Standard deviation = ${stdDev}`;
             
             // Update slider value displays and positions
             updateSliderValue('mean-slider', 'mean-value');
@@ -487,9 +517,9 @@
                     layout: {
                         padding: {
                             top: 10,
-                            right: 35,
+                            right: 15,
                             bottom: 35,
-                            left: 20
+                            left: 10
                         }
                     },
                     plugins: {

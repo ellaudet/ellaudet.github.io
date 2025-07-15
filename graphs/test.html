@@ -240,56 +240,6 @@
             display: none;
         }
         
-        @media (max-width: 768px), (max-device-width: 768px) {
-            .mobile-break {
-                display: inline;
-            }
-            
-            .equation-display {
-                margin-bottom: 6px;
-            }
-            
-            .header-section {
-                padding: 45px 15px 30px 15px;
-            }
-            
-            .content-section {
-                padding: 30px 15px 25px 15px;
-            }
-            
-            .chart-container {
-                padding: 10px 0px 10px 0px;
-            }
-            
-            .y-label {
-                top: 60px !important;
-                left: 18px !important;
-            }
-        }
-        
-        @media (max-width: 1200px), (max-device-width: 1200px) {
-            .mobile-break {
-                display: inline;
-            }
-            
-            .header-section {
-                padding: 10px 15px 12px 15px;
-            }
-            
-            .content-section {
-                padding: 15px 15px 25px 15px;
-            }
-            
-            .chart-container {
-                padding: 15px 5px 15px 5px;
-            }
-            
-            .y-label {
-                top: 60px !important;
-                left: 18px !important;
-            }
-        }
-        
         @media only screen and (max-width: 1200px) {
             .mobile-break {
                 display: inline !important;
@@ -693,27 +643,17 @@
                                 tickLength: 0
                             },
                             title: {
-                                display: false  // Disable automatic Y label
+                                display: true,
+                                text: 'Y',
+                                color: '#333',
+                                font: {
+                                    size: 14
+                                },
+                                align: 'end'
                             }
                         }
                     },
                     animation: {
-                        onComplete: function() {
-                            // Add Y label dynamically positioned after chart is rendered
-                            const ctx = this.chart.ctx;
-                            const chartArea = this.chart.chartArea;
-                            
-                            ctx.save();
-                            ctx.fillStyle = '#333';
-                            ctx.font = 'bold 16px Helvetica';
-                            ctx.textAlign = 'left';
-                            ctx.textBaseline = 'top';
-                            
-                            // Add Y label (top left of chart area)
-                            ctx.fillText('Y', chartArea.left + 5, chartArea.top + 5);
-                            
-                            ctx.restore();
-                        },
                         duration: 300
                     }
                 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Graph: Mean and Standard Deviation</title>
+    <title>Interactive Graph: Correlation Coefficient</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     
     <!-- Google Analytics Tag -->
@@ -13,7 +13,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-YEPLTYLL6H', {
-          page_title: 'Interactive Graph: Mean and Standard Deviation',
+          page_title: 'Interactive Graph: Correlation Coefficient',
           page_location: window.location.href,
           send_page_view: true
       });
@@ -66,16 +66,12 @@
             width: 100%;
             margin: 0 auto;
         }
-        .equation-display {
+        .correlation-display {
             text-align: center;
             margin-bottom: 15px;
             font-size: 18px;
             font-weight: bold;
             color: #333;
-        }
-        
-        .equation-mobile-break {
-            display: none;
         }
         .chart-title {
             text-align: center;
@@ -97,6 +93,15 @@
             margin-top: 1px;
             line-height: 1.5;
         }
+        .form-select, .form-check {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .form-check-label {
+            font-size: 15px;
+            font-weight: normal;
+            color: #333333;
+        }
         .step-list {
             line-height: 1.5;
             margin-bottom: 15px;
@@ -115,110 +120,65 @@
             margin-top: 20px;
             border-left: 3px solid #6c757d;
         }
-        .slider-container {
-            margin-bottom: 20px;
-        }
-        .slider-input {
-            width: 100%;
-            margin: 10px 0 5px 0;
-            position: relative;
-        }
-        
-        /* Custom slider container with dynamic value positioning */
-        .slider-wrapper {
-            position: relative;
-            width: 100%;
-        }
-        
-        /* Custom red slider styling */
-        .form-range {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-            cursor: pointer;
-            width: 100%;
-        }
-        
-        /* Slider track */
-        .form-range::-webkit-slider-track {
-            background: #ddd;
-            height: 6px;
-            border-radius: 3px;
-        }
-        
-        .form-range::-moz-range-track {
-            background: #ddd;
-            height: 6px;
-            border-radius: 3px;
-            border: none;
-        }
-        
-        /* Slider thumb */
-        .form-range::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            background: #fb4128;
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .form-range::-moz-range-thumb {
-            background: #fb4128;
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        /* Slider thumb hover effect */
-        .form-range::-webkit-slider-thumb:hover {
-            background: #dc3545;
-            transform: scale(1.1);
-        }
-        
-        .form-range::-moz-range-thumb:hover {
-            background: #dc3545;
-            transform: scale(1.1);
-        }
-        
-        /* Slider focus styles */
-        .form-range:focus {
-            outline: none;
-        }
-        
-        .form-range:focus::-webkit-slider-thumb {
-            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
-        }
-        
-        .form-range:focus::-moz-range-thumb {
-            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
-        }
-        
-        /* Dynamic value positioning */
-        .slider-dynamic-value {
+        .loading-overlay {
             position: absolute;
-            top: 45px;
-            font-weight: bold;
-            color: #fb4128;
-            font-size: 14px;
-            transform: translateX(-50%);
-            pointer-events: none;
-            transition: left 0.1s ease;
-            white-space: nowrap;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #fb4128;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Custom red checkbox styling */
+        .form-check-input {
+            background-color: white;
+            border-color: #ced4da;
+        }
+        
+        .form-check-input:checked {
+            background-color: #fb4128;
+            border-color: #fb4128;
+        }
+        
+        .form-check-input:focus {
+            border-color: #fb4128;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
+        }
+        
+        .form-check-input:checked:focus {
+            box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
+        }
+        
+        /* Custom dropdown styling */
+        .form-select {
+            border-color: #ced4da;
+        }
+        
+        .form-select:focus {
+            border-color: #0891b2;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(8, 145, 178, 0.25);
         }
         
         /* Mobile optimizations */
         .mobile-break {
-            display: none;
-        }
-        
-        .mobile-title-break {
             display: none;
         }
         
@@ -227,12 +187,7 @@
                 display: inline;
             }
             
-            .equation-mobile-break {
-                display: inline;
-            }
-            
-            .equation-display {
-                line-height: 1.1;
+            .correlation-display {
                 margin-bottom: 6px;
             }
             
@@ -279,8 +234,8 @@
         <div class="app-container">
             <!-- Header Section -->
             <div class="header-section">
-                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; margin-top:2px; font-size: 20px;">
-                    Interactive Graph:<span class="mobile-break"><br></span> Mean and Standard Deviation
+                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; margin-top: 2px; font-size: 20px;">
+                    Interactive Graph:<span class="mobile-break"><br></span> Correlation Coefficient
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
                     By Elena Llaudet, co-author of 
@@ -294,27 +249,35 @@
             <div class="content-section">
                 <!-- Key Points Box -->
                 <div class="info-box">
-                    <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.5;">
-                        The mean determines the center of the distribution of a variable. The standard deviation determines its spread—roughly, the average distance from the observations to the mean.
+                    <p style="margin: 0 0 10px 0; font-size: 16px; color: #333333; line-height: 1.5;">
+                        The correlation coefficient (or correlation) captures the direction and strength of the linear association between two variables with a number that ranges from -1 to 1.
                     </p>
+                    <ul style="margin: 0; padding-left: 20px; line-height: 1.5;">
+                        <li style="margin-bottom: 8px; font-size: 16px; color: #333333;">
+                            The sign reflects the direction: positive when the variables tend to move together (when the slope of the line of best fit is positive) and negative when the variables tend to move in opposite directions (when the slope of the line of best fit is negative).
+                        </li>
+                        <li style="margin-bottom: 0; font-size: 16px; color: #333333;">
+                            The absolute value reflects the strength: it ranges from 0 (no linear association) to 1 (perfect linear association), increasing as dots get closer to the line of best fit.
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Explanation -->
                 <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
-                    Let's see how changing these parameters affects the distribution of a normal random variable (used here for illustration purposes): 
+                    Let's explore how changing the direction and strength of the linear association affects the correlation coefficient:
                 </p>
 
                 <!-- Steps -->
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 1:</span> The graph below shows the distribution of a normal random variable with mean 0 and standard deviation 1. Because the mean is set to 0, the curve is centered at zero. And because the standard deviation is set to 1, the observations are, on average, about 1 unit away from the mean.
+                            <span class="step-number">STEP 1:</span> The graph below shows a scatterplot of two variables with a correlation of 1. The sign is positive because the slope of the line of best fit is positive (it moves upward from left to right), and the absolute value is 1 because all dots lie exactly on the line. (Check the box to show the line of best fit as a dashed red line.) This indicates a perfectly positive linear relationship between X and Y.
                         </div>
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 2:</span> Use the first slider to change the mean. This shifts the distribution left or right without changing its shape (or spread).
+                            <span class="step-number">STEP 2:</span> Use the first drop-down menu to change the direction of the linear association from positive to negative. The line of best fit changes from sloping upward to sloping downward (from left to right), and the correlation coefficient changes from positive to negative. It is now -1, indicating a perfectly negatively linear relationship.
                         </div>
                         <div style="margin-bottom: 18px; line-height: 1.5;">
-                            <span class="step-number">STEP 3:</span> Now, use the second slider to change the standard deviation. Larger standard deviations create wider, flatter distributions because the observations are further away from the mean, on average. By contrast, smaller standard deviations create narrower, taller distributions because the observations are closer to the mean, on average. However, the center stays the same.
+                            <span class="step-number">STEP 3:</span> Now, use the second drop-down menu to change the strength of the linear association. When selecting weaker linear associations (for example, from perfect to strong or from strong to weak to moderate) , the dots spread farther from the line, and the absolute value of the correlation decreases. When there is no linear association, the correlation coefficient will be approximately 0, and the dots will be scattered without any discernible pattern or trend.
                         </div>
                     </div>
                 </div>
@@ -323,28 +286,35 @@
                     <!-- Controls Panel -->
                     <div class="col-lg-4">
                         <div class="controls-panel">
-                            <div class="slider-container">
-                                <label class="form-label">Mean:</label>
-                                <p class="form-text">
-                                    Move this slider to see how the mean changes the center of the distribution.
-                                </p>
-                                <div class="slider-wrapper">
-                                    <input type="range" class="form-range slider-input" id="mean-slider" 
-                                           min="-2" max="2" step="0.1" value="0">
-                                    <div class="slider-dynamic-value" id="mean-value">0</div>
-                                </div>
+                            <div class="form-check" style="margin-bottom: 8px;">
+                                <input class="form-check-input" type="checkbox" id="show-line">
+                                <label class="form-check-label" for="show-line">
+                                    Show line of best fit
+                                </label>
                             </div>
 
-                            <div class="slider-container">
-                                <label class="form-label">Standard deviation:</label>
-                                <p class="form-text">
-                                    Move this slider to see how the standard deviation changes the spread of the distribution.
+                            <div class="mb-3" style="margin-bottom: 10px !important;">
+                                <label class="form-label" style="margin-bottom: 0px;">Direction of linear association:</label>
+                                <p class="form-text" style="line-height: 1.5; margin-bottom: 10px;">
+                                    Select whether the variables tend to move in the same direction (positive) or in opposite directions (negative) and observe how that changes the slope of the line of best fit and the sign of the correlation coefficient.
                                 </p>
-                                <div class="slider-wrapper">
-                                    <input type="range" class="form-range slider-input" id="sd-slider" 
-                                           min="1" max="3" step="0.1" value="1">
-                                    <div class="slider-dynamic-value" id="sd-value">1</div>
-                                </div>
+                                <select class="form-select" id="direction-select">
+                                    <option value="positive">positive linear association</option>
+                                    <option value="negative">negative linear association</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3" style="margin-bottom: 0px !important;">
+                                <label class="form-label" style="margin-bottom: 0px;">Strength of linear association:</label>
+                                <p class="form-text" style="line-height: 1.5; margin-bottom: 10px;">
+                                    Select the strength of the linear association and observe how that changes how tightly the dots cluster around the line of best fit and the absolute value of the correlation coefficient.
+                                </p>
+                                <select class="form-select" id="strength-select">
+                                    <option value="perfect">perfect linear association</option>
+                                    <option value="strong">strong linear association</option>
+                                    <option value="moderate">weak to moderate linear association</option>
+                                    <option value="none">no linear association (approximately)</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -352,10 +322,16 @@
                     <!-- Chart Panel -->
                     <div class="col-lg-8">
                         <div class="chart-container">
-                            <div class="equation-display" id="equation-display">
-                                Mean = 0 and Standard deviation = 1
+                            <div class="correlation-display" id="correlation-display">
+                                Correlation = 1
                             </div>
-                            <canvas id="distributionChart"></canvas>
+                            <canvas id="scatterChart"></canvas>
+                            <div class="loading-overlay" id="loading-overlay" style="display: none;">
+                                <div>
+                                    <div class="spinner"></div>
+                                    <p style="margin-top: 10px; color: #666;">Generating data...</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -363,7 +339,7 @@
                 <!-- Notes Section -->
                 <div class="notes-section">
                     <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
-                        <strong>Note:</strong> This graph is a density histogram, which shows the distribution of a variable through bins of different heights. The x-axis shows the range of values the variable takes, and the height of the bins indicates the relative proportion of the observations taking those values.
+                        <strong>Notes:</strong> In a scatterplot, each dot represents an observation, positioned according to the values of (<em>X<sub>i</sub></em>, <em>Y<sub>i</sub></em>). The line of best fit is the line that best summarizes the data cloud. For illustration purposes, here we use <em>weak</em>, <em>moderate</em>, and <em>strong</em>, but note that what is considered a <em>weak</em> correlation in one field may be considered <em>strong</em> in another.
                     </p>
                 </div>
             </div>
@@ -386,7 +362,7 @@
             try {
                 if (typeof gtag !== 'undefined') {
                     gtag('config', 'G-YEPLTYLL6H', {
-                        page_title: 'Interactive Graph: Mean and Standard Deviation',
+                        page_title: 'Interactive Graph: Correlation Coefficient',
                         page_location: window.location.href,
                         send_page_view: true
                     });
@@ -400,120 +376,162 @@
 
         // Initialize app
         let chart;
+        let currentData = [];
         
-        // Function to update slider value position
-        function updateSliderValue(sliderId, valueId) {
-            const slider = document.getElementById(sliderId);
-            const valueDisplay = document.getElementById(valueId);
-            const value = parseFloat(slider.value);
-            const min = parseFloat(slider.min);
-            const max = parseFloat(slider.max);
-            
-            // Calculate percentage position with better alignment
-            const percentage = ((value - min) / (max - min)) * 100;
-            
-            // Account for thumb width to center properly
-            const thumbOffset = (percentage - 50) * 0.15;
-            const adjustedPercentage = percentage - thumbOffset;
-            
-            // Update value text and position
-            valueDisplay.textContent = value;
-            valueDisplay.style.left = `${adjustedPercentage}%`;
-        }
-        
-        // Generate normal distribution data
-        function generateNormalData(mean, stdDev, numPoints = 10000) {
+        // Generate data based on correlation parameters
+        function generateData(direction, strength) {
+            const n = 1000; // Number of points (matching original)
             const data = [];
+            let correlation = 0;
             
-            // Box-Muller transform to generate normal distribution
-            for (let i = 0; i < numPoints; i += 2) {
-                const u1 = Math.random();
-                const u2 = Math.random();
+            // Set seed for consistent results
+            Math.seedrandom = function(seed) {
+                const m = 0x80000000;
+                const a = 1103515245;
+                const c = 12345;
+                let state = seed ? seed : Math.floor(Math.random() * (m - 1));
                 
-                const z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-                const z1 = Math.sqrt(-2 * Math.log(u1)) * Math.sin(2 * Math.PI * u2);
-                
-                data.push(mean + stdDev * z0);
-                if (i + 1 < numPoints) {
-                    data.push(mean + stdDev * z1);
-                }
+                Math.random = function() {
+                    state = (a * state + c) % m;
+                    return state / (m - 1);
+                };
+            };
+            Math.seedrandom(1234);
+            
+            // Generate base x values
+            const baseX = [];
+            for (let i = 0; i < n; i++) {
+                baseX.push(gaussianRandom() * 10 + 50);
             }
             
-            return data;
+            // Get sign multiplier
+            const signMult = (direction === 'positive') ? 1 : -1;
+            
+            // Generate y values based on strength
+            for (let i = 0; i < n; i++) {
+                const x = baseX[i];
+                let y;
+                
+                switch (strength) {
+                    case 'perfect':
+                        y = x; // perfect linear association
+                        break;
+                    case 'strong':
+                        y = x + gaussianRandom() * 7; // strong linear association
+                        break;
+                    case 'moderate':
+                        y = x + gaussianRandom() * 16; // weak to moderate linear association
+                        break;
+                    case 'none':
+                        y = gaussianRandom() * 20 + 50; // no linear association (approximately)
+                        break;
+                }
+                
+                // Apply sign
+                const yFinal = signMult * y;
+                
+                data.push({ x: x, y: yFinal });
+            }
+            
+            return { data, correlation };
         }
         
-        // Create histogram data from normal distribution
-        function createHistogramData(mean, stdDev) {
-            const data = generateNormalData(mean, stdDev, 10000);
-            const bins = 100;
-            const minVal = -10;
-            const maxVal = 10;
-            const binWidth = (maxVal - minVal) / bins;
+        // Box-Muller transform for normal distribution
+        function gaussianRandom() {
+            let u = 0, v = 0;
+            while(u === 0) u = Math.random();
+            while(v === 0) v = Math.random();
+            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+        }
+        
+        // Calculate actual correlation coefficient
+        function calculateCorrelation(data) {
+            const n = data.length;
+            const sumX = data.reduce((sum, point) => sum + point.x, 0);
+            const sumY = data.reduce((sum, point) => sum + point.y, 0);
+            const sumXY = data.reduce((sum, point) => sum + point.x * point.y, 0);
+            const sumX2 = data.reduce((sum, point) => sum + point.x * point.x, 0);
+            const sumY2 = data.reduce((sum, point) => sum + point.y * point.y, 0);
             
-            // Initialize histogram bins
-            const histogram = new Array(bins).fill(0);
+            const numerator = n * sumXY - sumX * sumY;
+            const denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
             
-            // Count data points in each bin
-            data.forEach(value => {
-                if (value >= minVal && value <= maxVal) {
-                    const binIndex = Math.floor((value - minVal) / binWidth);
-                    if (binIndex >= 0 && binIndex < bins) {
-                        histogram[binIndex]++;
-                    }
-                }
-            });
+            return denominator === 0 ? 0 : numerator / denominator;
+        }
+        
+        // Calculate regression line
+        function calculateRegressionLine(data) {
+            const n = data.length;
+            const sumX = data.reduce((sum, point) => sum + point.x, 0);
+            const sumY = data.reduce((sum, point) => sum + point.y, 0);
+            const sumXY = data.reduce((sum, point) => sum + point.x * point.y, 0);
+            const sumX2 = data.reduce((sum, point) => sum + point.x * point.x, 0);
             
-            // Convert counts to density (normalize by total count and bin width)
-            const totalCount = data.length;
-            const densityData = histogram.map(count => count / (totalCount * binWidth));
+            const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            const intercept = (sumY - slope * sumX) / n;
             
-            // Create chart data
-            const chartData = [];
-            for (let i = 0; i < bins; i++) {
-                const binCenter = minVal + (i + 0.5) * binWidth;
-                chartData.push({
-                    x: binCenter,
-                    y: densityData[i]
-                });
-            }
-            
-            return chartData;
+            return { slope, intercept };
         }
         
         // Update chart
         function updateChart() {
-            const mean = parseFloat(document.getElementById('mean-slider').value);
-            const stdDev = parseFloat(document.getElementById('sd-slider').value);
+            const direction = document.getElementById('direction-select').value;
+            const strength = document.getElementById('strength-select').value;
+            const showLine = document.getElementById('show-line').checked;
             
-            // Update parameter display
-            document.getElementById('equation-display').innerHTML = 
-                `Mean = ${mean} and<span class="equation-mobile-break"><br></span> Standard deviation = ${stdDev}`;
+            const result = generateData(direction, strength);
+            currentData = result.data;
+            const actualCorrelation = calculateCorrelation(currentData);
             
-            // Update slider value displays and positions
-            updateSliderValue('mean-slider', 'mean-value');
-            updateSliderValue('sd-slider', 'sd-value');
+            // Update correlation display (smart decimal formatting)
+            const correlationText = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
+                Math.round(actualCorrelation) : actualCorrelation.toFixed(2);
+            document.getElementById('correlation-display').textContent = 
+                `Correlation = ${correlationText}`;
             
-            // Generate new histogram data
-            const histogramData = createHistogramData(mean, stdDev);
+            // Update chart data (Data Points are now at index 1)
+            chart.data.datasets[1].data = currentData;
             
-            // Update chart data
-            chart.data.datasets[0].data = histogramData;
+            // Calculate bounds with padding
+            const xValues = currentData.map(p => p.x);
+            const yValues = currentData.map(p => p.y);
+            const minX = Math.min(...xValues);
+            const maxX = Math.max(...xValues);
+            const minY = Math.min(...yValues);
+            const maxY = Math.max(...yValues);
             
-            // Add vertical line at 10.5 for clean edge
-            if (chart.data.datasets.length === 1) {
-                chart.data.datasets.push({
-                    type: 'line',
+            // Add 10% padding around the data
+            const xPadding = (maxX - minX) * 0.1;
+            const yPadding = (maxY - minY) * 0.1;
+            
+            // Update chart scales with padding
+            chart.options.scales.x.min = minX - xPadding;
+            chart.options.scales.x.max = maxX + xPadding;
+            chart.options.scales.y.min = minY - yPadding;
+            chart.options.scales.y.max = maxY + yPadding;
+            
+            // Handle regression line
+            if (showLine && strength !== 'none') {
+                const regression = calculateRegressionLine(currentData);
+                const minX = Math.min(...currentData.map(p => p.x));
+                const maxX = Math.max(...currentData.map(p => p.x));
+                
+                chart.data.datasets[0] = {
+                    label: 'Line of Best Fit',
                     data: [
-                        { x: 11, y: 0 },
-                        { x: 11, y: 0.5 }
+                        { x: minX, y: regression.slope * minX + regression.intercept },
+                        { x: maxX, y: regression.slope * maxX + regression.intercept }
                     ],
-                    borderColor: '#ddd',
-                    borderWidth: 1,
+                    type: 'line',
+                    borderColor: '#fb4128',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
                     pointRadius: 0,
                     fill: false,
-                    tension: 0,
-                    order: 0
-                });
+                    tension: 0
+                };
+            } else {
+                chart.data.datasets[0] = { data: [] };
             }
             
             chart.update('none');
@@ -521,133 +539,104 @@
         
         // Initialize chart
         function initChart() {
-            const ctx = document.getElementById('distributionChart').getContext('2d');
+            const ctx = document.getElementById('scatterChart').getContext('2d');
             
             // Check if mobile
             const isMobileDevice = window.innerWidth <= 768;
             
             chart = new Chart(ctx, {
-                type: 'bar',
+                type: 'scatter',
                 data: {
                     datasets: [{
-                        label: 'Density',
+                        label: 'Line of Best Fit',
+                        data: [],
+                        type: 'line',
+                        borderColor: '#fb4128',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    }, {
+                        label: 'Data Points',
                         data: [],
                         backgroundColor: '#0891b2',
-                        borderColor: 'white',
-                        borderWidth: 0.5,
-                        barPercentage: 1.0,
-                        categoryPercentage: 1.0
+                        borderColor: '#0891b2',
+                        pointRadius: 3,
+                        pointHoverRadius: 5
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: true,
-                    aspectRatio: isMobileDevice ? 1 : 1.5,  
-                    layout: {
-                        padding: {
-                            top: 10,
-                            right: 15,
-                            bottom: 10,
-                            left: 2
-                        }
-                    },
+                    aspectRatio: isMobileDevice ? 1 : 1.5,
                     plugins: {
                         legend: {
                             display: false
                         },
-                        tooltip: {
-                            enabled: false
+                        title: {
+                            display: false
                         }
                     },
                     scales: {
                         x: {
+                            display: false,
                             type: 'linear',
-                            position: 'bottom',
-                            min: -10,
-                            max: 10,
-                            ticks: {
-                                stepSize: 2,
-                                color: '#333',
-                                font: {
-                                    size: 12
-                                },
-                                padding: 8
-                            },
-                            grid: {
-                                color: '#ddd',
-                                drawBorder: true,
-                                tickLength: 0,
-                                offset: false
-                            },
-                            title: {
-                                display: true,
-                                text: 'value',
-                                color: '#333',
-                                font: {
-                                    size: 14
-                                },
-                                align: 'end',
-                                padding: isMobileDevice ? { top: 0 } : { top: 0 }
-                            }
+                            position: 'bottom'
                         },
                         y: {
-                            type: 'linear',
-                            min: 0,
-                            max: 0.5,
-                            ticks: {
-                                stepSize: 0.1,
-                                color: '#333',
-                                font: {
-                                    size: 12
-                                },
-                                padding: 8
-                            },
-                            grid: {
-                                color: '#ddd',
-                                drawBorder: true,
-                                tickLength: 0
-                            },
-                            title: {
-                                display: true,
-                                text: 'density',
-                                color: '#333',
-                                font: {
-                                    size: 14
-                                },
-                                align: 'end'
-                            }
+                            display: false,
+                            type: 'linear'
                         }
                     },
                     animation: {
-                        duration: 300
+                        onComplete: function() {
+                            // Add X and Y labels after chart is rendered
+                            const ctx = this.chart.ctx;
+                            const chartArea = this.chart.chartArea;
+                            
+                            ctx.save();
+                            ctx.fillStyle = '#666';
+                            ctx.font = 'bold 16px Helvetica';
+                            ctx.textAlign = 'right';
+                            ctx.textBaseline = 'bottom';
+                            
+                            // Add X label (bottom right)
+                            ctx.fillText('X', chartArea.right - 10, chartArea.bottom - 5);
+                            
+                            // Add Y label (top left)
+                            ctx.textAlign = 'left';
+                            ctx.textBaseline = 'top';
+                            ctx.fillText('Y', chartArea.left + 5, chartArea.top + 5);
+                            
+                            ctx.restore();
+                        },
+                        duration: 500
                     }
                 }
             });
             
-            updateChart();
-
+            // Add resize listener for dynamic aspect ratio
             window.addEventListener('resize', () => {
-            const isMobileDevice = window.innerWidth <= 768;
-          const newAspectRatio = isMobileDevice ? 1 : 1.5;
+                const isMobileDevice = window.innerWidth <= 768;
+                const newAspectRatio = isMobileDevice ? 1 : 1.5;
 
-          if (chart.options.aspectRatio !== newAspectRatio) {
-            chart.options.aspectRatio = newAspectRatio;
-            chart.update();
-          }
-        });
+                if (chart.options.aspectRatio !== newAspectRatio) {
+                    chart.options.aspectRatio = newAspectRatio;
+                    chart.update();
+                }
+            });
             
+            // Initial chart update
+            updateChart();
         }
         
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
             initChart();
             
-            // Initialize slider value positions
-            updateSliderValue('mean-slider', 'mean-value');
-            updateSliderValue('sd-slider', 'sd-value');
-            
-            document.getElementById('mean-slider').addEventListener('input', updateChart);
-            document.getElementById('sd-slider').addEventListener('input', updateChart);
+            document.getElementById('direction-select').addEventListener('change', updateChart);
+            document.getElementById('strength-select').addEventListener('change', updateChart);
+            document.getElementById('show-line').addEventListener('change', updateChart);
             
             // Track page load
             setTimeout(function() {

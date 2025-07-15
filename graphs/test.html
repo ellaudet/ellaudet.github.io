@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Graph: Least Squares Method</title>
+    <title>Interactive Graph: Random Treatment Assignment</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     
     <!-- Google Analytics Tag -->
@@ -13,7 +13,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-YEPLTYLL6H', {
-          page_title: 'Interactive Graph: Least Squares Method',
+          page_title: 'Interactive Graph: Random Treatment Assignment',
           page_location: window.location.href,
           send_page_view: true
       });
@@ -62,21 +62,30 @@
             border-radius: 8px;
             padding: 25px;
             position: relative;
-            height: 550px;
+            height: 340px;
+        }
+        .charts-row {
+            display: flex;
+            gap: 15px;
+            height: 240px;
+        }
+        .chart-item {
+            flex: 1;
+            position: relative;
         }
         .chart-title {
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 18px;
+            margin-bottom: 0px;
+            font-size: 16px;
             font-weight: bold;
             color: #333;
         }
-        .ssr-display {
+        .chart-subtitle {
             text-align: center;
-            margin-bottom: 15px;
-            font-size: 18px;
+            margin-bottom: 5px;
+            font-size: 16px;
             font-weight: bold;
-            color: #1f78b4;
+            color: #333;
         }
         .form-label {
             color: #333333;
@@ -90,15 +99,6 @@
             margin-bottom: 10px;
             margin-top: 1px;
             line-height: 1.5;
-        }
-        .form-select, .form-check {
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-        .form-check-label {
-            font-size: 15px;
-            font-weight: normal;
-            color: #333333;
         }
         .step-list {
             line-height: 1.5;
@@ -118,37 +118,102 @@
             margin-top: 20px;
             border-left: 3px solid #6c757d;
         }
-        
-        /* Custom red checkbox styling */
-        .form-check-input {
-            background-color: white;
-            border-color: #ced4da;
+        .slider-container {
+            margin-bottom: 20px;
         }
         
-        .form-check-input:checked {
-            background-color: #fb4128;
-            border-color: #fb4128;
+        /* Custom slider container with dynamic value positioning */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
         }
         
-        .form-check-input:focus {
-            border-color: #fb4128;
-            outline: 0;
-            box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
+        /* Custom red slider styling */
+        .form-range {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            width: 100%;
         }
         
-        .form-check-input:checked:focus {
-            box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
+        /* Slider track */
+        .form-range::-webkit-slider-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
         }
         
-        /* Custom dropdown styling */
-        .form-select {
-            border-color: #ced4da;
+        .form-range::-moz-range-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
+            border: none;
         }
         
-        .form-select:focus {
-            border-color: #0891b2;
-            outline: 0;
-            box-shadow: 0 0 0 0.25rem rgba(8, 145, 178, 0.25);
+        /* Slider thumb */
+        .form-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #fb4128;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .form-range::-moz-range-thumb {
+            background: #fb4128;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Slider thumb hover effect */
+        .form-range::-webkit-slider-thumb:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        
+        .form-range::-moz-range-thumb:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        
+        /* Slider focus styles */
+        .form-range:focus {
+            outline: none;
+        }
+        
+        .form-range:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
+        }
+        
+        .form-range:focus::-moz-range-thumb {
+            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
+        }
+        
+        /* Dynamic value positioning */
+        .slider-dynamic-value {
+            position: absolute;
+            top: 45px;
+            font-weight: bold;
+            color: #fb4128;
+            font-size: 14px;
+            transform: translateX(-50%);
+            pointer-events: none;
+            transition: left 0.1s ease;
+            white-space: nowrap;
+        }
+        
+        canvas {
+            max-width: 100%;
+            height: auto !important;
         }
         
         /* Mobile optimizations */
@@ -164,6 +229,28 @@
             .chart-container {
                 height: 400px !important;
             }
+            
+            .header-section {
+                padding: 45px 15px 30px 15px;
+            }
+            
+            .content-section {
+                padding: 30px 15px 25px 15px;
+            }
+            
+            .chart-container {
+                padding: 10px 0px 10px 0px;
+            }
+            
+            .charts-row {
+                flex-direction: column;
+                height: auto;
+                gap: 30px;
+            }
+            
+            .chart-item {
+                height: 300px;
+            }
         }
         
         @media (max-width: 1200px), (max-device-width: 1200px) {
@@ -176,12 +263,7 @@
             }
             
             .chart-container {
-                padding: 15px 10px 15px 15px;
-            }
-            
-            .y-label {
-                top: 55px !important;
-                left: 20px !important;
+                padding: 15px 10px 15px 10px;
             }
         }
         
@@ -198,7 +280,7 @@
             <!-- Header Section -->
             <div class="header-section">
                 <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; margin-top: 2px; font-size: 20px;">
-                    Interactive Graph:<span class="mobile-break"><br></span> Least Squares Method
+                    Interactive Graph:<span class="mobile-break"><br></span> Random Treatment Assignment
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
                     By Elena Llaudet, co-author of 
@@ -213,26 +295,23 @@
                 <!-- Key Points Box -->
                 <div class="info-box">
                     <p style="margin: 0; font-size: 16px; color: #333333; line-height: 1.5;">
-                        To summarize the relationship between two variables, X and Y, we often use the least squares method. This method selects the line that minimizes the sum of squared residuals (SSR). Residuals—also known as errors—are the vertical distances between each data point and the line. The SSR captures the total magnitude of these errors by squaring them (which prevents negative and positive errors from canceling each other out) and summing them. The closer the line is to the data points, the smaller the errors and the SSR, and thus the better the line summarizes the relationship between X and Y.
+                        Random treatment assignment makes treatment and control groups comparable when sample size <em>n</em> is large enough.
                     </p>
                 </div>
 
                 <!-- Explanation -->
                 <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
-                    Let's see how different lines fit the data to build an intuition about the least squares method:
+                    Suppose the population is composed of 20% orange individuals, 10% blue individuals, 20% pink individuals, 30% green individuals, and 20% purple individuals. If we select a sample of <em>n</em> individuals from this population and randomly assign them to treatment and control groups, the two groups will have similar proportions of each type of individual as long as <em>n</em> is large enough. Let's take a closer look:
                 </p>
 
                 <!-- Steps -->
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 1:</span> The scatterplot below shows the relationship between X and Y. In theory, we could draw an infinite number of lines on this scatterplot, but some lines will summarize the relationship between X and Y better than others. Intuitively, we know that the line of best fit should be as close as possible to the data points, and thus have the smallest possible errors. Let's start by examining Line #1 (which is selected by default). Check the box to display both the line and its errors. This line does not fit the data well. It has a negative slope while X and Y clearly have a positive relationship, and as a result the errors are very large. In this case, SSR = 704.
-                        </div>
-                        <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 2:</span> Now, select Line #2 from the dropdown menu. This line fits the data better because it produces smaller errors (shorter vertical distances). Here, the SSR = 452. However, this is still not the best-fitting line, as the SSR can be reduced further.
+                            <span class="step-number">STEP 1:</span> Look at the graphs below. If the sample size is set to only 20 individuals, the treatment group might end up with all the pink individuals while the control group gets all the blue and purple ones, making the groups clearly not comparable even with random assignment.
                         </div>
                         <div style="margin-bottom: 18px; line-height: 1.5;">
-                            <span class="step-number">STEP 3:</span> Finally, select Line #3. The errors associated with Line #3 are the smallest among the three. Here, the SSR = 297, which is the lowest of all options. Line #3 is the one the least squares method would choose as the line of best fit, because it has the smallest SSR of all possible lines.
+                            <span class="step-number">STEP 2:</span> Move the slider to increase the sample size and observe how the treatment and control groups start to look more similar. When <em>n</em> reaches 1000, the groups have nearly identical proportions, making them comparable.
                         </div>
                     </div>
                 </div>
@@ -241,23 +320,16 @@
                     <!-- Controls Panel -->
                     <div class="col-lg-4">
                         <div class="controls-panel">
-                            <div class="form-check" style="margin-bottom: 15px;">
-                                <input class="form-check-input" type="checkbox" id="show-line-errors">
-                                <label class="form-check-label" for="show-line-errors">
-                                    Show line (as a solid orange line)<br>and errors (as dashed gray lines)
-                                </label>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Line:</label>
+                            <div class="slider-container">
+                                <label class="form-label">Sample size <em>n</em>:</label>
                                 <p class="form-text">
-                                    Select different lines to see how they fit the data.
+                                    Move the slider to see how random assignment creates comparable groups as sample size increases.
                                 </p>
-                                <select class="form-select" id="line-select">
-                                    <option value="line1">Line #1</option>
-                                    <option value="line2">Line #2</option>
-                                    <option value="line3">Line #3</option>
-                                </select>
+                                <div class="slider-wrapper">
+                                    <input type="range" class="form-range" id="sample-size-slider" 
+                                           min="20" max="1000" step="10" value="20">
+                                    <div class="slider-dynamic-value" id="sample-size-value">20</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -265,12 +337,18 @@
                     <!-- Chart Panel -->
                     <div class="col-lg-8">
                         <div class="chart-container">
-                            <div class="chart-title" id="chart-title">
-                                Scatterplot of X and Y
+                            <div class="charts-row">
+                                <div class="chart-item">
+                                    <div class="chart-title">Treatment Group</div>
+                                    <div class="chart-subtitle" id="treatment-n">n_t = 10</div>
+                                    <canvas id="treatmentChart" width="400" height="300"></canvas>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-title">Control Group</div>
+                                    <div class="chart-subtitle" id="control-n">n_c = 10</div>
+                                    <canvas id="controlChart" width="400" height="300"></canvas>
+                                </div>
                             </div>
-                            <!-- Manual Y label -->
-                            <div class="y-label" style="position: absolute; top: 65px; left: 30px; font-size: 14px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
-                            <canvas id="scatterChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -278,7 +356,7 @@
                 <!-- Notes Section -->
                 <div class="notes-section">
                     <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
-                        <strong>Note:</strong> A scatterplot enables us to visualize the relationship between two variables by plotting one variable against the other in two-dimensional space. Each dot represents an observation. The errors are the vertical distances between the dots and the line.
+                        <strong>Note:</strong> <em>n</em> is the total sample size, <em>n_t</em> is the size of the treatment group, and <em>n_c</em> is the size of the control group. The white numbers on top of each bar show the actual count of individuals of that type in each group.
                     </p>
                 </div>
             </div>
@@ -301,7 +379,7 @@
             try {
                 if (typeof gtag !== 'undefined') {
                     gtag('config', 'G-YEPLTYLL6H', {
-                        page_title: 'Interactive Graph: Least Squares Method',
+                        page_title: 'Interactive Graph: Random Treatment Assignment',
                         page_location: window.location.href,
                         send_page_view: true
                     });
@@ -314,229 +392,319 @@
         let sessionStart = Date.now();
 
         // Initialize app
-        let chart;
-        let dataPoints = [];
+        let treatmentChart, controlChart;
         
-        // Pre-generated data (matching the Shiny app)
-        function generateData() {
-            // Using the same seed and parameters as the Shiny app
-            Math.seedrandom = function(seed) {
-                const m = 0x80000000;
-                const a = 1103515245;
-                const c = 12345;
-                let state = seed ? seed : Math.floor(Math.random() * (m - 1));
-                
-                Math.random = function() {
-                    state = (a * state + c) % m;
-                    return state / (m - 1);
-                };
-            };
-            Math.seedrandom(1234);
-            
-            const data = [];
-            for (let i = 0; i < 20; i++) {
-                const x = gaussianRandom() * 2 + 2; // mean=2, sd=2
-                const error = gaussianRandom() * 4; // mean=0, sd=4
-                const y = -1 + 2 * x + error; // y = -1 + 2*x + error
-                data.push({ x: x, y: y });
-            }
-            return data;
-        }
-        
-        // Box-Muller transform for normal distribution
-        function gaussianRandom() {
-            let u = 0, v = 0;
-            while(u === 0) u = Math.random();
-            while(v === 0) v = Math.random();
-            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-        }
-        
-        // Line parameters (matching Shiny app)
-        const lineParams = {
-            'line1': { intercept: 2, slope: -1, number: 1, ssr: 704 },
-            'line2': { intercept: 2, slope: 0.5, number: 2, ssr: 452 },
-            'line3': { intercept: -1, slope: 2, number: 3, ssr: 297 }
+        // Color mapping for the five types
+        const typeColors = {
+            'Orange': '#e34a33',
+            'Blue': '#1f78b4', 
+            'Pink': '#f781bf',
+            'Green': '#33a02c',
+            'Purple': '#6a3d9a'
         };
         
-        // Calculate SSR for a given line
-        function calculateSSR(data, intercept, slope) {
-            let ssr = 0;
-            data.forEach(point => {
-                const predictedY = intercept + slope * point.x;
-                const residual = point.y - predictedY;
-                ssr += residual * residual;
-            });
-            return Math.round(ssr);
+        // Function to update slider value position
+        function updateSliderValue(sliderId, valueId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+            const value = parseFloat(slider.value);
+            const min = parseFloat(slider.min);
+            const max = parseFloat(slider.max);
+            
+            // Calculate percentage position with better alignment
+            const percentage = ((value - min) / (max - min)) * 100;
+            
+            // Account for thumb width to center properly
+            const thumbOffset = (percentage - 50) * 0.15;
+            const adjustedPercentage = percentage - thumbOffset;
+            
+            // Update value text and position
+            valueDisplay.textContent = value;
+            valueDisplay.style.left = `${adjustedPercentage}%`;
         }
         
-        // Update chart
-        function updateChart() {
-            const selectedLine = document.getElementById('line-select').value;
-            const showLineErrors = document.getElementById('show-line-errors').checked;
-            const params = lineParams[selectedLine];
+        // Generate sample data based on sample size
+        function generateSampleData(sampleSize) {
+            const individuals = [];
             
-            // Update title
-            if (showLineErrors) {
-                document.getElementById('chart-title').textContent = `Line #${params.number} (SSR = ${params.ssr})`;
+            // Add individuals according to proportions
+            const orangeCount = Math.round(sampleSize * 0.2);
+            const blueCount = Math.round(sampleSize * 0.1);
+            const pinkCount = Math.round(sampleSize * 0.2);
+            const greenCount = Math.round(sampleSize * 0.3);
+            const purpleCount = sampleSize - orangeCount - blueCount - pinkCount - greenCount;
+            
+            for (let i = 0; i < orangeCount; i++) individuals.push('Orange');
+            for (let i = 0; i < blueCount; i++) individuals.push('Blue');
+            for (let i = 0; i < pinkCount; i++) individuals.push('Pink');
+            for (let i = 0; i < greenCount; i++) individuals.push('Green');
+            for (let i = 0; i < purpleCount; i++) individuals.push('Purple');
+            
+            return individuals;
+        }
+        
+        // Randomly assign individuals to treatment/control
+        function randomAssignment(individuals) {
+            const treatment = [];
+            const control = [];
+            
+            // Create seeded random number generator for consistent results
+            function seededRandom(seed) {
+                let x = Math.sin(seed) * 10000;
+                return x - Math.floor(x);
+            }
+            
+            // Special case for n=20 to match the text description
+            if (individuals.length === 20) {
+                let seed = 123;
+                individuals.forEach(individual => {
+                    if (individual === 'Blue' || individual === 'Purple') {
+                        control.push(individual);
+                    } else if (individual === 'Pink') {
+                        treatment.push(individual);
+                    } else {
+                        if (seededRandom(seed++) < 0.5) {
+                            treatment.push(individual);
+                        } else {
+                            control.push(individual);
+                        }
+                    }
+                });
             } else {
-                document.getElementById('chart-title').textContent = 'Scatterplot of X and Y';
+                // For other sample sizes, use seeded random assignment
+                let seed = 678;
+                individuals.forEach(individual => {
+                    if (seededRandom(seed++) < 0.5) {
+                        treatment.push(individual);
+                    } else {
+                        control.push(individual);
+                    }
+                });
             }
             
-            // Clear existing datasets
-            chart.data.datasets = [{
-                label: 'Data Points',
-                data: dataPoints,
-                backgroundColor: '#0891b2',
-                borderColor: '#0891b2',
-                pointRadius: 4,
-                pointHoverRadius: 6,
-                showLine: false,
-                order: 3
-            }];
-            
-            if (showLineErrors) {
-                // Add regression line - extend to full axis range for consistency
-                chart.data.datasets.push({
-                    label: 'Regression Line',
-                    data: [
-                        { x: -6, y: params.intercept + params.slope * (-6) },
-                        { x: 10, y: params.intercept + params.slope * 10 }
-                    ],
-                    type: 'line',
-                    borderColor: '#fb4128',
-                    borderWidth: 3,
-                    pointRadius: 0,
-                    fill: false,
-                    tension: 0,
-                    order: 2
-                });
-                
-                // Add error lines
-                const errorLines = [];
-                dataPoints.forEach(point => {
-                    const predictedY = params.intercept + params.slope * point.x;
-                    errorLines.push({
-                        label: 'Error Lines',
-                        data: [
-                            { x: point.x, y: point.y },
-                            { x: point.x, y: predictedY }
-                        ],
-                        type: 'line',
-                        borderColor: 'gray',
-                        borderWidth: 1,
-                        borderDash: [5, 5],
-                        pointRadius: 0,
-                        fill: false,
-                        tension: 0,
-                        order: 1
-                    });
-                });
-                
-                chart.data.datasets.push(...errorLines);
-            }
-            
-            chart.update('none');
+            return { treatment, control };
         }
         
-        // Initialize chart
-        function initChart() {
-            const ctx = document.getElementById('scatterChart').getContext('2d');
+        // Count occurrences of each type and convert to proportions
+        function countTypes(individuals) {
+            const counts = {
+                'Orange': 0,
+                'Blue': 0,
+                'Pink': 0,
+                'Green': 0,
+                'Purple': 0
+            };
             
-            // Generate data once
-            dataPoints = generateData();
+            individuals.forEach(individual => {
+                counts[individual]++;
+            });
             
-            chart = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Data Points',
-                        data: dataPoints,
-                        backgroundColor: '#1f78b4',
-                        borderColor: '#1f78b4',
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        showLine: false
-                    }]
-                },
+            // Store raw counts for display on bars
+            const rawCounts = { ...counts };
+            
+            // Convert to proportions
+            const total = individuals.length;
+            if (total === 0) {
+                return { proportions: counts, rawCounts: rawCounts };
+            }
+            
+            Object.keys(counts).forEach(key => {
+                counts[key] = counts[key] / total;
+            });
+            
+            return { proportions: counts, rawCounts: rawCounts };
+        }
+        
+        // Create chart data from counts
+        function createChartData(countData) {
+            const proportions = countData.proportions;
+            const rawCounts = countData.rawCounts;
+            
+            return {
+                labels: ['orange', 'blue', 'pink', 'green', 'purple'],
+                datasets: [{
+                    data: [proportions.Orange, proportions.Blue, proportions.Pink, proportions.Green, proportions.Purple],
+                    backgroundColor: [
+                        typeColors.Orange,
+                        typeColors.Blue,
+                        typeColors.Pink,
+                        typeColors.Green,
+                        typeColors.Purple
+                    ],
+                    borderColor: 'white',
+                    borderWidth: 1
+                }],
+                rawCounts: [rawCounts.Orange, rawCounts.Blue, rawCounts.Pink, rawCounts.Green, rawCounts.Purple]
+            };
+        }
+        
+        // Check if device is mobile - more comprehensive detection
+        function isMobile() {
+            return window.innerWidth <= 768 || 
+                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   'ontouchstart' in window ||
+                   navigator.maxTouchPoints > 0;
+        }
+        
+        // Chart configuration
+        function getChartConfig(data, maxY) {
+            return {
+                type: 'bar',
+                data: data,
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: {
-                            top: 10,
-                            right: 15,
-                            bottom: 35,
-                            left: 15
-                        }
-                    },
+                    maintainAspectRatio: true,
+                    aspectRatio: 4 / 3,
+                    resizeDelay: 200,
                     plugins: {
                         legend: {
                             display: false
                         },
                         tooltip: {
                             enabled: true,
-                            mode: 'point',
-                            intersect: false
+                            callbacks: {
+                                label: function(context) {
+                                    const proportion = context.parsed.y;
+                                    const percentage = (proportion * 100).toFixed(1);
+                                    const count = data.rawCounts[context.dataIndex];
+                                    return `${count} individuals (${percentage}%)`;
+                                }
+                            }
                         }
                     },
                     scales: {
                         x: {
-                            type: 'linear',
-                            position: 'bottom',
-                            min: -6,
-                            max: 10,
                             ticks: {
-                                display: false
-                            },
-                            grid: {
-                                display: false,
-                                drawBorder: true,
-                                borderColor: '#333',
-                                borderWidth: 1
-                            },
-                            title: {
-                                display: true,
-                                text: 'X',
                                 color: '#333',
                                 font: {
-                                    size: 14
-                                },
-                                align: 'end'
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                display: false
                             }
                         },
                         y: {
-                            type: 'linear',
-                            min: -25,
-                            max: 25,
+                            min: 0,
+                            max: maxY,
                             ticks: {
-                                display: false
+                                color: '#333',
+                                font: {
+                                    size: 11
+                                },
+                                callback: function(value) {
+                                    return (value * 100).toFixed(0) + '%';
+                                }
                             },
                             grid: {
-                                display: false,
-                                drawBorder: true,
-                                borderColor: '#333',
-                                borderWidth: 1
-                            },
-                            title: {
-                                display: false  // Disable automatic Y label
+                                color: '#ddd'
                             }
                         }
                     },
-                    animation: {
-                        duration: 300
+                    animation: false,
+                    transitions: {
+                        active: {
+                            animation: false
+                        },
+                        resize: {
+                            animation: false
+                        },
+                        show: {
+                            animation: false
+                        },
+                        hide: {
+                            animation: false
+                        }
                     }
-                }
-            });
+                },
+                plugins: [{
+                    id: 'barLabels',
+                    afterDatasetsDraw: function(chart) {
+                        const ctx = chart.ctx;
+                        const chartData = chart.data;
+                        
+                        ctx.save();
+                        ctx.fillStyle = 'white';
+                        ctx.strokeStyle = 'black';
+                        ctx.lineWidth = 1;
+                        ctx.font = 'bold 14px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'top';
+                        
+                        const meta = chart.getDatasetMeta(0);
+                        
+                        chartData.datasets[0].data.forEach((value, index) => {
+                            const bar = meta.data[index];
+                            const count = chartData.rawCounts[index];
+                            
+                            if (bar && count > 0) {
+                                const x = bar.x;
+                                const y = bar.y + 12;
+                                
+                                ctx.strokeText(count.toString(), x, y);
+                                ctx.fillText(count.toString(), x, y);
+                            }
+                        });
+                        
+                        ctx.restore();
+                    }
+                }]
+            };
+        }
+        
+        // Update all charts
+        function updateCharts() {
+            const sampleSize = parseInt(document.getElementById('sample-size-slider').value);
             
-            updateChart();
+            updateSliderValue('sample-size-slider', 'sample-size-value');
+            
+            const individuals = generateSampleData(sampleSize);
+            const assignment = randomAssignment(individuals);
+            
+            const treatmentData = countTypes(assignment.treatment);
+            const controlData = countTypes(assignment.control);
+            
+            document.getElementById('treatment-n').textContent = `n_t = ${assignment.treatment.length}`;
+            document.getElementById('control-n').textContent = `n_c = ${assignment.control.length}`;
+            
+            const maxY = 0.6; // Fixed scale for better comparison
+            
+            treatmentChart.data = createChartData(treatmentData);
+            treatmentChart.options.scales.y.max = maxY;
+            treatmentChart.update(isMobile() ? 'none' : 'active');
+            
+            controlChart.data = createChartData(controlData);
+            controlChart.options.scales.y.max = maxY;
+            controlChart.update(isMobile() ? 'none' : 'active');
+        }
+        
+        // Initialize charts
+        function initCharts() {
+            const sampleSize = 20;
+            const individuals = generateSampleData(sampleSize);
+            const assignment = randomAssignment(individuals);
+            
+            const treatmentCounts = countTypes(assignment.treatment);
+            const controlCounts = countTypes(assignment.control);
+            
+            const maxY = 0.6;
+            
+            treatmentChart = new Chart(document.getElementById('treatmentChart'), 
+                getChartConfig(createChartData(treatmentCounts), maxY));
+            
+            controlChart = new Chart(document.getElementById('controlChart'), 
+                getChartConfig(createChartData(controlCounts), maxY));
+            
+            updateCharts();
         }
         
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            initChart();
+            initCharts();
             
-            document.getElementById('line-select').addEventListener('change', updateChart);
-            document.getElementById('show-line-errors').addEventListener('change', updateChart);
+            updateSliderValue('sample-size-slider', 'sample-size-value');
+            
+            document.getElementById('sample-size-slider').addEventListener('input', updateCharts);
             
             // Track page load
             setTimeout(function() {

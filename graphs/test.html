@@ -628,7 +628,7 @@
 
             window.addEventListener('resize', () => {
             const isMobileDevice = window.innerWidth <= 768;
-          const newAspectRatio = isMobileDevice ? 1 : 2.5;
+          const newAspectRatio = isMobileDevice ? 1 : 1.5;
 
           if (chart.options.aspectRatio !== newAspectRatio) {
             chart.options.aspectRatio = newAspectRatio;

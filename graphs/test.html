@@ -378,6 +378,17 @@
         let chart;
         let currentData = [];
         
+        // Get responsive sizing based on screen size
+        function getResponsiveSizing() {
+            const isMobileDevice = window.innerWidth <= 768;
+            return {
+                pointRadius: isMobileDevice ? 2 : 3,
+                pointHoverRadius: isMobileDevice ? 4 : 5,
+                lineWidth: isMobileDevice ? 1.5 : 2,
+                aspectRatio: isMobileDevice ? 1 : 1.5
+            };
+        }
+        
         // Generate data based on correlation parameters
         function generateData(direction, strength) {
             const n = 1000; // Number of points (matching original)
@@ -483,6 +494,9 @@
             currentData = result.data;
             const actualCorrelation = calculateCorrelation(currentData);
             
+            // Get current responsive sizing
+            const sizing = getResponsiveSizing();
+            
             // Update correlation display (smart decimal formatting)
             const correlationText = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
                 Math.round(actualCorrelation) : actualCorrelation.toFixed(2);
@@ -491,6 +505,8 @@
             
             // Update chart data (Data Points are now at index 1)
             chart.data.datasets[1].data = currentData;
+            chart.data.datasets[1].pointRadius = sizing.pointRadius;
+            chart.data.datasets[1].pointHoverRadius = sizing.pointHoverRadius;
             
             // Calculate bounds with padding
             const xValues = currentData.map(p => p.x);
@@ -516,9 +532,6 @@
                 const minX = Math.min(...currentData.map(p => p.x));
                 const maxX = Math.max(...currentData.map(p => p.x));
                 
-                // Get current responsive sizing for line width
-                const sizing = getResponsiveSizing();
-                
                 chart.data.datasets[0] = {
                     label: 'Line of Best Fit',
                     data: [
@@ -538,17 +551,6 @@
             }
             
             chart.update('none');
-        }
-        
-        // Get responsive sizing based on screen size
-        function getResponsiveSizing() {
-            const isMobileDevice = window.innerWidth <= 768;
-            return {
-                pointRadius: isMobileDevice ? 2 : 3,
-                pointHoverRadius: isMobileDevice ? 4 : 5,
-                lineWidth: isMobileDevice ? 1.5 : 2,
-                aspectRatio: isMobileDevice ? 1 : 1.5
-            };
         }
         
         // Initialize chart

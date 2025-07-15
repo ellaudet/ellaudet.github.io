@@ -334,40 +334,32 @@
     </div>
 
     <script>
-        // Enhanced Analytics tracking with error handling
+        // SIMPLE TRACKING - Just visits and time
         function trackEvent(eventName, parameters = {}) {
             try {
                 if (typeof gtag !== 'undefined') {
                     gtag('event', eventName, parameters);
-                    console.log('GA Event tracked:', eventName, parameters);
-                } else {
-                    console.warn('gtag not available for event:', eventName);
                 }
             } catch (error) {
                 console.error('Error tracking event:', error);
             }
         }
 
-        // Track page view explicitly
         function trackPageView() {
             try {
                 if (typeof gtag !== 'undefined') {
                     gtag('config', 'G-YEPLTYLL6H', {
                         page_title: 'Interactive Graph: Mean and Standard Deviation',
                         page_location: window.location.href,
-                        custom_map: {
-                            'page_type': 'interactive_graph',
-                            'content_type': 'mean_standard_deviation'
-                        }
+                        send_page_view: true
                     });
-                    console.log('Page view tracked for:', window.location.href);
-                } else {
-                    console.warn('gtag not available for page view tracking');
                 }
             } catch (error) {
                 console.error('Error tracking page view:', error);
             }
         }
+
+        let sessionStart = Date.now();
 
         // Initialize app
         let chart;
@@ -470,13 +462,6 @@
             // Update chart data
             chart.data.datasets[0].data = histogramData;
             chart.update('none');
-            
-            // Track interaction
-            trackEvent('distribution_updated', {
-                mean: mean,
-                standard_deviation: stdDev,
-                page_url: window.location.href
-            });
         }
         
         // Initialize chart
@@ -577,85 +562,33 @@
             updateChart();
         }
         
-        // Track session metrics
-        let sessionStart = Date.now();
-        let interactionCount = 0;
-        let sliderInteractions = {
-            mean: 0,
-            stdDev: 0
-        };
-        
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize chart first
             initChart();
             
             // Initialize slider value positions
             updateSliderValue('mean-slider', 'mean-value');
             updateSliderValue('sd-slider', 'sd-value');
             
-            document.getElementById('mean-slider').addEventListener('input', function() {
-                interactionCount++;
-                sliderInteractions.mean++;
-                updateChart();
-            });
+            document.getElementById('mean-slider').addEventListener('input', updateChart);
+            document.getElementById('sd-slider').addEventListener('input', updateChart);
             
-            document.getElementById('sd-slider').addEventListener('input', function() {
-                interactionCount++;
-                sliderInteractions.stdDev++;
-                updateChart();
-            });
-            
-            // Track app load with delay to ensure gtag is ready
+            // Track page load
             setTimeout(function() {
                 trackPageView();
-                trackEvent('distribution_app_loaded', {
-                    load_type: 'javascript_version',
-                    load_time: Date.now(),
-                    user_agent: navigator.userAgent,
-                    page_url: window.location.href,
-                    referrer: document.referrer
+                trackEvent('page_loaded', {
+                    page_url: window.location.href
                 });
             }, 1000);
         });
         
-        // Track when user leaves the page
+        // Track session duration
         window.addEventListener('beforeunload', function() {
             const sessionDuration = Date.now() - sessionStart;
             trackEvent('session_end', {
-                session_duration_ms: sessionDuration,
                 session_duration_minutes: Math.round(sessionDuration / 60000),
-                interaction_count: interactionCount,
-                mean_slider_interactions: sliderInteractions.mean,
-                stddev_slider_interactions: sliderInteractions.stdDev,
                 page_url: window.location.href
             });
-        });
-        
-        // Track visibility changes (tab switching)
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                trackEvent('page_hidden', {
-                    time_on_page: Date.now() - sessionStart,
-                    interaction_count: interactionCount
-                });
-            } else {
-                trackEvent('page_visible', {
-                    return_time: Date.now() - sessionStart
-                });
-            }
-        });
-        
-        // Track scroll behavior
-        let scrollTracked = false;
-        window.addEventListener('scroll', function() {
-            if (!scrollTracked && window.scrollY > 100) {
-                scrollTracked = true;
-                trackEvent('page_scrolled', {
-                    scroll_depth: window.scrollY,
-                    time_to_scroll: Date.now() - sessionStart
-                });
-            }
         });
     </script>
 </body>

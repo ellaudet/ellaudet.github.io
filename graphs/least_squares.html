@@ -12,7 +12,11 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-YEPLTYLL6H');
+      gtag('config', 'G-YEPLTYLL6H', {
+          page_title: 'Interactive Graph: Least Squares Method',
+          page_location: window.location.href,
+          send_page_view: true
+      });
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -276,10 +280,38 @@
     </div>
 
     <script>
-        // Analytics tracking
+        // Enhanced Analytics tracking with error handling
         function trackEvent(eventName, parameters = {}) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', eventName, parameters);
+            try {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', eventName, parameters);
+                    console.log('GA Event tracked:', eventName, parameters);
+                } else {
+                    console.warn('gtag not available for event:', eventName);
+                }
+            } catch (error) {
+                console.error('Error tracking event:', error);
+            }
+        }
+
+        // Track page view explicitly
+        function trackPageView() {
+            try {
+                if (typeof gtag !== 'undefined') {
+                    gtag('config', 'G-YEPLTYLL6H', {
+                        page_title: 'Interactive Graph: Least Squares Method',
+                        page_location: window.location.href,
+                        custom_map: {
+                            'page_type': 'interactive_graph',
+                            'content_type': 'least_squares_method'
+                        }
+                    });
+                    console.log('Page view tracked for:', window.location.href);
+                } else {
+                    console.warn('gtag not available for page view tracking');
+                }
+            } catch (error) {
+                console.error('Error tracking page view:', error);
             }
         }
 
@@ -411,7 +443,8 @@
             trackEvent('least_squares_updated', {
                 line_selected: selectedLine,
                 show_errors: showLineErrors,
-                ssr: params.ssr
+                ssr: params.ssr,
+                page_url: window.location.href
             });
         }
         
@@ -508,28 +541,74 @@
             updateChart();
         }
         
+        // Track session metrics
+        let sessionStart = Date.now();
+        let interactionCount = 0;
+        
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize chart first
             initChart();
             
-            document.getElementById('line-select').addEventListener('change', updateChart);
-            document.getElementById('show-line-errors').addEventListener('change', updateChart);
-            
-            // Track app load
-            trackEvent('least_squares_app_loaded', {
-                load_type: 'javascript_version',
-                load_time: Date.now()
+            // Add event listeners
+            document.getElementById('line-select').addEventListener('change', function() {
+                interactionCount++;
+                updateChart();
             });
+            
+            document.getElementById('show-line-errors').addEventListener('change', function() {
+                interactionCount++;
+                updateChart();
+            });
+            
+            // Track app load with delay to ensure gtag is ready
+            setTimeout(function() {
+                trackPageView();
+                trackEvent('least_squares_app_loaded', {
+                    load_type: 'javascript_version',
+                    load_time: Date.now(),
+                    user_agent: navigator.userAgent,
+                    page_url: window.location.href,
+                    referrer: document.referrer
+                });
+            }, 1000);
         });
         
-        // Track session duration
-        let sessionStart = Date.now();
+        // Track when user leaves the page
         window.addEventListener('beforeunload', function() {
             const sessionDuration = Date.now() - sessionStart;
             trackEvent('session_end', {
                 session_duration_ms: sessionDuration,
-                session_duration_minutes: Math.round(sessionDuration / 60000)
+                session_duration_minutes: Math.round(sessionDuration / 60000),
+                interaction_count: interactionCount,
+                page_url: window.location.href
             });
+        });
+        
+        // Track visibility changes (tab switching)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                trackEvent('page_hidden', {
+                    time_on_page: Date.now() - sessionStart,
+                    interaction_count: interactionCount
+                });
+            } else {
+                trackEvent('page_visible', {
+                    return_time: Date.now() - sessionStart
+                });
+            }
+        });
+        
+        // Track scroll behavior
+        let scrollTracked = false;
+        window.addEventListener('scroll', function() {
+            if (!scrollTracked && window.scrollY > 100) {
+                scrollTracked = true;
+                trackEvent('page_scrolled', {
+                    scroll_depth: window.scrollY,
+                    time_to_scroll: Date.now() - sessionStart
+                });
+            }
         });
     </script>
 </body>

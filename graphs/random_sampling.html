@@ -348,40 +348,32 @@
     </div>
 
     <script>
-        // Enhanced Analytics tracking with error handling
+        // SIMPLE TRACKING - Just visits and time
         function trackEvent(eventName, parameters = {}) {
             try {
                 if (typeof gtag !== 'undefined') {
                     gtag('event', eventName, parameters);
-                    console.log('GA Event tracked:', eventName, parameters);
-                } else {
-                    console.warn('gtag not available for event:', eventName);
                 }
             } catch (error) {
                 console.error('Error tracking event:', error);
             }
         }
 
-        // Track page view explicitly
         function trackPageView() {
             try {
                 if (typeof gtag !== 'undefined') {
                     gtag('config', 'G-YEPLTYLL6H', {
                         page_title: 'Interactive Graph: Random Sampling',
                         page_location: window.location.href,
-                        custom_map: {
-                            'page_type': 'interactive_graph',
-                            'content_type': 'random_sampling'
-                        }
+                        send_page_view: true
                     });
-                    console.log('Page view tracked for:', window.location.href);
-                } else {
-                    console.warn('gtag not available for page view tracking');
                 }
             } catch (error) {
                 console.error('Error tracking page view:', error);
             }
         }
+
+        let sessionStart = Date.now();
 
         // Initialize app
         let populationChart, sampleChart;
@@ -469,27 +461,6 @@
             });
             
             return counts;
-        }
-        
-        // Calculate representativeness score
-        function calculateRepresentativeness(sampleCounts, sampleSize) {
-            const populationProportions = {
-                'Orange': 0.2,
-                'Blue': 0.1,
-                'Pink': 0.2,
-                'Green': 0.3,
-                'Purple': 0.2
-            };
-            
-            let totalDeviation = 0;
-            Object.keys(sampleCounts).forEach(type => {
-                const sampleProportion = sampleCounts[type] / sampleSize;
-                const expectedProportion = populationProportions[type];
-                totalDeviation += Math.abs(sampleProportion - expectedProportion);
-            });
-            
-            // Convert to a 0-100 scale where 100 is perfectly representative
-            return Math.max(0, 100 - (totalDeviation * 100));
         }
         
         // Create chart data from counts
@@ -648,7 +619,6 @@
             
             const sampleIndividuals = generateSampleData(sampleSize);
             const sampleCounts = countTypes(sampleIndividuals);
-            const representativeness = calculateRepresentativeness(sampleCounts, sampleSize);
             
             document.getElementById('sample-n').textContent = `n = ${sampleSize}`;
             
@@ -656,17 +626,6 @@
             
             sampleChart.data = sampleData;
             sampleChart.update(isMobile() ? 'none' : 'active');
-            
-            trackEvent('sampling_updated', {
-                sample_size: sampleSize,
-                representativeness_score: Math.round(representativeness),
-                orange_count: sampleCounts.Orange,
-                blue_count: sampleCounts.Blue,
-                pink_count: sampleCounts.Pink,
-                green_count: sampleCounts.Green,
-                purple_count: sampleCounts.Purple,
-                page_url: window.location.href
-            });
         }
         
         // Initialize charts
@@ -688,91 +647,30 @@
             updateCharts();
         }
         
-        // Track session metrics
-        let sessionStart = Date.now();
-        let interactionCount = 0;
-        let sampleSizeValues = [];
-        let representativenessScores = [];
-        
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize charts first
             initCharts();
             
             updateSliderValue('sample-size-slider', 'sample-size-value');
             
-            document.getElementById('sample-size-slider').addEventListener('input', function() {
-                interactionCount++;
-                const currentValue = parseInt(this.value);
-                sampleSizeValues.push(currentValue);
-                
-                // Calculate current representativeness for tracking
-                const sampleIndividuals = generateSampleData(currentValue);
-                const sampleCounts = countTypes(sampleIndividuals);
-                const representativeness = calculateRepresentativeness(sampleCounts, currentValue);
-                representativenessScores.push(representativeness);
-                
-                updateCharts();
-            });
+            document.getElementById('sample-size-slider').addEventListener('input', updateCharts);
             
-            // Track app load with delay to ensure gtag is ready
+            // Track page load
             setTimeout(function() {
                 trackPageView();
-                trackEvent('sampling_app_loaded', {
-                    load_type: 'javascript_version',
-                    load_time: Date.now(),
-                    user_agent: navigator.userAgent,
-                    page_url: window.location.href,
-                    referrer: document.referrer
+                trackEvent('page_loaded', {
+                    page_url: window.location.href
                 });
             }, 1000);
         });
         
-        // Track when user leaves the page
+        // Track session duration
         window.addEventListener('beforeunload', function() {
             const sessionDuration = Date.now() - sessionStart;
-            const maxSampleSize = sampleSizeValues.length > 0 ? Math.max(...sampleSizeValues) : 20;
-            const minSampleSize = sampleSizeValues.length > 0 ? Math.min(...sampleSizeValues) : 20;
-            const avgRepresentativeness = representativenessScores.length > 0 ? 
-                representativenessScores.reduce((a, b) => a + b, 0) / representativenessScores.length : 0;
-            
             trackEvent('session_end', {
-                session_duration_ms: sessionDuration,
                 session_duration_minutes: Math.round(sessionDuration / 60000),
-                interaction_count: interactionCount,
-                max_sample_size_explored: maxSampleSize,
-                min_sample_size_explored: minSampleSize,
-                unique_sample_sizes: [...new Set(sampleSizeValues)].length,
-                avg_representativeness_score: Math.round(avgRepresentativeness),
-                explored_large_samples: maxSampleSize >= 200 ? 'yes' : 'no',
                 page_url: window.location.href
             });
-        });
-        
-        // Track visibility changes (tab switching)
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                trackEvent('page_hidden', {
-                    time_on_page: Date.now() - sessionStart,
-                    interaction_count: interactionCount
-                });
-            } else {
-                trackEvent('page_visible', {
-                    return_time: Date.now() - sessionStart
-                });
-            }
-        });
-        
-        // Track scroll behavior
-        let scrollTracked = false;
-        window.addEventListener('scroll', function() {
-            if (!scrollTracked && window.scrollY > 100) {
-                scrollTracked = true;
-                trackEvent('page_scrolled', {
-                    scroll_depth: window.scrollY,
-                    time_to_scroll: Date.now() - sessionStart
-                });
-            }
         });
     </script>
 </body>

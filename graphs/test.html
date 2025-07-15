@@ -62,11 +62,11 @@
             border-radius: 8px;
             padding: 25px;
             position: relative;
-            height: 520px;
+            height: 550px;
         }
         .chart-title {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-size: 18px;
             font-weight: bold;
             color: #333;
@@ -164,29 +164,9 @@
             .chart-container {
                 height: 400px !important;
             }
-            
-            .chart-title {
-                margin-bottom: 6px;
-            }
-            
-            .header-section {
-                padding: 45px 15px 30px 15px;
-            }
-            
-            .content-section {
-                padding: 30px 15px 25px 15px;
-            }
-            
-            .chart-container {
-                padding: 10px 0px 10px 0px;
-            }
         }
         
         @media (max-width: 1200px), (max-device-width: 1200px) {
-            .mobile-break {
-                display: inline;
-            }
-            
             .header-section {
                 padding: 10px 15px 12px 15px;
             }
@@ -196,11 +176,12 @@
             }
             
             .chart-container {
-                padding: 15px 10px 15px 10px;
+                padding: 15px 10px 15px 15px;
             }
             
-            .chart-title {
-                margin-bottom: 5px !important;
+            .y-label {
+                top: 55px !important;
+                left: 20px !important;
             }
         }
         
@@ -287,6 +268,8 @@
                             <div class="chart-title" id="chart-title">
                                 Scatterplot of X and Y
                             </div>
+                            <!-- Manual Y label -->
+                            <div class="y-label" style="position: absolute; top: 65px; left: 30px; font-size: 14px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
                             <canvas id="scatterChart"></canvas>
                         </div>
                     </div>
@@ -459,9 +442,6 @@
         function initChart() {
             const ctx = document.getElementById('scatterChart').getContext('2d');
             
-            // Check if mobile
-            const isMobileDevice = window.innerWidth <= 768;
-            
             // Generate data once
             dataPoints = generateData();
             
@@ -471,8 +451,8 @@
                     datasets: [{
                         label: 'Data Points',
                         data: dataPoints,
-                        backgroundColor: '#0891b2',
-                        borderColor: '#0891b2',
+                        backgroundColor: '#1f78b4',
+                        borderColor: '#1f78b4',
                         pointRadius: 4,
                         pointHoverRadius: 6,
                         showLine: false
@@ -480,14 +460,13 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
-                    aspectRatio: isMobileDevice ? 1 : 1.5,
+                    maintainAspectRatio: false,
                     layout: {
                         padding: {
                             top: 10,
                             right: 15,
-                            bottom: 10,
-                            left: 2
+                            bottom: 35,
+                            left: 15
                         }
                     },
                     plugins: {
@@ -507,17 +486,13 @@
                             min: -6,
                             max: 10,
                             ticks: {
-                                color: '#333',
-                                font: {
-                                    size: 12
-                                },
-                                padding: 8
+                                display: false
                             },
                             grid: {
-                                color: '#ddd',
+                                display: false,
                                 drawBorder: true,
-                                tickLength: 0,
-                                offset: false
+                                borderColor: '#333',
+                                borderWidth: 1
                             },
                             title: {
                                 display: true,
@@ -526,8 +501,7 @@
                                 font: {
                                     size: 14
                                 },
-                                align: 'end',
-                                padding: { top: 0 }
+                                align: 'end'
                             }
                         },
                         y: {
@@ -535,42 +509,22 @@
                             min: -25,
                             max: 25,
                             ticks: {
-                                color: '#333',
-                                font: {
-                                    size: 12
-                                },
-                                padding: 8
+                                display: false
                             },
                             grid: {
-                                color: '#ddd',
+                                display: false,
                                 drawBorder: true,
-                                tickLength: 0
+                                borderColor: '#333',
+                                borderWidth: 1
                             },
                             title: {
-                                display: true,
-                                text: 'Y',
-                                color: '#333',
-                                font: {
-                                    size: 14
-                                },
-                                align: 'end'
+                                display: false  // Disable automatic Y label
                             }
                         }
                     },
                     animation: {
                         duration: 300
                     }
-                }
-            });
-            
-            // Add resize listener for dynamic aspect ratio
-            window.addEventListener('resize', () => {
-                const isMobileDevice = window.innerWidth <= 768;
-                const newAspectRatio = isMobileDevice ? 1 : 1.5;
-
-                if (chart.options.aspectRatio !== newAspectRatio) {
-                    chart.options.aspectRatio = newAspectRatio;
-                    chart.update();
                 }
             });
             

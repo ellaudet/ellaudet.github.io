@@ -62,7 +62,9 @@
             border-radius: 8px;
             padding: 25px;
             position: relative;
-            height: 550px;
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
         }
         .equation-display {
             text-align: center;
@@ -231,10 +233,11 @@
             
             .equation-display {
                 line-height: 1.1;
+                margin-bottom: 6px;
             }
             
             .header-section {
-                padding: 4px 15px 30px 15px;
+                padding: 45px 15px 30px 15px;
             }
             
             .content-section {
@@ -242,8 +245,7 @@
             }
             
             .chart-container {
-                padding: 15px 0px 50px 0px;
-                height: 600px;
+                padding: 10px 0px 10px 0px;
             }
         }
         
@@ -253,7 +255,7 @@
             }
             
             .header-section {
-                padding: 4px 15px 12px 15px;
+                padding: 10px 15px 12px 15px;
             }
             
             .content-section {
@@ -277,7 +279,7 @@
         <div class="app-container">
             <!-- Header Section -->
             <div class="header-section">
-                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; font-size: 20px;">
+                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; margin-top:2px; font-size: 20px;">
                     Interactive Graph:<span class="mobile-break"><br></span> Mean and Standard Deviation
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
@@ -496,12 +498,33 @@
             
             // Update chart data
             chart.data.datasets[0].data = histogramData;
+            
+            // Add vertical line at 10.5 for clean edge
+            if (chart.data.datasets.length === 1) {
+                chart.data.datasets.push({
+                    type: 'line',
+                    data: [
+                        { x: 11, y: 0 },
+                        { x: 11, y: 0.5 }
+                    ],
+                    borderColor: '#ddd',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0,
+                    order: 0
+                });
+            }
+            
             chart.update('none');
         }
         
         // Initialize chart
         function initChart() {
             const ctx = document.getElementById('distributionChart').getContext('2d');
+            
+            // Check if mobile
+            const isMobileDevice = window.innerWidth <= 768;
             
             chart = new Chart(ctx, {
                 type: 'bar',
@@ -518,13 +541,14 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
+                    aspectRatio: isMobileDevice ? 1 : 1.5,  
                     layout: {
                         padding: {
                             top: 10,
                             right: 15,
-                            bottom: 35,
-                            left: 5
+                            bottom: 10,
+                            left: 2
                         }
                     },
                     plugins: {
@@ -546,11 +570,14 @@
                                 color: '#333',
                                 font: {
                                     size: 12
-                                }
+                                },
+                                padding: 8
                             },
                             grid: {
                                 color: '#ddd',
-                                drawBorder: true
+                                drawBorder: true,
+                                tickLength: 0,
+                                offset: false
                             },
                             title: {
                                 display: true,
@@ -559,7 +586,8 @@
                                 font: {
                                     size: 14
                                 },
-                                align: 'end'
+                                align: 'end',
+                                padding: isMobileDevice ? { top: 0 } : { top: 0 }
                             }
                         },
                         y: {
@@ -571,11 +599,13 @@
                                 color: '#333',
                                 font: {
                                     size: 12
-                                }
+                                },
+                                padding: 8
                             },
                             grid: {
                                 color: '#ddd',
-                                drawBorder: true
+                                drawBorder: true,
+                                tickLength: 0
                             },
                             title: {
                                 display: true,
@@ -595,6 +625,17 @@
             });
             
             updateChart();
+
+            window.addEventListener('resize', () => {
+            const isMobileDevice = window.innerWidth <= 768;
+          const newAspectRatio = isMobileDevice ? 1 : 1.5;
+
+          if (chart.options.aspectRatio !== newAspectRatio) {
+            chart.options.aspectRatio = newAspectRatio;
+            chart.update();
+          }
+        });
+            
         }
         
         // Event listeners

@@ -425,8 +425,6 @@
                             <div class="equation-display" id="equation-display">
                                 Y = 1 + 2X
                             </div>
-                            <!-- Manual Y label -->
-                            <div class="y-label" style="position: absolute; top: 70px; left: 28px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
                             <canvas id="lineChart"></canvas>
                         </div>
                     </div>
@@ -700,6 +698,22 @@
                         }
                     },
                     animation: {
+                        onComplete: function() {
+                            // Add Y label dynamically positioned after chart is rendered
+                            const ctx = this.chart.ctx;
+                            const chartArea = this.chart.chartArea;
+                            
+                            ctx.save();
+                            ctx.fillStyle = '#333';
+                            ctx.font = 'bold 16px Helvetica';
+                            ctx.textAlign = 'left';
+                            ctx.textBaseline = 'top';
+                            
+                            // Add Y label (top left of chart area)
+                            ctx.fillText('Y', chartArea.left + 5, chartArea.top + 5);
+                            
+                            ctx.restore();
+                        },
                         duration: 300
                     }
                 }

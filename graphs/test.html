@@ -234,7 +234,7 @@
             }
             
             .header-section {
-                padding: 4px 15px 30px 15px;
+                padding: 25px 15px 30px 15px;
             }
             
             .content-section {
@@ -503,6 +503,9 @@
         function initChart() {
             const ctx = document.getElementById('distributionChart').getContext('2d');
             
+            // Check if mobile
+            const isMobileDevice = window.innerWidth <= 768;
+            
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -524,7 +527,7 @@
                             top: 10,
                             right: 15,
                             bottom: 35,
-                            left: 5
+                            left: 2
                         }
                     },
                     plugins: {
@@ -550,7 +553,9 @@
                             },
                             grid: {
                                 color: '#ddd',
-                                drawBorder: true
+                                drawBorder: true,
+                                tickLength: 0,
+                                offset: false
                             },
                             title: {
                                 display: true,
@@ -559,7 +564,8 @@
                                 font: {
                                     size: 14
                                 },
-                                align: 'end'
+                                align: 'end',
+                                padding: isMobileDevice ? { top: 5 } : { top: 10 }
                             }
                         },
                         y: {

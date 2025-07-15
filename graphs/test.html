@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Graph: Correlation Coefficient</title>
+    <title>Interactive Graph: Intercept and Slope</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     
     <!-- Google Analytics Tag -->
@@ -13,7 +13,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-YEPLTYLL6H', {
-          page_title: 'Interactive Graph: Correlation Coefficient',
+          page_title: 'Interactive Graph: Intercept and Slope',
           page_location: window.location.href,
           send_page_view: true
       });
@@ -62,21 +62,12 @@
             border-radius: 8px;
             padding: 25px;
             position: relative;
-            max-width: 100%;
-            width: 100%;
-            margin: 0 auto;
+            height: 520px;
         }
-        .correlation-display {
+        .equation-display {
             text-align: center;
             margin-bottom: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-        }
-        .chart-title {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
             color: #333;
         }
@@ -84,23 +75,20 @@
             color: #333333;
             font-size: 15px;
             font-weight: normal;
-            margin-bottom: 0px;
+            margin-bottom: 5px;
         }
         .form-text {
             color: #666;
             font-size: 14px;
-            margin-bottom: 10px;
-            margin-top: 1px;
+            margin-bottom: 5px;
             line-height: 1.5;
         }
-        .form-select, .form-check {
-            margin-bottom: 10px;
+        .form-check {
+            margin-bottom: 8px;
             font-size: 14px;
         }
         .form-check-label {
-            font-size: 15px;
-            font-weight: normal;
-            color: #333333;
+            font-size: 14px;
         }
         .step-list {
             line-height: 1.5;
@@ -120,32 +108,111 @@
             margin-top: 20px;
             border-left: 3px solid #6c757d;
         }
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
+        .slider-container {
+            margin-bottom: 20px;
         }
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #fb4128;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .slider-input {
+            width: 100%;
+            margin: 10px 0 5px 0;
+            position: relative;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .slider-value {
+            text-align: center;
+            font-weight: bold;
+            color: #fb4128;
+            margin-top: 2px;
+            font-size: 16px;
         }
         
-        /* Custom red checkbox styling */
+        /* Custom slider container with dynamic value positioning */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        /* Custom red slider styling */
+        .form-range {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        /* Slider track */
+        .form-range::-webkit-slider-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
+        }
+        
+        .form-range::-moz-range-track {
+            background: #ddd;
+            height: 6px;
+            border-radius: 3px;
+            border: none;
+        }
+        
+        /* Slider thumb */
+        .form-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #fb4128;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .form-range::-moz-range-thumb {
+            background: #fb4128;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Slider thumb hover effect */
+        .form-range::-webkit-slider-thumb:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        
+        .form-range::-moz-range-thumb:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        
+        /* Slider focus styles */
+        .form-range:focus {
+            outline: none;
+        }
+        
+        .form-range:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
+        }
+        
+        .form-range:focus::-moz-range-thumb {
+            box-shadow: 0 0 0 3px rgba(251, 65, 40, 0.3);
+        }
+        
+        /* Dynamic value positioning */
+        .slider-dynamic-value {
+            position: absolute;
+            top: 45px;
+            font-weight: bold;
+            color: #fb4128;
+            font-size: 14px;
+            transform: translateX(-50%);
+            pointer-events: none;
+            transition: left 0.1s ease;
+            white-space: nowrap;
+        }
+        
         .form-check-input {
             background-color: white;
             border-color: #ced4da;
@@ -166,66 +233,39 @@
             box-shadow: 0 0 0 0.25rem rgba(251, 65, 40, 0.25);
         }
         
-        /* Custom dropdown styling */
-        .form-select {
-            border-color: #ced4da;
-        }
-        
-        .form-select:focus {
-            border-color: #0891b2;
-            outline: 0;
-            box-shadow: 0 0 0 0.25rem rgba(8, 145, 178, 0.25);
-        }
-        
-        /* Mobile optimizations */
-        .mobile-break {
-            display: none;
-        }
-        
-        @media (max-width: 768px), (max-device-width: 768px) {
-            .mobile-break {
-                display: inline;
-            }
-            
-            .correlation-display {
-                margin-bottom: 6px;
-            }
-            
-            .header-section {
-                padding: 45px 15px 30px 15px;
-            }
-            
-            .content-section {
-                padding: 30px 15px 25px 15px;
-            }
-            
-            .chart-container {
-                padding: 10px 0px 10px 0px;
-            }
-        }
-        
+        /* Mobile title styling - multiple approaches */
         @media (max-width: 1200px), (max-device-width: 1200px) {
             .mobile-break {
                 display: inline;
             }
             
+            .chart-container {
+                padding: 15px 10px 15px 15px;
+            }
+            
+            .y-label {
+                top: 60px !important;
+                left: 18px !important;
+            }
+            
             .header-section {
-                padding: 10px 15px 12px 15px;
+                padding: 4px 15px 12px 15px;
             }
             
             .content-section {
                 padding: 15px 15px 25px 15px;
             }
-            
-            .chart-container {
-                padding: 15px 5px 15px 5px;
-            }
         }
         
+        /* Additional mobile detection */
         @media only screen and (max-width: 1200px) {
             .mobile-break {
                 display: inline !important;
             }
+        }
+        
+        .mobile-break {
+            display: none;
         }
     </style>
 </head>
@@ -234,8 +274,8 @@
         <div class="app-container">
             <!-- Header Section -->
             <div class="header-section">
-                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; margin-top: 2px; font-size: 20px;">
-                    Interactive Graph:<span class="mobile-break"><br></span> Correlation Coefficient
+                <h3 style="color: #fb4128; text-align: center; margin-bottom: 2px; font-size: 20px;">
+                    Interactive Graph:<span class="mobile-break"><br></span> Intercept and Slope
                 </h3>
                 <p style="text-align: center; color: #797979; margin-bottom: 0; margin-top: 0; font-size: 18px;">
                     By Elena Llaudet, co-author of 
@@ -249,35 +289,60 @@
             <div class="content-section">
                 <!-- Key Points Box -->
                 <div class="info-box">
-                    <p style="margin: 0 0 10px 0; font-size: 16px; color: #333333; line-height: 1.5;">
-                        The correlation coefficient (or correlation) captures the direction and strength of the linear association between two variables with a number that ranges from -1 to 1.
+                    <p style="margin: 0 0 10px 0; font-size: 16px; color: #333333;">
+                        We can define a line as Y = α + βX, where:
                     </p>
-                    <ul style="margin: 0; padding-left: 20px; line-height: 1.5;">
+                    <ul style="margin: 0; padding-left: 20px; line-height: 1.4;">
                         <li style="margin-bottom: 8px; font-size: 16px; color: #333333;">
-                            The sign reflects the direction: positive when the variables tend to move together (when the slope of the line of best fit is positive) and negative when the variables tend to move in opposite directions (when the slope of the line of best fit is negative).
+                            α (alpha) is the intercept: the value of Y when X=0, which determines the vertical location of the line.
                         </li>
                         <li style="margin-bottom: 0; font-size: 16px; color: #333333;">
-                            The absolute value reflects the strength: it ranges from 0 (no linear association) to 1 (perfect linear association), increasing as dots get closer to the line of best fit.
+                            β (beta) is the slope: rise over run (the change in Y divided by the change in X between two points on the line), which determines the steepness of the line. Interpretation: change in Y associated with a one-unit increase in X.
                         </li>
                     </ul>
                 </div>
 
                 <!-- Explanation -->
                 <p style="font-size: 16px; color: #333333; margin-bottom: 12px; line-height: 1.5;">
-                    Let's explore how changing the direction and strength of the linear association affects the correlation coefficient:
+                    Let's see how changing these parameters affects the line:
                 </p>
 
                 <!-- Steps -->
                 <div class="step-list">
                     <div style="font-size: 16px; color: #333333; line-height: 1.5;">
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 1:</span> The graph below shows a scatterplot of two variables with a correlation of 1. The sign is positive because the slope of the line of best fit is positive (it moves upward from left to right), and the absolute value is 1 because all dots lie exactly on the line. (Check the box to show the line of best fit as a dashed red line.) This indicates a perfectly positive linear relationship between X and Y.
+                            <span class="step-number">STEP 1:</span> The graph below shows a line with an intercept of 1 and a slope of 2, so the line is: Y = 1 + 2X (as shown in the title).
+                            <ul style="margin: 8px 0 0 0; padding-left: 20px; list-style-position: outside; line-height: 1.5;">
+                                <li style="margin-bottom: 6px; line-height: 1.5;">
+                                    To verify the intercept, find 0 on the x-axis, move up to the line, and find the Y-value that corresponds to that point on the line. The point is (0,1), confirming the intercept is 1. (Check the first box to show in the graph the point at X=0 as an orange circle.) Note: The intercept is not always where the line crosses the visible y-axis, since that axis might not be drawn exactly at X=0.
+                                </li>
+                                <li style="margin-bottom: 0; line-height: 1.5;">
+                                    To verify the slope, choose two points on the line, and calculate rise over run. For example, we can use the intercept and the point at X=2, which is (2,5). (Check the second box to show in the graph this point as an orange triangle.) Using (0,1) and (2,5):
+                                    <ul style="margin: 3px 0; padding-left: 20px; list-style-position: outside; line-height: 1.5;">
+                                        <li style="margin-bottom: 0;">rise = ΔY = Y<sub>final</sub> - Y<sub>initial</sub> = 5-1 = 4</li>
+                                        <li style="margin-bottom: 0;">run = ΔX = X<sub>final</sub> - X<sub>initial</sub> = 2-0 = 2</li>
+                                        <li style="margin-bottom: 0;">slope = rise/run = 4/2 = 2</li>
+                                    </ul>
+                                    Interpretation: every one-unit increase in X is associated with an increase in Y of 2 units.
+                                </li>
+                            </ul>
                         </div>
                         <div style="margin-bottom: 12px; line-height: 1.5;">
-                            <span class="step-number">STEP 2:</span> Use the first drop-down menu to change the direction of the linear association from positive to negative. The line of best fit changes from sloping upward to sloping downward (from left to right), and the correlation coefficient changes from positive to negative. It is now -1, indicating a perfectly negatively linear relationship.
+                            <span class="step-number">STEP 2:</span> Move the intercept slider to see how it shifts the line vertically without changing its steepness. For example, changing from 1 to -1 moves both points down by 2 units, but the slope stays the same because neither rise nor run have changed.
                         </div>
                         <div style="margin-bottom: 18px; line-height: 1.5;">
-                            <span class="step-number">STEP 3:</span> Now, use the second drop-down menu to change the strength of the linear association. When selecting weaker linear associations (for example, from perfect to strong or from strong to weak to moderate) , the dots spread farther from the line, and the absolute value of the correlation decreases. When there is no linear association, the correlation coefficient will be approximately 0, and the dots will be scattered without any discernible pattern or trend.
+                            <span class="step-number">STEP 3:</span> Now, keep the intercept at -1 and move the slope slider to see how it changes the line's steepness without affecting the intercept.
+                            <ul style="margin: 8px 0 0 0; padding-left: 20px; list-style-position: outside; line-height: 1.5;">
+                                <li style="margin-bottom: 6px; line-height: 1.5;">
+                                    Decreasing the slope from 2 to 1 makes the line less steep, but keeps it moving upwards (from left to right). The X=0 point stays at (0,-1), but the X=2 point moves to (2,1): rise = 1-(-1) = 2, run = 2-0 = 2, so slope = 2/2 = 1. Interpretation: every one-unit increase in X is associated with an increase in Y of 1 unit.
+                                </li>
+                                <li style="margin-bottom: 6px; line-height: 1.5;">
+                                    A negative slope reverses the direction of the line: it will go from moving upwards to downwards (from left to right). With slope = -2, the X=0 point stays at (0,-1), but the X=2 point drops to (2,-5): rise = -5-(-1) = -4, run = 2-0 = 2, slope = -4/2 = -2. Interpretation: every one-unit increase in X is associated with a <em>decrease</em> in Y of 2 units.
+                                </li>
+                                <li style="margin-bottom: 0; line-height: 1.5;">
+                                    Setting the slope to 0 creates a horizontal line. The X=0 point stays at (0,-1), and the X=2 point moves to (2,-1): rise = -1-(-1) = 0, run = 2-0 = 2, so slope = 0/2 = 0. Interpretation: changes in X are not associated with any change in Y.
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -287,51 +352,54 @@
                     <div class="col-lg-4">
                         <div class="controls-panel">
                             <div class="form-check" style="margin-bottom: 8px;">
-                                <input class="form-check-input" type="checkbox" id="show-line">
-                                <label class="form-check-label" for="show-line">
-                                    Show line of best fit
+                                <input class="form-check-input" type="checkbox" id="show-x0-point">
+                                <label class="form-check-label" for="show-x0-point">
+                                    Show point at X=0 (orange circle)
                                 </label>
                             </div>
 
-                            <div class="mb-3" style="margin-bottom: 10px !important;">
-                                <label class="form-label" style="margin-bottom: 0px;">Direction of linear association:</label>
-                                <p class="form-text" style="line-height: 1.5; margin-bottom: 10px;">
-                                    Select whether the variables tend to move in the same direction (positive) or in opposite directions (negative) and observe how that changes the slope of the line of best fit and the sign of the correlation coefficient.
-                                </p>
-                                <select class="form-select" id="direction-select">
-                                    <option value="positive">positive linear association</option>
-                                    <option value="negative">negative linear association</option>
-                                </select>
+                            <div class="form-check" style="margin-bottom: 12px;">
+                                <input class="form-check-input" type="checkbox" id="show-x2-point">
+                                <label class="form-check-label" for="show-x2-point">
+                                    Show point at X=2 (orange triangle)
+                                </label>
                             </div>
 
-                            <div class="mb-3" style="margin-bottom: 0px !important;">
-                                <label class="form-label" style="margin-bottom: 0px;">Strength of linear association:</label>
-                                <p class="form-text" style="line-height: 1.5; margin-bottom: 10px;">
-                                    Select the strength of the linear association and observe how that changes how tightly the dots cluster around the line of best fit and the absolute value of the correlation coefficient.
+                            <div class="slider-container">
+                                <label class="form-label">Intercept:</label>
+                                <p class="form-text">
+                                    Move this slider to see how the intercept changes the line's vertical position.
                                 </p>
-                                <select class="form-select" id="strength-select">
-                                    <option value="perfect">perfect linear association</option>
-                                    <option value="strong">strong linear association</option>
-                                    <option value="moderate">weak to moderate linear association</option>
-                                    <option value="none">no linear association (approximately)</option>
-                                </select>
+                                <div class="slider-wrapper">
+                                    <input type="range" class="form-range slider-input" id="intercept-slider" 
+                                           min="-2" max="2" step="0.1" value="1">
+                                    <div class="slider-dynamic-value" id="intercept-value">1</div>
+                                </div>
+                            </div>
+
+                            <div class="slider-container">
+                                <label class="form-label">Slope:</label>
+                                <p class="form-text">
+                                    Move this slider to see how the slope changes the line's steepness.
+                                </p>
+                                <div class="slider-wrapper">
+                                    <input type="range" class="form-range slider-input" id="slope-slider" 
+                                           min="-2" max="2" step="0.1" value="2">
+                                    <div class="slider-dynamic-value" id="slope-value">2</div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Chart Panel -->
                     <div class="col-lg-8">
-                        <div class="chart-container">
-                            <div class="correlation-display" id="correlation-display">
-                                Correlation = 1
+                        <div class="chart-container" style="position: relative;">
+                            <div class="equation-display" id="equation-display">
+                                Y = 1 + 2X
                             </div>
-                            <canvas id="scatterChart"></canvas>
-                            <div class="loading-overlay" id="loading-overlay" style="display: none;">
-                                <div>
-                                    <div class="spinner"></div>
-                                    <p style="margin-top: 10px; color: #666;">Generating data...</p>
-                                </div>
-                            </div>
+                            <!-- Manual Y label -->
+                            <div class="y-label" style="position: absolute; top: 70px; left: 28px; font-size: 16px; color: #333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Y</div>
+                            <canvas id="lineChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -339,7 +407,7 @@
                 <!-- Notes Section -->
                 <div class="notes-section">
                     <p style="margin: 0; font-size: 15px; color: #666; line-height: 1.5;">
-                        <strong>Notes:</strong> In a scatterplot, each dot represents an observation, positioned according to the values of (<em>X<sub>i</sub></em>, <em>Y<sub>i</sub></em>). The line of best fit is the line that best summarizes the data cloud. For illustration purposes, here we use <em>weak</em>, <em>moderate</em>, and <em>strong</em>, but note that what is considered a <em>weak</em> correlation in one field may be considered <em>strong</em> in another.
+                        <strong>Notes:</strong> In this graph, each point consists of two coordinates in the two-dimensional space. The first coordinate indicates the position of the point on the x-axis, and the second indicates the position of the point on the y-axis. For example, the point (0,1) aligns with 0 on the x-axis and 1 on the y-axis.
                     </p>
                 </div>
             </div>
@@ -362,7 +430,7 @@
             try {
                 if (typeof gtag !== 'undefined') {
                     gtag('config', 'G-YEPLTYLL6H', {
-                        page_title: 'Interactive Graph: Correlation Coefficient',
+                        page_title: 'Interactive Graph: Intercept and Slope',
                         page_location: window.location.href,
                         send_page_view: true
                     });
@@ -376,257 +444,221 @@
 
         // Initialize app
         let chart;
-        let currentData = [];
         
-        // Generate data based on correlation parameters
-        function generateData(direction, strength) {
-            const n = 1000; // Number of points (matching original)
-            const data = [];
-            let correlation = 0;
+        // Function to update slider value position
+        function updateSliderValue(sliderId, valueId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+            const value = parseFloat(slider.value);
+            const min = parseFloat(slider.min);
+            const max = parseFloat(slider.max);
             
-            // Set seed for consistent results
-            Math.seedrandom = function(seed) {
-                const m = 0x80000000;
-                const a = 1103515245;
-                const c = 12345;
-                let state = seed ? seed : Math.floor(Math.random() * (m - 1));
-                
-                Math.random = function() {
-                    state = (a * state + c) % m;
-                    return state / (m - 1);
-                };
-            };
-            Math.seedrandom(1234);
+            // Calculate percentage position with better alignment
+            const percentage = ((value - min) / (max - min)) * 100;
             
-            // Generate base x values
-            const baseX = [];
-            for (let i = 0; i < n; i++) {
-                baseX.push(gaussianRandom() * 10 + 50);
-            }
+            // Account for thumb width to center properly
+            // The thumb is 20px wide, so we need to adjust for the track padding
+            const thumbOffset = (percentage - 50) * 0.15; // Fine-tune this multiplier as needed
+            const adjustedPercentage = percentage - thumbOffset;
             
-            // Get sign multiplier
-            const signMult = (direction === 'positive') ? 1 : -1;
-            
-            // Generate y values based on strength
-            for (let i = 0; i < n; i++) {
-                const x = baseX[i];
-                let y;
-                
-                switch (strength) {
-                    case 'perfect':
-                        y = x; // perfect linear association
-                        break;
-                    case 'strong':
-                        y = x + gaussianRandom() * 7; // strong linear association
-                        break;
-                    case 'moderate':
-                        y = x + gaussianRandom() * 16; // weak to moderate linear association
-                        break;
-                    case 'none':
-                        y = gaussianRandom() * 20 + 50; // no linear association (approximately)
-                        break;
-                }
-                
-                // Apply sign
-                const yFinal = signMult * y;
-                
-                data.push({ x: x, y: yFinal });
-            }
-            
-            return { data, correlation };
-        }
-        
-        // Box-Muller transform for normal distribution
-        function gaussianRandom() {
-            let u = 0, v = 0;
-            while(u === 0) u = Math.random();
-            while(v === 0) v = Math.random();
-            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-        }
-        
-        // Calculate actual correlation coefficient
-        function calculateCorrelation(data) {
-            const n = data.length;
-            const sumX = data.reduce((sum, point) => sum + point.x, 0);
-            const sumY = data.reduce((sum, point) => sum + point.y, 0);
-            const sumXY = data.reduce((sum, point) => sum + point.x * point.y, 0);
-            const sumX2 = data.reduce((sum, point) => sum + point.x * point.x, 0);
-            const sumY2 = data.reduce((sum, point) => sum + point.y * point.y, 0);
-            
-            const numerator = n * sumXY - sumX * sumY;
-            const denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
-            
-            return denominator === 0 ? 0 : numerator / denominator;
-        }
-        
-        // Calculate regression line
-        function calculateRegressionLine(data) {
-            const n = data.length;
-            const sumX = data.reduce((sum, point) => sum + point.x, 0);
-            const sumY = data.reduce((sum, point) => sum + point.y, 0);
-            const sumXY = data.reduce((sum, point) => sum + point.x * point.y, 0);
-            const sumX2 = data.reduce((sum, point) => sum + point.x * point.x, 0);
-            
-            const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
-            const intercept = (sumY - slope * sumX) / n;
-            
-            return { slope, intercept };
+            // Update value text and position
+            valueDisplay.textContent = value;
+            valueDisplay.style.left = `${adjustedPercentage}%`;
         }
         
         // Update chart
         function updateChart() {
-            const direction = document.getElementById('direction-select').value;
-            const strength = document.getElementById('strength-select').value;
-            const showLine = document.getElementById('show-line').checked;
+            const intercept = parseFloat(document.getElementById('intercept-slider').value);
+            const slope = parseFloat(document.getElementById('slope-slider').value);
+            const showX0 = document.getElementById('show-x0-point').checked;
+            const showX2 = document.getElementById('show-x2-point').checked;
             
-            const result = generateData(direction, strength);
-            currentData = result.data;
-            const actualCorrelation = calculateCorrelation(currentData);
+            // Update equation display
+            const interceptText = intercept >= 0 ? intercept : `(${intercept})`;
+            const slopeText = slope >= 0 ? slope : `(${slope})`;
+            document.getElementById('equation-display').textContent = `Y = ${interceptText} + ${slopeText}X`;
             
-            // Update correlation display (smart decimal formatting)
-            const correlationText = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
-                Math.round(actualCorrelation) : actualCorrelation.toFixed(2);
-            document.getElementById('correlation-display').textContent = 
-                `Correlation = ${correlationText}`;
+            // Update slider value displays and positions
+            updateSliderValue('intercept-slider', 'intercept-value');
+            updateSliderValue('slope-slider', 'slope-value');
             
-            // Update chart data (Data Points are now at index 1)
-            chart.data.datasets[1].data = currentData;
+            // Generate line data
+            const xValues = [];
+            const yValues = [];
+            for (let x = -2; x <= 4; x += 0.1) {
+                xValues.push(x);
+                yValues.push(intercept + slope * x);
+            }
             
-            // Calculate bounds with padding
-            const xValues = currentData.map(p => p.x);
-            const yValues = currentData.map(p => p.y);
-            const minX = Math.min(...xValues);
-            const maxX = Math.max(...xValues);
-            const minY = Math.min(...yValues);
-            const maxY = Math.max(...yValues);
+            // Update main line
+            chart.data.datasets[0].data = xValues.map((x, i) => ({ x: x, y: yValues[i] }));
             
-            // Add 10% padding around the data
-            const xPadding = (maxX - minX) * 0.1;
-            const yPadding = (maxY - minY) * 0.1;
+            // Clear additional datasets
+            chart.data.datasets = chart.data.datasets.slice(0, 1);
             
-            // Update chart scales with padding
-            chart.options.scales.x.min = minX - xPadding;
-            chart.options.scales.x.max = maxX + xPadding;
-            chart.options.scales.y.min = minY - yPadding;
-            chart.options.scales.y.max = maxY + yPadding;
+            // Add grid lines and points if requested
+            const gridLines = [];
+            const points = [];
             
-            // Handle regression line
-            if (showLine && strength !== 'none') {
-                const regression = calculateRegressionLine(currentData);
-                const minX = Math.min(...currentData.map(p => p.x));
-                const maxX = Math.max(...currentData.map(p => p.x));
-                
-                chart.data.datasets[0] = {
-                    label: 'Line of Best Fit',
-                    data: [
-                        { x: minX, y: regression.slope * minX + regression.intercept },
-                        { x: maxX, y: regression.slope * maxX + regression.intercept }
-                    ],
-                    type: 'line',
-                    borderColor: '#fb4128',
+            if (showX0) {
+                const y0 = intercept;
+                // Vertical dashed line from (0, y0) to bottom
+                gridLines.push({
+                    data: [{ x: 0, y: y0 }, { x: 0, y: -6 }],
+                    borderColor: '#bababa',
                     borderWidth: 2,
                     borderDash: [5, 5],
                     pointRadius: 0,
                     fill: false,
-                    tension: 0
-                };
-            } else {
-                chart.data.datasets[0] = { data: [] };
+                    tension: 0,
+                    order: 5
+                });
+                // Horizontal dashed line from (0, y0) to left
+                gridLines.push({
+                    data: [{ x: 0, y: y0 }, { x: -2, y: y0 }],
+                    borderColor: '#bababa',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0,
+                    order: 5
+                });
+                // Red circle point
+                points.push({
+                    type: 'scatter',
+                    data: [{ x: 0, y: y0 }],
+                    backgroundColor: '#fb4128',
+                    borderColor: '#fb4128',
+                    pointRadius: 7,
+                    pointStyle: 'circle',
+                    showLine: false,
+                    order: 1
+                });
             }
+            
+            if (showX2) {
+                const y2 = intercept + slope * 2;
+                // Vertical dashed line from (2, y2) to bottom
+                gridLines.push({
+                    data: [{ x: 2, y: y2 }, { x: 2, y: -6 }],
+                    borderColor: '#bababa',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0,
+                    order: 5
+                });
+                // Horizontal dashed line from (2, y2) to left
+                gridLines.push({
+                    data: [{ x: 2, y: y2 }, { x: -2, y: y2 }],
+                    borderColor: '#bababa',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0,
+                    order: 5
+                });
+                // Red triangle point
+                points.push({
+                    type: 'scatter',
+                    data: [{ x: 2, y: y2 }],
+                    backgroundColor: '#fb4128',
+                    borderColor: '#fb4128',
+                    pointRadius: 9,
+                    pointStyle: 'triangle',
+                    showLine: false,
+                    order: 1
+                });
+            }
+            
+            // Add all grid lines and points to chart
+            chart.data.datasets.push(...gridLines, ...points);
             
             chart.update('none');
         }
         
         // Initialize chart
         function initChart() {
-            const ctx = document.getElementById('scatterChart').getContext('2d');
-            
-            // Check if mobile
-            const isMobileDevice = window.innerWidth <= 768;
+            const ctx = document.getElementById('lineChart').getContext('2d');
             
             chart = new Chart(ctx, {
-                type: 'scatter',
+                type: 'line',
                 data: {
                     datasets: [{
-                        label: 'Line of Best Fit',
+                        label: 'Line',
                         data: [],
-                        type: 'line',
-                        borderColor: '#fb4128',
-                        borderWidth: 2,
-                        borderDash: [5, 5],
-                        pointRadius: 0,
-                        fill: false
-                    }, {
-                        label: 'Data Points',
-                        data: [],
-                        backgroundColor: '#0891b2',
                         borderColor: '#0891b2',
-                        pointRadius: 3,
-                        pointHoverRadius: 5
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0,
+                        order: 10
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
-                    aspectRatio: isMobileDevice ? 1 : 1.5,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            top: 10,
+                            right: 35,
+                            bottom: 35,
+                            left: 20
+                        }
+                    },
                     plugins: {
                         legend: {
-                            display: false
-                        },
-                        title: {
                             display: false
                         }
                     },
                     scales: {
                         x: {
-                            display: false,
                             type: 'linear',
-                            position: 'bottom'
+                            position: 'bottom',
+                            min: -2,
+                            max: 4,
+                            ticks: {
+                                stepSize: 1,
+                                color: '#333'
+                            },
+                            grid: {
+                                color: '#ddd'
+                            },
+                            title: {
+                                display: true,
+                                text: 'X',
+                                color: '#333',
+                                font: {
+                                    size: 16
+                                },
+                                align: 'end'
+                            }
                         },
                         y: {
-                            display: false,
-                            type: 'linear'
+                            type: 'linear',
+                            min: -6,
+                            max: 6,
+                            ticks: {
+                                stepSize: 1,
+                                color: '#333'
+                            },
+                            grid: {
+                                color: '#ddd'
+                            },
+                            title: {
+                                display: false  // Disable automatic Y label
+                            }
                         }
                     },
                     animation: {
-                        onComplete: function() {
-                            // Add X and Y labels after chart is rendered
-                            const ctx = this.chart.ctx;
-                            const chartArea = this.chart.chartArea;
-                            
-                            ctx.save();
-                            ctx.fillStyle = '#666';
-                            ctx.font = 'bold 16px Helvetica';
-                            ctx.textAlign = 'right';
-                            ctx.textBaseline = 'bottom';
-                            
-                            // Add X label (bottom right)
-                            ctx.fillText('X', chartArea.right - 10, chartArea.bottom - 5);
-                            
-                            // Add Y label (top left)
-                            ctx.textAlign = 'left';
-                            ctx.textBaseline = 'top';
-                            ctx.fillText('Y', chartArea.left + 5, chartArea.top + 5);
-                            
-                            ctx.restore();
-                        },
-                        duration: 500
+                        duration: 300
                     }
                 }
             });
             
-            // Add resize listener for dynamic aspect ratio
-            window.addEventListener('resize', () => {
-                const isMobileDevice = window.innerWidth <= 768;
-                const newAspectRatio = isMobileDevice ? 1 : 1.5;
-
-                if (chart.options.aspectRatio !== newAspectRatio) {
-                    chart.options.aspectRatio = newAspectRatio;
-                    chart.update();
-                }
-            });
-            
-            // Initial chart update
             updateChart();
         }
         
@@ -634,9 +666,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             initChart();
             
-            document.getElementById('direction-select').addEventListener('change', updateChart);
-            document.getElementById('strength-select').addEventListener('change', updateChart);
-            document.getElementById('show-line').addEventListener('change', updateChart);
+            // Initialize slider value positions
+            updateSliderValue('intercept-slider', 'intercept-value');
+            updateSliderValue('slope-slider', 'slope-value');
+            
+            document.getElementById('intercept-slider').addEventListener('input', updateChart);
+            document.getElementById('slope-slider').addEventListener('input', updateChart);
+            document.getElementById('show-x0-point').addEventListener('change', updateChart);
+            document.getElementById('show-x2-point').addEventListener('change', updateChart);
             
             // Track page load
             setTimeout(function() {

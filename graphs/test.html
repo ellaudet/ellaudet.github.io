@@ -496,6 +496,24 @@
             
             // Update chart data
             chart.data.datasets[0].data = histogramData;
+            
+            // Add vertical line at 10.5 for clean edge
+            if (chart.data.datasets.length === 1) {
+                chart.data.datasets.push({
+                    type: 'line',
+                    data: [
+                        { x: 10.5, y: 0 },
+                        { x: 10.5, y: 0.5 }
+                    ],
+                    borderColor: '#ddd',
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0,
+                    order: 0
+                });
+            }
+            
             chart.update('none');
         }
         

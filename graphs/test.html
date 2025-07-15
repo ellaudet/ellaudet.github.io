@@ -378,17 +378,6 @@
         let chart;
         let currentData = [];
         
-        // Get responsive sizing based on screen size
-        function getResponsiveSizing() {
-            const isMobileDevice = window.innerWidth <= 768;
-            return {
-                pointRadius: isMobileDevice ? 2 : 3,
-                pointHoverRadius: isMobileDevice ? 4 : 5,
-                lineWidth: isMobileDevice ? 1.5 : 2,
-                aspectRatio: isMobileDevice ? 1 : 1.5
-            };
-        }
-        
         // Generate data based on correlation parameters
         function generateData(direction, strength) {
             const n = 1000; // Number of points (matching original)
@@ -494,9 +483,6 @@
             currentData = result.data;
             const actualCorrelation = calculateCorrelation(currentData);
             
-            // Get current responsive sizing
-            const sizing = getResponsiveSizing();
-            
             // Update correlation display (smart decimal formatting)
             const correlationText = (Math.abs(actualCorrelation) === 1 || actualCorrelation === 0) ? 
                 Math.round(actualCorrelation) : actualCorrelation.toFixed(2);
@@ -505,8 +491,6 @@
             
             // Update chart data (Data Points are now at index 1)
             chart.data.datasets[1].data = currentData;
-            chart.data.datasets[1].pointRadius = sizing.pointRadius;
-            chart.data.datasets[1].pointHoverRadius = sizing.pointHoverRadius;
             
             // Calculate bounds with padding
             const xValues = currentData.map(p => p.x);
@@ -540,7 +524,7 @@
                     ],
                     type: 'line',
                     borderColor: '#fb4128',
-                    borderWidth: sizing.lineWidth,
+                    borderWidth: 2,
                     borderDash: [5, 5],
                     pointRadius: 0,
                     fill: false,
@@ -557,8 +541,8 @@
         function initChart() {
             const ctx = document.getElementById('scatterChart').getContext('2d');
             
-            // Get initial sizing
-            const sizing = getResponsiveSizing();
+            // Check if mobile
+            const isMobileDevice = window.innerWidth <= 768;
             
             chart = new Chart(ctx, {
                 type: 'scatter',
@@ -568,7 +552,7 @@
                         data: [],
                         type: 'line',
                         borderColor: '#fb4128',
-                        borderWidth: sizing.lineWidth,
+                        borderWidth: 2,
                         borderDash: [5, 5],
                         pointRadius: 0,
                         fill: false
@@ -577,14 +561,14 @@
                         data: [],
                         backgroundColor: '#0891b2',
                         borderColor: '#0891b2',
-                        pointRadius: sizing.pointRadius,
-                        pointHoverRadius: sizing.pointHoverRadius
+                        pointRadius: 3,
+                        pointHoverRadius: 5
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: true,
-                    aspectRatio: sizing.aspectRatio,
+                    aspectRatio: isMobileDevice ? 1 : 1.5,
                     plugins: {
                         legend: {
                             display: false
@@ -631,25 +615,15 @@
                 }
             });
             
-            // Add resize listener for dynamic aspect ratio and sizing
+            // Add resize listener for dynamic aspect ratio
             window.addEventListener('resize', () => {
-                const newSizing = getResponsiveSizing();
+                const isMobileDevice = window.innerWidth <= 768;
+                const newAspectRatio = isMobileDevice ? 1 : 1.5;
 
-                // Update aspect ratio
-                if (chart.options.aspectRatio !== newSizing.aspectRatio) {
-                    chart.options.aspectRatio = newSizing.aspectRatio;
+                if (chart.options.aspectRatio !== newAspectRatio) {
+                    chart.options.aspectRatio = newAspectRatio;
+                    chart.update();
                 }
-                
-                // Update point and line sizing
-                chart.data.datasets[1].pointRadius = newSizing.pointRadius;
-                chart.data.datasets[1].pointHoverRadius = newSizing.pointHoverRadius;
-                
-                // Update line width for regression line if it exists
-                if (chart.data.datasets[0].data.length > 0) {
-                    chart.data.datasets[0].borderWidth = newSizing.lineWidth;
-                }
-                
-                chart.update();
             });
             
             // Initial chart update

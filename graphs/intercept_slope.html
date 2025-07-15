@@ -12,7 +12,11 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-YEPLTYLL6H');
+      gtag('config', 'G-YEPLTYLL6H', {
+          page_title: 'Interactive Graph: Intercept and Slope',
+          page_location: window.location.href,
+          send_page_view: true
+      });
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -411,10 +415,38 @@
     </div>
 
     <script>
-        // Analytics tracking
+        // Enhanced Analytics tracking with error handling
         function trackEvent(eventName, parameters = {}) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', eventName, parameters);
+            try {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', eventName, parameters);
+                    console.log('GA Event tracked:', eventName, parameters);
+                } else {
+                    console.warn('gtag not available for event:', eventName);
+                }
+            } catch (error) {
+                console.error('Error tracking event:', error);
+            }
+        }
+
+        // Track page view explicitly
+        function trackPageView() {
+            try {
+                if (typeof gtag !== 'undefined') {
+                    gtag('config', 'G-YEPLTYLL6H', {
+                        page_title: 'Interactive Graph: Intercept and Slope',
+                        page_location: window.location.href,
+                        custom_map: {
+                            'page_type': 'interactive_graph',
+                            'content_type': 'intercept_slope'
+                        }
+                    });
+                    console.log('Page view tracked for:', window.location.href);
+                } else {
+                    console.warn('gtag not available for page view tracking');
+                }
+            } catch (error) {
+                console.error('Error tracking page view:', error);
             }
         }
 
@@ -560,7 +592,8 @@
                 intercept: intercept,
                 slope: slope,
                 show_x0_point: showX0,
-                show_x2_point: showX2
+                show_x2_point: showX2,
+                page_url: window.location.href
             });
         }
         
@@ -646,35 +679,119 @@
             updateChart();
         }
         
+        // Track session metrics
+        let sessionStart = Date.now();
+        let interactionCount = 0;
+        let interceptValues = [];
+        let slopeValues = [];
+        let pointInteractions = {
+            x0_shown: 0,
+            x2_shown: 0
+        };
+        
         // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize chart first
             initChart();
             
             // Initialize slider value positions
             updateSliderValue('intercept-slider', 'intercept-value');
             updateSliderValue('slope-slider', 'slope-value');
             
-            document.getElementById('intercept-slider').addEventListener('input', updateChart);
-            document.getElementById('slope-slider').addEventListener('input', updateChart);
-            document.getElementById('show-x0-point').addEventListener('change', updateChart);
-            document.getElementById('show-x2-point').addEventListener('change', updateChart);
+            document.getElementById('intercept-slider').addEventListener('input', function() {
+                interactionCount++;
+                interceptValues.push(parseFloat(this.value));
+                updateChart();
+            });
             
-            // Track app load
-            trackEvent('slope_app_loaded', {
-                load_type: 'javascript_version',
-                load_time: Date.now()
+            document.getElementById('slope-slider').addEventListener('input', function() {
+                interactionCount++;
+                slopeValues.push(parseFloat(this.value));
+                updateChart();
+            });
+            
+            document.getElementById('show-x0-point').addEventListener('change', function() {
+                interactionCount++;
+                if (this.checked) pointInteractions.x0_shown++;
+                updateChart();
+            });
+            
+            document.getElementById('show-x2-point').addEventListener('change', function() {
+                interactionCount++;
+                if (this.checked) pointInteractions.x2_shown++;
+                updateChart();
+            });
+            
+            // Track app load with delay to ensure gtag is ready
+            setTimeout(function() {
+                trackPageView();
+                trackEvent('slope_app_loaded', {
+                    load_type: 'javascript_version',
+                    load_time: Date.now(),
+                    user_agent: navigator.userAgent,
+                    page_url: window.location.href,
+                    referrer: document.referrer
+                });
+            }, 1000);
+        });
+        
+        // Track when user leaves the page
+        window.addEventListener('beforeunload', function() {
+            const sessionDuration = Date.now() - sessionStart;
+            const exploredNegativeSlopes = slopeValues.some(s => s < 0);
+            const exploredPositiveSlopes = slopeValues.some(s => s > 0);
+            const exploredZeroSlope = slopeValues.some(s => s === 0);
+            const exploredNegativeIntercepts = interceptValues.some(i => i < 0);
+            const exploredPositiveIntercepts = interceptValues.some(i => i > 0);
+            const usedPointFeatures = pointInteractions.x0_shown > 0 || pointInteractions.x2_shown > 0;
+            
+            const interceptRange = interceptValues.length > 0 ? 
+                Math.max(...interceptValues) - Math.min(...interceptValues) : 0;
+            const slopeRange = slopeValues.length > 0 ? 
+                Math.max(...slopeValues) - Math.min(...slopeValues) : 0;
+            
+            trackEvent('session_end', {
+                session_duration_ms: sessionDuration,
+                session_duration_minutes: Math.round(sessionDuration / 60000),
+                interaction_count: interactionCount,
+                intercept_interactions: interceptValues.length,
+                slope_interactions: slopeValues.length,
+                explored_negative_slopes: exploredNegativeSlopes,
+                explored_positive_slopes: exploredPositiveSlopes,
+                explored_zero_slope: exploredZeroSlope,
+                explored_negative_intercepts: exploredNegativeIntercepts,
+                explored_positive_intercepts: exploredPositiveIntercepts,
+                intercept_range_explored: Math.round(interceptRange * 10) / 10,
+                slope_range_explored: Math.round(slopeRange * 10) / 10,
+                used_point_features: usedPointFeatures,
+                x0_point_shows: pointInteractions.x0_shown,
+                x2_point_shows: pointInteractions.x2_shown,
+                page_url: window.location.href
             });
         });
         
-        // Track session duration
-        let sessionStart = Date.now();
-        window.addEventListener('beforeunload', function() {
-            const sessionDuration = Date.now() - sessionStart;
-            trackEvent('session_end', {
-                session_duration_ms: sessionDuration,
-                session_duration_minutes: Math.round(sessionDuration / 60000)
-            });
+        // Track visibility changes (tab switching)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                trackEvent('page_hidden', {
+                    time_on_page: Date.now() - sessionStart,
+                    interaction_count: interactionCount
+                });
+            } else {
+                trackEvent('page_visible', {
+                    return_time: Date.now() - sessionStart
+                });
+            }
         });
-    </script>
-</body>
-</html>
+        
+        // Track scroll behavior
+        let scrollTracked = false;
+        window.addEventListener('scroll', function() {
+            if (!scrollTracked && window.scrollY > 100) {
+                scrollTracked = true;
+                trackEvent('page_scrolled', {
+                    scroll_depth: window.scrollY,
+                    time_to_scroll: Date.now() - sessionStart
+                });
+            }
+        });

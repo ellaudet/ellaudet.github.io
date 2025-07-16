@@ -166,7 +166,7 @@ h3 {
 .container {
     padding: 10px 25px;
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
 }
 
 .container-full-width {
@@ -184,7 +184,7 @@ h3 {
     flex: 1;
     padding: 10px 25px;
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
 }
 
 /* Container content styling */
@@ -287,7 +287,7 @@ p + ul {
     padding: 15px 25px;
     margin: 20px 20px 20px 0;
     max-width: 700px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
 }
 
 .important-notes h3 {

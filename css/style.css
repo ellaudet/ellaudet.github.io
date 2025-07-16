@@ -181,6 +181,21 @@ h3 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* Container content styling */
+.container-header {
+    color: #666;
+    margin-bottom: -7px;
+    font-style: italic;
+}
+
+.container-intro {
+    margin-bottom: -7px;
+}
+
+.container-footer {
+    margin-top: -15px;
+}
+
 .container h2, .container p, .container ul, .container li,
 .container-half h2, .container-half p, .container-half ul, .container-half li {
     margin-top: 0;

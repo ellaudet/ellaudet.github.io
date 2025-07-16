@@ -120,6 +120,7 @@ p + ul {
     border-radius: 5px;
     width: auto;
     height: 100%;
+    max-width: 120px
     margin-right: 20px;
     object-fit: cover;
 }

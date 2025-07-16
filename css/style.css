@@ -223,9 +223,9 @@ ul ul {
    padding-top:0;
 }
 
-ul li > ul {
-  margin-top: 0;
-  padding-top: 0;
+li > ul {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 ul li > ul > li {

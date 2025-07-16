@@ -468,6 +468,8 @@ ul > li > ul {
     
     .header img {
         width: 80px;
+       border-radius: 4px;
+       margin-right: 10px;
     }
 }
 

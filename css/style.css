@@ -282,6 +282,15 @@ ul > li > ul {
     padding-top: 0;
 }
 
+.container-header + ul {
+   padding-top: 0;
+}
+
+.container ul + .container-footer {
+    padding-top: 0;
+}  
+   
+
 /* Full Container Content */
 .container h2,
 .container p,

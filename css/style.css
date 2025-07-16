@@ -85,6 +85,11 @@ a:hover {
     font-weight: normal;
 }
 
+/* Ensure explanation-tag stays normal size even inside highlight */
+.highlight .explanation-tag {
+    font-size: 1rem;
+}
+
 .highlight {
     color: var(--primary-color);
     font-size: 1.1rem;

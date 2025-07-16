@@ -18,7 +18,7 @@ body {
 
 .header img {
     border-radius: 5px;
-    width: 120px;
+    width: 110px;
     height: auto;
     margin-right: 20px;
 }
@@ -30,7 +30,7 @@ body {
 }
 
 .header-content h1 {
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: normal;
     text-transform: uppercase;
     margin: 0;
@@ -281,7 +281,7 @@ p + ul {
 }
 
 /* Mobile Responsive Styles */
-@media (max-width: 600px) {
+@media (max-width: 550px) {
     .nav {
         flex-direction: column;
         align-items: flex-start;

@@ -190,7 +190,13 @@ h3 {
 /* Container content styling */
 .container-header {
     color: #666;
-    margin-bottom: 0;
+    margin-bottom: -10px;
+    font-style: italic;
+}
+
+.container-half header {
+    color: #666;
+    margin-bottom: -10px;
     font-style: italic;
 }
 

@@ -190,7 +190,7 @@ h3 {
 /* Container content styling */
 .container-header {
     color: #666;
-    margin-bottom: -10px;
+    margin-bottom: 0.2em;
     font-style: italic;
 }
 
@@ -276,6 +276,10 @@ p + ul {
 .highlight + ul {
     margin-top: 0;
 }
+
+.container-header + ul {
+    margin-top:0;
+}    
 
 /* Important Notes Box (DSS page) */
 .important-notes {

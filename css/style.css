@@ -273,6 +273,7 @@ ul > li > ul {
 
 .container-header + .container-intro,
 .container-header + ul,
+.container .container-header + ul,
 .container-intro + ul,
 .container-half .container-header + ul,
 .container-half .container-intro + ul,

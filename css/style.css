@@ -281,6 +281,10 @@ ul > li > ul {
     padding-top: 0;
 }
 
+.container-half .container-intro + ul {
+    padding-top: 0;
+}
+
 /* Full Container Content */
 .container h2,
 .container p,

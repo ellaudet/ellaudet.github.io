@@ -167,6 +167,7 @@ h3 {
     padding: 10px 25px;
     background-color: #fff;
     /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
+    border: 1px solid #ddd;
 }
 
 .container-full-width {
@@ -185,6 +186,7 @@ h3 {
     padding: 10px 25px;
     background-color: #fff;
     /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
+    border: 1px solid #ddd;
 }
 
 /* Container content styling */
@@ -216,7 +218,7 @@ h3 {
 }
 
 .container p, .container ul, .container-half p, .container-half ul {
-    padding-top: 10px;
+    padding-top: 0px;
     padding-bottom: 10px;
 }
 

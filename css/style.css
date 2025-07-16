@@ -218,9 +218,18 @@ ul > li > ul {
     padding-top: 0;
 }
 
-ul + ul {
+ul ul {
    margin-top:0;
    padding-top:0;
+}
+
+ul li > ul {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+ul li > ul > li {
+  margin-top: 0;
 }
 
 /* ============================================================================

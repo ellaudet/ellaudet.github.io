@@ -236,9 +236,9 @@ ul li > p {
   margin-bottom: 0.5rem;
 }
 
-p + ul {
+/* p + ul {
    margin-top: 0.5rem;
-}
+} */
 
 /* ============================================================================
    CONTAINERS (DSS Page Layout)

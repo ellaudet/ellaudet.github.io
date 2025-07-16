@@ -22,7 +22,7 @@ body {
     border-radius: 5px;
     width: 120px;
     height: auto;
-    margin-right: 20px;
+    margin-right: 30px;
 }
 
 .header-content {
@@ -314,6 +314,19 @@ p + ul {
     
     .nav {
         padding: 8px 10px 8px 10px;
+    }
+    
+    .header-content h1 {
+        font-size: 1.1em;
+    }
+    
+    .header-content h2 {
+        font-size: 14px;
+    }
+    
+    .header img {
+        width: 100px;
+        margin-right: 20px;
     }
 }
 

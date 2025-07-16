@@ -210,6 +210,8 @@ ul li {
 ul > li > ul {
     margin-left: 0;
     padding-left: 20px;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 .container-header + ul {
@@ -308,7 +310,7 @@ ul > li > ul {
 }
 
 .container ul li {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
 }
 
 .container ul li ul {
@@ -353,7 +355,7 @@ ul > li > ul {
 }
 
 .container-half ul li {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
 }
 
 .container-half ul li ul {

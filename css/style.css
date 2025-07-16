@@ -139,6 +139,12 @@ h3 {
     font-weight: normal;
 }
 
+.explanation-tag {
+    color: #888;
+    font-size: 1em;
+    font-weight: normal;
+}
+
 .highlight {
     color: #fb4128;
     font-size: 1.1em;

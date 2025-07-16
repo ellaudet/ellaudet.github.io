@@ -270,24 +270,29 @@ ul > li > ul {
 
 .container-footer {
     margin-top: 0;
+    pading-top:0;
 }
 
 /* Reduce spacing after headers */
-.container-header + .container-intro {
-    padding-top: 0;
+
+.container-half .container-header + ul {
+   padding-top: 0;
+   margin-top:0;
 }
 
-.container-header + ul,
-.container-half .container-header + ul {
-    padding-top: 0;
+.container-half .container-intro + ul {
+   padding-top: 0;
+   margin-top: 0;
 }
 
 .container-header + ul {
    padding-top: 0;
+   margin-top: 0;
 }
 
 .container ul + .container-footer {
-    padding-top: 0;
+   padding-top: 0;
+   margin-top: 0;
 }  
    
 

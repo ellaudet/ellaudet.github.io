@@ -257,7 +257,7 @@ ul > li > ul {
 .container-intro {
     margin-bottom: -7px;
     margin-top: 0;
-    padding-top: 5px;
+    padding-top: 0px;
 }
 
 .container-footer {
@@ -266,12 +266,12 @@ ul > li > ul {
 
 /* Reduce spacing after headers */
 .container-header + .container-intro {
-    padding-top: 5px;
+    padding-top: 0px;
 }
 
 .container-header + ul,
 .container-half .container-header + ul {
-    padding-top: 5px;
+    padding-top: 0px;
 }
 
 /* Full Container Content */

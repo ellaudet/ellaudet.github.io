@@ -439,14 +439,14 @@ ul > li > ul {
 ============================================================================ */
 
 /* Tablet and smaller */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .container-row {
         flex-direction: column;
     }
 }
 
 /* Mobile */
-@media (max-width: 700px) {
+@media (max-width: 600px) {
     .dss-photo {
         display: none;
     }
@@ -479,7 +479,7 @@ ul > li > ul {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
     .conditional-break {
         display: block;
     }

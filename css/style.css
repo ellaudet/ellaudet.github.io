@@ -248,7 +248,7 @@ h3 {
 /* List Styles */
 ul {
     margin-bottom: 0.5em;
-    padding-left: 0;
+    padding-left: 20px;
 }
 
 ul li {

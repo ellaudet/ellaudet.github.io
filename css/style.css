@@ -469,14 +469,14 @@ ul > li > ul {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     .conditional-break {
         display: block;
     }
 }
 
 /* Very small screens */
-@media (max-width: 400px) {
+@media (max-width: 600px) {
     .mobile-break {
         display: block;
     }

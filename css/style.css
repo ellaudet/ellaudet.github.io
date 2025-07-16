@@ -294,6 +294,18 @@ p + ul {
     .social-links {
         display: none;
     }
+    
+    .header-content h1 {
+        font-size: 1.1em;
+    }
+    
+    .header-content h2 {
+        font-size: 14px;
+    }
+    
+    .header img {
+        width: 100px;
+    }
 }
 
 @media (max-width: 768px) {

@@ -200,12 +200,14 @@ p + ul {
 ============================================================================ */
 
 ul {
+    margin-top:0;
     margin-bottom: 0.5rem;
     padding-left: 20px;
 }
 
 ul li {
-    margin-bottom: 0.5rem;
+   margin-top:0;
+   margin-bottom: 0.5rem;
 }
 
 ul > li > ul {

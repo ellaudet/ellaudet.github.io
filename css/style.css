@@ -320,6 +320,17 @@ p + ul {
     }
 }
 
+/* Very small screens */
+@media (max-width: 400px) {
+    .mobile-break {
+        display: block;
+    }
+    
+    .mobile-hide {
+        display: none;
+    }
+}
+
 /* Page-specific image adjustments */
 /* Teaching page */
 .teaching-page .content img.dss-photo {

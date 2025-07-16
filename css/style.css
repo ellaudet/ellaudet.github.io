@@ -233,11 +233,11 @@ ul li > ul > li {
 }
 
 ul li > p {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 p + ul {
-   margin-top: 1rem;
+   margin-top: 0.5rem;
 }
 
 /* ============================================================================

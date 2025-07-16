@@ -190,13 +190,13 @@ h3 {
 /* Container content styling */
 .container-header {
     color: #666;
-    margin-bottom: 0.2em;
+    margin-bottom: 0;
     font-style: italic;
 }
 
 .container-intro {
     margin-bottom: -7px;
-    margin-top: 0.2em; 
+    margin-top: 0; 
 }
 
 .container-footer {

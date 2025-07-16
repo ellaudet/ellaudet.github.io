@@ -110,7 +110,7 @@ p + ul {
 
 .header {
     display: flex;
-    align-items: stretch;
+    align-items: flex-start;
     padding: 20px 30px 15px 30px;
     background-color: var(--bg-light);
     border-bottom: 1px solid var(--border-color);
@@ -118,9 +118,8 @@ p + ul {
 
 .header img {
     border-radius: 5px;
-    width: auto;
-    height: 100%;
-    max-width: 120px
+    width: 120px;
+    height: auto;
     margin-right: 20px;
     object-fit: cover;
 }

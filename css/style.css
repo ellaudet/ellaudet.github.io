@@ -442,7 +442,7 @@ ul > li > ul {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 678px) {
     .nav {
         flex-direction: column;
         align-items: flex-start;
@@ -469,14 +469,14 @@ ul > li > ul {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 678px) {
     .conditional-break {
         display: block;
     }
 }
 
 /* Very small screens */
-@media (max-width: 600px) {
+@media (max-width: 678px) {
     .mobile-break {
         display: block;
     }

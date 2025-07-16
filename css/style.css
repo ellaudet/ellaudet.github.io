@@ -118,7 +118,7 @@ p + ul {
 
 .header img {
     border-radius: 5px;
-    width: 120px;
+    width: 110px;
     height: auto;
     margin-right: 20px;
     object-fit: cover;
@@ -459,7 +459,7 @@ ul > li > ul {
     }
     
     .header-content h1 {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .header-content h2 {

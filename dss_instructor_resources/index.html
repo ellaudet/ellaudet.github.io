@@ -1,354 +1,275 @@
-/* Elena Llaudet Website - Common Styles */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSS Instructor Resources</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
 
-body {
-    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #444;
+<!-- Google Analytics Tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YEPLTYLL6H"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-YEPLTYLL6H');
+</script>
+
+<!-- Body -->
+<body>
+<div class="header">
+<img src="../images/llaudet.png" alt="Elena Llaudet">
+<div class="header-content">
+<h1>Elena Llaudet</h1>
+<h2>Associate Professor<span class="mobile-hide"> of Political Science at Suffolk University</span></h2>
+<h2>Co-author of <em>Data Analysis for Social Science</em> (w/ <span class="mobile-hide">Kosuke</span> Imai)</h2>
+<p class="social-links">
+<a href="https://github.com/ellaudet" target="_blank">GitHub</a> | 
+<a href="https://bsky.app/profile/ellaudet.bsky.social" target="_blank">Bluesky</a> | 
+<a href="https://x.com/ellaudet" target="_blank">Twitter</a> | 
+ellaudet [at] gmail [dot] com
+</p>
+</div>
+</div>
+
+<div class="nav">
+<a href="https://ellaudet.github.io/" class="nav-link inactive">HOME</a>
+<span>|</span>
+<a href="https://ellaudet.github.io/publications/" class="nav-link inactive">PUBLICATIONS</a>
+<span>|</span>
+<a href="https://ellaudet.github.io/teaching/" class="nav-link inactive">TEACHING</a>
+<span>|</span>
+<a href="https://ellaudet.github.io/dss_instructor_resources/" class="nav-link active">DSS INSTRUCTOR RESOURCES</a>
+</div>
+
+<div class="content">
+<div class="main-container">
+
+
+<div class="container-row">
+<div class="container-half">
+<p style="color: #666; margin-bottom: -7px;"><em>What's On This Page?</em></p>
+<p style="margin-bottom: -7px;">Instructor and student resources I have created (some are still works in progress) to complement DSS:</p>
+<ul>
+<li><a href="#my-course">Overview of My Course</a></li>
+<li><a href="#lecture-slides">Lecture Slides</a></li>
+<li><a href="#exercises">Additional Replication Exercises</a></li>
+<li><a href="#interactive">Interactive Graphs</a></li>
+<li><a href="#review">Self-Graded Review Exercises</a></li>
+<li><a href="#videos">Videos</a></li>
+<li><a href="#readings">Additional Readings</a></li>
+</ul>
+</div>
+
+<div class="container-half">
+<p style="color: #666; margin-bottom: -7px;"><em>Quick Links:</em></p>
+<ul>
+<li><a href="https://press.princeton.edu/books/paperback/9780691199436/data-analysis-for-social-science#preview" target="_blank">Read First Chapter</a></li>
+<li><a href="https://bit.ly/dss_amazon" target="_blank">See in Amazon</a></li>
+<li><a href="https://bit.ly/dss_exam" target="_blank">Request Exam Copy</a></li>
+<li><a href="https://press.princeton.edu/books/paperback/9780691199436/data-analysis-for-social-science" target="_blank">Official Book Website</a></li>
+<li><a href="https://www.iwanami.co.jp/book/b656062.html" target="_blank">Japanese Translation</a></li>
+<li><a href="https://ellaudet.github.io/dss_book/student_resources_by_type/" target="_blank">DSS Student Resources</a></li>
+</ul>
+</div>
+</div>
+
+<div class="container">
+<p style="color: #666; margin-bottom: -7px;"><em>What's NOT On This Page?</em></p>
+<ul>
+<li>The files necessary to produce and change my syllabus, lecture slides, and the additional replication exercises</li>
+<li>The datasets analyzed in the additional replication exercises and their solutions</li>
+</ul>
+<p style="margin-top: -15px;">If you are an instructor using DSS as the main textbook in your course, you can request these materials from Princeton University Press <a href="https://bit.ly/dss_instructor" target="_blank">here</a>.</p>
+</div>
+
+<h2 class="highlight"><a id="my-course">OVERVIEW OF MY COURSE</a></h2>
+<p>My course progresses through small, digestible exercises that students work through at least three times: first by following along with the exercises in the textbook on their own computer, 
+then through the in-class exercises we complete together, and again in the weekly take-home problem sets. 
+All three&mdash;textbook, in-class exercises, and problem sets&mdash;run in parallel, drawing on the same statistical concepts and code but asking students to answer different research questions 
+by analyzing other real-world datasets. This gives students repeated hands-on experience, which is key to building skills, and shows them how to apply quantitative reasoning across a variety of contexts.</p>
+
+<ul>
+<li>Logistics: My course meets for 23-25 sessions, each 75 minutes long. If you have fewer meetings, I recommend skipping the review sessions (lectures 8, 12, 16) and, if you must, also one or two of the final lectures (22, 23, and 24).</li>
+<li>Content: It skips some of the more advanced topics in DSS because it is designed for undergraduates with no prior experience in coding or statistics, and minimal math background.</li>
+<li>My syllabus is <a href="https://www.dropbox.com/scl/fi/dps2998u2xdn75k73qj8c/syllabus_fall2025.pdf?rlkey=i1i0xe4axespdtvk1ulpzzu7g&st=yr082oj1&dl=0" target="_blank">here</a> (updated: 06/27/2025).</li>
+<li>The in-class exercises are included in the lecture slides below, and my problem sets are identified among the additional replication exercises further down.</li>
+<li>If you plan to use my student resources, I recommend directing students to the <a href="https://ellaudet.github.io/dss_book/student_resources_by_type/" target="_blank">DSS Student Resources</a> website (bit.ly/dss_student_resources),
+which includes all student-facing materials: self-graded review exercises, interactive graphs, videos, and additional readings.</li>
+<li>Instructors can request an exam copy of the book <a href="https://bit.ly/dss_exam" target="_blank">here</a>.</li>
+<li>All code and datasets used in the book are available in the DSS folder <a href="https://press.princeton.edu/student-resources/data-analysis-for-social-science" target="_blank">here</a>.
+Those used in the additional replication exercises are provided only to instructors using DSS as the main textbook.</li> 
+<li><em>Questions?</em> Feel free to email me at ellaudet [at] gmail [dot] com. <em>Feedback?</em> Please share it through <a href="https://bit.ly/dss_feedback">this short survey</a> (submissions can be anonymous).</li>
+</ul>
+
+<h2 class="highlight"><a id="lecture-slides">LECTURE SLIDES</a> <span style="color: #888;">(currently being reviewed/expanded; updated source files will be available to instructors via PUP in a few weeks)</span></h2>
+<p>My lecture slides are meant to complement DSS, not replace it. They skip some of the more advanced topics covered in the book and do not repeat all the details found in it.</p>
+
+<ul>
+<li><a href="https://www.dropbox.com/scl/fi/a9utf7osdcuzq2xrj2pd0/lecture_1.pdf?rlkey=ls1zd22gw3fw0mu40o9veibqd&amp;dl=0" target="_blank">Lecture 1. Course Introduction</a> (updated: 06/27/2025)</li>
+        <li><a href="https://www.dropbox.com/s/vis7pdnw16e093s/lecture_2.pdf?dl=0" target="_blank">Lecture 2. Introduction to RStudio and R</a> <span class="chapter-tag">(Readings: 1-1.6)</span> (updated: 07/01/2025)</li>
+        <li><a href="https://www.dropbox.com/s/rgelazupf8hjla6/lecture_3.pdf?dl=0" target="_blank">Lecture 3. Observations and Variables</a> <span class="chapter-tag">(Readings: 1.7)</span> </span> (updated: 07/02/2025)</li>
+        <li><a href="https://www.dropbox.com/s/85tk09rzv9zefkv/lecture_4.pdf?dl=0" target="_blank">Lecture 4. Computing and Interpreting Means</a> <span class="chapter-tag">(Readings: 1.8-1.10)</span> (updated: 07/01/2025)</li>
+        <li><a href="https://www.dropbox.com/s/l2soz52cf2at9fh/lecture_5.pdf?dl=0" target="_blank">Lecture 5. Causal Effects and Randomized Experiments</a> <span class="chapter-tag">(Readings: 2-2.4)</span> (updated: 07/02/2025)</li>
+<li><a href="https://www.dropbox.com/s/wrmeb5m4gi1y4hv/lecture_6.pdf?dl=0" target="_blank">Lecture 6. Does Social Pressure Affect Turnout?</a> <span class="chapter-tag">(Readings: 2.5-2.7)</span> (updated: 07/02/2025)</li>
+<li><a href="https://www.dropbox.com/s/uxkb2vlfad412od/lecture_7.pdf?dl=0" target="_blank">Lecture 7. Survey Research and Exploring One Variable at a Time</a> <span class="chapter-tag">(Readings: 3-3.4)</span> (updated: 07/05/2025) </li>
+<li><a href="https://www.dropbox.com/s/x0njxdh9w2ch97c/lecture_8.pdf?dl=0" target="_blank">Lecture 8. Review</a> (updated: 07/08/2025) </li>
+<li><a href="https://www.dropbox.com/s/eh57f7ano78nsud/lecture_9.pdf?dl=0" target="_blank">Lecture 9. Exploring the Relationship Between Two Variables</a> <span class="chapter-tag">(Readings: 3.5-3.7)</span> (updated: 07/08/2025) </li>
+<li><a href="https://www.dropbox.com/s/7frxxyviazoavza/lecture_10.pdf?dl=0" target="_blank">Lecture 10. Predicting Non-Binary Outcomes with Linear Regression</a> <span class="chapter-tag">(Readings: 4-4.4.1</span> (updated: 07/12/2025)</li>
+<li><a href="https://www.dropbox.com/s/rgew2iomcz9xa4n/lecture_11.pdf?dl=0" target="_blank">Lecture 11. Predicting Binary Outcomes with Linear Regression</a> <span class="chapter-tag">(Readings: 4.6-4.9)</span></li>
+<li><a href="https://www.dropbox.com/s/1hzidc44tqzj49b/lecture_12.pdf?dl=0" target="_blank">Lecture 12. Review</a></li>
+<li><a href="https://www.dropbox.com/s/vopox7hf4ic04ds/lecture_13.pdf?dl=0" target="_blank">Lecture 13. Estimating Causal Effects with Observational Data</a> <span class="chapter-tag">(Readings: 5-5.3.1)</span></li>
+<li><a href="https://www.dropbox.com/s/904lqq6zka0ycfj/lecture_14.pdf?dl=0" target="_blank">Lecture 14. Controlling for Confounders Using Multiple Linear Regression</a> <span class="chapter-tag">(Readings: 5.3.2-5.4.2)</span></span></li>
+<li><a href="https://www.dropbox.com/s/cptzvwahojhskev/lecture_15.pdf?dl=0" target="_blank">Lecture 15. Internal and External Validity</a> <span class="chapter-tag">(Readings: 5.5-5.7)</span></span></li>
+<li><a href="https://www.dropbox.com/s/m6xpfapxs73jw8z/lecture_16.pdf?dl=0" target="_blank">Lecture 16. Review</a></span></li>
+<li>Lecture 17. Midterm Exam</li>
+<li>Lecture 18. Review of the Midterm</li>    
+<li><a href="https://www.dropbox.com/s/pf1ttcf6trj7728/lecture_19.pdf?dl=0" target="_blank">Lecture 19. Probability</a> <span class="chapter-tag">(Readings: 6-6.8)</span></li>
+<li><a href="https://www.dropbox.com/s/7wrzougkzgfh7sk/lecture_20.pdf?dl=0" target="_blank">Lecture 20. Hypothesis Testing with Estimated Regression Coefficients</a> <span class="chapter-tag">(Readings: 7-7.1, 7.3-7.6)</span></li>
+<li><a href="https://www.dropbox.com/s/whvnnts2i7cycwb/lecture_21.pdf?dl=0" target="_blank">Lecture 21. Do Small Classes Increase Probability of Graduating</a></li>
+<li><a href="https://www.dropbox.com/s/3uzfbm7aqbh3ibt/lecture_22.pdf?dl=0" target="_blank">Lecture 22. Do Women Promote Different Policies Than Men?</a></li>
+<li><a href="https://www.dropbox.com/s/o3ww203ldz1my9b/lecture_23.pdf?dl=0" target="_blank">Lecture 23. Does Social Pressure Affect Turnout?</a></li>
+<li><a href="https://www.dropbox.com/s/kow3s6vn6mdjlb2/lecture_24.pdf?dl=0" target="_blank">Lecture 24. Is There Racial Discrimination in the Labor Market?</a></li>
+<li>Lecture 25. Final Exam</li> 
+</ul>
+
+<h2 class="highlight"><a id="exercises">ADDITIONAL REPLICATION EXERCISES</a></h2>
+<p>These exercises draw on the same statistical concepts and code used in the exercises in the book, 
+but ask students to answer different research questions by analyzing other real-world datasets, 
+giving students the opportunity to apply the same statistical tools across a variety of contexts. 
+They can be used as in-class exercises or as problem sets. (I have marked those that I assign as problem sets.):</p>
+
+<ul>
+<li><p style="margin-bottom: 0.5em;">Does Having a Criminal Record Affect the Chances of Receiving A Call Back for a Job Interview?
+<span class="chapter-tag">Based on: Devah Pager. 2003. "The Mark of a Criminal Record." <em>American Journal of Sociology</em>, 108 (5): 937-75.</span></p>
+<ul>
+<li><a href="https://www.dropbox.com/s/r2gvcw7g1xmg2as/criminal-record-labor-market-part1-without-solutions.pdf?dl=0" target="_blank">Part I: Loading and Making Sense of Data</a> <span class="chapter-tag">(Chapter 1)</span></li>
+<li><a href="https://www.dropbox.com/s/xfiav1lcd41aoeu/criminal-record-labor-market-part2-without-solutions.pdf?dl=0" target="_blank">Part II: Computing and Interpreting Means</a> <span class="chapter-tag">(Chapter 1)</span></li>
+<li><a href="https://www.dropbox.com/s/n2zge3j82q86mj9/criminal-record-labor-market-part3-without-solutions.pdf?dl=0" target="_blank">Part III: Estimating an Average Causal Effect</a> <span class="chapter-tag">(Chapter 2)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/xq3hjspk9humxghlu3yv4/criminal-record-labor-market-part4-without-solutions.pdf?rlkey=wpy7tw9unaacez9fvb3cjnzs2&dl=0" target="_blank">Part IV: Focus on White Applicants</a> <span class="chapter-tag">(Chapter 7)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/bnygbjp5v0htryck7zy2w/criminal-record-labor-market-part5-without-solutions.pdf?rlkey=z3cg7bmy6jvd0ixr70yf9tt5j&dl=0" target="_blank">Part V: Focus on Black Applicants</a> <span class="chapter-tag">(Chapter 7)</span></li>
+</ul>
+</li>
+
+<li><p style="margin-bottom: 0.5em;">Does Social Pressure Affect Turnout?
+<span class="chapter-tag">Based on: Alan Gerber, Donald Green, and Christopher Larimer. 2008. "Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment." <em>American Political Science Review</em>, 102(1): 33-48.</span></p>
+<ul>
+<li><a href="https://www.dropbox.com/scl/fi/fvglhvd13894am58fwwyc/social-pressure-to-vote-part1-without-solutions.pdf?rlkey=zpg9ht93ha0znifdw5o0s8j42&dl=0" target="_blank">Part I: Loading Data and Computing Means</a> <span class="chapter-tag">(Chapter 1)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/hf16emijbh5x8xh0d33iz/social-pressure-to-vote-part2-without-solutions.pdf?rlkey=7iwok0qw2posjnrdhy05bc3rc&dl=0" target="_blank">Part II: Estimating an Average Causal Effect</a> <span class="chapter-tag">(Chapter 2)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/36v4f6z5ltx5gxmy9mvkm/social-pressure-to-vote-part3-without-solutions.pdf?rlkey=z49r8kbm9v8xcnjiwo0y7l5zj&dl=0" target="_blank">Part III: Statistical Significance & Validity</a> <span class="chapter-tag">(Chapter 7)</span></li>
+</ul>
+</li>
+
+<li><p style="margin-bottom: 0.5em;">Estimating the Bias in Self-Reported Turnout</p>
+<ul>
+<li><a href="https://www.dropbox.com/scl/fi/xzu1ebm6qhteax0yna0kc/bias-in-self-reported-turnout-part1-without-solutions.pdf?rlkey=lky2xu57i3l4ltoppeepb3lyl&dl=0" target="_blank">Part I: Loading and Making Sense of Data</a> <span class="chapter-tag">(Chapter 1)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/fdr7rojpf70h9hubscubk/bias-in-self-reported-turnout-part2-without-solutions.pdf?rlkey=hyqx59rgi7kvmtp2mn6reb1ib&dl=0" target="_blank">Part II: Computing and Interpreting Means</a> <span class="chapter-tag">(Chapter 1)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/7e7bmwse5cxzwef5jgp6r/bias-in-self-reported-turnout-part3-without-solutions.pdf?rlkey=r7q1fhf1e4wfg5ixba9prs09n&dl=0" target="_blank">Part III: Subsetting Variables and Creating Histograms</a> <span class="chapter-tag">(Chapter 3)</span></li>
+</ul>
+</li>
+
+<li><p style="margin-bottom: 0.5em;">Do Women Promote Different Policies than Men?
+<span class="chapter-tag">Based on: Raghabendra Chattopadhyay and Esther Duflo. 2004. "Women as Policy Makers: Evidence from a Randomized Policy Experiment in India." <em>Econometrica</em>, 72 (5): 1409-43.</span></p>
+<ul>
+<li><a href="https://www.dropbox.com/scl/fi/elf5gslqqyovejavbwj41/female-leaders-india-part1-without-solutions.pdf?rlkey=a2v1uedhn31ec2j1kt7rxyw1v&dl=0" target="_blank">Part I: Loading and Making Sense of Data</a> <span class="chapter-tag">(Chapter 1; Problem Set #1)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/a35v8nmwe9szmretzpagl/female-leaders-india-part2-without-solutions.pdf?rlkey=cvbzx9z6a346j658pm48au97t&dl=0" target="_blank">Part II: Computing and Interpreting Means</a> <span class="chapter-tag">(Chapter 1; Problem Set #2)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/bwlrz9youtgbakvzdafin/female-leaders-india-part3-without-solutions.pdf?rlkey=fnqy6ox1v5kj3550nfucbdkvj&dl=0" target="_blank">Part III: Estimating an Average Causal Effect</a> <span class="chapter-tag">(Chapter 2; Problem Set #3)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/nwwr4eojl9nq9xumkwaux/female-leaders-india-part4-without-solutions.pdf?rlkey=tskkzntmtefwo7g7dx8kpsf3t&dl=0" target="_blank">Part IV: Visualizations and Correlations</a> <span class="chapter-tag">(Chapter 3; Problem Set #4)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/nmeiefrdx0bmnk1do6pt5/female-leaders-india-part5-without-solutions.pdf?rlkey=n51ep5su5qdwgh3lhii987hye&dl=0" target="_blank">Part V: Effect on Drinking Water Facilities</a> <span class="chapter-tag">(Chapter 7; Problem Set #9)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/552xgkzl25l8iw95d6v7s/female-leaders-india-part6-without-solutions.pdf?rlkey=gwzihttmfm3lotyk55z8hkxkt&dl=0" target="_blank">Part VI: Effect on Irrigation Facilities</a> <span class="chapter-tag">(Chapter 7)</span></li>
+</ul>
+</li>
+
+<li><p style="margin-bottom: 0.5em;">Predicting Course Grades Using Midterm Scores</p>
+<ul>
+<li><a href="https://www.dropbox.com/scl/fi/686hfl945uq3opp048hfp/predicting-course-grades-part1-without-solutions.pdf?rlkey=wg1m1e9y0p11ws47tkrfrescl&dl=0" target="_blank">Part I: Predicting Final Exam Scores</a> <span class="chapter-tag">(Chapter 4)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/acb1mxxnkw2xl8p4xeqpy/predicting-course-grades-part2-without-solutions.pdf?rlkey=lot65blqcgtqb2pskgk8yty45&dl=0" target="_blank">Part II: Predicting Overall Scores</a> <span class="chapter-tag">(Chapter 4; Problem Set #5)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/f3ntijpnngxy5bfeqc78o/predicting-course-grades-part3-without-solutions.pdf?rlkey=4a21anvfc72dp8mdl03z7u0hm&dl=0" target="_blank">Part III: Predicting Probability of Earning an A or A-</a> <span class="chapter-tag">(Chapter 4)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/hqo3pcmrz33h40rtznf86/predicting-course-grades-part4-without-solutions.pdf?rlkey=lajoemofbwcqotczlecl85ncg&dl=0" target="_blank">Part IV: Quantifying Uncertainty</a> <span class="chapter-tag">(Chapter 7)</span></li>
+</ul>
+
+<li><p style="margin-bottom: 0.5em;">What is the Effect of the Death of the Leader on the Level of Democracy?
+<span class="chapter-tag">Based on: Benjamin Jones and Benjamin Olken. 2009. "Hit or Miss? The Effect of Assassinations on Institutions and War." <em>American Economic Journal: Macroeconomics</em>, 1 (2): 55-87.</span></p>
+<ul>
+<li><a href="https://www.dropbox.com/scl/fi/l29rcg3l67z1ifynxz7yx/leaders-assassination-part1-without-solutions.pdf?rlkey=lno9y4r92bdfn29jok4k1pa56&dl=0" target="_blank">Part I: Visualizations and Correlations</a> <span class="chapter-tag">(Chapter 3)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/33iotppa1xyu0f2010z8j/leaders-assassination-part2-without-solutions.pdf?rlkey=89hb2d5o519qglls7j0by7hvc&dl=0" target="_blank">Part II: Difference-in-Means Estimator</a> <span class="chapter-tag">(Chapter 5; Problem Set #6)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/dpw3zcuc7x1h0vrj8bgha/leaders-assassination-part3-without-solutions.pdf?rlkey=b0yz13se6d07cicdg1n1txmyi&dl=0" target="_blank">Part III: Controlling for Confounders</a> <span class="chapter-tag">(Chapter 5)</span></li>
+</ul>
+</li>
+
+<li><p style="margin-bottom: 0.5em;">Other One-Part Exercises</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/mird1dvhdxp3knp/evidence-data-fabrication-without-solutions.pdf?dl=0" target="_blank">Evidence of Data Fabrication</a> <span class="chapter-tag">Based on: David Broockman, Joshua Kalla, and Peter Aronow. "Irregularities in LaCour (2014)" (Chapter 3)</span></li>
+<li><a href="https://www.dropbox.com/s/76rbp69z6vg55zj/predicting-elections-using-betting-markets-without-solutions.pdf?dl=0" target="_blank">Predicting Elections Using Betting Markets</a> <span class="chapter-tag">(Chapter 4)</span></li>
+<li><a href="https://www.dropbox.com/s/28jn6997c4kf4hc/black-candidates-black-turnout-without-solutions.pdf?dl=0" target="_blank">Does Having a Black Candidate Running Increase Black Turnout?</a> <span class="chapter-tag">Based on: Bernard Fraga. 2016. "Candidates or Districts? Reevaluating the Role of Race in Voter Turnout." <em>American Journal of Political Science</em>, 60: 97-122. (Chapter 5)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/qij8t6jbighx7fbqmwwff/political-TV-ads-without-solutions.pdf?rlkey=eom9njt4is0fla95mmxtavct8&dl=0" target="_blank">Do Political TV Ads Affect Voter Turnout?</a> <span class="chapter-tag">Based on: Ansolabehere, Stephen, Shanto Iyengar, Adam Simon and Nicholas Valentino. 1994. "Does Attack Advertising Demobilize the Electorate?" <em>The American Political Science Review</em>, Vol. 88, No. 4, pp. 829-838. (Chapter 5; Problem Set #7)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/jdf6g0etl8ppnug2ou1yt/multiple-choice-probability-questions-without-solutions.pdf?rlkey=gv3pgcuusx6wu6qwj4qp14nf2&dl=0" target="_blank">Multiple-Choice Questions on Probability</a> <span class="chapter-tag">(Chapter 6; Problem Set #8)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/yt1k4u4vbykv57zlcdpy5/small-class-student-outcomes-without-solutions.pdf?rlkey=fy233kczmflmcnljnigbfky08&dl=0" target="_blank">Do Small Classes in Elementary School Improve Student Outcomes?</a> <span class="chapter-tag">Based on: Frederick Mosteller, "The Tennessee Study of Class Size in the Early School Grades," <em>Future of Children</em> 5, no.2 (1995): 113-27. (Chapter 7)</span></li>
+<li><a href="https://www.dropbox.com/scl/fi/muxntl1qlymkelg7a4309/racial-discrimination-labor-market-without-solutions.pdf?rlkey=ru4lfu43p0xqjfk8r78fj0mp3&dl=0" target="_blank">Is There Racial Discrimination in the Labor Market?</a> <span class="chapter-tag">Based on: Marianne Bertrand and Sendhil Mullainathan. 2004. "Are Emily and Greg more employable than Lakisha and Jamal? A field experiment on labor market discrimination." <em>American Economic Review</em>, 94 (4): 991-1013. (Chapter 7; Problem Set for Extra Credit)</span></li>
+</ul>
+</li>
+</ul>
+
+<h2 class="highlight"><a id="interactive">INTERACTIVE GRAPHS</a> <span style="color: #888;">(work in progress)</span></h2>
+<p>To help students develop an intuition about some of the key concepts in statistics:</p>
+
+<ul>
+<li><a href="https://ellaudet.github.io/graphs/random_assignment.html" target="_blank">Random Treatment Assignment</a> <span class="chapter-tag">(Chapter 2)</span></li>
+
+<li><a href="https://ellaudet.github.io/graphs/random_sampling.html" target="_blank">Random Sampling</a> <span class="chapter-tag">(Chapter 3)</span></li>
+
+<li><a href="https://ellaudet.github.io/graphs/mean_sd.html" target="_blank">Mean and Standard Deviation</a>  <span class="chapter-tag">(Chapter 3)</span></li>
+
+<li><a href="https://ellaudet.github.io/graphs/correlation.html" target="_blank">Correlation Coefficient</a> <span class="chapter-tag">(Chapter 3)</span></li>
+
+<li><a href="https://ellaudet.github.io/graphs/intercept_slope.html" target="_blank">Intercept and Slope</a> <span class="chapter-tag">(Chapter 4)</span></li>
+
+<li><a href="https://ellaudet.github.io/graphs/least_squares.html" target="_blank">Least Squares Method</a> <span class="chapter-tag">(Chapter 4)</span></li>
+
+<li>Law of Large Numbers (coming soon) <span class="chapter-tag">(Chapter 6)</span></li>
+
+<li>Central Limit Theorem (coming soon) <span class="chapter-tag">(Chapter 7)</span></li>
+
+<li>Hypothesis Testing (coming soon) <span class="chapter-tag">(Chapter 7)</span></li>
+</ul>
+
+<h2 class="highlight"><a id="review">SELF-GRADED REVIEW EXERCISES</a> <span style="color: #888;">(work in progress)</span></h2>
+<p>To enable students to check their understanding of the material on their own <span style="color: #888;">(run code in linked R script in RStudio)</span>:</p>
+
+<ul>
+<li><a href="https://bit.ly/dss_review1" target="_blank">Chapter 1. Introduction</a></li>
+<li><a href="https://bit.ly/dss_review2" target="_blank">Chapter 2. Estimating Causal Effects with Randomized Experiments</a></li>
+</ul>
+
+<h2 class="highlight"><a id="videos">VIDEOS</a> <span style="color: #888;">(work in progress)</span></h2>
+
+<ul>
+<li><a href="https://bit.ly/dss_experiment" target="_blank">How to Run a Randomized Experiment</a> <span class="chapter-tag">(Chapter 2)</span></li>
+<li><a href="https://bit.ly/dss_fitted_line" target="_blank">How to Fit a Line to Predict Y Based on X</a> <span class="chapter-tag">(Chapter 4)</span></li>
+</ul>
+
+<h2 class="highlight"><a id="readings">ADDITIONAL READINGS</a> <span style="color: #888;">(work in progress)</span></h2>
+
+<ul>
+<li><a href="https://bit.ly/dss_in_the_cloud" target="_blank">How to Use Posit Cloud for Data Analysis</a> <span class="chapter-tag">(Chapter 1)</span></li>
+</ul>
+
+</div>
+</div>
+
+<pre>&nbsp;</pre>    
+
+<script>
+// Only add target="_blank" to links that are NOT navigation links and don't start with '#' or 'mailto:'
+document.querySelectorAll('a:not(.nav-link)').forEach(link => {
+// Check if the link does not start with '#' or 'mailto:'
+if (!link.getAttribute('href').startsWith('#') && !link.getAttribute('href').startsWith('mailto:')) {
+link.setAttribute('target', '_blank');
 }
+});
+</script>
 
-/* Header Styles */
-.header {
-    display: flex;
-    align-items: flex-start;
-    padding: 20px 20px 15px 20px;
-    background-color: #e4e4dc;
-    border-bottom: 1px solid #ddd;
-}
-
-.header img {
-    border-radius: 5px;
-    width: 120px;
-    height: auto;
-    margin-right: 20px;
-}
-
-.header-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.header-content h1 {
-    font-size: 1.3em;
-    font-weight: normal;
-    text-transform: uppercase;
-    margin: 0;
-    color: #fb4128;
-}
-
-.header-content h2:first-of-type {
-    margin-top: 3px;
-    font-size: 16px;
-}
-
-.header-content h2:nth-of-type(2) {
-    margin-top: -4px;
-    font-size: 16px;
-}
-
-.header-content h2 {
-    font-size: 16px;
-    font-weight: normal;
-    margin: 5px 0;
-    color: #666;
-}
-
-.social-links {
-    margin-top: 8px;
-    font-size: 16px;
-    color: #666;
-}
-
-.social-links a {
-    color: #666;
-}
-
-/* Navigation Styles */
-.nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 10px;
-    padding: 8px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-}
-
-.nav a {
-    text-decoration: none;
-    font-size: 1em;
-    font-weight: normal;
-    color: #888;
-    white-space: nowrap;
-}
-
-.nav a.active {
-    color: #fb4128;
-}
-
-.nav a:hover {
-    text-decoration: underline;
-}
-
-.nav span {
-    color: #888;
-}
-
-/* Content Styles */
-.content {
-    padding: 10px 20px;
-    background-color: #f4f4f4;
-}
-
-.main-container {
-    max-width: 900px;
-}
-
-/* Typography */
-p {
-    text-align: left;
-    margin: 1em 0;
-}
-
-a {
-    color: #fb4128;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-h3 {
-    color: #666;
-    font-size: 1em;
-    margin-top: 0;
-    margin-bottom: 0.2em;
-    font-weight: 500;
-}
-
-/* Special Text Classes */
-.all-caps {
-    text-transform: uppercase;
-}
-
-.chapter-tag {
-    color: #888;
-    font-size: 1em;
-    font-weight: normal;
-}
-
-.highlight {
-    color: #fb4128;
-    font-size: 1.1em;
-    margin-top: 1.5em;
-    margin-bottom: 0.2em;
-    font-weight: 500;
-}
-
-/* Image Styles */
-.content img.dss-photo {
-    float: right;
-    margin-left: 10px;
-    width: 170px;
-    height: auto;
-    border-radius: 5px;
-}
-
-/* Container Styles (for DSS page) */
-.container {
-    padding: 10px 25px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.container-full-width {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.container-row {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.container-half {
-    flex: 1;
-    padding: 10px 25px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.container h2, .container p, .container ul, .container li,
-.container-half h2, .container-half p, .container-half ul, .container-half li {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0;
-}
-
-.container h2, .container-half h2 {
-    color: #fb4128;
-    border-bottom: 2px solid #fb4128;
-    padding-bottom: 10px;
-}
-
-.container p, .container ul, .container-half p, .container-half ul {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.container ul, .container-half ul {
-    padding-left: 20px;
-}
-
-.container a, .container-half a {
-    color: #fb4128;
-    text-decoration: none;
-}
-
-.container a:hover, .container-half a:hover {
-    text-decoration: underline;
-}
-
-.container p, .container-half p {
-    margin-bottom: 0;
-}
-
-.container ul, .container-half ul {
-    margin-top: 0;
-}
-
-.container ul li, .container-half ul li {
-    margin-bottom: 0.5em;
-}
-
-/* List Styles */
-ul {
-    margin-bottom: 0.5em;
-}
-
-ul li {
-    margin-bottom: 0.5em;
-}
-
-ul > li > ul {
-    margin-left: 20px;
-    padding-left: 0;
-}
-
-.container ul li ul, .container-half ul li ul {
-    padding-top: 0;
-}
-
-/* Special Spacing */
-.highlight + p {
-    margin-top: 0;
-}
-
-p + ul {
-    margin-top: 0;
-}
-
-.highlight + ul {
-    margin-top: 0;
-}
-
-/* Important Notes Box (DSS page) */
-.important-notes {
-    background-color: #fff;
-    padding: 15px 25px;
-    margin: 20px 20px 20px 0;
-    max-width: 700px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.important-notes h3 {
-    color: #fb4128;
-    border-bottom: 2px solid #fb4128;
-    padding-bottom: 10px;
-    margin-bottom: 0;
-}
-
-.important-notes ul {
-    padding-top: 10px;
-    padding-left: 20px;
-}
-
-.important-notes ul li {
-    margin-bottom: 0.5em;
-}
-
-/* Mobile Responsive Styles */
-@media (max-width: 600px) {
-    .nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .nav span {
-        display: none;
-    }
-
-    .social-links {
-        display: none;
-    }
-    
-    .header-content h1 {
-        font-size: 1.1em;
-    }
-    
-    .header-content h2 {
-        font-size: 14px;
-    }
-    
-    .header img {
-        width: 100px;
-    }
-}
-
-/* Very small screens */
-@media (max-width: 400px) {
-    .mobile-break {
-        display: block;
-    }
-    
-    .mobile-hide {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .container-row {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 700px) {
-    .dss-photo {
-        display: none;
-    }
-}
-
-/* Page-specific image adjustments */
-/* Teaching page */
-.teaching-page .content img.dss-photo {
-    margin: 10px 0 10px 20px;
-    width: 200px;
-    border: 1px solid #ddd;
-}
-
-/* Publications page */
-.publications-page .content img.dss-photo {
-    margin-left: 30px;
-    margin-top: 10px;
-    width: 300px;
-}
-
-/* Publications page responsive */
-@media (max-width: 500px) {
-    .conditional-break {
-        display: block;
-    }
-}
+</body>
+</html>

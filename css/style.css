@@ -29,8 +29,7 @@ body {
     --bg-white: #fff;
     --border-color: #ddd;
     --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    --heading-color: #2a2a2a;
-    --blue-color: #0A206E;
+    --heading-color: #444;
 }
 
 /* ============================================================================

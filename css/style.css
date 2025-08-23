@@ -21,7 +21,7 @@ body {
 ============================================================================ */
 
 :root {
-    --primary-color: #0A206E; /* #fb4128;*/
+    --primary-color: #fb4128;
     --text-color: #444;
     --text-light: #666;
     --text-lighter: #888;

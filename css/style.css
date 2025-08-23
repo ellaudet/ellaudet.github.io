@@ -21,7 +21,7 @@ body {
 ============================================================================ */
 
 :root {
-    --primary-color: #fb4128;
+    --primary-color: #0A206E; /* #fb4128;*/
     --text-color: #444;
     --text-light: #666;
     --text-lighter: #888;
@@ -30,6 +30,7 @@ body {
     --border-color: #ddd;
     --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     --heading-color: #2a2a2a;
+    --blue-color: #0A206E;
 }
 
 /* ============================================================================
@@ -49,7 +50,7 @@ h1 {
 
 h2 {
     font-size: 0.875rem;
-    color: var(--heading-color);
+    color: var(--text-light);
     margin: 0.3rem 0;
 }
 

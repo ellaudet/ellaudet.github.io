@@ -36,7 +36,7 @@ body {
    TYPOGRAPHY
 ============================================================================ */
 
-h1, h2, h3 {
+h1, h3 {
     margin: 0;
     font-weight: normal;
 }
@@ -51,6 +51,7 @@ h2 {
     font-size: 0.875rem;
     color: var(--text-light);
     margin: 0.3rem 0;
+    font-weight: bold;
 }
 
 h3 {

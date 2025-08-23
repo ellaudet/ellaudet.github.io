@@ -49,7 +49,7 @@ h1 {
 
 h2 {
     font-size: 0.875rem;
-    color: var(--text-light);
+    color: var(--heading-color);
     margin: 0.3rem 0;
 }
 

@@ -302,6 +302,7 @@ ul li > p {
 .container-header + ul,
 .container .container-header + ul,
 .container-intro + ul,
+ul+li,
 .container-half .container-header + ul,
 .container-half .container-intro + ul,
 .container ul + .container-footer {

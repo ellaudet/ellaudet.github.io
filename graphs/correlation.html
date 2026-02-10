@@ -356,31 +356,24 @@
         let chart;
         let currentData = [];
         
+        // Box-Muller transform for normal distribution
+        function gaussianRandom() {
+            let u = 0, v = 0;
+            while(u === 0) u = Math.random();
+            while(v === 0) v = Math.random();
+            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+        }
+        
         // Generate data based on correlation parameters
         function generateData(direction, strength) {
-            const n = 1000; // Number of points (matching original)
+            const n = 1000; // Number of points
             const data = [];
-            let correlation = 0;
-    
-        // Set seed for consistent results
-        Math.seedrandom = function(seed) {
-            const m = 0x80000000;
-            const a = 1103515245;
-            const c = 12345;
-            let state = seed ? seed : Math.floor(Math.random() * (m - 1));
-        
-        Math.random = function() {
-            state = (a * state + c) % m;
-            return state / (m - 1);
-        };
-    };
-    Math.seedrandom(1234);
-    
-    // Generate base x values
-    const baseX = [];
-    for (let i = 0; i < n; i++) {
-        baseX.push(gaussianRandom() * 10 + 50);
-    }
+            
+            // Generate base x values
+            const baseX = [];
+            for (let i = 0; i < n; i++) {
+                baseX.push(gaussianRandom() * 10 + 50);
+            }
             
             // Get sign multiplier
             const signMult = (direction === 'positive') ? 1 : -1;
@@ -411,15 +404,7 @@
                 data.push({ x: x, y: yFinal });
             }
             
-            return { data, correlation };
-        }
-        
-        // Box-Muller transform for normal distribution
-        function gaussianRandom() {
-            let u = 0, v = 0;
-            while(u === 0) u = Math.random();
-            while(v === 0) v = Math.random();
-            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+            return { data };
         }
         
         // Calculate actual correlation coefficient

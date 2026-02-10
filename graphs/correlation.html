@@ -20,6 +20,7 @@
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
     
     <style>
         body {
@@ -356,6 +357,31 @@
         let chart;
         let currentData = [];
         
+        // Plugin to draw X and Y labels
+        const axisLabelsPlugin = {
+            id: 'axisLabels',
+            afterDraw: (chart) => {
+                const ctx = chart.ctx;
+                const chartArea = chart.chartArea;
+                
+                ctx.save();
+                ctx.fillStyle = '#666';
+                ctx.font = 'bold 16px Helvetica';
+                
+                // Add X label (bottom right)
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'bottom';
+                ctx.fillText('X', chartArea.right - 10, chartArea.bottom - 5);
+                
+                // Add Y label (top left)
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+                ctx.fillText('Y', chartArea.left + 5, chartArea.top + 5);
+                
+                ctx.restore();
+            }
+        };
+        
         // Box-Muller transform for normal distribution
         function gaussianRandom() {
             let u = 0, v = 0;
@@ -366,8 +392,11 @@
         
         // Generate data based on correlation parameters
         function generateData(direction, strength) {
-            const n = 1000; // Number of points
+            const n = 1000; // Number of points (matching original)
             const data = [];
+            
+            // Use seedrandom for consistent results
+            Math.seedrandom('1234-' + direction + '-' + strength);
             
             // Generate base x values
             const baseX = [];
@@ -552,30 +581,10 @@
                         }
                     },
                     animation: {
-                        onComplete: function(animation) {
-                            // Add X and Y labels after chart is rendered
-                            if (!animation || !animation.chart) return;
-                            const ctx = animation.chart.ctx;  // ← Now it works!
-                                        
-                            ctx.save();
-                            ctx.fillStyle = '#666';
-                            ctx.font = 'bold 16px Helvetica';
-                            ctx.textAlign = 'right';
-                            ctx.textBaseline = 'bottom';
-                            
-                            // Add X label (bottom right)
-                            ctx.fillText('X', chartArea.right - 10, chartArea.bottom - 5);
-                            
-                            // Add Y label (top left)
-                            ctx.textAlign = 'left';
-                            ctx.textBaseline = 'top';
-                            ctx.fillText('Y', chartArea.left + 5, chartArea.top + 5);
-                            
-                            ctx.restore();
-                        },
                         duration: 500
                     }
-                }
+                },
+                plugins: [axisLabelsPlugin]
             });
             
             // Add resize listener for dynamic aspect ratio

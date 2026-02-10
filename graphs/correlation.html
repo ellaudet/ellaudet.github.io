@@ -552,11 +552,12 @@
                         }
                     },
                     animation: {
-                        onComplete: function() {
+                        onComplete: function(animation) {
                             // Add X and Y labels after chart is rendered
-                            const ctx = this.chart.ctx;
+                            if (!animation || !animation.chart) return;
+                            const ctx = animation.chart.ctx;  // ← Now it works!
                             const chartArea = this.chart.chartArea;
-                            
+                                        
                             ctx.save();
                             ctx.fillStyle = '#666';
                             ctx.font = 'bold 16px Helvetica';

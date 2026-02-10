@@ -357,31 +357,6 @@
         let chart;
         let currentData = [];
         
-        // Plugin to draw X and Y labels
-        const axisLabelsPlugin = {
-            id: 'axisLabels',
-            afterDraw: (chart) => {
-                const ctx = chart.ctx;
-                const chartArea = chart.chartArea;
-                
-                ctx.save();
-                ctx.fillStyle = '#666';
-                ctx.font = 'bold 16px Helvetica';
-                
-                // Add X label (bottom right)
-                ctx.textAlign = 'right';
-                ctx.textBaseline = 'bottom';
-                ctx.fillText('X', chartArea.right - 10, chartArea.bottom - 5);
-                
-                // Add Y label (top left)
-                ctx.textAlign = 'left';
-                ctx.textBaseline = 'top';
-                ctx.fillText('Y', chartArea.left + 5, chartArea.top + 5);
-                
-                ctx.restore();
-            }
-        };
-        
         // Box-Muller transform for normal distribution
         function gaussianRandom() {
             let u = 0, v = 0;
@@ -584,7 +559,7 @@
                         duration: 500
                     }
                 },
-                plugins: [axisLabelsPlugin]
+                plugins: []
             });
             
             // Add resize listener for dynamic aspect ratio

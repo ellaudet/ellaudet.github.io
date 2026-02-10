@@ -556,7 +556,6 @@
                             // Add X and Y labels after chart is rendered
                             if (!animation || !animation.chart) return;
                             const ctx = animation.chart.ctx;  // ← Now it works!
-                            const chartArea = this.chart.chartArea;
                                         
                             ctx.save();
                             ctx.fillStyle = '#666';

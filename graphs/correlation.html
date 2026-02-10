@@ -360,12 +360,27 @@
         function generateData(direction, strength) {
             const n = 1000; // Number of points (matching original)
             const data = [];
+            let correlation = 0;
     
-            // Generate base x values
-            const baseX = [];
-            for (let i = 0; i < n; i++) {
-            baseX.push(gaussianRandom() * 10 + 50);
-            }
+        // Set seed for consistent results
+        Math.seedrandom = function(seed) {
+            const m = 0x80000000;
+            const a = 1103515245;
+            const c = 12345;
+            let state = seed ? seed : Math.floor(Math.random() * (m - 1));
+        
+        Math.random = function() {
+            state = (a * state + c) % m;
+            return state / (m - 1);
+        };
+    };
+    Math.seedrandom(1234);
+    
+    // Generate base x values
+    const baseX = [];
+    for (let i = 0; i < n; i++) {
+        baseX.push(gaussianRandom() * 10 + 50);
+    }
             
             // Get sign multiplier
             const signMult = (direction === 'positive') ? 1 : -1;

@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
     color: #444;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
 }
 
 /* ============================================================================
@@ -25,7 +25,7 @@ body {
     --text-color: #444;
     --text-light: #666;
     --text-lighter: #888;
-    --bg-light: #f4f4f4;
+    --bg-light: #ffffff;
     --bg-white: #fff;
     --border-color: #ddd;
     --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

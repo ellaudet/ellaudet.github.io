@@ -176,7 +176,10 @@ a:focus-visible {
     padding: 24px 28px;
 }
 
-.card { margin-bottom: 22px; }
+.card {
+    margin-bottom: 22px;
+    display: flow-root;   /* makes the card grow to contain floated images */
+}
 
 .container-row {
     display: flex;

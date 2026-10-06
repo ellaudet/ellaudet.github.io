@@ -248,6 +248,8 @@ h2.highlight {
 .card ul li,
 .container-half ul li { margin-bottom: 0.4em; }
 
+.card ul li::marker { color: var(--accent); }
+
 .card li > p { margin-bottom: 0.5em; }
 
 .card li > ul {

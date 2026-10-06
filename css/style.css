@@ -1,14 +1,14 @@
 /* ==========================================================================
    Elena Llaudet — personal website stylesheet
-   Same design language as the DSS book site, with a navy accent and a touch
+   Same design language as the DSS book site, with a green accent and a touch
    of gold (the book site uses the coral from its cover) so the two are easy
    to tell apart. To change the colors, edit the variables below.
    ========================================================================== */
 
 :root {
-    --accent: #1E3A8A;         /* rich navy: top bar, name, headings accents */
-    --accent-text: #2347A6;    /* slightly brighter navy for links, so they stand out from body text */
-    --accent-tint: #EEF2FB;    /* very light tint for hover backgrounds */
+    --accent: #0E9F6E;         /* emerald green: top bar, name, headings accents */
+    --accent-text: #047857;    /* deeper green for links, so small text keeps good contrast on white */
+    --accent-tint: #ECF8F3;    /* very light green tint for hover backgrounds */
     --gold: #D69E2E;           /* small warm accent: active tab underline */
     --ink: #262626;            /* body text */
     --muted: #5C6168;          /* secondary text */

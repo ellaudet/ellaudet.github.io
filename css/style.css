@@ -1,15 +1,13 @@
 /* ==========================================================================
    Elena Llaudet — personal website stylesheet
-   Same design language as the DSS book site, with a green accent and a touch
-   of gold (the book site uses the coral from its cover) so the two are easy
-   to tell apart. To change the colors, edit the variables below.
+   Same design language and coral accent as the DSS book site (the coral from
+   its cover). To change the colors, edit the variables below.
    ========================================================================== */
 
 :root {
-    --accent: #0E9F6E;         /* emerald green: top bar, name, headings accents */
-    --accent-text: #047857;    /* deeper green for links, so small text keeps good contrast on white */
-    --accent-tint: #ECF8F3;    /* very light green tint for hover backgrounds */
-    --gold: #D69E2E;           /* small warm accent: active tab underline */
+    --accent: #E63E43;         /* coral from the book cover: top bar, name, active tab underline */
+    --accent-text: #D12F3A;    /* slightly deeper coral for links and text */
+    --accent-tint: #FDEEEF;    /* very light coral tint for hover backgrounds */
     --ink: #262626;            /* body text */
     --muted: #5C6168;          /* secondary text */
     --line: #E6E6EA;           /* hairlines and borders */
@@ -154,7 +152,7 @@ a:focus-visible {
 
 .nav a.active {
     color: var(--accent);
-    border-bottom-color: var(--gold);
+    border-bottom-color: var(--accent);
 }
 
 /* ---------- Page layout ---------- */

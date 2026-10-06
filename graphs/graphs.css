@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Interactive graph pages — shared look
+   Loaded AFTER each page's own <style> block, so it only overrides the page
+   "chrome" (fonts, header, cards, labels, slider color). It deliberately does
+   NOT touch chart sizes or chart colors: the explanations refer to them
+   (e.g. "orange circle", "orange line"), and the charts are drawn by the
+   page scripts.
+   Same navy palette as the rest of the site (see ../css/style.css).
+   ========================================================================== */
+
+:root {
+    --accent: #1B3A6B;         /* navy */
+    --accent-text: #2347A6;    /* links */
+    --accent-tint: #EEF2FB;    /* very light navy tint */
+    --ink: #262626;
+    --muted: #5C6168;
+    --line: #E6E6EA;
+    --page: #F6F6F8;
+}
+
+body {
+    font-family: "Source Sans 3", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background-color: var(--page);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Page card and header ---------- */
+
+.app-container {
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    border-top: 5px solid var(--accent);
+    box-shadow: 0 1px 2px rgba(20, 20, 30, 0.05), 0 4px 14px rgba(20, 20, 30, 0.06);
+}
+
+.header-section {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    padding-top: 14px;
+}
+
+/* the title and subtitle carry inline colors, so these need !important */
+.header-section h3 {
+    color: var(--accent) !important;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.header-section p {
+    color: var(--muted) !important;
+}
+
+.header-section p a {
+    color: var(--muted) !important;
+}
+
+a {
+    color: var(--accent-text);
+}
+
+/* ---------- Text blocks ---------- */
+
+.info-box {
+    background-color: var(--accent-tint);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+}
+
+.step-number {
+    color: var(--accent);
+}
+
+.controls-panel {
+    background-color: var(--page);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.chart-container {
+    border-color: var(--line);
+    border-radius: 10px;
+}
+
+.notes-section {
+    background-color: var(--page);
+    border-left-color: var(--accent);
+}
+
+.form-label,
+.chart-title,
+.chart-subtitle {
+    color: var(--ink);
+}
+
+.form-text {
+    color: var(--muted);
+}
+
+/* ---------- Sliders ---------- */
+
+.slider-dynamic-value {
+    color: var(--accent);
+}
+
+.form-range::-webkit-slider-thumb {
+    background: var(--accent);
+}
+
+.form-range::-moz-range-thumb {
+    background: var(--accent);
+}
+
+.form-range::-webkit-slider-thumb:hover {
+    background: #12294F;
+}
+
+.form-range::-moz-range-thumb:hover {
+    background: #12294F;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.3);
+}
+
+.form-range:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.3);
+}

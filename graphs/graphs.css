@@ -5,13 +5,13 @@
    NOT touch chart sizes or chart colors: the explanations refer to them
    (e.g. "orange circle", "orange line"), and the charts are drawn by the
    page scripts.
-   Same navy palette as the rest of the site (see ../css/style.css).
+   Same coral palette as the DSS book site (these graphs go with the book).
    ========================================================================== */
 
 :root {
-    --accent: #1B3A6B;         /* navy */
-    --accent-text: #2347A6;    /* links */
-    --accent-tint: #EEF2FB;    /* very light navy tint */
+    --accent: #E63E43;         /* coral from the book cover: bars, borders, slider */
+    --accent-text: #D12F3A;    /* slightly deeper coral for text and links */
+    --accent-tint: #FDEEEF;    /* very light coral tint */
     --ink: #262626;
     --muted: #5C6168;
     --line: #E6E6EA;
@@ -42,7 +42,7 @@ body {
 
 /* the title and subtitle carry inline colors, so these need !important */
 .header-section h3 {
-    color: var(--accent) !important;
+    color: var(--accent-text) !important;
     font-weight: 700;
     letter-spacing: 0.02em;
 }
@@ -68,7 +68,7 @@ a {
 }
 
 .step-number {
-    color: var(--accent);
+    color: var(--accent-text);
 }
 
 .controls-panel {
@@ -100,7 +100,7 @@ a {
 /* ---------- Sliders ---------- */
 
 .slider-dynamic-value {
-    color: var(--accent);
+    color: var(--accent-text);
 }
 
 .form-range::-webkit-slider-thumb {
@@ -112,17 +112,17 @@ a {
 }
 
 .form-range::-webkit-slider-thumb:hover {
-    background: #12294F;
+    background: #C2262E;
 }
 
 .form-range::-moz-range-thumb:hover {
-    background: #12294F;
+    background: #C2262E;
 }
 
 .form-range:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.3);
+    box-shadow: 0 0 0 3px rgba(230, 62, 67, 0.3);
 }
 
 .form-range:focus::-moz-range-thumb {
-    box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.3);
+    box-shadow: 0 0 0 3px rgba(230, 62, 67, 0.3);
 }

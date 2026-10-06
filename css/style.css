@@ -1,14 +1,15 @@
 /* ==========================================================================
    Elena Llaudet — personal website stylesheet
-   Same design language as the DSS book site, with a navy accent
-   (the book site uses the coral from its cover) so the two are easy to
-   tell apart. To change the accent, edit the variables below.
+   Same design language as the DSS book site, with a navy accent and a touch
+   of gold (the book site uses the coral from its cover) so the two are easy
+   to tell apart. To change the colors, edit the variables below.
    ========================================================================== */
 
 :root {
-    --accent: #1B3A6B;         /* navy: top bar, rules, markers, name */
-    --accent-text: #1F4E8F;    /* slightly brighter navy for links, so they stand out from body text */
-    --accent-tint: #EDF2FA;    /* very light tint for hover backgrounds */
+    --accent: #1E3A8A;         /* rich navy: top bar, name, headings accents */
+    --accent-text: #2347A6;    /* slightly brighter navy for links, so they stand out from body text */
+    --accent-tint: #EEF2FB;    /* very light tint for hover backgrounds */
+    --gold: #D69E2E;           /* small warm accent: active tab underline, bullet markers */
     --ink: #262626;            /* body text */
     --muted: #5C6168;          /* secondary text */
     --line: #E6E6EA;           /* hairlines and borders */
@@ -152,8 +153,8 @@ a:focus-visible {
 }
 
 .nav a.active {
-    color: var(--accent-text);
-    border-bottom-color: var(--accent);
+    color: var(--accent);
+    border-bottom-color: var(--gold);
 }
 
 /* ---------- Page layout ---------- */
@@ -247,7 +248,7 @@ h2.highlight {
 .card ul li,
 .container-half ul li { margin-bottom: 0.4em; }
 
-.card ul li::marker { color: var(--accent); }
+.card ul li::marker { color: var(--gold); }
 
 .card li > p { margin-bottom: 0.5em; }
 

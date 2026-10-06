@@ -9,7 +9,7 @@
     --accent: #1E3A8A;         /* rich navy: top bar, name, headings accents */
     --accent-text: #2347A6;    /* slightly brighter navy for links, so they stand out from body text */
     --accent-tint: #EEF2FB;    /* very light tint for hover backgrounds */
-    --gold: #D69E2E;           /* small warm accent: active tab underline, bullet markers */
+    --gold: #D69E2E;           /* small warm accent: active tab underline */
     --ink: #262626;            /* body text */
     --muted: #5C6168;          /* secondary text */
     --line: #E6E6EA;           /* hairlines and borders */
@@ -247,8 +247,6 @@ h2.highlight {
 
 .card ul li,
 .container-half ul li { margin-bottom: 0.4em; }
-
-.card ul li::marker { color: var(--gold); }
 
 .card li > p { margin-bottom: 0.5em; }
 
